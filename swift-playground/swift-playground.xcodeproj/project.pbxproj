@@ -15,6 +15,7 @@
 		F70173831C6E6EAF006F799A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70173811C6E6EAF006F799A /* LaunchScreen.storyboard */; };
 		F701738E1C6E6EAF006F799A /* swift_playgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701738D1C6E6EAF006F799A /* swift_playgroundTests.swift */; };
 		F70173991C6E6EAF006F799A /* swift_playgroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */; };
+		F70173A71C6F2C0C006F799A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173A61C6F2C0C006F799A /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F70173941C6E6EAF006F799A /* swift-playgroundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-playgroundUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_playgroundUITests.swift; sourceTree = "<group>"; };
 		F701739A1C6E6EAF006F799A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F70173A61C6F2C0C006F799A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				F70173751C6E6EAF006F799A /* AppDelegate.swift */,
 				F70173771C6E6EAF006F799A /* ViewController.swift */,
+				F70173A61C6F2C0C006F799A /* SwiftyJSON.swift */,
 				F70173791C6E6EAF006F799A /* Main.storyboard */,
 				F701737F1C6E6EAF006F799A /* Assets.xcassets */,
 				F70173811C6E6EAF006F799A /* LaunchScreen.storyboard */,
@@ -265,6 +268,7 @@
 				F70173781C6E6EAF006F799A /* ViewController.swift in Sources */,
 				F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */,
 				F701737E1C6E6EAF006F799A /* swift_playground.xcdatamodeld in Sources */,
+				F70173A71C6F2C0C006F799A /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
