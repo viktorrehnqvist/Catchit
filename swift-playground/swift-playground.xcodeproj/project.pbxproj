@@ -16,6 +16,9 @@
 		F701738E1C6E6EAF006F799A /* swift_playgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701738D1C6E6EAF006F799A /* swift_playgroundTests.swift */; };
 		F70173991C6E6EAF006F799A /* swift_playgroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */; };
 		F70173A71C6F2C0C006F799A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173A61C6F2C0C006F799A /* SwiftyJSON.swift */; };
+		F70173A91C6F42F9006F799A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173A81C6F42F9006F799A /* Post.swift */; };
+		F70173AA1C6F42F9006F799A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173A81C6F42F9006F799A /* Post.swift */; };
+		F70173AB1C6F42F9006F799A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173A81C6F42F9006F799A /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,7 @@
 		F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_playgroundUITests.swift; sourceTree = "<group>"; };
 		F701739A1C6E6EAF006F799A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F70173A61C6F2C0C006F799A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		F70173A81C6F42F9006F799A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 			children = (
 				F70173751C6E6EAF006F799A /* AppDelegate.swift */,
 				F70173771C6E6EAF006F799A /* ViewController.swift */,
+				F70173A81C6F42F9006F799A /* Post.swift */,
 				F70173A61C6F2C0C006F799A /* SwiftyJSON.swift */,
 				F70173791C6E6EAF006F799A /* Main.storyboard */,
 				F701737F1C6E6EAF006F799A /* Assets.xcassets */,
@@ -269,6 +274,7 @@
 				F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */,
 				F701737E1C6E6EAF006F799A /* swift_playground.xcdatamodeld in Sources */,
 				F70173A71C6F2C0C006F799A /* SwiftyJSON.swift in Sources */,
+				F70173A91C6F42F9006F799A /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F701738E1C6E6EAF006F799A /* swift_playgroundTests.swift in Sources */,
+				F70173AA1C6F42F9006F799A /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F70173991C6E6EAF006F799A /* swift_playgroundUITests.swift in Sources */,
+				F70173AB1C6F42F9006F799A /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
