@@ -18,6 +18,7 @@ class ViewController: UIViewController, PostServiceDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.postService.getPosts()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -28,4 +29,6 @@ class ViewController: UIViewController, PostServiceDelegate {
 
 
 }
+
+
 
