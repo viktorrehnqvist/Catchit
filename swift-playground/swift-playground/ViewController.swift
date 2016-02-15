@@ -8,8 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PostServiceDelegate {
 
+    let postService = PostService()
+    
+    func setPosts(post: Post) {
+        // Display fetched posts
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
