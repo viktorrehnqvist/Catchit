@@ -8,10 +8,20 @@
 
 import Foundation
 
+protocol PostServiceDelegate {
+    func setPosts(post: Post)
+}
+
 class PostService {
+    
+    var delegate: PostServiceDelegate?
+    
     func getPosts() {
         // Http-request
         // Extract data from JSON
-        // Delegate data
+        let post = Post(username: "testname", achievement: "testachievement", score: 1, imageUrl: "testurl")
+        if delegate != nil {
+            delegate?.setPosts(post)
+        }
     }
 }
