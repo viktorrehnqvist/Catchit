@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol PostServiceDelegate {
     func setPosts(post: Post)
@@ -17,16 +18,38 @@ class PostService {
     var delegate: PostServiceDelegate?
     
     func getPosts() {
-        let path = "http://192.168.1.116:3000/posts.json"
-        let url = NSURL(string: path)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithURL(url!)
-        let post = Post(username: "testname", achievement: "testachievement", score: 1, imageUrl: "testurl")
-        task.resume()
-        print(task)
-        if delegate != nil {
-            delegate?.setPosts(post)
-        }
+        Alamofire.request(.GET, "http://192.168.1.116:3000/tasks.json")
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+            }
     }
-}
+    
+    func createPost() {
+        let parameters = [
+            "task": [
+                "user_id": 1,
+                "title": "test",
+                "completed": true
+            ]
+        ]
+        Alamofire.request(.POST, "http://192.168.1.116:3000/tasks.json", parameters: parameters)
+    }
+    
+    func updatePost() {
+        let parameters = [
+            "task": [
+                "user_id": 1,
+                "title": "false",
+                "completed": true
+            ]
+        ]
+        Alamofire.request(.PUT, "http://192.168.1.116:3000/tasks/1.json", parameters: parameters)
+    }
+    
+    func destroyPost() {
+        Alamofire.request(.DELETE, "http://192.168.1.116:3000/tasks/1.json")
+    }
 
+}
