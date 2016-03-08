@@ -101,6 +101,20 @@ class PostService {
             return test
         }
     }
+    
+    func getWithHeaders() {
+        let headers = [
+            "X-User-Email": "ios@ios.com",
+            "X-User-Token": "wxKc3_wy1txSwbLgYpKr"
+        ]
+    
+        Alamofire.request(.GET, "http://localhost:3000/secret/index", headers: headers)
+        .responseString { response in
+            print("Success: \(response.result.isSuccess)")
+            print("Response String: \(response.result.value)")
+        }
+    }
+
 
 
 }
