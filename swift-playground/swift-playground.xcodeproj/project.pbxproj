@@ -23,6 +23,8 @@
 		F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7B553D01C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7B553D11C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
+		F7EEC2731C92E200002378E9 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EEC2721C92E200002378E9 /* NewViewController.swift */; };
+		F7EEC2751C92E31C002378E9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		F74018801C72FEF2004383FE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../Weather-App-Example/Weather-App-Example/SwiftyJSON.swift"; sourceTree = "<group>"; };
 		F7901CD31C730D97001B9129 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		F7B553CE1C71ABFB00EA9D12 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PostService.swift; sourceTree = "<group>"; tabWidth = 4; };
+		F7EEC2721C92E200002378E9 /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,8 @@
 			children = (
 				F70173751C6E6EAF006F799A /* AppDelegate.swift */,
 				F70173771C6E6EAF006F799A /* ViewController.swift */,
+				F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */,
+				F7EEC2721C92E200002378E9 /* NewViewController.swift */,
 				F70173A81C6F42F9006F799A /* Post.swift */,
 				F7B553CE1C71ABFB00EA9D12 /* PostService.swift */,
 				F74018801C72FEF2004383FE /* SwiftyJSON.swift */,
@@ -400,7 +406,9 @@
 			files = (
 				F70173781C6E6EAF006F799A /* ViewController.swift in Sources */,
 				F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */,
+				F7EEC2751C92E31C002378E9 /* CollectionViewCell.swift in Sources */,
 				F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */,
+				F7EEC2731C92E200002378E9 /* NewViewController.swift in Sources */,
 				F74018811C72FEF2004383FE /* SwiftyJSON.swift in Sources */,
 				F701737E1C6E6EAF006F799A /* swift_playground.xcdatamodeld in Sources */,
 				F70173A91C6F42F9006F799A /* Post.swift in Sources */,
