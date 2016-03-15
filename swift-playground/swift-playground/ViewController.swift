@@ -23,7 +23,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let appleProducts = ["Bestig ett berg", "Posera jämte en polis", "Spring ett maraton", "Klappa en igelkott"]
+    let appleProducts = ["Bestig ett berg", "Posera jämte en polis", "Spring ett maraton som är väldigt långt", "Klappa en igelkott"]
     
     let imageArray = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "3"), UIImage(named: "4") ]
     
