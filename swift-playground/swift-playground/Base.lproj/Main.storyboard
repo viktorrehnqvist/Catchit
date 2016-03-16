@@ -37,7 +37,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ejS-uN-p6b">
                                                     <rect key="frame" x="0.0" y="46" width="250" height="205"/>
-                                                    <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.93824857473373413" green="0.25814864039421082" blue="0.13739368319511414" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgN-ug-cCC">
@@ -46,7 +46,7 @@
                                                     <color key="textColor" red="0.087409026920795441" green="0.038166191428899765" blue="0.018957732245326042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 gilla-markeringar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0se-Ja-eJQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inga gilla-markeringar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0se-Ja-eJQ">
                                                     <rect key="frame" x="8" y="250" width="90" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="KuZ-HY-j1O"/>
@@ -72,6 +72,7 @@
                                                         <constraint firstAttribute="width" constant="120" id="JDJ-Le-RKV"/>
                                                         <constraint firstAttribute="width" constant="120" id="oto-m6-A28"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <state key="normal" title="Gilla">
                                                         <color key="titleColor" red="0.996257483959198" green="0.99363070726394653" blue="0.99299103021621704" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -80,6 +81,9 @@
                                                             <exclude reference="JDJ-Le-RKV"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="pressLikeButton:" destination="s9q-bA-xns" eventType="touchUpInside" id="MTj-Vw-INR"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04S-c7-960">
                                                     <rect key="frame" x="124" y="324" width="122" height="30"/>
@@ -134,8 +138,11 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="04S-c7-960" secondAttribute="trailing" constant="-4" id="wzu-hm-upE"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="commentButton" destination="04S-c7-960" id="t1S-Sn-rOL"/>
                                             <outlet property="imageView" destination="ejS-uN-p6b" id="rjY-UH-L1o"/>
                                             <outlet property="label" destination="zgN-ug-cCC" id="fwU-93-gx4"/>
+                                            <outlet property="likeButton" destination="2gV-1F-Yb3" id="ZOE-u6-10O"/>
+                                            <outlet property="likeCount" destination="0se-Ja-eJQ" id="Bgm-d7-pU5"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

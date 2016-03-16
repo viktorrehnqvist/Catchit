@@ -18,6 +18,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     let postService = PostService()
     
+    
     func setPosts(json: AnyObject) {
         print(json)
     }
@@ -49,7 +50,6 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
-        
         return cell
         
     }
