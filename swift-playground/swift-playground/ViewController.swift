@@ -75,13 +75,13 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     
     @IBAction func pressCommentButton(sender: UIButton) {
-        self.performSegueWithIdentifier("showImage", sender: self)
+        self.performSegueWithIdentifier("showComments", sender: sender)
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showImage" {
-            print(sender)
+        if segue.identifier == "showComments" {
+            print(sender!.tag)
         }
     }
 

@@ -178,7 +178,7 @@
                     <navigationItem key="navigationItem" title="UICollectionView" id="ql0-O4-18G"/>
                     <connections>
                         <outlet property="collectionView" destination="nDc-wz-2pn" id="QMa-fJ-hHl"/>
-                        <segue destination="Umm-fh-qXz" kind="show" identifier="showImage" action="showDetailViewController:sender:" id="TX8-be-bYQ"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showComments" action="showDetailViewController:sender:" id="TX8-be-bYQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
