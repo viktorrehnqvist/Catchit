@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 
 @available(iOS 9.0, *)
-class ViewController: UIViewController, PostServiceDelegate, CollectionViewCellDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var scrollView: UIScrollView!
     var stackView: UIStackView!
@@ -56,9 +56,9 @@ class ViewController: UIViewController, PostServiceDelegate, CollectionViewCellD
         
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
+        cell.commentButton?.tag = indexPath.row
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
-        
         
         return cell
         
@@ -74,9 +74,10 @@ class ViewController: UIViewController, PostServiceDelegate, CollectionViewCellD
             return size
     }
     
-    func displayCommentView(comments: AnyObject?) {
-        self.performSegueWithIdentifier("showImage", sender: comments)
+    @IBAction func pressCommentButton(sender: UIButton) {
+        self.performSegueWithIdentifier("showImage", sender: self)
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showImage" {

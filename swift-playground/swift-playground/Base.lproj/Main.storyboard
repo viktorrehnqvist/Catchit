@@ -107,7 +107,7 @@
                                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="pressCommentButton:" destination="s9q-bA-xns" eventType="touchUpInside" id="7ui-K7-5I8"/>
+                                                                <action selector="pressCommentButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b1l-Yx-Mpp"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -153,6 +153,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="buttonContainer" destination="wPn-vG-oXA" id="T3n-w8-CfG"/>
+                                            <outlet property="commentButton" destination="04S-c7-960" id="AK7-yx-yiZ"/>
                                             <outlet property="imageView" destination="ejS-uN-p6b" id="rjY-UH-L1o"/>
                                             <outlet property="label" destination="zgN-ug-cCC" id="fwU-93-gx4"/>
                                             <outlet property="likeButton" destination="2gV-1F-Yb3" id="ZOE-u6-10O"/>
