@@ -8,13 +8,21 @@
 
 import UIKit
 
+protocol CollectionViewCellDelegate {
+    func displayComments(comments: AnyObject)
+}
+
 class CollectionViewCell: UICollectionViewCell {
+    
+    var delegate: CollectionViewCellDelegate?
+    let comments = ["comment1", "comment2", "comment3"]
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var buttonContainer: UIStackView!
     
     @IBAction func pressLikeButton(sender: AnyObject) {
         // Send like request to API
@@ -38,7 +46,17 @@ class CollectionViewCell: UICollectionViewCell {
             }
             likeButton?.setTitle("Gilla", forState: .Normal)
         }
-        
+    }
+    
+    @IBAction func pressCommentButton(sender: AnyObject) {
+        print(self.delegate)
+        if self.delegate != nil {
+            print("2")
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("3")
+                self.delegate?.displayComments(self.comments)
+            })
+        }
     }
     
     
