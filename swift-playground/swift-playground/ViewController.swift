@@ -13,12 +13,8 @@ import Alamofire
 @available(iOS 9.0, *)
 class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var scrollView: UIScrollView!
-    var stackView: UIStackView!
-    var postImage: UIImageView!
-    
     let postService = PostService()
-    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    var screenSize: CGRect = UIScreen.mainScreen().bounds
     
     func setPosts(json: AnyObject) {
         print(json)
@@ -34,7 +30,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     let imageArray = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "4"), UIImage(named: "3"), UIImage(named: "3") ]
     
-    let commentsArray = [["1", "2", "3"], ["1"], [], ["1", "2", "3"], ["1", "2", "3", "4", "5", "6"]]
+    let commentsArray = [["Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "2", "3"], ["1"], [], ["1", "2", "3"], ["1", "2", "3", "4", "5", "6"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
