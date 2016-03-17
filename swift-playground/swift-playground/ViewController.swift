@@ -34,6 +34,8 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     let imageArray = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "4"), UIImage(named: "3"), UIImage(named: "3") ]
     
+    let commentsArray = [["1", "2", "3"], ["1"], [], ["1", "2", "3"], ["1", "2", "3", "4", "5", "6"]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         postService.getPosts()
@@ -81,7 +83,8 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showComments" {
-            print(sender!.tag)
+            let vc = segue.destinationViewController as! NewViewController
+            vc.comments = self.commentsArray[sender!.tag]
         }
     }
 

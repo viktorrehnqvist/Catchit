@@ -9,13 +9,12 @@
 import UIKit
 
 class NewViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
     
-    var image = UIImage()
+    var comments = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageView.image = self.image
+        print(comments)
         // Do any additional setup after loading the view.
     }
 
