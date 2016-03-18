@@ -264,7 +264,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en kommentar..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Im9-tO-heW">
                                 <rect key="frame" x="20" y="562" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -280,6 +280,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="78p-CN-kmo" id="q5r-OX-ZTT"/>
+                        <outlet property="textField" destination="Im9-tO-heW" id="D8e-me-qUq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLQ-Fu-DP9" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -24,15 +24,17 @@ extension UILabel{
     }
 }
 
-class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
     var comments = []
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textField.delegate = self
         print(comments)
         // Do any additional setup after loading the view.
     }
@@ -73,7 +75,25 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             print(size)
             return size
     }
-
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        animateViewMoving(true, moveValue: 210)
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        animateViewMoving(false, moveValue: 210)
+    }
+    
+    // Lifting the view up
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
     
     /*
     // MARK: - Navigation
