@@ -52,6 +52,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         cell.label?.text = self.comments[indexPath.row] as? String
         cell.label.numberOfLines = 0
+        
         print(indexPath)
         return cell
         
@@ -60,11 +61,15 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+            let label = UILabel(frame: CGRectMake(0, 0, screenSize.width - 100, 0))
             label.text = self.comments[indexPath.row] as? String
+            label.font = label.font.fontWithSize(12)
             // Calculates the required height for this comment depending on content
-            let newLabelHeight = label.requiredHeight()
-            let size = CGSize(width: screenSize.width, height: newLabelHeight + 30)
+            var newLabelHeight = label.requiredHeight()
+            if newLabelHeight < 30 {
+                newLabelHeight = 35
+            }
+            let size = CGSize(width: screenSize.width, height: newLabelHeight + 10)
             print(size)
             return size
     }
