@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--UICollectionView-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="swift_playground" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nDc-wz-2pn">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" red="0.18431372549019609" green="0.24313725490196078" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GjB-fk-aJi">
                                     <size key="itemSize" width="250" height="362"/>
@@ -166,16 +166,33 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="VAg-7A-pXx"/>
                                 </connections>
                             </collectionView>
+                            <tabBar contentMode="scaleAspectFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Kf-pi-QFM">
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                                <color key="backgroundColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <tabBarItem title="Hem" image="home_icon" selectedImage="home_icon" id="Wwv-tf-f6L"/>
+                                    <tabBarItem title="Utforska" image="explore_icon" selectedImage="explore_icon" id="pbj-Pd-fM9"/>
+                                    <tabBarItem title="Uppdrag" image="achievement_icon" id="jjJ-Ji-ymx"/>
+                                    <tabBarItem title="Bucket-list" image="bucketlist_icon" id="xI7-ZV-cBe"/>
+                                    <tabBarItem title="Notiser" image="notice_icon" id="INA-tb-sta"/>
+                                </items>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="selectedImageTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="nDc-wz-2pn" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="2M9-v4-LkJ"/>
-                            <constraint firstItem="nDc-wz-2pn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BeM-2g-EYg"/>
-                            <constraint firstItem="nDc-wz-2pn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GQp-k6-x59"/>
-                            <constraint firstAttribute="trailing" secondItem="nDc-wz-2pn" secondAttribute="trailing" id="MwT-BP-kOK"/>
+                            <constraint firstItem="0Kf-pi-QFM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8bE-WE-UwR"/>
+                            <constraint firstItem="0Kf-pi-QFM" firstAttribute="leading" secondItem="nDc-wz-2pn" secondAttribute="leading" id="CF4-hm-2fh"/>
+                            <constraint firstAttribute="trailing" secondItem="0Kf-pi-QFM" secondAttribute="trailing" id="Oqb-VB-gv2"/>
+                            <constraint firstItem="0Kf-pi-QFM" firstAttribute="top" secondItem="nDc-wz-2pn" secondAttribute="bottom" id="elb-1B-3Ng"/>
+                            <constraint firstItem="0Kf-pi-QFM" firstAttribute="trailing" secondItem="nDc-wz-2pn" secondAttribute="trailing" id="jSn-4K-fF2"/>
+                            <constraint firstItem="0Kf-pi-QFM" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="qEg-xr-WeF"/>
+                            <constraint firstItem="nDc-wz-2pn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="u20-y9-6Oe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="UICollectionView" id="ql0-O4-18G"/>
+                    <navigationItem key="navigationItem" id="ql0-O4-18G"/>
                     <connections>
                         <outlet property="collectionView" destination="nDc-wz-2pn" id="QMa-fJ-hHl"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showComments" action="showDetailViewController:sender:" id="TX8-be-bYQ"/>
@@ -183,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="323"/>
+            <point key="canvasLocation" x="1057" y="336"/>
         </scene>
         <!--New View Controller-->
         <scene sceneID="qZl-Lw-Vrz">
@@ -323,6 +340,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="achievement_icon" width="32" height="32"/>
         <image name="avatar" width="159" height="159"/>
+        <image name="bucketlist_icon" width="32" height="32"/>
+        <image name="explore_icon" width="32" height="32"/>
+        <image name="home_icon" width="64" height="64"/>
+        <image name="notice_icon" width="32" height="32"/>
     </resources>
 </document>
