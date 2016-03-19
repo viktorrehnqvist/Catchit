@@ -25,17 +25,19 @@ extension UILabel{
 }
 
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
-    
-    var comments = []
+    var comments: [AnyObject] = []
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
     
+    @IBAction func backButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
-        print(comments)
         // Do any additional setup after loading the view.
     }
 
@@ -55,7 +57,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         cell.label?.text = self.comments[indexPath.row] as? String
         cell.label.numberOfLines = 0
         
-        print(indexPath)
         return cell
         
     }
@@ -72,7 +73,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 newLabelHeight = 35
             }
             let size = CGSize(width: screenSize.width, height: newLabelHeight + 10)
-            print(size)
             return size
     }
     
@@ -86,16 +86,10 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        createComment()
         return true
     }
     
-    
-    /**
-     * Called when the user click on the view (outside the UITextField).
-     */
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        textField.resignFirstResponder()
-    }
     
     // Lifting the view up
     func animateViewMoving (up:Bool, moveValue :CGFloat){
@@ -103,10 +97,19 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let movement:CGFloat = ( up ? -moveValue : moveValue)
         UIView.beginAnimations( "animateView", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration )
+        UIView.setAnimationDuration(movementDuration)
         self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
         UIView.commitAnimations()
     }
+    
+    func createComment () {
+        // Insert code to send comment to API
+        let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
+        comments.insert(textField.text!, atIndex: self.comments.count)
+        collectionView.insertItemsAtIndexPaths([indexPath])
+        textField.text = ""
+    }
+    
     
     /*
     // MARK: - Navigation

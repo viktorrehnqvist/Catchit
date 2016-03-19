@@ -197,8 +197,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="78p-CN-kmo">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="78p-CN-kmo">
+                                <rect key="frame" x="0.0" y="108" width="600" height="448"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gkZ-zX-wPJ">
                                     <size key="itemSize" width="600" height="281"/>
@@ -266,16 +266,32 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQY-wR-pjH">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Kommentarer" id="doB-Ds-p8M">
+                                        <barButtonItem key="leftBarButtonItem" title="Tillbaka" id="IgO-qi-T0t">
+                                            <connections>
+                                                <action selector="backButton:" destination="Umm-fh-qXz" id="Noq-wu-O02"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="78p-CN-kmo" firstAttribute="top" secondItem="FOk-Cu-5Xp" secondAttribute="bottom" id="0Kp-U9-7uD"/>
-                            <constraint firstItem="QA7-8T-vFw" firstAttribute="top" secondItem="Im9-tO-heW" secondAttribute="bottom" constant="8" symbolic="YES" id="2FN-gf-vxc"/>
-                            <constraint firstAttribute="trailing" secondItem="78p-CN-kmo" secondAttribute="trailing" id="2zj-1R-xBG"/>
-                            <constraint firstItem="78p-CN-kmo" firstAttribute="centerX" secondItem="Im9-tO-heW" secondAttribute="centerX" id="5S6-RS-9mq"/>
-                            <constraint firstItem="78p-CN-kmo" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leading" id="Kks-kf-SHY"/>
-                            <constraint firstItem="78p-CN-kmo" firstAttribute="bottom" secondItem="QA7-8T-vFw" secondAttribute="top" id="OKQ-Yr-URe"/>
-                            <constraint firstItem="Im9-tO-heW" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leadingMargin" id="daC-Sb-MKR"/>
+                            <constraint firstItem="LQY-wR-pjH" firstAttribute="trailing" secondItem="78p-CN-kmo" secondAttribute="trailing" id="18B-1J-4gq"/>
+                            <constraint firstItem="Im9-tO-heW" firstAttribute="top" secondItem="78p-CN-kmo" secondAttribute="bottom" constant="6" id="9MZ-Ig-bi9"/>
+                            <constraint firstItem="QA7-8T-vFw" firstAttribute="top" secondItem="Im9-tO-heW" secondAttribute="bottom" constant="8" symbolic="YES" id="EoY-Fp-yBw"/>
+                            <constraint firstAttribute="trailing" secondItem="78p-CN-kmo" secondAttribute="trailing" id="V4L-on-XfL"/>
+                            <constraint firstItem="Im9-tO-heW" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leadingMargin" id="aAI-Uy-zSl"/>
+                            <constraint firstItem="78p-CN-kmo" firstAttribute="centerX" secondItem="Im9-tO-heW" secondAttribute="centerX" id="aOg-3w-6kS"/>
+                            <constraint firstItem="LQY-wR-pjH" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leading" id="aWE-rW-SxL"/>
+                            <constraint firstItem="78p-CN-kmo" firstAttribute="top" secondItem="LQY-wR-pjH" secondAttribute="bottom" id="aa5-QE-w6k"/>
+                            <constraint firstItem="78p-CN-kmo" firstAttribute="leading" secondItem="LQY-wR-pjH" secondAttribute="leading" id="cPP-Pu-Y1o"/>
+                            <constraint firstItem="LQY-wR-pjH" firstAttribute="top" secondItem="FOk-Cu-5Xp" secondAttribute="bottom" id="vah-s7-RHU"/>
                         </constraints>
                     </view>
                     <connections>
