@@ -84,6 +84,19 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         animateViewMoving(false, moveValue: 210)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    /**
+     * Called when the user click on the view (outside the UITextField).
+     */
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        textField.resignFirstResponder()
+    }
+    
     // Lifting the view up
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         let movementDuration:NSTimeInterval = 0.3
