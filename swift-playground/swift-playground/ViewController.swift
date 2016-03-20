@@ -73,12 +73,12 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     
     @IBAction func pressCommentButton(sender: UIButton) {
-        self.performSegueWithIdentifier("showComments", sender: sender)
+        self.performSegueWithIdentifier("showCommentsFromHome", sender: sender)
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showComments" {
+        if segue.identifier == "showCommentsFromHome" {
             let vc = segue.destinationViewController as! NewViewController
             vc.comments = self.commentsArray[sender!.tag]
         }

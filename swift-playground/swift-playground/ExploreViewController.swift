@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import Foundation
+import Alamofire
 
+@available(iOS 9.0, *)
 class ExploreViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
@@ -34,6 +37,10 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         postService.getPosts()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,7 +76,17 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
             return size
     }
     
+    @IBAction func pressCommentButton(sender: UIButton) {
+        self.performSegueWithIdentifier("showCommentsFromExplore", sender: sender)
+    }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCommentsFromExplore" {
+            let vc = segue.destinationViewController as! NewViewController
+            vc.comments = self.commentsArray[sender!.tag]
+        }
+    }
     
     
 }

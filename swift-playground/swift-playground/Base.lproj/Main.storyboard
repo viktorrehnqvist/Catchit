@@ -179,7 +179,7 @@
                     <navigationItem key="navigationItem" id="ql0-O4-18G"/>
                     <connections>
                         <outlet property="collectionView" destination="nDc-wz-2pn" id="QMa-fJ-hHl"/>
-                        <segue destination="Umm-fh-qXz" kind="show" identifier="showComments" action="showDetailViewController:sender:" id="TX8-be-bYQ"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromHome" action="showDetailViewController:sender:" id="TX8-be-bYQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -309,7 +309,7 @@
                                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="pressCommentButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="saH-Iq-6dg"/>
+                                                                <action selector="pressCommentButton:" destination="pc2-b1-3Nb" eventType="touchUpInside" id="Yx0-I8-WKi"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -381,6 +381,7 @@
                     <navigationItem key="navigationItem" id="967-Y5-XOk"/>
                     <connections>
                         <outlet property="collectionView" destination="eHU-QR-que" id="MWE-4v-oBQ"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromExplore" id="JTS-hb-4sY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ8-HB-1jf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -527,7 +528,7 @@
                                     <navigationItem title="Kommentarer" id="doB-Ds-p8M">
                                         <barButtonItem key="leftBarButtonItem" title="Tillbaka" id="IgO-qi-T0t">
                                             <connections>
-                                                <action selector="backButton:" destination="Umm-fh-qXz" id="Noq-wu-O02"/>
+                                                <action selector="backButton:" destination="Umm-fh-qXz" id="jJE-tf-7KM"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -590,4 +591,7 @@
         <image name="home_icon" width="64" height="64"/>
         <image name="notice_icon" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="JTS-hb-4sY"/>
+    </inferredMetricsTieBreakers>
 </document>
