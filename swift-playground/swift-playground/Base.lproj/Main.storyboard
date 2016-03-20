@@ -371,10 +371,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eHU-QR-que" firstAttribute="top" secondItem="d7L-dm-8DZ" secondAttribute="bottom" id="6QC-X3-0uj"/>
+                            <constraint firstItem="eHU-QR-que" firstAttribute="top" secondItem="d7L-dm-8DZ" secondAttribute="bottom" id="3Tn-F8-MPA"/>
                             <constraint firstAttribute="trailing" secondItem="eHU-QR-que" secondAttribute="trailing" id="Nbn-De-cVS"/>
-                            <constraint firstItem="eHU-QR-que" firstAttribute="bottom" secondItem="5Ym-Ng-Ynu" secondAttribute="top" id="SDe-Aa-aWg"/>
                             <constraint firstItem="eHU-QR-que" firstAttribute="leading" secondItem="UFc-RP-6Ue" secondAttribute="leading" id="aBC-Dl-J02"/>
+                            <constraint firstItem="eHU-QR-que" firstAttribute="bottom" secondItem="5Ym-Ng-Ynu" secondAttribute="top" id="duU-3C-dCV"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Utforska" image="explore_icon" selectedImage="explore_icon" id="cFt-0w-xLY"/>
@@ -399,9 +399,58 @@
                     <view key="view" contentMode="scaleToFill" id="6jG-aF-5R9">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deD-fv-5yp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <subviews>
+                                    <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1fs-MO-ro8">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                        <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XpF-n0-gZl">
+                                            <size key="itemSize" width="250" height="362"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="achievementCell" id="1Vc-2W-JmT" customClass="AchievementCollectionViewCell" customModule="swift_playground" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="10" width="250" height="362"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="362"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <color key="backgroundColor" red="0.99625748400000003" green="0.99363070730000003" blue="0.99299103020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="wZV-hz-tXx" id="fM5-et-IZk"/>
+                                            <outlet property="delegate" destination="wZV-hz-tXx" id="06c-07-CV7"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="1fs-MO-ro8" secondAttribute="bottom" constant="49" id="6mn-DH-TJU"/>
+                                    <constraint firstItem="1fs-MO-ro8" firstAttribute="top" secondItem="deD-fv-5yp" secondAttribute="top" id="Shi-Zh-0cN"/>
+                                    <constraint firstItem="1fs-MO-ro8" firstAttribute="leading" secondItem="deD-fv-5yp" secondAttribute="leading" id="cnd-oj-pAY"/>
+                                    <constraint firstAttribute="trailing" secondItem="1fs-MO-ro8" secondAttribute="trailing" id="f9u-bs-TLp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="deD-fv-5yp" secondAttribute="trailing" id="2n2-fN-vtc"/>
+                            <constraint firstItem="deD-fv-5yp" firstAttribute="top" secondItem="Ed8-61-Z2c" secondAttribute="bottom" id="FhZ-CB-utk"/>
+                            <constraint firstAttribute="bottom" secondItem="deD-fv-5yp" secondAttribute="bottom" id="lKQ-JM-OHo"/>
+                            <constraint firstItem="deD-fv-5yp" firstAttribute="leading" secondItem="6jG-aF-5R9" secondAttribute="leading" id="lhM-Fg-UhE"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Uppdrag" image="achievement_icon" selectedImage="achievement_icon" id="Ot1-Po-I6y"/>
+                    <connections>
+                        <outlet property="collectionView" destination="1fs-MO-ro8" id="qgU-kQ-S22"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cs6-JP-pci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
