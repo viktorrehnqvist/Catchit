@@ -457,7 +457,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="78p-CN-kmo">
-                                <rect key="frame" x="0.0" y="108" width="600" height="448"/>
+                                <rect key="frame" x="0.0" y="50" width="600" height="443"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gkZ-zX-wPJ">
                                     <size key="itemSize" width="600" height="281"/>
@@ -520,13 +520,8 @@
                                     <outlet property="delegate" destination="Umm-fh-qXz" id="lXZ-pe-9ZX"/>
                                 </connections>
                             </collectionView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en kommentar..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Im9-tO-heW">
-                                <rect key="frame" x="20" y="498" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textField>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQY-wR-pjH">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Kommentarer" id="doB-Ds-p8M">
@@ -538,19 +533,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en kommentar..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Im9-tO-heW">
+                                <rect key="frame" x="20" y="501" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="LQY-wR-pjH" secondAttribute="trailing" id="5rl-1t-Ux2"/>
-                            <constraint firstItem="Im9-tO-heW" firstAttribute="top" secondItem="QA7-8T-vFw" secondAttribute="bottom" constant="11" id="D1i-Y4-wkf"/>
-                            <constraint firstItem="LQY-wR-pjH" firstAttribute="leading" secondItem="78p-CN-kmo" secondAttribute="leading" id="DLp-hf-Mev"/>
-                            <constraint firstItem="LQY-wR-pjH" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leading" id="DVX-45-TqN"/>
-                            <constraint firstItem="Im9-tO-heW" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leadingMargin" id="IzT-Id-7uu"/>
-                            <constraint firstItem="LQY-wR-pjH" firstAttribute="top" secondItem="FOk-Cu-5Xp" secondAttribute="bottom" constant="64" id="T1D-Gv-scT"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="78p-CN-kmo" secondAttribute="bottom" constant="-20" id="b7s-cC-YjD"/>
-                            <constraint firstItem="78p-CN-kmo" firstAttribute="centerX" secondItem="Im9-tO-heW" secondAttribute="centerX" id="f4j-Y2-8Yz"/>
-                            <constraint firstItem="78p-CN-kmo" firstAttribute="top" secondItem="LQY-wR-pjH" secondAttribute="bottom" id="iy6-ys-OvI"/>
-                            <constraint firstItem="78p-CN-kmo" firstAttribute="trailing" secondItem="LQY-wR-pjH" secondAttribute="trailing" id="o6m-An-iZh"/>
+                            <constraint firstItem="Im9-tO-heW" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leadingMargin" id="DLc-Zp-Hm9"/>
+                            <constraint firstItem="LQY-wR-pjH" firstAttribute="trailing" secondItem="78p-CN-kmo" secondAttribute="trailing" id="LIJ-0h-vg0"/>
+                            <constraint firstItem="Im9-tO-heW" firstAttribute="centerX" secondItem="78p-CN-kmo" secondAttribute="centerX" id="NF0-AE-EKL"/>
+                            <constraint firstItem="78p-CN-kmo" firstAttribute="top" secondItem="LQY-wR-pjH" secondAttribute="bottom" constant="6" id="Qzc-Cj-Vw3"/>
+                            <constraint firstItem="Im9-tO-heW" firstAttribute="top" secondItem="78p-CN-kmo" secondAttribute="bottom" constant="8" symbolic="YES" id="R55-VY-uAq"/>
+                            <constraint firstAttribute="trailing" secondItem="78p-CN-kmo" secondAttribute="trailing" id="VVC-kD-b4j"/>
+                            <constraint firstItem="LQY-wR-pjH" firstAttribute="leading" secondItem="78p-CN-kmo" secondAttribute="leading" id="bcr-CH-nR6"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Im9-tO-heW" secondAttribute="bottom" constant="5" id="kpp-7h-Tnq"/>
+                            <constraint firstItem="LQY-wR-pjH" firstAttribute="leading" secondItem="rMi-bt-jJy" secondAttribute="leading" id="vZr-AQ-O3i"/>
+                            <constraint firstItem="LQY-wR-pjH" firstAttribute="top" secondItem="FOk-Cu-5Xp" secondAttribute="bottom" id="wmx-Ay-ZaZ"/>
                         </constraints>
                     </view>
                     <connections>

@@ -77,11 +77,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 210)
+        animateViewMoving(true, moveValue: 212)
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 210)
+        animateViewMoving(false, moveValue: 212)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
