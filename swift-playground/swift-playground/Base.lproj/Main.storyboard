@@ -169,14 +169,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="nDc-wz-2pn" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="4aj-9w-gDD"/>
-                            <constraint firstAttribute="trailing" secondItem="nDc-wz-2pn" secondAttribute="trailing" id="PZq-MX-glK"/>
-                            <constraint firstItem="nDc-wz-2pn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="YMM-EV-eJX"/>
-                            <constraint firstItem="nDc-wz-2pn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ouI-g3-Ah1"/>
+                            <constraint firstItem="nDc-wz-2pn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3xk-9K-Thx"/>
+                            <constraint firstItem="nDc-wz-2pn" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="cXc-3u-0IH"/>
+                            <constraint firstItem="nDc-wz-2pn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pYH-j5-D4X"/>
+                            <constraint firstAttribute="trailing" secondItem="nDc-wz-2pn" secondAttribute="trailing" id="s9b-CB-3oh"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Hem" image="home_icon" selectedImage="home_icon" id="f2P-cL-L1T"/>
-                    <navigationItem key="navigationItem" id="ql0-O4-18G"/>
                     <connections>
                         <outlet property="collectionView" destination="nDc-wz-2pn" id="QMa-fJ-hHl"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromHome" action="showDetailViewController:sender:" id="TX8-be-bYQ"/>
@@ -190,7 +189,17 @@
         <scene sceneID="hGf-hV-2oi">
             <objects>
                 <tabBarController id="Mov-A6-gvQ" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="HXh-VS-Ci0"/>
+                    <navigationItem key="navigationItem" id="HXh-VS-Ci0">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="v3b-aX-AQN">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sök..." textAlignment="natural" minimumFontSize="17" id="KPt-ue-BEM">
+                                <rect key="frame" x="20" y="7" width="230" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="y0v-Tz-1mR"/>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="WQ6-sG-ZJC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -861,6 +870,7 @@
         <image name="achievement_button_icon3" width="60" height="60"/>
         <image name="achievement_icon" width="32" height="32"/>
         <image name="avatar" width="159" height="159"/>
+        <image name="avatarsmall" width="30" height="24"/>
         <image name="bucketlist_icon" width="32" height="32"/>
         <image name="explore_icon" width="32" height="32"/>
         <image name="home_icon" width="64" height="64"/>
@@ -868,6 +878,6 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JTS-hb-4sY"/>
+        <segue reference="TX8-be-bYQ"/>
     </inferredMetricsTieBreakers>
 </document>
