@@ -645,7 +645,68 @@
                     <view key="view" contentMode="scaleToFill" id="Xfz-Wl-Vys">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ien-Na-utX">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BYG-Du-GOT">
+                                    <size key="itemSize" width="250" height="46"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="noticeCell" id="Url-HF-9Ut" customClass="NoticeCollectionViewCell" customModule="swift_playground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YM6-sm-Aqw">
+                                                    <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="LBJ-6O-cYs"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-95-2R7">
+                                                    <rect key="frame" x="46" y="8" width="196" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.99625748400000003" green="0.99363070730000003" blue="0.99299103020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="top" secondItem="Url-HF-9Ut" secondAttribute="topMargin" id="ahK-bd-fJ0"/>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="bottom" secondItem="Url-HF-9Ut" secondAttribute="bottomMargin" id="bI1-B6-hEL"/>
+                                            <constraint firstItem="YM6-sm-Aqw" firstAttribute="leading" secondItem="Url-HF-9Ut" secondAttribute="leadingMargin" id="cK2-8B-Urg"/>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="top" secondItem="YM6-sm-Aqw" secondAttribute="top" id="lAA-3X-sYG"/>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="trailing" secondItem="Url-HF-9Ut" secondAttribute="trailingMargin" id="rNZ-2Z-WWC"/>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="bottom" secondItem="YM6-sm-Aqw" secondAttribute="bottom" id="vIE-Wd-ue6"/>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="leading" secondItem="YM6-sm-Aqw" secondAttribute="trailing" constant="8" symbolic="YES" id="zFu-7L-6jv"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="noticeImage" destination="YM6-sm-Aqw" id="wTY-xE-8Ec"/>
+                                            <outlet property="noticeLabel" destination="2Hf-95-2R7" id="H4Y-Og-fmW"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="n1Y-MO-kZk" id="ULE-5Y-jH2"/>
+                                    <outlet property="delegate" destination="n1Y-MO-kZk" id="bUH-Wf-ZNF"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ien-Na-utX" secondAttribute="trailing" id="4rf-vS-YMg"/>
+                            <constraint firstItem="ien-Na-utX" firstAttribute="leading" secondItem="Xfz-Wl-Vys" secondAttribute="leading" id="OEy-im-est"/>
+                            <constraint firstItem="ien-Na-utX" firstAttribute="top" secondItem="e1I-G9-EuS" secondAttribute="bottom" id="gEp-O3-Ah0"/>
+                            <constraint firstItem="ien-Na-utX" firstAttribute="bottom" secondItem="qS2-58-mhC" secondAttribute="top" id="knR-NS-vhl"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Aviseringar" image="notice_icon" selectedImage="notice_icon" id="Jg3-Rv-eMy"/>
                 </viewController>
