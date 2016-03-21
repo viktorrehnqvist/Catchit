@@ -561,7 +561,72 @@
                     <view key="view" contentMode="scaleToFill" id="kKn-7b-g2p">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9Wr-Ip-zqh">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="WtL-hh-5DW">
+                                    <size key="itemSize" width="250" height="46"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="bucketlistCell" id="HdM-16-ChC" customClass="BucketlistCollectionViewCell" customModule="swift_playground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cykla med en hund till affären och handla" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iih-4e-Ruu">
+                                                    <rect key="frame" x="8" y="4" width="148" height="38"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50v-fF-uY3">
+                                                    <rect key="frame" x="168" y="4" width="74" height="38"/>
+                                                    <color key="backgroundColor" red="0.17254901959999999" green="0.48627450979999998" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="74" id="frw-WB-N7T"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" title="Ladda upp">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.99625748400000003" green="0.99363070730000003" blue="0.99299103020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="leading" secondItem="HdM-16-ChC" secondAttribute="leadingMargin" id="2fn-RN-gMh"/>
+                                            <constraint firstItem="50v-fF-uY3" firstAttribute="top" secondItem="Iih-4e-Ruu" secondAttribute="top" id="5kb-aE-hJe"/>
+                                            <constraint firstItem="50v-fF-uY3" firstAttribute="leading" secondItem="Iih-4e-Ruu" secondAttribute="trailing" constant="12" id="M6B-od-Vj6"/>
+                                            <constraint firstItem="50v-fF-uY3" firstAttribute="trailing" secondItem="HdM-16-ChC" secondAttribute="trailingMargin" id="WuE-PI-1sv"/>
+                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="centerY" secondItem="HdM-16-ChC" secondAttribute="centerY" id="eF4-Xi-fQF"/>
+                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="topMargin" constant="-4" id="gbA-CV-PyH"/>
+                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="bottom" secondItem="50v-fF-uY3" secondAttribute="bottom" id="mej-rB-u76"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="uploadButton" destination="50v-fF-uY3" id="iGN-LX-2dH"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="dcD-Gz-shw" id="zQV-rX-UJl"/>
+                                    <outlet property="delegate" destination="dcD-Gz-shw" id="vaa-lF-r0g"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9Wr-Ip-zqh" firstAttribute="top" secondItem="mfx-jA-Jiu" secondAttribute="bottom" id="0zg-6T-4Jc"/>
+                            <constraint firstAttribute="trailing" secondItem="9Wr-Ip-zqh" secondAttribute="trailing" id="6xX-Mc-mlM"/>
+                            <constraint firstItem="9Wr-Ip-zqh" firstAttribute="leading" secondItem="kKn-7b-g2p" secondAttribute="leading" id="PQZ-pN-Fdy"/>
+                            <constraint firstItem="9Wr-Ip-zqh" firstAttribute="bottom" secondItem="b4y-zW-Oif" secondAttribute="top" id="gEg-Tl-tzb"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Bucket-list" image="bucketlist_icon" selectedImage="bucketlist_icon" id="OM0-LY-bm7"/>
                 </viewController>
