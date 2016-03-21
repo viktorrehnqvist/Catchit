@@ -10,4 +10,9 @@ import UIKit
 
 class AchievementCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var achievementImage1: UIImageView!
+    @IBOutlet weak var achievementImage2: UIImageView!
+    @IBOutlet weak var achievementImage3: UIImageView!
+    @IBOutlet weak var uploadButton: UIButton!
+    
 }

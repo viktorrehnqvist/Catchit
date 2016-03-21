@@ -58,6 +58,7 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
         
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
+        cell.uploadButton.layer.cornerRadius = 5
         
         return cell
         
@@ -66,9 +67,7 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let image = self.imageArray[indexPath.row]!
-            let heightFactor = image.size.height / image.size.width
-            let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
+            let size = CGSize(width: screenSize.width, height: screenSize.width * 1.2)
             
             return size
     }
