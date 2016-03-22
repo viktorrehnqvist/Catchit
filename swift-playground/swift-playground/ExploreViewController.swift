@@ -58,11 +58,10 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         
         let tapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
         
+        cell.likeCount.addGestureRecognizer(tapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
-        cell.likeButton.addGestureRecognizer(tapGesture)
-        cell.addGestureRecognizer(tapGesture)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
@@ -84,6 +83,10 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         self.performSegueWithIdentifier("showCommentsFromExplore", sender: sender)
     }
     
+    @IBAction func showLikes(sender: AnyObject?) {
+        print("test")
+        self.performSegueWithIdentifier("showLikesFromExplore", sender: sender)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCommentsFromExplore" {
@@ -92,10 +95,6 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         }
         if segue.identifier == "showLikesFromExplore" {
         }
-    }
-    
-    @IBAction func showLikes(sender: AnyObject?) {
-        self.performSegueWithIdentifier("showLikesFromExplore", sender: sender)
     }
     
     

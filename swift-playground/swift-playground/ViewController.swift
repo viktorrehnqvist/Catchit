@@ -52,6 +52,9 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
+        
+        cell.likeCount.addGestureRecognizer(tapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
@@ -76,11 +79,17 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         self.performSegueWithIdentifier("showCommentsFromHome", sender: sender)
     }
     
+    @IBAction func showLikes(sender: AnyObject?) {
+        print("test")
+        self.performSegueWithIdentifier("showLikesFromHome", sender: sender)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCommentsFromHome" {
             let vc = segue.destinationViewController as! NewViewController
             vc.comments = self.commentsArray[sender!.tag]
+        }
+        if segue.identifier == "showLikesFromHome" {
         }
     }
 
