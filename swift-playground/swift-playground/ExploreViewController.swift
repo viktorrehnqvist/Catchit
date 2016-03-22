@@ -56,9 +56,11 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! CollectionViewCell
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
+        let likesTapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
+        let commentsTapGesture = UITapGestureRecognizer(target: self, action: "pressCommentButton:")
         
-        cell.likeCount.addGestureRecognizer(tapGesture)
+        cell.likeCount.addGestureRecognizer(likesTapGesture)
+        cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
@@ -90,7 +92,10 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCommentsFromExplore" {
             let vc = segue.destinationViewController as! NewViewController
-            vc.comments = self.commentsArray[sender!.tag]
+            // Cant send tag from tap gesture, get comments from something else and delete next if
+            if (sender!.tag != nil) {
+                vc.comments = self.commentsArray[sender!.tag]
+            }
         }
         if segue.identifier == "showLikesFromExplore" {
         }

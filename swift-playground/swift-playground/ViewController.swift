@@ -56,12 +56,15 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
+        let likesTapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
+        let commentsTapGesture = UITapGestureRecognizer(target: self, action: "pressCommentButton:")
         
-        cell.likeCount.addGestureRecognizer(tapGesture)
+        cell.likeCount.addGestureRecognizer(likesTapGesture)
+        cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
+        cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
@@ -79,7 +82,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
             return size
     }
     
-    @IBAction func pressCommentButton(sender: UIButton) {
+    @IBAction func pressCommentButton(sender: AnyObject?) {
         self.performSegueWithIdentifier("showCommentsFromHome", sender: sender)
     }
     
@@ -90,7 +93,10 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCommentsFromHome" {
             let vc = segue.destinationViewController as! NewViewController
-            vc.comments = self.commentsArray[sender!.tag]
+            // Cant send tag from tap gesture, get comments from something else and delete next if
+            if (sender!.tag != nil) {
+                vc.comments = self.commentsArray[sender!.tag]
+            }
         }
         if segue.identifier == "showLikesFromHome" {
         }

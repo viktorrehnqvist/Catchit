@@ -15,12 +15,11 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var commentCount: UILabel!
     @IBOutlet weak var buttonContainer: UIStackView!
     
-    
     @IBAction func pressLikeButton(sender: AnyObject) {
-        // Send like request to API
-        print(commentButton.tag)
+        // Send like request to API with commentButton.tag
         let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)
         let onlyNumberPartOfString = likeCount.text!.substringToIndex(lastPartInString)
         if (likeButton?.titleLabel?.text == "Gilla") {
