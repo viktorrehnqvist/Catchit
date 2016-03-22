@@ -56,9 +56,13 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! CollectionViewCell
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
+        
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
+        cell.likeButton.addGestureRecognizer(tapGesture)
+        cell.addGestureRecognizer(tapGesture)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
@@ -86,7 +90,14 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
             let vc = segue.destinationViewController as! NewViewController
             vc.comments = self.commentsArray[sender!.tag]
         }
+        if segue.identifier == "showLikesFromExplore" {
+        }
     }
+    
+    @IBAction func showLikes(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showLikesFromExplore", sender: sender)
+    }
+    
     
     
 }
