@@ -38,7 +38,11 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,7 +84,6 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     
     @IBAction func showLikes(sender: AnyObject?) {
-        print("test")
         self.performSegueWithIdentifier("showLikesFromHome", sender: sender)
     }
     

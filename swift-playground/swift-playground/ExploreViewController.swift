@@ -84,7 +84,6 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     @IBAction func showLikes(sender: AnyObject?) {
-        print("test")
         self.performSegueWithIdentifier("showLikesFromExplore", sender: sender)
     }
     

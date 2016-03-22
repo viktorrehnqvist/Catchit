@@ -25,11 +25,11 @@
                                     <size key="itemSize" width="250" height="362"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="cell" id="s9q-bA-xns" customClass="CollectionViewCell" customModule="swift_playground" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="250" height="362"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="362"/>
@@ -238,11 +238,11 @@
                                     <size key="itemSize" width="250" height="362"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="exploreCell" id="oQX-pO-Lvo" customClass="CollectionViewCell" customModule="swift_playground" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="250" height="362"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="362"/>
@@ -404,7 +404,7 @@
         <!--Likes View Controller-->
         <scene sceneID="Axp-eL-Fk2">
             <objects>
-                <viewController id="CCn-0l-fD4" customClass="LikesViewController" customModule="swift_playground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="CCn-0l-fD4" customClass="LikesViewController" customModule="swift_playground" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9En-f0-16w"/>
                         <viewControllerLayoutGuide type="bottom" id="RxO-OV-f5O"/>
@@ -415,12 +415,12 @@
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SvS-TZ-Tyk">
                                 <rect key="frame" x="0.0" y="44" width="600" height="443"/>
-                                <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Hmn-E4-V4B">
                                     <size key="itemSize" width="250" height="46"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="noticeCell" id="Aid-Zm-WVu" customClass="NoticeCollectionViewCell" customModule="swift_playground" customModuleProvider="target">
@@ -482,13 +482,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="SvS-TZ-Tyk" secondAttribute="trailing" id="8Di-70-RHU"/>
-                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="top" secondItem="jGw-8V-aUL" secondAttribute="bottom" id="DK0-px-mbX"/>
-                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="leading" secondItem="jGw-8V-aUL" secondAttribute="leading" id="IZC-hb-IeF"/>
-                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="bottom" secondItem="RxO-OV-f5O" secondAttribute="top" id="LV6-h2-BtS"/>
-                            <constraint firstItem="jGw-8V-aUL" firstAttribute="trailing" secondItem="SvS-TZ-Tyk" secondAttribute="trailing" id="b0W-c6-ZNS"/>
-                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="leading" secondItem="8zq-ib-kyt" secondAttribute="leading" id="hqm-ES-VUm"/>
-                            <constraint firstItem="jGw-8V-aUL" firstAttribute="top" secondItem="9En-f0-16w" secondAttribute="bottom" id="lHI-aK-KGB"/>
+                            <constraint firstItem="jGw-8V-aUL" firstAttribute="leading" secondItem="8zq-ib-kyt" secondAttribute="leading" id="9ci-W5-jwD"/>
+                            <constraint firstAttribute="trailing" secondItem="SvS-TZ-Tyk" secondAttribute="trailing" id="FsJ-vx-RoM"/>
+                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="top" secondItem="jGw-8V-aUL" secondAttribute="bottom" id="G5z-AU-FNA"/>
+                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="bottom" secondItem="RxO-OV-f5O" secondAttribute="top" id="S1n-21-Euq"/>
+                            <constraint firstItem="jGw-8V-aUL" firstAttribute="top" secondItem="9En-f0-16w" secondAttribute="bottom" id="SG4-03-Pz1"/>
+                            <constraint firstItem="jGw-8V-aUL" firstAttribute="leading" secondItem="SvS-TZ-Tyk" secondAttribute="leading" id="c4Q-aH-rmw"/>
+                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="trailing" secondItem="jGw-8V-aUL" secondAttribute="trailing" id="gzA-A1-5O9"/>
                         </constraints>
                     </view>
                     <connections>
@@ -518,11 +518,11 @@
                                     <size key="itemSize" width="250" height="264"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="achievementCell" id="1Vc-2W-JmT" customClass="AchievementCollectionViewCell" customModule="swift_playground" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="250" height="264"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="264"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="264"/>
@@ -980,7 +980,7 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9gd-33-pz2"/>
-        <segue reference="TX8-be-bYQ"/>
+        <segue reference="zhv-hg-8pY"/>
+        <segue reference="JTS-hb-4sY"/>
     </inferredMetricsTieBreakers>
 </document>
