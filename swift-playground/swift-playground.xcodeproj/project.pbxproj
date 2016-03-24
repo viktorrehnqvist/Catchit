@@ -24,6 +24,7 @@
 		F73A51CF1CA046BA0029779D /* BucketlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */; };
 		F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */; };
 		F73A51DA1CA127430029779D /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51D91CA127430029779D /* LikesViewController.swift */; };
+		F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51DC1CA1690D0029779D /* ProfileViewController.swift */; };
 		F74018811C72FEF2004383FE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74018801C72FEF2004383FE /* SwiftyJSON.swift */; };
 		F761C52C1C9DD60200E3C334 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C52B1C9DD60200E3C334 /* ExploreViewController.swift */; };
 		F761C5301C9DD6CF00E3C334 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */; };
@@ -91,6 +92,7 @@
 		F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51D91CA127430029779D /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
+		F73A51DC1CA1690D0029779D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F74018801C72FEF2004383FE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../Weather-App-Example/Weather-App-Example/SwiftyJSON.swift"; sourceTree = "<group>"; };
 		F761C52B1C9DD60200E3C334 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */,
 				F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */,
 				F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */,
+				F73A51DC1CA1690D0029779D /* ProfileViewController.swift */,
 				F73A51D91CA127430029779D /* LikesViewController.swift */,
 				F721AD521C9B503300BF0BEA /* CommentsCollectionViewCell.swift */,
 				F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */,
@@ -437,6 +440,7 @@
 				F70173781C6E6EAF006F799A /* ViewController.swift in Sources */,
 				F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */,
 				F761C52C1C9DD60200E3C334 /* ExploreViewController.swift in Sources */,
+				F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */,
 				F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */,
 				F7EEC2751C92E31C002378E9 /* CollectionViewCell.swift in Sources */,
 				F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */,

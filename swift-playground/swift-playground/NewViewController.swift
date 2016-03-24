@@ -32,14 +32,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func backButton(sender: AnyObject) {
-        // Handles different show types, dismiss for home and navigation for explore. This should be fixed to display identically.
-        self.dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
         textField.delegate = self
         // Do any additional setup after loading the view.
     }

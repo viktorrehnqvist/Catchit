@@ -21,7 +21,6 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
     
     @IBAction func backButton(sender: AnyObject) {
         // Handles different show types, dismiss for home and navigation for explore. This should be fixed to display identically.
-        self.dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
     
@@ -30,10 +29,6 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
         postService.getPosts()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = true
     }
     
     override func didReceiveMemoryWarning() {
