@@ -56,8 +56,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! CollectionViewCell
         
-        let likesTapGesture = UITapGestureRecognizer(target: self, action: "showLikes:")
-        let commentsTapGesture = UITapGestureRecognizer(target: self, action: "pressCommentButton:")
+        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ExploreViewController.showLikes(_:)))
+        let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ExploreViewController.pressCommentButton(_:)))
         
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
