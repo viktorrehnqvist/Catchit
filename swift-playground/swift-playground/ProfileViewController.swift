@@ -84,7 +84,7 @@ class ProfileViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     @IBAction func showLikes(sender: AnyObject?) {
-        self.performSegueWithIdentifier("showLikesFromHome", sender: sender)
+        self.performSegueWithIdentifier("showLikesFromProfile", sender: sender)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

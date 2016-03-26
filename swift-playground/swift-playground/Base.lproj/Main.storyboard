@@ -831,6 +831,7 @@
                                                 </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inga gilla-markeringar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuD-hS-PNI">
                                                     <rect key="frame" x="8" y="250" width="90" height="21"/>
+                                                    <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -877,7 +878,7 @@
                                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="pressCommentButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x0n-1Y-5ev"/>
+                                                                <action selector="pressCommentButton:" destination="Egn-Kw-huY" eventType="touchUpInside" id="Nnu-TO-Zb6"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -893,6 +894,7 @@
                                                 </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 kommentarer" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgi-eV-AJ6">
                                                     <rect key="frame" x="169" y="251" width="73" height="18"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="73" id="7js-Hr-cba"/>
                                                         <constraint firstAttribute="height" constant="18" id="K5k-PX-cd6"/>
@@ -934,7 +936,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="buttonContainer" destination="W5j-PW-zvh" id="etz-mi-OUx"/>
-                                            <outlet property="commentButton" destination="q8v-PH-ZJ1" id="Jea-ao-lod"/>
+                                            <outlet property="commentButton" destination="q8v-PH-ZJ1" id="PIB-rl-Brd"/>
                                             <outlet property="commentCount" destination="Zgi-eV-AJ6" id="fJJ-b8-n0I"/>
                                             <outlet property="imageView" destination="S1Q-sR-SX8" id="a4T-Gy-0gN"/>
                                             <outlet property="label" destination="LjV-uX-Hdz" id="SqV-hP-AkP"/>
@@ -1030,6 +1032,10 @@
                             <constraint firstItem="jjL-YQ-7zg" firstAttribute="leading" secondItem="Wjs-dl-iWN" secondAttribute="leading" id="z3S-0o-d0v"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromProfile" id="LZO-0g-si8"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromProfile" id="6oL-8J-eNe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A7z-IN-6uA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1345,8 +1351,8 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UnV-OJ-WQS"/>
-        <segue reference="KBR-5L-ez0"/>
-        <segue reference="zmg-u7-toT"/>
+        <segue reference="jJ1-6D-cDh"/>
+        <segue reference="LZO-0g-si8"/>
+        <segue reference="6oL-8J-eNe"/>
     </inferredMetricsTieBreakers>
 </document>
