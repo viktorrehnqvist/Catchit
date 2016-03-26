@@ -224,8 +224,8 @@
                     <connections>
                         <segue destination="qQv-56-V0Y" kind="relationship" relationship="viewControllers" id="GWm-Rl-npz"/>
                         <segue destination="h5c-Mz-qek" kind="relationship" relationship="viewControllers" id="9CH-fh-aPS"/>
-                        <segue destination="4ln-H9-1nl" kind="relationship" relationship="viewControllers" id="o2R-7F-N6P"/>
                         <segue destination="567-WM-G3O" kind="relationship" relationship="viewControllers" id="GDV-yf-8hu"/>
+                        <segue destination="4ln-H9-1nl" kind="relationship" relationship="viewControllers" id="o2R-7F-N6P"/>
                         <segue destination="5Gj-zd-KUA" kind="relationship" relationship="viewControllers" id="rsy-il-62l"/>
                     </connections>
                 </tabBarController>
@@ -576,18 +576,17 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon3" translatesAutoresizingMaskIntoConstraints="NO" id="KcK-Mp-dk4">
-                                                    <rect key="frame" x="165" y="144" width="77" height="68"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon1" translatesAutoresizingMaskIntoConstraints="NO" id="tVm-jL-3PC">
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon1" translatesAutoresizingMaskIntoConstraints="NO" id="tVm-jL-3PC">
                                                     <rect key="frame" x="8" y="144" width="77" height="68"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="77" id="402-i8-bMl"/>
                                                         <constraint firstAttribute="height" constant="68" id="tzL-lb-EjO"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon2" translatesAutoresizingMaskIntoConstraints="NO" id="Y4n-lP-Lw9">
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon2" translatesAutoresizingMaskIntoConstraints="NO" id="Y4n-lP-Lw9">
                                                     <rect key="frame" x="87" y="144" width="77" height="68"/>
+                                                    <gestureRecognizers/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5AB-en-h4q">
                                                     <rect key="frame" x="0.0" y="68" width="250" height="54"/>
@@ -613,6 +612,9 @@
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon3" translatesAutoresizingMaskIntoConstraints="NO" id="KcK-Mp-dk4">
+                                                    <rect key="frame" x="165" y="144" width="77" height="68"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -648,6 +650,9 @@
                                             <constraint firstItem="KcK-Mp-dk4" firstAttribute="top" secondItem="5AB-en-h4q" secondAttribute="bottom" constant="22" id="yEs-Bn-19P"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="bucketlistImage" destination="KcK-Mp-dk4" id="jq8-Rf-h7D"/>
+                                            <outlet property="completersImage" destination="tVm-jL-3PC" id="JVA-vC-iyO"/>
+                                            <outlet property="shareImage" destination="Y4n-lP-Lw9" id="Iby-EZ-rs7"/>
                                             <outlet property="uploadButton" destination="005-uw-xuh" id="Zfs-3S-1Bc"/>
                                         </connections>
                                     </collectionViewCell>
@@ -684,6 +689,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="1fs-MO-ro8" id="qgU-kQ-S22"/>
+                        <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesViewFromAchievement" id="S0S-yH-cd5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cs6-JP-pci" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1351,8 +1357,8 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jJ1-6D-cDh"/>
-        <segue reference="LZO-0g-si8"/>
-        <segue reference="6oL-8J-eNe"/>
+        <segue reference="KBR-5L-ez0"/>
+        <segue reference="S0S-yH-cd5"/>
+        <segue reference="3Ph-BA-daD"/>
     </inferredMetricsTieBreakers>
 </document>

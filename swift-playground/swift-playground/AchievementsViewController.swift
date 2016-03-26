@@ -56,6 +56,15 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("achievementCell", forIndexPath: indexPath) as! AchievementCollectionViewCell
         
+        let completersTapGesture = UITapGestureRecognizer(target: self, action: #selector(AchievementsViewController.showCompleters(_:)))
+        let shareTapGesture = UITapGestureRecognizer(target: self, action: #selector(AchievementsViewController.shareAchievement(_:)))
+        let bucketlistTapGesture = UITapGestureRecognizer(target: self, action: #selector(AchievementsViewController.bucketlistPress(_:)))
+        
+        cell.tag = indexPath.row
+        cell.completersImage.addGestureRecognizer(completersTapGesture)
+        cell.shareImage.addGestureRecognizer(shareTapGesture)
+        cell.bucketlistImage.addGestureRecognizer(bucketlistTapGesture)
+        
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.layer.cornerRadius = 5
@@ -71,6 +80,41 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
             
             return size
     }
+    
+    @IBAction func showCompleters(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
+        print("test")
+    }
+    
+    @IBAction func shareAchievement(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
+        print("test")
+    }
+    
+    @IBAction func bucketlistPress(sender: AnyObject?) {
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let cell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
+        if cell.bucketlistImage.image == UIImage(named: "achievement_button_icon3") {
+            cell.bucketlistImage.image = UIImage(named: "bucketlist-remove_icon")
+        } else {
+            cell.bucketlistImage.image = UIImage(named: "achievement_button_icon3")
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCommentsFromHome" {
+            let vc = segue.destinationViewController as! NewViewController
+            // Cant send tag from tap gesture, get comments from something else and delete next if
+            if (sender!.tag != nil) {
+                vc.comments = self.commentsArray[sender!.tag]
+            }
+        }
+        if segue.identifier == "showLikesFromHome" {
+        }
+    }
+
     
     
     

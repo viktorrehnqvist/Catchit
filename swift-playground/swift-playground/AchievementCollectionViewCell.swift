@@ -15,4 +15,9 @@ class AchievementCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var achievementImage3: UIImageView!
     @IBOutlet weak var uploadButton: UIButton!
     
+    @IBOutlet weak var completersImage: UIImageView!
+    @IBOutlet weak var shareImage: UIImageView!
+    @IBOutlet weak var bucketlistImage: UIImageView!
+    
+    
 }
