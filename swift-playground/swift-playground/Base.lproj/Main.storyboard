@@ -52,19 +52,13 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="zhm-BZ-D1T">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="zhm-BZ-D1T">
                                                     <rect key="frame" x="8" y="8" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Du4-9V-lZW"/>
                                                         <constraint firstAttribute="width" constant="30" id="kEZ-ZL-Du6"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sholle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adf-hO-eR6">
-                                                    <rect key="frame" x="48" y="8" width="131" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wPn-vG-oXA">
                                                     <rect key="frame" x="5" y="324" width="240" height="30"/>
                                                     <subviews>
@@ -118,6 +112,12 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sholle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adf-hO-eR6">
+                                                    <rect key="frame" x="48" y="8" width="131" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -157,6 +157,8 @@
                                             <outlet property="label" destination="zgN-ug-cCC" id="fwU-93-gx4"/>
                                             <outlet property="likeButton" destination="2gV-1F-Yb3" id="ZOE-u6-10O"/>
                                             <outlet property="likeCount" destination="0se-Ja-eJQ" id="Bgm-d7-pU5"/>
+                                            <outlet property="profileImage" destination="zhm-BZ-D1T" id="pyD-p5-bOG"/>
+                                            <outlet property="profileLabel" destination="Adf-hO-eR6" id="hSW-12-WaO"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -184,17 +186,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="k0F-ZP-tjg">
-                            <connections>
-                                <segue destination="Egn-Kw-huY" kind="show" id="zmg-u7-toT"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="k0F-ZP-tjg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="nDc-wz-2pn" id="QMa-fJ-hHl"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromHome" id="UnV-OJ-WQS"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromHome" id="KBR-5L-ez0"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromHome" id="dwR-E4-82o"/>
+                        <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromHome" id="N5Z-XD-MLh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -294,14 +293,14 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="emS-60-bge">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="emS-60-bge">
                                                     <rect key="frame" x="8" y="8" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="p3g-Rd-nOM"/>
                                                         <constraint firstAttribute="width" constant="30" id="vPK-kV-Twn"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sholle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUf-ad-lnZ">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sholle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUf-ad-lnZ">
                                                     <rect key="frame" x="48" y="8" width="131" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -388,6 +387,8 @@
                                             <outlet property="label" destination="Jko-gn-H0I" id="ShN-X8-anT"/>
                                             <outlet property="likeButton" destination="i50-za-ErQ" id="3fw-6B-TUF"/>
                                             <outlet property="likeCount" destination="ojd-oO-X0t" id="iRm-EU-mWc"/>
+                                            <outlet property="profileImage" destination="emS-60-bge" id="Jnz-uT-UQI"/>
+                                            <outlet property="profileLabel" destination="WUf-ad-lnZ" id="a5o-vG-hFX"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -417,7 +418,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="x59-OH-39U">
                             <connections>
-                                <segue destination="Egn-Kw-huY" kind="show" id="jJ1-6D-cDh"/>
+                                <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromExplore" id="jJ1-6D-cDh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -426,6 +427,7 @@
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromExplore" id="JTS-hb-4sY"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromExplore" id="zhv-hg-8pY"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromExplore" id="4pd-pR-4gV"/>
+                        <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromExplore" id="xHK-9p-MYi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ8-HB-1jf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1695,9 +1697,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JIk-2X-1Dy"/>
-        <segue reference="L9l-gp-JAO"/>
-        <segue reference="S0S-yH-cd5"/>
-        <segue reference="JTS-hb-4sY"/>
+        <segue reference="KBR-5L-ez0"/>
+        <segue reference="dwR-E4-82o"/>
+        <segue reference="N5Z-XD-MLh"/>
+        <segue reference="UnV-OJ-WQS"/>
     </inferredMetricsTieBreakers>
 </document>

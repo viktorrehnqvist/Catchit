@@ -59,10 +59,14 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
+        let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
+        let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
+        cell.profileImage.addGestureRecognizer(profileImageTapGesture)
+        cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
@@ -94,6 +98,10 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     @IBAction func showAchievement(sender: AnyObject?) {
         self.performSegueWithIdentifier("showAchievementFromHome", sender: sender)
+    }
+    
+    @IBAction func showProfile(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showProfileFromHome", sender: sender)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

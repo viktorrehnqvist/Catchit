@@ -17,6 +17,8 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var commentCount: UILabel!
     @IBOutlet weak var buttonContainer: UIStackView!
+    @IBOutlet weak var profileLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     
     
     @IBAction func pressLikeButton(sender: AnyObject) {
