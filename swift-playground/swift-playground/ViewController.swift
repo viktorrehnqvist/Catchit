@@ -58,9 +58,11 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.pressCommentButton(_:)))
+        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.showAchievement(_:)))
         
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
+        cell.label.addGestureRecognizer(achievementTapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
@@ -88,6 +90,10 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     @IBAction func showLikes(sender: AnyObject?) {
         self.performSegueWithIdentifier("showLikesFromHome", sender: sender)
+    }
+    
+    @IBAction func showAchievement(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showAchievementFromHome", sender: sender)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

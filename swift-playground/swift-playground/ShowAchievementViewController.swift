@@ -1,14 +1,14 @@
 //
-//  ProfileViewController.swift
+//  ShowAchievementViewController.swift
 //  swift-playground
 //
-//  Created by viktor johansson on 22/03/16.
+//  Created by viktor johansson on 28/03/16.
 //  Copyright © 2016 viktor johansson. All rights reserved.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -70,21 +70,21 @@ class ProfileViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let image = self.imageArray[indexPath.row]!
-            let heightFactor = image.size.height / image.size.width
-            let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
-            
-            return size
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let image = self.imageArray[indexPath.row]!
+        let heightFactor = image.size.height / image.size.width
+        let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
+        
+        return size
     }
     
     func collectionView(collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+                        viewForSupplementaryElementOfKind kind: String,
+                                                          atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
-                                                                      withReuseIdentifier: "profileTopBar",
-                                                                      forIndexPath: indexPath)
+                                                                               withReuseIdentifier: "profileTopBar",
+                                                                               forIndexPath: indexPath)
         return headerView
     }
     
