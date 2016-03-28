@@ -79,6 +79,15 @@ class ProfileViewController: UIViewController, PostServiceDelegate, UICollection
             return size
     }
     
+    func collectionView(collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
+                                                                      withReuseIdentifier: "profileTopBar",
+                                                                      forIndexPath: indexPath)
+        return headerView
+    }
+    
     @IBAction func pressCommentButton(sender: AnyObject?) {
         self.performSegueWithIdentifier("showCommentsFromProfile", sender: sender)
     }

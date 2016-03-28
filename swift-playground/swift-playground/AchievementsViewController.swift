@@ -83,12 +83,10 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
     
     @IBAction func showCompleters(sender: AnyObject?) {
         self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
-        print("test")
     }
     
     @IBAction func shareAchievement(sender: AnyObject?) {
         self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
-        print("test")
     }
     
     @IBAction func bucketlistPress(sender: AnyObject?) {
