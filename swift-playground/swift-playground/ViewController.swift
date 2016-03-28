@@ -56,9 +56,9 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         
-        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.showLikes(_:)))
-        let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.pressCommentButton(_:)))
-        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.showAchievement(_:)))
+        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
+        let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
+        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)

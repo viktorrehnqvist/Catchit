@@ -11,5 +11,6 @@ import UIKit
 class BucketlistCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var uploadButton: UIButton!
+    @IBOutlet weak var achievementLabel: UILabel!
     
 }

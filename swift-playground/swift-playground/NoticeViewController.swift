@@ -46,6 +46,9 @@ class NoticeViewController:  UIViewController, PostServiceDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noticeCell", forIndexPath: indexPath) as! NoticeCollectionViewCell
         
+        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
+        
+        cell.noticeLabel.addGestureRecognizer(achievementTapGesture)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1
@@ -65,6 +68,9 @@ class NoticeViewController:  UIViewController, PostServiceDelegate, UICollection
             return size
     }
     
+    @IBAction func showAchievement(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showAchievementFromNotice", sender: sender)
+    }
     
     
 }

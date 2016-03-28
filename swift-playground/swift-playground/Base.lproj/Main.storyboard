@@ -268,7 +268,7 @@
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jko-gn-H0I">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jko-gn-H0I">
                                                     <rect key="frame" x="8" y="273" width="234" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.087409026919999994" green="0.038166191430000003" blue="0.018957732250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -425,6 +425,7 @@
                         <outlet property="collectionView" destination="eHU-QR-que" id="MWE-4v-oBQ"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromExplore" id="JTS-hb-4sY"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromExplore" id="zhv-hg-8pY"/>
+                        <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromExplore" id="4pd-pR-4gV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ8-HB-1jf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -559,7 +560,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="fjM-8l-15e"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cykla med en hund" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSP-pB-CJH">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cykla med en hund" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSP-pB-CJH">
                                                     <rect key="frame" x="8" y="47" width="234" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="mu0-ZD-dYg"/>
@@ -651,6 +652,7 @@
                                             <constraint firstItem="KcK-Mp-dk4" firstAttribute="top" secondItem="5AB-en-h4q" secondAttribute="bottom" constant="22" id="yEs-Bn-19P"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="achievementLabel" destination="BSP-pB-CJH" id="pav-hK-Q5S"/>
                                             <outlet property="bucketlistImage" destination="KcK-Mp-dk4" id="jq8-Rf-h7D"/>
                                             <outlet property="completersImage" destination="tVm-jL-3PC" id="JVA-vC-iyO"/>
                                             <outlet property="shareImage" destination="Y4n-lP-Lw9" id="Iby-EZ-rs7"/>
@@ -691,6 +693,7 @@
                     <connections>
                         <outlet property="collectionView" destination="1fs-MO-ro8" id="qgU-kQ-S22"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesViewFromAchievement" id="S0S-yH-cd5"/>
+                        <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromAchievements" id="Ftt-UR-dJW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cs6-JP-pci" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -726,7 +729,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cykla med en hund till affären och handla" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iih-4e-Ruu">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cykla med en hund till affären och handla" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iih-4e-Ruu">
                                                     <rect key="frame" x="8" y="4" width="148" height="38"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -757,6 +760,7 @@
                                             <constraint firstItem="Iih-4e-Ruu" firstAttribute="bottom" secondItem="50v-fF-uY3" secondAttribute="bottom" id="mej-rB-u76"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="achievementLabel" destination="Iih-4e-Ruu" id="4u5-Ol-IVy"/>
                                             <outlet property="uploadButton" destination="50v-fF-uY3" id="iGN-LX-2dH"/>
                                         </connections>
                                     </collectionViewCell>
@@ -791,6 +795,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromBucketlist" id="L9l-gp-JAO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6q-t7-DCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1410,7 +1417,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="LBJ-6O-cYs"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-95-2R7">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-95-2R7">
                                                     <rect key="frame" x="46" y="8" width="196" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1465,6 +1472,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromNotice" id="azt-Oc-gww"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABu-9s-vFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1685,8 +1695,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zmg-u7-toT"/>
-        <segue reference="QzT-29-F4w"/>
-        <segue reference="8RT-Zk-lhb"/>
+        <segue reference="JIk-2X-1Dy"/>
+        <segue reference="L9l-gp-JAO"/>
+        <segue reference="S0S-yH-cd5"/>
+        <segue reference="JTS-hb-4sY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -56,14 +56,16 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("achievementCell", forIndexPath: indexPath) as! AchievementCollectionViewCell
         
-        let completersTapGesture = UITapGestureRecognizer(target: self, action: #selector(AchievementsViewController.showCompleters(_:)))
-        let shareTapGesture = UITapGestureRecognizer(target: self, action: #selector(AchievementsViewController.shareAchievement(_:)))
-        let bucketlistTapGesture = UITapGestureRecognizer(target: self, action: #selector(AchievementsViewController.bucketlistPress(_:)))
+        let completersTapGesture = UITapGestureRecognizer(target: self, action: #selector(showCompleters(_:)))
+        let shareTapGesture = UITapGestureRecognizer(target: self, action: #selector(shareAchievement(_:)))
+        let bucketlistTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
+        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
         cell.tag = indexPath.row
         cell.completersImage.addGestureRecognizer(completersTapGesture)
         cell.shareImage.addGestureRecognizer(shareTapGesture)
         cell.bucketlistImage.addGestureRecognizer(bucketlistTapGesture)
+        cell.achievementLabel.addGestureRecognizer(achievementTapGesture)
         
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -87,6 +89,10 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
     
     @IBAction func shareAchievement(sender: AnyObject?) {
         self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
+    }
+    
+    @IBAction func showAchievement(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showAchievementFromAchievements", sender: sender)
     }
     
     @IBAction func bucketlistPress(sender: AnyObject?) {

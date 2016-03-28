@@ -53,8 +53,8 @@ class ProfileViewController: UIViewController, PostServiceDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! CollectionViewCell
         
-        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.showLikes(_:)))
-        let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.pressCommentButton(_:)))
+        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
+        let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
         
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)

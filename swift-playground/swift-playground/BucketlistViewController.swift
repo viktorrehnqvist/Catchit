@@ -46,6 +46,9 @@ class BucketlistViewController:  UIViewController, PostServiceDelegate, UICollec
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("bucketlistCell", forIndexPath: indexPath) as! BucketlistCollectionViewCell
         
+        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
+        
+        cell.achievementLabel.addGestureRecognizer(achievementTapGesture)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.layer.cornerRadius = 5
@@ -64,6 +67,9 @@ class BucketlistViewController:  UIViewController, PostServiceDelegate, UICollec
             return size
     }
     
+    @IBAction func showAchievement(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showAchievementFromBucketlist", sender: sender)
+    }
     
     
 }
