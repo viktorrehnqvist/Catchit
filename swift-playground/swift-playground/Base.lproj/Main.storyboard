@@ -1097,7 +1097,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="profileCell" id="m5w-MS-in6" customClass="CollectionViewCell" customModule="swift_playground" customModuleProvider="target">
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="showAchievementCell" id="m5w-MS-in6" customClass="CollectionViewCell" customModule="swift_playground" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="342" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1164,7 +1164,7 @@
                                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="pressCommentButton:" destination="Egn-Kw-huY" eventType="touchUpInside" id="sCB-YK-6yU"/>
+                                                                <action selector="pressCommentButton:" destination="7Za-Yi-E48" eventType="touchUpInside" id="u7P-rC-ctd"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -1260,23 +1260,35 @@
                                             <color key="textColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon1" translatesAutoresizingMaskIntoConstraints="NO" id="Nco-oU-BLB">
+                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon1" translatesAutoresizingMaskIntoConstraints="NO" id="Nco-oU-BLB">
                                             <rect key="frame" x="8" y="95" width="77" height="128"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="77" id="oQe-80-mNW"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="1fe-Cq-zQE" appends="YES" id="2Gi-A9-Ahg"/>
+                                            </connections>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon3" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-Mb-Ila">
+                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon3" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-Mb-Ila">
                                             <rect key="frame" x="515" y="95" width="77" height="128"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="77" id="Coc-g8-eDH"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="VTb-Lg-LrT" appends="YES" id="nyl-an-VsH"/>
+                                            </connections>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon2" translatesAutoresizingMaskIntoConstraints="NO" id="hll-lt-DfX">
+                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon2" translatesAutoresizingMaskIntoConstraints="NO" id="hll-lt-DfX">
                                             <rect key="frame" x="262" y="95" width="77" height="128"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="77" id="Cfg-Q8-6ge"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="rzw-6T-lEe" appends="YES" id="hIb-8b-gzm"/>
+                                            </connections>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7x-li-HBD">
                                             <rect key="frame" x="8" y="222" width="584" height="38"/>
@@ -1340,11 +1352,26 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesViewFromShowAchievement" id="QzT-29-F4w"/>
+                        <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromShowAchievement" id="QzT-29-F4w"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromShowAchievement" id="8RT-Zk-lhb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqP-rR-Od6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="VTb-Lg-LrT">
+                    <connections>
+                        <action selector="bucketlistPress:" destination="7Za-Yi-E48" id="rvT-cb-YAg"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="rzw-6T-lEe">
+                    <connections>
+                        <action selector="showLikes:" destination="7Za-Yi-E48" id="Sf8-uz-auS"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="1fe-Cq-zQE">
+                    <connections>
+                        <action selector="showLikes:" destination="7Za-Yi-E48" id="tdB-qO-nOl"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="248" y="1532"/>
         </scene>
@@ -1658,8 +1685,8 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zmg-u7-toT"/>
         <segue reference="QzT-29-F4w"/>
         <segue reference="8RT-Zk-lhb"/>
-        <segue reference="3Ph-BA-daD"/>
     </inferredMetricsTieBreakers>
 </document>

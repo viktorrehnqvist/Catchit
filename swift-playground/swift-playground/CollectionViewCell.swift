@@ -18,6 +18,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var commentCount: UILabel!
     @IBOutlet weak var buttonContainer: UIStackView!
     
+    
     @IBAction func pressLikeButton(sender: AnyObject) {
         // Send like request to API with commentButton.tag
         let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)

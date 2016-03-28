@@ -51,11 +51,12 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("showAchievementCell", forIndexPath: indexPath) as! CollectionViewCell
         
-        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.showLikes(_:)))
-        let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.pressCommentButton(_:)))
+        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.showLikes(_:)))
+        let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.pressCommentButton(_:)))
         
+        cell.tag = indexPath.row
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
@@ -88,12 +89,17 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
         return headerView
     }
     
+    
+    @IBAction func bucketlistPress(sender: AnyObject?) {
+        // Change bucketlist-image.
+    }
+    
     @IBAction func pressCommentButton(sender: AnyObject?) {
-        self.performSegueWithIdentifier("showCommentsFromProfile", sender: sender)
+        self.performSegueWithIdentifier("showCommentsFromShowAchievement", sender: sender)
     }
     
     @IBAction func showLikes(sender: AnyObject?) {
-        self.performSegueWithIdentifier("showLikesFromProfile", sender: sender)
+        self.performSegueWithIdentifier("showLikesFromShowAchievement", sender: sender)
     }
     
     @IBAction func followUser(sender: UIButton) {
@@ -105,14 +111,14 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showCommentsFromProfile" {
+        if segue.identifier == "showCommentsFromShowAchievement" {
             let vc = segue.destinationViewController as! NewViewController
             // Cant send tag from tap gesture, get comments from something else and delete next if
             if (sender!.tag != nil) {
                 vc.comments = self.commentsArray[sender!.tag]
             }
         }
-        if segue.identifier == "showLikesFromProfile" {
+        if segue.identifier == "showLikesFromShowAchievement" {
         }
     }
     
