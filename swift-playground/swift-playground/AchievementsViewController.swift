@@ -109,6 +109,7 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
     }
     
     @IBAction func uploadPost(sender: AnyObject?) {
+        // Make this a delegate.
         let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
         existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
             self.useLibrary()

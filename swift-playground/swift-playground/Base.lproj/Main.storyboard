@@ -754,6 +754,9 @@
                                                     <state key="normal" title="Ladda upp">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="uploadPost:" destination="dcD-Gz-shw" eventType="touchUpInside" id="iaH-nT-xd1"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1318,6 +1321,9 @@
                                             <state key="normal" title="Ladda upp">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="uploadPost:" destination="7Za-Yi-E48" eventType="touchUpInside" id="Qog-Bh-9sS"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100p" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpZ-yy-JYX">
                                             <rect key="frame" x="551" y="8" width="41" height="30"/>
@@ -1711,9 +1717,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="S0S-yH-cd5"/>
-        <segue reference="Ftt-UR-dJW"/>
-        <segue reference="3Ph-BA-daD"/>
-        <segue reference="JTS-hb-4sY"/>
+        <segue reference="L9l-gp-JAO"/>
+        <segue reference="QzT-29-F4w"/>
+        <segue reference="8RT-Zk-lhb"/>
+        <segue reference="djO-lN-Qc8"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -117,6 +118,51 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
             sender.setTitle("Följ", forState: .Normal)
         }
     }
+    
+    @IBAction func uploadPost(sender: AnyObject?) {
+        let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
+        existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
+            self.useLibrary()
+            })
+        existingOrNewMediaController.addAction(UIAlertAction(title: "Ta bild eller video", style: .Default) { (UIAlertAction) in
+            self.useCamera()
+            })
+        existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
+        self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+    }
+    
+    func useLibrary() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func useCamera() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.Camera
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType]
+        var image: UIImage?
+        var videoUrl: String?
+        if mediaType!.isEqualToString(kUTTypeImage as String) {
+            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
+            videoUrl = info[UIImagePickerControllerMediaURL] as? String
+        }
+        print(image)
+        print(videoUrl)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
