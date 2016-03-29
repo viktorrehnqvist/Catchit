@@ -619,6 +619,9 @@
                                                     <state key="normal" title="Ladda upp">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="uploadPost:" destination="wZV-hz-tXx" eventType="touchUpInside" id="XzS-Mg-ldY"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon3" translatesAutoresizingMaskIntoConstraints="NO" id="KcK-Mp-dk4">
                                                     <rect key="frame" x="165" y="144" width="77" height="68"/>
@@ -1530,14 +1533,14 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Qxc-OB-EW9">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Qxc-OB-EW9">
                                                     <rect key="frame" x="8" y="8" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="GnL-ZT-aKK"/>
                                                         <constraint firstAttribute="height" constant="30" id="fwm-6E-PDs"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sholle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrd-86-T94">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sholle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrd-86-T94">
                                                     <rect key="frame" x="46" y="8" width="136" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="136" id="bws-H0-uIq"/>
@@ -1563,6 +1566,8 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="label" destination="0UY-wG-4VD" id="Au8-eR-N7S"/>
+                                            <outlet property="profileImage" destination="Qxc-OB-EW9" id="mud-SZ-0Kh"/>
+                                            <outlet property="profileLabel" destination="qrd-86-T94" id="EOh-O1-2wC"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1586,6 +1591,7 @@
                     <connections>
                         <outlet property="collectionView" destination="78p-CN-kmo" id="q5r-OX-ZTT"/>
                         <outlet property="textField" destination="Im9-tO-heW" id="D8e-me-qUq"/>
+                        <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromComments" id="wDe-rl-syz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLQ-Fu-DP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1705,9 +1711,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4pd-pR-4gV"/>
-        <segue reference="zhv-hg-8pY"/>
+        <segue reference="S0S-yH-cd5"/>
+        <segue reference="Ftt-UR-dJW"/>
+        <segue reference="3Ph-BA-daD"/>
         <segue reference="JTS-hb-4sY"/>
-        <segue reference="xHK-9p-MYi"/>
     </inferredMetricsTieBreakers>
 </document>

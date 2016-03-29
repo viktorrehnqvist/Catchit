@@ -54,6 +54,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("commentCell", forIndexPath: indexPath) as! CommentsCollectionViewCell
         
+        let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
+        let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
+        
+        cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
+        cell.profileImage.addGestureRecognizer(profileImageTapGesture)
         cell.label?.text = self.comments[indexPath.row] as? String
         cell.label.numberOfLines = 0
         
@@ -108,6 +113,10 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         comments.insert(textField.text!, atIndex: self.comments.count)
         collectionView.insertItemsAtIndexPaths([indexPath])
         textField.text = ""
+    }
+    
+    @IBAction func showProfile(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showProfileFromComments", sender: sender)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

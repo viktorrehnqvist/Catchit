@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 
 @available(iOS 9.0, *)
-class AchievementsViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class AchievementsViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -105,6 +105,25 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
         } else {
             cell.bucketlistImage.image = UIImage(named: "achievement_button_icon3")
         }
+    }
+    
+    @IBAction func uploadPost(sender: AnyObject?) {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            imageFromSource.sourceType = .Camera
+        } else {
+            imageFromSource.sourceType = .PhotoLibrary
+        }
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let temp : UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        print(temp)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -10,4 +10,6 @@ import UIKit
 
 class CommentsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var profileLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
 }
