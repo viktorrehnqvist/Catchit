@@ -109,6 +109,27 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
     }
     
     @IBAction func uploadPost(sender: AnyObject?) {
+        let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
+        existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
+            self.useLibrary()
+        })
+        existingOrNewMediaController.addAction(UIAlertAction(title: "Ta bild eller video", style: .Default) { (UIAlertAction) in
+            self.useCamera()
+        })
+        existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
+        self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+    }
+    
+    func useLibrary() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func useCamera() {
         let imageFromSource = UIImagePickerController()
         imageFromSource.delegate = self
         imageFromSource.allowsEditing = false
