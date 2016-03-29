@@ -110,6 +110,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         textField.text = ""
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Tillbaka"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
     
     /*
     // MARK: - Navigation

@@ -63,6 +63,12 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
             return size
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Tillbaka"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
+    
     
     
 }

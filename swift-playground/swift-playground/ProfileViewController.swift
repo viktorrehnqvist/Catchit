@@ -111,6 +111,9 @@ class ProfileViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Tillbaka"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
         if segue.identifier == "showCommentsFromProfile" {
             let vc = segue.destinationViewController as! NewViewController
             // Cant send tag from tap gesture, get comments from something else and delete next if
