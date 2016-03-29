@@ -24,6 +24,8 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var header: AchievementsCollectionReusableView!
+    
     let appleProducts = ["Bestig ett berg", "Posera jämte en polis", "Klappa en igelkott", "Spring ett maraton", "Spring ett maraton"]
     
     let imageArray = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "4"), UIImage(named: "3"), UIImage(named: "3") ]
@@ -45,6 +47,7 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.appleProducts.count
@@ -90,13 +93,21 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
                                                           atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                                withReuseIdentifier: "profileTopBar",
-                                                                               forIndexPath: indexPath)
+                                                                               forIndexPath: indexPath) as! AchievementsCollectionReusableView
+        let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
+        headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
+        header = headerView
         return headerView
     }
     
     
     @IBAction func bucketlistPress(sender: AnyObject?) {
-        // Change bucketlist-image.
+        // Check for better compare method, without string comparing
+        if header.bucketlistImage.image == UIImage(named: "achievement_button_icon3") {
+            header.bucketlistImage.image = UIImage(named: "bucketlist-remove_icon")
+        } else {
+            header.bucketlistImage.image = UIImage(named: "achievement_button_icon3")
+        }
     }
     
     @IBAction func pressCommentButton(sender: AnyObject?) {
