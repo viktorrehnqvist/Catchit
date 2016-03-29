@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import Alamofire
+import MobileCoreServices
 
 @available(iOS 9.0, *)
 class AchievementsViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -111,18 +112,22 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
         let imageFromSource = UIImagePickerController()
         imageFromSource.delegate = self
         imageFromSource.allowsEditing = false
-        
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            imageFromSource.sourceType = .Camera
-        } else {
-            imageFromSource.sourceType = .PhotoLibrary
-        }
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.Camera
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
         self.presentViewController(imageFromSource, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let temp : UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        print(temp)
+        let mediaType = info[UIImagePickerControllerMediaType]
+        var image: UIImage?
+        var videoUrl: String?
+        if mediaType!.isEqualToString(kUTTypeImage as String) {
+            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
+            videoUrl = info[UIImagePickerControllerMediaURL] as? String
+        }
+        print(image)
+        print(videoUrl)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
