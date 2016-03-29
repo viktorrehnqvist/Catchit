@@ -55,10 +55,14 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.pressCommentButton(_:)))
+        let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
+        let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
         cell.tag = indexPath.row
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
+        cell.profileImage.addGestureRecognizer(profileImageTapGesture)
+        cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         cell.imageView?.image = self.imageArray[indexPath.row]
         cell.label?.text = self.appleProducts[indexPath.row]
         cell.commentButton?.tag = indexPath.row
@@ -100,6 +104,10 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
     
     @IBAction func showLikes(sender: AnyObject?) {
         self.performSegueWithIdentifier("showLikesFromShowAchievement", sender: sender)
+    }
+    
+    @IBAction func showProfile(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showProfileFromShowAchievement", sender: sender)
     }
     
     @IBAction func followUser(sender: UIButton) {
