@@ -97,6 +97,7 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
     }
     
     @IBAction func bucketlistPress(sender: AnyObject?) {
+        // Changes more than one achievement, fix this.
         let point = sender?.view
         let mainCell = point?.superview
         let main = mainCell?.superview

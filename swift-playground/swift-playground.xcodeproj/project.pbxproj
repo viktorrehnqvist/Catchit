@@ -21,6 +21,7 @@
 		F70173AB1C6F42F9006F799A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173A81C6F42F9006F799A /* Post.swift */; };
 		F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */; };
 		F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */; };
+		F71290541CAC459500639DA0 /* PostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290531CAC459500639DA0 /* PostCollectionReusableView.swift */; };
 		F721AD531C9B503300BF0BEA /* CommentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F721AD521C9B503300BF0BEA /* CommentsCollectionViewCell.swift */; };
 		F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */; };
 		F73A51CF1CA046BA0029779D /* BucketlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */; };
@@ -91,6 +92,7 @@
 		F70173A81C6F42F9006F799A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAchievementViewController.swift; sourceTree = "<group>"; };
 		F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsCollectionReusableView.swift; sourceTree = "<group>"; };
+		F71290531CAC459500639DA0 /* PostCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCollectionReusableView.swift; sourceTree = "<group>"; };
 		F721AD521C9B503300BF0BEA /* CommentsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketlistCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				F73A51D91CA127430029779D /* LikesViewController.swift */,
 				F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */,
 				F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */,
+				F71290531CAC459500639DA0 /* PostCollectionReusableView.swift */,
 				F721AD521C9B503300BF0BEA /* CommentsCollectionViewCell.swift */,
 				F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */,
 				F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */,
@@ -447,6 +450,7 @@
 				F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */,
 				F761C52C1C9DD60200E3C334 /* ExploreViewController.swift in Sources */,
 				F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */,
+				F71290541CAC459500639DA0 /* PostCollectionReusableView.swift in Sources */,
 				F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */,
 				F7EEC2751C92E31C002378E9 /* CollectionViewCell.swift in Sources */,
 				F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */,
