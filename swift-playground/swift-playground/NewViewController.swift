@@ -90,23 +90,33 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                                                                                forIndexPath: indexPath) as! PostCollectionReusableView
         //let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
         //headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
+        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
+        let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
+        let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
+        let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
+        
+        headerView.achievementLabel.addGestureRecognizer(achievementTapGesture)
+        headerView.likesCount.addGestureRecognizer(likesTapGesture)
+        headerView.profileLabel.addGestureRecognizer(profileLabelTapGesture)
+        headerView.profileImage.addGestureRecognizer(profileImageTapGesture)
         headerView.postImage.image = UIImage(named: "1")
         headerView.achievementLabel.text = "Bestig ett Berg"
         headerView.commentsCount.text = "2 kommentarer"
         headerView.likesCount.text = "4 gilla-markeringar"
         headerView.profileLabel.text = "Sholle"
         headerView.profileImage.image = UIImage(named: "avatarsmall")
+        
         header = headerView
         return headerView
     }
 
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 212)
+        animateViewMoving(true, moveValue: 165, moveSpeed: 0.5)
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 212)
+        animateViewMoving(false, moveValue: 165, moveSpeed: 0)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -117,8 +127,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     
     // Lifting the view up
-    func animateViewMoving (up:Bool, moveValue :CGFloat){
-        let movementDuration:NSTimeInterval = 0.3
+    func animateViewMoving (up:Bool, moveValue :CGFloat, moveSpeed:Double){
+        let movementDuration:NSTimeInterval = moveSpeed
         let movement:CGFloat = ( up ? -moveValue : moveValue)
         UIView.beginAnimations( "animateView", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
@@ -133,6 +143,14 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         comments.insert(textField.text!, atIndex: self.comments.count)
         collectionView.insertItemsAtIndexPaths([indexPath])
         textField.text = ""
+    }
+    
+    @IBAction func showAchievement(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showAchievementFromComments", sender: sender)
+    }
+    
+    @IBAction func showLikes(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showLikesFromComments", sender: sender)
     }
     
     @IBAction func showProfile(sender: AnyObject?) {

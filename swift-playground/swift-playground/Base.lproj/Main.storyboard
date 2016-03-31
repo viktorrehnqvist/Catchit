@@ -1692,6 +1692,8 @@
                         <outlet property="collectionView" destination="78p-CN-kmo" id="q5r-OX-ZTT"/>
                         <outlet property="textField" destination="Im9-tO-heW" id="D8e-me-qUq"/>
                         <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromComments" id="wDe-rl-syz"/>
+                        <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromComments" id="OC7-hT-lCd"/>
+                        <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromComments" id="76D-eb-acg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLQ-Fu-DP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1812,8 +1814,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dwR-E4-82o"/>
-        <segue reference="QzT-29-F4w"/>
-        <segue reference="8RT-Zk-lhb"/>
-        <segue reference="wDe-rl-syz"/>
+        <segue reference="N5Z-XD-MLh"/>
+        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="KBR-5L-ez0"/>
     </inferredMetricsTieBreakers>
 </document>
