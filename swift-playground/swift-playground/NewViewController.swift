@@ -27,6 +27,7 @@ extension UILabel{
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     var comments: [AnyObject] = []
     var screenSize: CGRect = UIScreen.mainScreen().bounds
+    var header: PostCollectionReusableView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
@@ -80,6 +81,25 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             let size = CGSize(width: screenSize.width, height: newLabelHeight + 10)
             return size
     }
+    
+    func collectionView(collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                                                          atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
+                                                                               withReuseIdentifier: "commentsTopBar",
+                                                                               forIndexPath: indexPath) as! PostCollectionReusableView
+        //let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
+        //headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
+        headerView.postImage.image = UIImage(named: "1")
+        headerView.achievementLabel.text = "Bestig ett Berg"
+        headerView.commentsCount.text = "2 kommentarer"
+        headerView.likesCount.text = "4 gilla-markeringar"
+        headerView.profileLabel.text = "Sholle"
+        headerView.profileImage.image = UIImage(named: "avatarsmall")
+        header = headerView
+        return headerView
+    }
+
     
     func textFieldDidBeginEditing(textField: UITextField) {
         animateViewMoving(true, moveValue: 212)

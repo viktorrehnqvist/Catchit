@@ -10,4 +10,12 @@ import UIKit
 
 class PostCollectionReusableView: UICollectionReusableView {
         
+    @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet weak var profileLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var commentsCount: UILabel!
+    @IBOutlet weak var likesCount: UILabel!
+    @IBOutlet weak var achievementLabel: UILabel!
+    
 }
