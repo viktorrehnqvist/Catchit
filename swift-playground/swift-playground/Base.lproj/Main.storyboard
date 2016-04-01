@@ -515,6 +515,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="SvS-TZ-Tyk" id="U8z-ke-W5X"/>
+                        <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromLikes" id="blo-6f-H6Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cR3-ki-viW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1813,9 +1814,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dwR-E4-82o"/>
-        <segue reference="N5Z-XD-MLh"/>
         <segue reference="UnV-OJ-WQS"/>
         <segue reference="KBR-5L-ez0"/>
+        <segue reference="blo-6f-H6Y"/>
+        <segue reference="76D-eb-acg"/>
     </inferredMetricsTieBreakers>
 </document>

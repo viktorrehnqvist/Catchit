@@ -44,12 +44,15 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noticeCell", forIndexPath: indexPath) as! NoticeCollectionViewCell
         
+        let noticeCellTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
+        
+        cell.addGestureRecognizer(noticeCellTapGesture)
+        cell.noticeImage.image = UIImage(named: "avatar")
+        cell.noticeLabel.text! = "Viktor Johansson"
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-        cell.noticeImage.image = UIImage(named: "avatar")
-        cell.noticeLabel.text! = "Viktor Johansson"
         
         return cell
         
@@ -69,6 +72,8 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
     
-    
+    @IBAction func showProfile(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showProfileFromLikes", sender: sender)
+    }
     
 }
