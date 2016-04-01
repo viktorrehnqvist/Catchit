@@ -41,6 +41,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,6 +54,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        loadMore(indexPath.row)
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! CollectionViewCell
         
@@ -72,13 +75,6 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         cell.commentButton?.tag = indexPath.row
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
-        
-        if indexPath.row == self.appleProducts.count - 1 {
-            self.appleProducts.append("Infinite scroll")
-            self.commentsArray.append(["Infinite scroll", "Coolt"])
-            self.imageArray.append(UIImage(named: "3"))
-            self.collectionView.reloadData()
-        }
         
         return cell
         
@@ -122,6 +118,19 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         }
     }
     
+    func loadMore(cellIndex: Int) {
+        print(cellIndex)
+        if cellIndex == self.appleProducts.count - 1 {
+            self.appleProducts.append("Infinite scroll")
+            self.appleProducts.append("Infinite scroll")
+            print(appleProducts)
+            self.commentsArray.append(["Infinite scroll", "Coolt"])
+            self.commentsArray.append(["Infinite scroll", "Coolt"])
+            self.imageArray.append(UIImage(named: "3"))
+            self.imageArray.append(UIImage(named: "3"))
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
+    }
     
     
 }

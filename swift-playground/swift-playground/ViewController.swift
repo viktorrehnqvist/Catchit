@@ -41,6 +41,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     override func didReceiveMemoryWarning() {
@@ -120,12 +121,16 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     
     func loadMore(cellIndex: Int) {
+        print(cellIndex)
         if cellIndex == self.appleProducts.count - 1 {
+            self.appleProducts.append("Infinite scroll")
             self.appleProducts.append("Infinite scroll")
             print(appleProducts)
             self.commentsArray.append(["Infinite scroll", "Coolt"])
+            self.commentsArray.append(["Infinite scroll", "Coolt"])
             self.imageArray.append(UIImage(named: "3"))
-            self.collectionView.reloadData()
+            self.imageArray.append(UIImage(named: "3"))
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
         }
     }
 }
