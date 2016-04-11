@@ -9,7 +9,11 @@
 import UIKit
 
 class AchievementsCollectionReusableView: UICollectionReusableView {
-        
-    @IBOutlet weak var bucketlistImage: UIImageView!
+    @IBOutlet weak var bucketlistImage: UIImageView! {
+        didSet { setupShit() }
+    }
     
+    func setupShit() {
+        
+    }
 }

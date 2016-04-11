@@ -12,31 +12,37 @@ import Alamofire
 import MobileCoreServices
 
 @available(iOS 9.0, *)
-class AchievementsViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AchievementsViewController: UIViewController, AchievementServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    let postService = PostService()
+    let achievementService = AchievementService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    
-    func setPosts(json: AnyObject) {
-        print(json)
-    }
-    
-    func displayComments(comments: AnyObject) {
-        print(comments)
-    }
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
-    let appleProducts = ["Utforska en skog", "Spill vatten på en hammare", "Cykla", "Spela en tennismatch", "Kör gokart"]
+    var achievementDescriptions: [AnyObject]! = []
+    var achievementIds: [Int] = []
     let imageArray = [UIImage(named: "4"), UIImage(named: "1"), UIImage(named: "3"), UIImage(named: "2"), UIImage(named: "4") ]
-    let commentsArray = [["Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "2", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt.", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "2", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt.", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt"], ["test"], [], ["1"], [], ["1", "2", "3"], ["1", "2", "3", "4", "5", "6"]]
+    
+    func setAchievements(json: AnyObject) {
+        print(json)
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                achievementDescriptions.append((json[i]?["description"])!)
+                achievementIds.append((json[i]?["id"]) as! Int)
+            }
+        }
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+
+    func displayComments(comments: AnyObject) {
+        print(comments)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postService.getPosts()
-        self.postService.delegate = self
+        achievementService.getAchievements()
+        self.achievementService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -50,10 +56,12 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.appleProducts.count
+        return self.achievementDescriptions.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        loadMore(indexPath.row)
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("achievementCell", forIndexPath: indexPath) as! AchievementCollectionViewCell
         
@@ -68,6 +76,7 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
         cell.bucketlistImage.addGestureRecognizer(bucketlistTapGesture)
         cell.achievementLabel.addGestureRecognizer(achievementTapGesture)
         
+        cell.achievementLabel.text! = (achievementDescriptions?[indexPath.row])! as! String
         cell.bucketlistImage.image = addToBucketlistImage
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -155,19 +164,11 @@ class AchievementsViewController: UIViewController, PostServiceDelegate, UIColle
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showCommentsFromHome" {
-            let vc = segue.destinationViewController as! NewViewController
-            // Cant send tag from tap gesture, get comments from something else and delete next if
-            if (sender!.tag != nil) {
-                vc.comments = self.commentsArray[sender!.tag]
-            }
-        }
-        if segue.identifier == "showLikesFromHome" {
+    func loadMore(cellIndex: Int) {
+        print(achievementIds.last!)
+        if cellIndex == self.achievementDescriptions.count - 1 {
+            achievementService.fetchMoreAchievements(achievementIds.last!)
         }
     }
-
-    
-    
     
 }
