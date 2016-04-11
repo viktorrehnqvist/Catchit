@@ -20,16 +20,66 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
+    let noPostImage = UIImage(named: "post")
     var achievementDescriptions: [AnyObject]! = []
     var achievementIds: [Int] = []
+    var achievementScores: [Int] = []
+    var achievementCompleterCounts: [Int] = []
+    var achievementFirstCompleterImages: [UIImage] = []
+    var achievementSecondCompleterImages: [UIImage] = []
+    var achievementThirdCompleterImages: [UIImage] = []
+    var achievementCompleterUserId: [[Int]] = []
+    var achievementCompleterUserNames: [[String]] = []
+    var achievementCompleterUserAvatars: [[String]] = []
+    
     let imageArray = [UIImage(named: "4"), UIImage(named: "1"), UIImage(named: "3"), UIImage(named: "2"), UIImage(named: "4") ]
     
     func setAchievements(json: AnyObject) {
-        print(json)
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 achievementDescriptions.append((json[i]?["description"])!)
                 achievementIds.append((json[i]?["id"]) as! Int)
+                achievementScores.append(json[i]?["score"] as! Int)
+                achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
+                achievementCompleterUserId.append((json[i]?["completer_user_infos"]!![0] as? ([Int]))!)
+                achievementCompleterUserNames.append((json[i]?["completer_user_infos"]!![1] as? ([String]))!)
+                achievementCompleterUserAvatars.append((json[i]?["completer_user_infos"]!![2] as? ([String]))!)
+                
+                // Load first three postes for achievement
+                if json[i]["latest_posts"]!!.count > 0 {
+                    if let CompleterImageUrl = json[i]["latest_posts"]?![0] as? String {
+                        let url = NSURL(string: "http://192.168.0.103:3000" + CompleterImageUrl)!
+                        let data = NSData(contentsOfURL:url)
+                        if data != nil {
+                            achievementFirstCompleterImages.append(UIImage(data: data!)!)
+                        }
+                    }
+                } else {
+                    achievementFirstCompleterImages.append(noPostImage!)
+                }
+                if json[i]["latest_posts"]!!.count > 1 {
+                    if let CompleterImageUrl = json[i]["latest_posts"]?![1] as? String {
+                        let url = NSURL(string: "http://192.168.0.103:3000" + CompleterImageUrl)!
+                        let data = NSData(contentsOfURL:url)
+                        if data != nil {
+                            achievementSecondCompleterImages.append(UIImage(data: data!)!)
+                        }
+                    }
+                } else {
+                    achievementSecondCompleterImages.append(noPostImage!)
+                }
+                if json[i]["latest_posts"]!!.count > 2 {
+                    if let CompleterImageUrl = json[i]["latest_posts"]?![2] as? String {
+                        let url = NSURL(string: "http://192.168.0.103:3000" + CompleterImageUrl)!
+                        let data = NSData(contentsOfURL:url)
+                        if data != nil {
+                            achievementThirdCompleterImages.append(UIImage(data: data!)!)
+                        }
+                    }
+                } else {
+                    achievementThirdCompleterImages.append(noPostImage!)
+                }
+
             }
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
@@ -76,7 +126,12 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         cell.bucketlistImage.addGestureRecognizer(bucketlistTapGesture)
         cell.achievementLabel.addGestureRecognizer(achievementTapGesture)
         
+        cell.achievementImage1.image = achievementFirstCompleterImages[indexPath.row]
+        cell.achievementImage2.image = achievementSecondCompleterImages[indexPath.row]
+        cell.achievementImage3.image = achievementThirdCompleterImages[indexPath.row]
+        cell.completersLabel.text! = String(achievementCompleterCounts[indexPath.row]) + " har klarat detta"
         cell.achievementLabel.text! = (achievementDescriptions?[indexPath.row])! as! String
+        cell.scoreLabel.text! = String(achievementScores[indexPath.row])
         cell.bucketlistImage.image = addToBucketlistImage
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -92,6 +147,21 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             let size = CGSize(width: screenSize.width, height: screenSize.width * 1.2)
             
             return size
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showLikesViewFromAchievement" {
+            let vc = segue.destinationViewController as! LikesViewController
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
+            vc.labels = achievementCompleterUserNames[thisCell.tag]
+            vc.ids = achievementCompleterUserId[thisCell.tag]
+            vc.avatarUrls = achievementCompleterUserAvatars[thisCell.tag]
+        }
+        if segue.identifier == "showLikesFromHome" {
+        }
     }
     
     @IBAction func showCompleters(sender: AnyObject?) {
@@ -165,7 +235,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     func loadMore(cellIndex: Int) {
-        print(achievementIds.last!)
         if cellIndex == self.achievementDescriptions.count - 1 {
             achievementService.fetchMoreAchievements(achievementIds.last!)
         }

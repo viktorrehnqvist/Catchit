@@ -73,7 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8CFB3433DA85D79A0DAEACC2 /* Pods-swift-playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-playground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swift-playground/Pods-swift-playground.debug.xcconfig"; sourceTree = "<group>"; };
+		8CFB3433DA85D79A0DAEACC2 /* Pods-swift-playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-playground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swift-playground/Pods-swift-playground.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C83969EC488B28C18D62CF0 /* Pods_swift_playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swift_playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A781472916FFA0E7BC567A75 /* Pods-swift-playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-playground.release.xcconfig"; path = "Pods/Target Support Files/Pods-swift-playground/Pods-swift-playground.release.xcconfig"; sourceTree = "<group>"; };
 		F70173721C6E6EAF006F799A /* swift-playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swift-playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };

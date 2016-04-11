@@ -8,26 +8,27 @@
 
 import UIKit
 
-class LikesViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class LikesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
+    var labels: [String] = []
+    var images: [UIImage] = []
+    var ids: [Int] = []
+    var avatarUrls: [String] = []
+    var avatars: [UIImage] = []
     
-    func setPosts(json: AnyObject) {
-        print(json)
-    }
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     @IBAction func backButton(sender: AnyObject) {
-        // Handles different show types, dismiss for home and navigation for explore. This should be fixed to display identically.
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postService.getPosts()
-        self.postService.delegate = self
+        loadAvatars()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -37,7 +38,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return avatarUrls.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -47,8 +48,9 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
         let noticeCellTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
         cell.addGestureRecognizer(noticeCellTapGesture)
-        cell.noticeImage.image = UIImage(named: "avatar")
-        cell.noticeLabel.text! = "Viktor Johansson"
+        cell.noticeLabel.text! = labels[indexPath.row]
+        cell.noticeImage.image = avatars[indexPath.row]
+        print(labels)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1
@@ -74,6 +76,21 @@ class LikesViewController: UIViewController, PostServiceDelegate, UICollectionVi
     
     @IBAction func showProfile(sender: AnyObject?) {
         self.performSegueWithIdentifier("showProfileFromLikes", sender: sender)
+    }
+    
+    func loadAvatars() {
+        if self.avatarUrls.count > 0 {
+            print("avatars loaded")
+            for avatarUrl in self.avatarUrls {
+                print(avatarUrl)
+                let url = NSURL(string: "http://192.168.0.103:3000" + avatarUrl)
+                let data = NSData(contentsOfURL:url!)
+                if data != nil {
+                    avatars.append(UIImage(data: data!)!)
+                }
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
     }
     
 }

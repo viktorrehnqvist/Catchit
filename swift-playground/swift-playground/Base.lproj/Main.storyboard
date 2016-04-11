@@ -662,9 +662,14 @@
                                             <constraint firstItem="KcK-Mp-dk4" firstAttribute="top" secondItem="5AB-en-h4q" secondAttribute="bottom" constant="22" id="yEs-Bn-19P"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="achievementImage1" destination="gOt-u6-Q9s" id="hON-bX-HjX"/>
+                                            <outlet property="achievementImage2" destination="EsX-vc-jTU" id="WbM-lS-PmR"/>
+                                            <outlet property="achievementImage3" destination="RBe-oP-ly5" id="Gza-SD-8Of"/>
                                             <outlet property="achievementLabel" destination="BSP-pB-CJH" id="pav-hK-Q5S"/>
                                             <outlet property="bucketlistImage" destination="KcK-Mp-dk4" id="jq8-Rf-h7D"/>
                                             <outlet property="completersImage" destination="tVm-jL-3PC" id="JVA-vC-iyO"/>
+                                            <outlet property="completersLabel" destination="WhQ-C5-B96" id="AVw-8y-bzX"/>
+                                            <outlet property="scoreLabel" destination="lT6-U7-iEy" id="HYF-T5-r5F"/>
                                             <outlet property="shareImage" destination="Y4n-lP-Lw9" id="Iby-EZ-rs7"/>
                                             <outlet property="uploadButton" destination="005-uw-xuh" id="Zfs-3S-1Bc"/>
                                         </connections>
@@ -828,7 +833,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jjL-YQ-7zg">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jjL-YQ-7zg">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TV1-UF-KDT">
@@ -1108,7 +1113,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2dj-hQ-vpX">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2dj-hQ-vpX">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Ot-iY-fDx">
@@ -1512,7 +1517,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en kommentar..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Im9-tO-heW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en kommentar..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Im9-tO-heW">
                                 <rect key="frame" x="20" y="515" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1814,9 +1819,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zhv-hg-8pY"/>
-        <segue reference="4pd-pR-4gV"/>
-        <segue reference="xHK-9p-MYi"/>
         <segue reference="JTS-hb-4sY"/>
+        <segue reference="Ftt-UR-dJW"/>
+        <segue reference="3Ph-BA-daD"/>
+        <segue reference="S0S-yH-cd5"/>
     </inferredMetricsTieBreakers>
 </document>
