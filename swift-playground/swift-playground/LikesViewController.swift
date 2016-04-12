@@ -83,7 +83,7 @@ class LikesViewController: UIViewController, UICollectionViewDelegate, UICollect
             print("avatars loaded")
             for avatarUrl in self.avatarUrls {
                 print(avatarUrl)
-                let url = NSURL(string: "http://192.168.0.103:3000" + avatarUrl)
+                let url = NSURL(string: "http://localhost:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     avatars.append(UIImage(data: data!)!)

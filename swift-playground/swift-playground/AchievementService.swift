@@ -18,7 +18,7 @@ class AchievementService {
     var delegate: AchievementServiceDelegate?
     
     func getAchievements() {
-        Alamofire.request(.GET, "http://192.168.0.103:3000/achievements.json/")
+        Alamofire.request(.GET, "http://localhost:3000/achievements.json/")
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -32,7 +32,7 @@ class AchievementService {
     }
     
     func fetchMoreAchievements(lastAchievementId: Int) {
-        Alamofire.request(.GET, "http://192.168.0.103:3000/achievements.json/", parameters: ["achievements": lastAchievementId])
+        Alamofire.request(.GET, "http://localhost:3000/achievements.json/", parameters: ["achievements": lastAchievementId])
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {

@@ -48,7 +48,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 // Load first three postes for achievement
                 if json[i]["latest_posts"]!!.count > 0 {
                     if let CompleterImageUrl = json[i]["latest_posts"]?![0] as? String {
-                        let url = NSURL(string: "http://192.168.0.103:3000" + CompleterImageUrl)!
+                        let url = NSURL(string: "http://localhost:3000" + CompleterImageUrl)!
                         let data = NSData(contentsOfURL:url)
                         if data != nil {
                             achievementFirstCompleterImages.append(UIImage(data: data!)!)
@@ -59,7 +59,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 }
                 if json[i]["latest_posts"]!!.count > 1 {
                     if let CompleterImageUrl = json[i]["latest_posts"]?![1] as? String {
-                        let url = NSURL(string: "http://192.168.0.103:3000" + CompleterImageUrl)!
+                        let url = NSURL(string: "http://localhost:3000" + CompleterImageUrl)!
                         let data = NSData(contentsOfURL:url)
                         if data != nil {
                             achievementSecondCompleterImages.append(UIImage(data: data!)!)
@@ -70,7 +70,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 }
                 if json[i]["latest_posts"]!!.count > 2 {
                     if let CompleterImageUrl = json[i]["latest_posts"]?![2] as? String {
-                        let url = NSURL(string: "http://192.168.0.103:3000" + CompleterImageUrl)!
+                        let url = NSURL(string: "http://localhost:3000" + CompleterImageUrl)!
                         let data = NSData(contentsOfURL:url)
                         if data != nil {
                             achievementThirdCompleterImages.append(UIImage(data: data!)!)
