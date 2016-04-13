@@ -45,6 +45,34 @@ class PostService {
         }
     }
     
+    func getExplorePosts() {
+        Alamofire.request(.GET, "http://localhost:3000/explore.json/")
+            .responseJSON { response in
+                print(response)
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setPosts(JSON)
+                        })
+                    }
+                }
+                
+        }
+    }
+    
+    func fetchMoreExplorePosts(lastPostId: Int) {
+        Alamofire.request(.GET, "http://localhost:3000/explore.json/", parameters: ["id": lastPostId])
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setPosts(JSON)
+                        })
+                    }
+                }
+        }
+    }
+    
     func createPost() {
         let parameters = [
             "task": [

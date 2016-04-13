@@ -394,6 +394,7 @@
                                             <outlet property="likeCount" destination="ojd-oO-X0t" id="iRm-EU-mWc"/>
                                             <outlet property="profileImage" destination="emS-60-bge" id="Jnz-uT-UQI"/>
                                             <outlet property="profileLabel" destination="WUf-ad-lnZ" id="a5o-vG-hFX"/>
+                                            <outlet property="scoreLabel" destination="gJh-xi-ztT" id="Qk9-33-flM"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1820,9 +1821,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dwR-E4-82o"/>
-        <segue reference="KBR-5L-ez0"/>
-        <segue reference="N5Z-XD-MLh"/>
-        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="4pd-pR-4gV"/>
+        <segue reference="xHK-9p-MYi"/>
+        <segue reference="JTS-hb-4sY"/>
+        <segue reference="zhv-hg-8pY"/>
     </inferredMetricsTieBreakers>
 </document>

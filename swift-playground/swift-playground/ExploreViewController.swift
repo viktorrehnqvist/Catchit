@@ -1,8 +1,8 @@
 //
-//  ExploreViewController.swift
+//  ViewController.swift
 //  swift-playground
 //
-//  Created by viktor johansson on 19/03/16.
+//  Created by viktor johansson on 12/02/16.
 //  Copyright © 2016 viktor johansson. All rights reserved.
 //
 
@@ -15,26 +15,53 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    
-    func setPosts(json: AnyObject) {
-        print(json)
-    }
-    
-    func displayComments(comments: AnyObject) {
-        print(comments)
-    }
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var appleProducts = ["Utforska en skog", "Spill vatten på en hammare", "Cykla", "Spela en tennismatch", "Kör gokart"]
+    var achievementDescriptions: [String] = []
+    var achievementIds: [Int] = []
+    var achievementScores: [Int] = []
+    var postIds: [Int] = []
+    var postImageUrls: [String] = []
+    var postImages: [UIImage] = []
+    var postVideoUrls: [String] = []
+    var postUserIds: [Int] = []
+    var postUserNames: [String] = []
+    var postUserAvatarUrls: [String] = []
+    var postUserAvatars: [UIImage] = []
+    var postComments: [[String]] = []
+    var postCommenterNames: [[String]] = []
+    var postCommenterAvatarUrls: [[String]] = []
+    var postCommentCounts: [Int] = []
+    var postLikeCounts: [Int] = []
     
-    var imageArray = [UIImage(named: "4"), UIImage(named: "1"), UIImage(named: "3"), UIImage(named: "2"), UIImage(named: "4") ]
-    
-    var commentsArray = [["Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "2", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt.", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "2", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt.", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt"], ["test"], [], ["1"], [], ["1", "2", "3"], ["1", "2", "3", "4", "5", "6"]]
+    func setPosts(json: AnyObject) {
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
+                achievementIds.append((json[i]?["achievement_id"]) as! Int)
+                achievementScores.append(json[i]?["achievement_score"] as! Int)
+                postIds.append(json[i]?["id"] as! Int)
+                postImageUrls.append((json[i]?["image_url"])! as! String)
+                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                postUserIds.append(json[i]?["user_id"] as! Int)
+                postUserNames.append((json[i]?["user_name"])! as! String)
+                postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
+                postComments.append((json[i]?["commenter_infos"]!![2] as? ([String]))!)
+                postCommentCounts.append(json[i]?["comments_count"] as! Int)
+                postCommenterAvatarUrls.append((json[i]?["commenter_infos"]!![0] as? ([String]))!)
+                postCommenterNames.append((json[i]?["commenter_infos"]!![1] as? ([String]))!)
+                postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                
+                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
+                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
+            }
+        }
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postService.getPosts()
+        postService.getExplorePosts()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -50,7 +77,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.appleProducts.count
+        return self.postIds.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -70,9 +97,15 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         cell.label.addGestureRecognizer(achievementTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
-        cell.imageView?.image = self.imageArray[indexPath.row]
-        cell.label?.text = self.appleProducts[indexPath.row]
+        cell.profileImage.image = self.postUserAvatars[indexPath.row]
+        cell.profileLabel.text! = self.postUserNames[indexPath.row]
+        cell.imageView?.image = self.postImages[indexPath.row]
+        cell.label?.text = self.achievementDescriptions[indexPath.row]
+        cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
+        cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
+        cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
         cell.commentButton?.tag = indexPath.row
+        cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
@@ -81,16 +114,16 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let image = self.imageArray[indexPath.row]!
-            let heightFactor = image.size.height / image.size.width
-            let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
-            
-            return size
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let image = self.postImages[indexPath.row]
+        let heightFactor = image.size.height / image.size.width
+        let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
+        
+        return size
     }
     
-    @IBAction func pressCommentButton(sender: UIButton) {
+    @IBAction func pressCommentButton(sender: AnyObject?) {
         self.performSegueWithIdentifier("showCommentsFromExplore", sender: sender)
     }
     
@@ -111,26 +144,35 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
             let vc = segue.destinationViewController as! NewViewController
             // Cant send tag from tap gesture, get comments from something else and delete next if
             if (sender!.tag != nil) {
-                vc.comments = self.commentsArray[sender!.tag]
+                vc.comments = self.postComments[sender!.tag]
             }
         }
         if segue.identifier == "showLikesFromExplore" {
         }
     }
     
+    
     func loadMore(cellIndex: Int) {
-        print(cellIndex)
-        if cellIndex == self.appleProducts.count - 1 {
-            self.appleProducts.append("Infinite scroll")
-            self.appleProducts.append("Infinite scroll")
-            print(appleProducts)
-            self.commentsArray.append(["Infinite scroll", "Coolt"])
-            self.commentsArray.append(["Infinite scroll", "Coolt"])
-            self.imageArray.append(UIImage(named: "3"))
-            self.imageArray.append(UIImage(named: "3"))
-            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        if cellIndex == self.postIds.count - 1 {
+            postService.fetchMoreExplorePosts(postIds.last!)
         }
     }
     
+    func fetchDataFromUrlToPostImages(fetchUrl: String) {
+        let url = NSURL(string: "http://localhost:3000" + fetchUrl)!
+        let data = NSData(contentsOfURL:url)
+        let image = UIImage(data: data!)
+        self.postImages.append(image!)
+    }
+    
+    func fetchDataFromUrlToPostUserAvatars(fetchUrl: String) {
+        let url = NSURL(string: "http://localhost:3000" + fetchUrl)!
+        let data = NSData(contentsOfURL:url)
+        let image = UIImage(data: data!)
+        self.postUserAvatars.append(image!)
+    }
     
 }
+
+
+

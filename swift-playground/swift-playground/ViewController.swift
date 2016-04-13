@@ -77,7 +77,6 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(self.postIds.count)
         return self.postIds.count
     }
     
@@ -156,7 +155,6 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 {
             postService.fetchMorePosts(postIds.last!)
-            print(postIds.last!)
         }
     }
     
