@@ -21,7 +21,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
     let noPostImage = UIImage(named: "post")
-    var achievementDescriptions: [AnyObject]! = []
+    var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
     var achievementScores: [Int] = []
     var achievementCompleterCounts: [Int] = []
@@ -31,13 +31,11 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementCompleterUserId: [[Int]] = []
     var achievementCompleterUserNames: [[String]] = []
     var achievementCompleterUserAvatars: [[String]] = []
-    
-    let imageArray = [UIImage(named: "4"), UIImage(named: "1"), UIImage(named: "3"), UIImage(named: "2"), UIImage(named: "4") ]
-    
+
     func setAchievements(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
-                achievementDescriptions.append((json[i]?["description"])!)
+                achievementDescriptions.append((json[i]?["description"])! as! String)
                 achievementIds.append((json[i]?["id"]) as! Int)
                 achievementScores.append(json[i]?["score"] as! Int)
                 achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
@@ -84,10 +82,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
-
-    func displayComments(comments: AnyObject) {
-        print(comments)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,7 +124,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         cell.achievementImage2.image = achievementSecondCompleterImages[indexPath.row]
         cell.achievementImage3.image = achievementThirdCompleterImages[indexPath.row]
         cell.completersLabel.text! = String(achievementCompleterCounts[indexPath.row]) + " har klarat detta"
-        cell.achievementLabel.text! = (achievementDescriptions?[indexPath.row])! as! String
+        cell.achievementLabel.text! = achievementDescriptions[indexPath.row]
         cell.scoreLabel.text! = String(achievementScores[indexPath.row])
         cell.bucketlistImage.image = addToBucketlistImage
         cell.layer.shouldRasterize = true

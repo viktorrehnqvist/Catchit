@@ -50,7 +50,6 @@ class LikesViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.addGestureRecognizer(noticeCellTapGesture)
         cell.noticeLabel.text! = labels[indexPath.row]
         cell.noticeImage.image = avatars[indexPath.row]
-        print(labels)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1

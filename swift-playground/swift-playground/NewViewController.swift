@@ -25,7 +25,7 @@ extension UILabel{
 }
 
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
-    var comments: [AnyObject] = []
+    var comments: [String] = []
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     var header: PostCollectionReusableView!
     
@@ -60,7 +60,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
-        cell.label?.text = self.comments[indexPath.row] as? String
+        cell.label?.text = self.comments[indexPath.row]
         cell.label.numberOfLines = 0
         
         return cell
@@ -71,7 +71,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             let label = UILabel(frame: CGRectMake(0, 0, screenSize.width - 100, 0))
-            label.text = self.comments[indexPath.row] as? String
+            label.text = self.comments[indexPath.row]
             label.font = label.font.fontWithSize(12)
             // Calculates the required height for this comment depending on content
             var newLabelHeight = label.requiredHeight()
