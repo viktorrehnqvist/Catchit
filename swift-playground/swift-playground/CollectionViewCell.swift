@@ -19,7 +19,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var buttonContainer: UIStackView!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
-    
+    @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func pressLikeButton(sender: AnyObject) {
         // Send like request to API with commentButton.tag

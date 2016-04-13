@@ -102,6 +102,9 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         cell.profileLabel.text! = self.postUserNames[indexPath.row]
         cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
+        cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
+        cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
+        cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true

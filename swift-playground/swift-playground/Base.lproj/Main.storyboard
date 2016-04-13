@@ -93,15 +93,6 @@
                                                         </button>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100p" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUx-TM-WY7">
-                                                    <rect key="frame" x="201" y="8" width="41" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="41" id="m0c-Xm-yam"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 kommentarer" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyg-SF-BZp">
                                                     <rect key="frame" x="169" y="251" width="73" height="18"/>
                                                     <constraints>
@@ -114,6 +105,15 @@
                                                 </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sholle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adf-hO-eR6">
                                                     <rect key="frame" x="48" y="8" width="131" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100p" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUx-TM-WY7">
+                                                    <rect key="frame" x="201" y="8" width="41" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="41" id="m0c-Xm-yam"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -159,6 +159,7 @@
                                             <outlet property="likeCount" destination="0se-Ja-eJQ" id="Bgm-d7-pU5"/>
                                             <outlet property="profileImage" destination="zhm-BZ-D1T" id="pyD-p5-bOG"/>
                                             <outlet property="profileLabel" destination="Adf-hO-eR6" id="hSW-12-WaO"/>
+                                            <outlet property="scoreLabel" destination="iUx-TM-WY7" id="OsR-b1-BJc"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1819,9 +1820,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JTS-hb-4sY"/>
-        <segue reference="Ftt-UR-dJW"/>
-        <segue reference="3Ph-BA-daD"/>
-        <segue reference="S0S-yH-cd5"/>
+        <segue reference="dwR-E4-82o"/>
+        <segue reference="KBR-5L-ez0"/>
+        <segue reference="N5Z-XD-MLh"/>
+        <segue reference="UnV-OJ-WQS"/>
     </inferredMetricsTieBreakers>
 </document>
