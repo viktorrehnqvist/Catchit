@@ -35,7 +35,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     var postLikeCounts: [Int] = []
     var morePostsToLoad: Bool = true
     
-    func setPosts(json: AnyObject) {
+    func setPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
@@ -47,7 +47,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
                 postUserIds.append(json[i]?["user_id"] as! Int)
                 postUserNames.append((json[i]?["user_name"])! as! String)
                 postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
-                postComments.append((json[i]?["commenter_infos"]!![2] as? ([String]))!)
+                postComments.append((json[i]?["commenter_infos"]!![3] as? ([String]))!)
                 postCommentCounts.append(json[i]?["comments_count"] as! Int)
                 postCommenterAvatarUrls.append((json[i]?["commenter_infos"]!![0] as? ([String]))!)
                 postCommenterNames.append((json[i]?["commenter_infos"]!![1] as? ([String]))!)
@@ -107,7 +107,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
-        cell.commentButton?.tag = indexPath.row
+        cell.commentButton?.tag = postIds[indexPath.row]
         cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -151,6 +151,13 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
             }
         }
         if segue.identifier == "showLikesFromExplore" {
+            let vc = segue.destinationViewController as! LikesViewController
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            let thisCell: CollectionViewCell = main as! CollectionViewCell
+            vc.typeIsPost = true
+            vc.postId = thisCell.commentButton.tag
         }
     }
     

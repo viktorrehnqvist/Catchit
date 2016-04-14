@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol AchievementServiceDelegate {
-    func setAchievements(json: AnyObject)
+    func setAchievementData(json: AnyObject)
 }
 
 class AchievementService {
@@ -23,7 +23,7 @@ class AchievementService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setAchievements(JSON)
+                            self.delegate?.setAchievementData(JSON)
                         })
                     }
                 }
@@ -37,11 +37,15 @@ class AchievementService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setAchievements(JSON)
+                            self.delegate?.setAchievementData(JSON)
                         })
                     }
                 }
         }
+    }
+    
+    func getCompleters(achievementId: Int) {
+        print("Fetch completers")
     }
     
     func toggleInBucketlist() {

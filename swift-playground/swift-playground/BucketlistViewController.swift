@@ -17,7 +17,7 @@ class BucketlistViewController:  UIViewController, PostServiceDelegate, UICollec
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
-    func setPosts(json: AnyObject) {
+    func setPostData(json: AnyObject) {
         print(json)
     }
 

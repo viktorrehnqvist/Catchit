@@ -35,7 +35,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     var postLikeCounts: [Int] = []
     var morePostsToLoad: Bool = true
     
-    func setPosts(json: AnyObject) {
+    func setPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
@@ -47,7 +47,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
                 postUserIds.append(json[i]?["user_id"] as! Int)
                 postUserNames.append((json[i]?["user_name"])! as! String)
                 postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
-                postComments.append((json[i]?["commenter_infos"]!![2] as? ([String]))!)
+                postComments.append((json[i]?["commenter_infos"]!![3] as? ([String]))!)
                 postCommentCounts.append(json[i]?["comments_count"] as! Int)
                 postCommenterAvatarUrls.append((json[i]?["commenter_infos"]!![0] as? ([String]))!)
                 postCommenterNames.append((json[i]?["commenter_infos"]!![1] as? ([String]))!)
@@ -57,7 +57,6 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
             }
         } else {
-            // No more posts to load
             morePostsToLoad = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
@@ -152,6 +151,13 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
             }
         }
         if segue.identifier == "showLikesFromHome" {
+            let vc = segue.destinationViewController as! LikesViewController
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            let thisCell: CollectionViewCell = main as! CollectionViewCell
+            vc.typeIsPost = true
+            vc.postId = thisCell.commentButton.tag
         }
     }
     

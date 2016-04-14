@@ -8,27 +8,44 @@
 
 import UIKit
 
-class LikesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class LikesViewController: UIViewController, PostServiceDelegate, AchievementServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
+    let achievementService = AchievementService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    var labels: [String] = []
-    var images: [UIImage] = []
-    var ids: [Int] = []
-    var avatarUrls: [String] = []
-    var avatars: [UIImage] = []
-    
-    
+    var typeIsPost: Bool!
+    var postId: Int?
+    var achievementId: Int?
+    var userNames: [String] = []
+    var userIds: [Int] = []
+    var userAvatarUrls: [String] = []
+    var userAvatars: [UIImage] = []
+
     @IBOutlet weak var collectionView: UICollectionView!
-    
     
     @IBAction func backButton(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    func setPostData(json: AnyObject) {
+        userNames = json["like_infos"]!![0] as! [String]
+        userAvatarUrls = json["like_infos"]!![1] as! [String]
+        userIds = json["like_infos"]!![2] as! [Int]
+        loadAvatars()
+    }
+    
+    func setAchievementData(json: AnyObject) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadAvatars()
+        if typeIsPost == true {
+            self.postService.delegate = self
+            postService.getLikes(postId!)
+        } else {
+            self.achievementService.delegate = self
+            achievementService.getCompleters(achievementId!)
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -38,7 +55,7 @@ class LikesViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return avatarUrls.count
+        return userIds.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -48,8 +65,8 @@ class LikesViewController: UIViewController, UICollectionViewDelegate, UICollect
         let noticeCellTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
         cell.addGestureRecognizer(noticeCellTapGesture)
-        cell.noticeLabel.text! = labels[indexPath.row]
-        cell.noticeImage.image = avatars[indexPath.row]
+        cell.noticeLabel.text! = userNames[indexPath.row]
+        cell.noticeImage.image = userAvatars[indexPath.row]
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1
@@ -78,14 +95,14 @@ class LikesViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func loadAvatars() {
-        if self.avatarUrls.count > 0 {
+        if self.userAvatarUrls.count > 0 {
             print("avatars loaded")
-            for avatarUrl in self.avatarUrls {
+            for avatarUrl in self.userAvatarUrls {
                 print(avatarUrl)
                 let url = NSURL(string: "http://localhost:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
-                    avatars.append(UIImage(data: data!)!)
+                    userAvatars.append(UIImage(data: data!)!)
                 }
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)

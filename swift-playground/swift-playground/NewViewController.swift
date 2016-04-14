@@ -25,12 +25,17 @@ extension UILabel{
 }
 
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
-    var comments: [String] = []
-    var screenSize: CGRect = UIScreen.mainScreen().bounds
-    var header: PostCollectionReusableView!
     
+    var header: PostCollectionReusableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
+    
+    var comments: [String] = []
+    var commentUserAvatarUrls: [String] = []
+    var commentUserAvatars: [UIImage] = []
+    var commentUserNames: [String] = []
+    var commentUserIds: [Int] = []
+    var screenSize: CGRect = UIScreen.mainScreen().bounds
     
     @IBAction func backButton(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
@@ -61,6 +66,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
         cell.label?.text = self.comments[indexPath.row]
+        cell.profileLabel.text = self.commentUserNames[indexPath.row]
+        cell.profileImage.image = self.commentUserAvatars[indexPath.row]
         cell.label.numberOfLines = 0
         
         return cell

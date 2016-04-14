@@ -33,7 +33,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementCompleterUserAvatars: [[String]] = []
     var moreAchievementsToLoad: Bool = true
 
-    func setAchievements(json: AnyObject) {
+    func setAchievementData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 achievementDescriptions.append((json[i]?["description"])! as! String)
@@ -153,9 +153,9 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             let mainCell = point?.superview
             let main = mainCell?.superview
             let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
-            vc.labels = achievementCompleterUserNames[thisCell.tag]
-            vc.ids = achievementCompleterUserId[thisCell.tag]
-            vc.avatarUrls = achievementCompleterUserAvatars[thisCell.tag]
+            print(thisCell)
+            print(vc)
+            // Set achievement-id from thisCell
         }
         if segue.identifier == "showLikesFromHome" {
         }

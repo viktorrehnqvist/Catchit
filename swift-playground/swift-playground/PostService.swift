@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol PostServiceDelegate {
-    func setPosts(json: AnyObject)
+    func setPostData(json: AnyObject)
 }
 
 class PostService {
@@ -20,16 +20,30 @@ class PostService {
     func getPosts() {
         Alamofire.request(.GET, "http://localhost:3000/posts.json/")
             .responseJSON { response in
-                print(response)
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setPosts(JSON)
+                            self.delegate?.setPostData(JSON)
                         })
                     }
                 }
                 
         }
+    }
+    
+    func getLikes(postId: Int) {
+        print("test")
+        Alamofire.request(.GET, "http://localhost:3000/posts/\(postId).json/")
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setPostData(JSON)
+                        })
+                    }
+                }
+        }
+
     }
     
     func fetchMorePosts(lastPostId: Int) {
@@ -38,7 +52,7 @@ class PostService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setPosts(JSON)
+                            self.delegate?.setPostData(JSON)
                         })
                     }
                 }
@@ -52,7 +66,7 @@ class PostService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setPosts(JSON)
+                            self.delegate?.setPostData(JSON)
                         })
                     }
                 }
@@ -66,7 +80,7 @@ class PostService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setPosts(JSON)
+                            self.delegate?.setPostData(JSON)
                         })
                     }
                 }
