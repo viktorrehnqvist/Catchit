@@ -31,6 +31,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementCompleterUserId: [[Int]] = []
     var achievementCompleterUserNames: [[String]] = []
     var achievementCompleterUserAvatars: [[String]] = []
+    var moreAchievementsToLoad: Bool = true
 
     func setAchievements(json: AnyObject) {
         if json.count > 0 {
@@ -79,6 +80,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 }
 
             }
+        } else {
+            moreAchievementsToLoad = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
@@ -229,7 +232,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     func loadMore(cellIndex: Int) {
-        if cellIndex == self.achievementDescriptions.count - 1 {
+        if cellIndex == self.achievementDescriptions.count - 1 && moreAchievementsToLoad {
             achievementService.fetchMoreAchievements(achievementIds.last!)
         }
     }

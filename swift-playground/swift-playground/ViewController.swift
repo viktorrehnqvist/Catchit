@@ -33,6 +33,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     var postCommenterAvatarUrls: [[String]] = []
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
+    var morePostsToLoad: Bool = true
     
     func setPosts(json: AnyObject) {
         if json.count > 0 {
@@ -55,6 +56,9 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
                 fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
             }
+        } else {
+            // No more posts to load
+            morePostsToLoad = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
@@ -104,7 +108,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
-        cell.commentButton?.tag = indexPath.row
+        cell.commentButton?.tag = postIds[indexPath.row]
         cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -153,7 +157,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     
     func loadMore(cellIndex: Int) {
-        if cellIndex == self.postIds.count - 1 {
+        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
             postService.fetchMorePosts(postIds.last!)
         }
     }

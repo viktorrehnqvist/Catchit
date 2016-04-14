@@ -33,6 +33,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     var postCommenterAvatarUrls: [[String]] = []
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
+    var morePostsToLoad: Bool = true
     
     func setPosts(json: AnyObject) {
         if json.count > 0 {
@@ -55,6 +56,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
                 fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
             }
+        } else {
+            morePostsToLoad = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
@@ -153,7 +156,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     
     
     func loadMore(cellIndex: Int) {
-        if cellIndex == self.postIds.count - 1 {
+        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
             postService.fetchMoreExplorePosts(postIds.last!)
         }
     }

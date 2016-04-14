@@ -10,6 +10,8 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    let postService = PostService()
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var likeButton: UIButton!
@@ -22,7 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func pressLikeButton(sender: AnyObject) {
-        // Send like request to API with commentButton.tag
+        postService.likePress(commentButton.tag)
         let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)
         let onlyNumberPartOfString = likeCount.text!.substringToIndex(lastPartInString)
         if (likeButton?.titleLabel?.text == "Gilla") {
@@ -43,6 +45,5 @@ class CollectionViewCell: UICollectionViewCell {
             likeButton?.setTitle("Gilla", forState: .Normal)
         }
     }
-    
     
 }

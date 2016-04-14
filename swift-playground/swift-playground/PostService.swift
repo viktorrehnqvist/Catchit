@@ -73,6 +73,10 @@ class PostService {
         }
     }
     
+    func likePress(postId: Int) {
+        print("like pressed" + String(postId))
+    }
+    
     func createPost() {
         let parameters = [
             "task": [
