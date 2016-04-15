@@ -45,7 +45,17 @@ class AchievementService {
     }
     
     func getCompleters(achievementId: Int) {
-        print("Fetch completers")
+        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/")
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAchievementData(JSON)
+                        })
+                    }
+                }
+        }
+        
     }
     
     func toggleInBucketlist() {

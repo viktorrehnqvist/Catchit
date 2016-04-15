@@ -117,7 +117,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         let bucketlistTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
-        cell.tag = indexPath.row
+        cell.tag = achievementIds[indexPath.row]
         cell.completersImage.addGestureRecognizer(completersTapGesture)
         cell.shareImage.addGestureRecognizer(shareTapGesture)
         cell.bucketlistImage.addGestureRecognizer(bucketlistTapGesture)
@@ -153,11 +153,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             let mainCell = point?.superview
             let main = mainCell?.superview
             let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
-            print(thisCell)
-            print(vc)
-            // Set achievement-id from thisCell
-        }
-        if segue.identifier == "showLikesFromHome" {
+            vc.achievementId = thisCell.tag
+            vc.typeIsPost = false
         }
     }
     
