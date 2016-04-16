@@ -47,10 +47,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
                 postUserIds.append(json[i]?["user_id"] as! Int)
                 postUserNames.append((json[i]?["user_name"])! as! String)
                 postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
-                postComments.append((json[i]?["commenter_infos"]!![3] as? ([String]))!)
                 postCommentCounts.append(json[i]?["comments_count"] as! Int)
-                postCommenterAvatarUrls.append((json[i]?["commenter_infos"]!![0] as? ([String]))!)
-                postCommenterNames.append((json[i]?["commenter_infos"]!![1] as? ([String]))!)
                 postLikeCounts.append(json[i]?["likes_count"] as! Int)
                 
                 fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
@@ -143,13 +140,20 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if segue.identifier == "showCommentsFromHome" {
             let vc = segue.destinationViewController as! NewViewController
-            // Cant send tag from tap gesture, get comments from something else and delete next if
             if (sender!.tag != nil) {
-                vc.comments = self.postComments[sender!.tag]
+                vc.postId = sender!.tag
+            } else {
+                let point = sender?.view
+                let mainCell = point?.superview
+                let main = mainCell?.superview
+                let thisCell: CollectionViewCell = main as! CollectionViewCell
+                vc.postId = thisCell.commentButton.tag
             }
         }
+        
         if segue.identifier == "showLikesFromHome" {
             let vc = segue.destinationViewController as! LikesViewController
             let point = sender?.view
@@ -159,6 +163,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
             vc.typeIsPost = true
             vc.postId = thisCell.commentButton.tag
         }
+        
     }
     
     

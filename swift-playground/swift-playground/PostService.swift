@@ -31,7 +31,7 @@ class PostService {
         }
     }
     
-    func getLikes(postId: Int) {
+    func getPost(postId: Int) {
         print("test")
         Alamofire.request(.GET, "http://localhost:3000/posts/\(postId).json/")
             .responseJSON { response in
@@ -43,7 +43,6 @@ class PostService {
                     }
                 }
         }
-
     }
     
     func fetchMorePosts(lastPostId: Int) {

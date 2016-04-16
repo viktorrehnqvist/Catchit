@@ -24,12 +24,14 @@ extension UILabel{
     }
 }
 
-class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
+class NewViewController: UIViewController, UICollectionViewDelegate, PostServiceDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
     var header: PostCollectionReusableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
+    let postService = PostService()
     
+    var postId: Int!
     var comments: [String] = []
     var commentUserAvatarUrls: [String] = []
     var commentUserAvatars: [UIImage] = []
@@ -41,9 +43,20 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    func setPostData(json: AnyObject) {
+        commentUserNames = json["commenter_infos"]!![0] as! [String]
+        commentUserAvatarUrls = json["commenter_infos"]!![1] as! [String]
+        commentUserIds = json["commenter_infos"]!![2] as! [Int]
+        comments = json["commenter_infos"]!![3] as! [String]
+        loadAvatars()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        postService.getPost(postId!)
+        self.postService.delegate = self
         textField.delegate = self
+        print(postId)
         // Do any additional setup after loading the view.
     }
 
@@ -170,14 +183,19 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func loadAvatars() {
+        if self.commentUserAvatarUrls.count > 0 {
+            print("avatars loaded")
+            for avatarUrl in self.commentUserAvatarUrls {
+                print(avatarUrl)
+                let url = NSURL(string: "http://localhost:3000" + avatarUrl)
+                let data = NSData(contentsOfURL:url!)
+                if data != nil {
+                    commentUserAvatars.append(UIImage(data: data!)!)
+                }
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
     }
-    */
 
 }

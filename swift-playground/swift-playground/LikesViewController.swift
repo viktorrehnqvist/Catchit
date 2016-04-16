@@ -45,7 +45,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         super.viewDidLoad()
         if typeIsPost == true {
             self.postService.delegate = self
-            postService.getLikes(postId!)
+            postService.getPost(postId!)
         } else {
             self.achievementService.delegate = self
             achievementService.getCompleters(achievementId!)
