@@ -31,6 +31,13 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     @IBOutlet weak var textField: UITextField!
     let postService = PostService()
     
+    var postImage: UIImage!
+    var likesCount: Int!
+    var commentsCount: Int!
+    var userName: String!
+    var userAvatar: UIImage!
+    var achievementScore: Int!
+    var achievementDescription: String!
     var postId: Int!
     var comments: [String] = []
     var commentUserAvatarUrls: [String] = []
@@ -119,12 +126,13 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         headerView.likesCount.addGestureRecognizer(likesTapGesture)
         headerView.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         headerView.profileImage.addGestureRecognizer(profileImageTapGesture)
-        headerView.postImage.image = UIImage(named: "1")
-        headerView.achievementLabel.text = "Bestig ett Berg"
-        headerView.commentsCount.text = "2 kommentarer"
-        headerView.likesCount.text = "4 gilla-markeringar"
-        headerView.profileLabel.text = "Sholle"
-        headerView.profileImage.image = UIImage(named: "avatarsmall")
+        headerView.postImage.image = postImage
+        headerView.achievementLabel.text = achievementDescription
+        headerView.commentsCount.text = String(commentsCount) + " kommentarer"
+        headerView.likesCount.text = String(likesCount) + " gilla-markeringar"
+        headerView.profileLabel.text = userName
+        headerView.profileImage.image = userAvatar
+        headerView.scoreLabel.text = String(achievementScore) + "p"
         
         header = headerView
         return headerView
@@ -159,8 +167,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     
     func createComment () {
         // Insert code to send comment to API
+        // This should not use all this counts, bad for the performance, check if atIndex really is needed.
         let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
         comments.insert(textField.text!, atIndex: self.comments.count)
+        commentUserNames.insert("Sholle", atIndex: self.commentUserNames.count)
+        commentUserAvatars.insert(UIImage(named: "avatar")!, atIndex: self.commentUserAvatars.count)
         collectionView.insertItemsAtIndexPaths([indexPath])
         textField.text = ""
     }

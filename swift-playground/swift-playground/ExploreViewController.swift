@@ -107,7 +107,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
-        cell.commentButton?.tag = postIds[indexPath.row]
+        cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -145,11 +145,26 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCommentsFromExplore" {
             let vc = segue.destinationViewController as! NewViewController
-            // Cant send tag from tap gesture, get comments from something else and delete next if
+            var cellIndex: Int
             if (sender!.tag != nil) {
-                vc.comments = self.postComments[sender!.tag]
+                cellIndex = sender!.tag
+            } else {
+                let point = sender?.view
+                let mainCell = point?.superview
+                let main = mainCell?.superview
+                let thisCell: CollectionViewCell = main as! CollectionViewCell
+                cellIndex = thisCell.commentButton.tag
             }
+            vc.postId = postIds[cellIndex]
+            vc.achievementDescription = achievementDescriptions[cellIndex]
+            vc.commentsCount = postCommentCounts[cellIndex]
+            vc.likesCount = postLikeCounts[cellIndex]
+            vc.postImage = postImages[cellIndex]
+            vc.achievementScore = achievementScores[cellIndex]
+            vc.userName = postUserNames[cellIndex]
+            vc.userAvatar = postUserAvatars[cellIndex]
         }
+        
         if segue.identifier == "showLikesFromExplore" {
             let vc = segue.destinationViewController as! LikesViewController
             let point = sender?.view
