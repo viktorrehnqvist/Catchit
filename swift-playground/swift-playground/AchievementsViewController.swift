@@ -47,19 +47,15 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 // Load first three postes for achievement
                 for postIndex in 0...(postImagesToLoad - 1) {
                     if let completerImageUrl = json[i]["latest_posts"]?![postIndex] as? String {
-                        print(json[i]["latest_posts"]?![postIndex])
                         let url = NSURL(string: "http://localhost:3000" + completerImageUrl)!
                         let data = NSData(contentsOfURL:url)
                         if data != nil {
                             switch postIndex {
                             case 0:
-                                print("First image for \(i) loaded")
                                 achievementFirstCompleterImages.append(UIImage(data: data!)!)
                             case 1:
-                                print("Second image for \(i) loaded")
                                 achievementSecondCompleterImages.append(UIImage(data: data!)!)
                             case 2:
-                                print("Third image for \(i) loaded")
                                 achievementThirdCompleterImages.append(UIImage(data: data!)!)
                             default:
                                 print("Switch Error")
@@ -72,15 +68,12 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     switch postsAlreadyLoaded {
                     case 0:
                         achievementFirstCompleterImages.append(noPostImage!)
-                        print("First image missing, adding!")
                     case 1:
                         achievementSecondCompleterImages.append(noPostImage!)
-                        print("Second image missing, adding!")
                     case 2:
                         achievementThirdCompleterImages.append(noPostImage!)
-                        print("Third image missing, adding!")
                     default:
-                        print("Missing imageCount \(postsAlreadyLoaded)")
+                        print("Switch Error")
                     }
                     postsAlreadyLoaded! += 1
                 }
