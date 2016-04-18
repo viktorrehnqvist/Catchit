@@ -32,10 +32,12 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     let postService = PostService()
     
     var postImage: UIImage!
+    var postImageUrl: String!
     var likesCount: Int!
     var commentsCount: Int!
     var userName: String!
     var userAvatar: UIImage!
+    var userAvatarUrl: String!
     var achievementScore: Int!
     var achievementDescription: String!
     var postId: Int!
@@ -51,11 +53,18 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     }
     
     func setPostData(json: AnyObject) {
+        postImageUrl = json["image_url"] as! String
+        userName = json["user_name"] as! String
+        userAvatarUrl = json["user_avatar_url"] as! String
+        likesCount = json["likes_count"] as! Int
+        commentsCount = json["comments_count"] as! Int
+        achievementDescription = json["achievement_description"] as! String
+        achievementScore = json["achievement_score"] as! Int
         commentUserNames = json["commenter_infos"]!![0] as! [String]
         commentUserAvatarUrls = json["commenter_infos"]!![1] as! [String]
         commentUserIds = json["commenter_infos"]!![2] as! [Int]
         comments = json["commenter_infos"]!![3] as! [String]
-        loadAvatars()
+        loadImageFromUrls()
     }
     
     override func viewDidLoad() {
@@ -194,19 +203,24 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
     
-    func loadAvatars() {
+    func loadImageFromUrls() {
         if self.commentUserAvatarUrls.count > 0 {
-            print("avatars loaded")
             for avatarUrl in self.commentUserAvatarUrls {
-                print(avatarUrl)
                 let url = NSURL(string: "http://localhost:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     commentUserAvatars.append(UIImage(data: data!)!)
                 }
             }
-            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            
         }
+        var url = NSURL(string: "http://localhost:3000" + postImageUrl)
+        var data = NSData(contentsOfURL: url!)
+        postImage = UIImage(data: data!)
+        url = NSURL(string: "http://localhost:3000" + userAvatarUrl)
+        data = NSData(contentsOfURL: url!)
+        userAvatar = UIImage(data: data!)
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
 
 }

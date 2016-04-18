@@ -28,9 +28,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementFirstCompleterImages: [UIImage] = []
     var achievementSecondCompleterImages: [UIImage] = []
     var achievementThirdCompleterImages: [UIImage] = []
-    var achievementCompleterUserId: [[Int]] = []
-    var achievementCompleterUserNames: [[String]] = []
-    var achievementCompleterUserAvatars: [[String]] = []
     var moreAchievementsToLoad: Bool = true
 
     func setAchievementData(json: AnyObject) {
@@ -40,9 +37,9 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementIds.append((json[i]?["id"]) as! Int)
                 achievementScores.append(json[i]?["score"] as! Int)
                 achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
-                achievementCompleterUserId.append((json[i]?["completer_user_infos"]!![0] as? ([Int]))!)
-                achievementCompleterUserNames.append((json[i]?["completer_user_infos"]!![1] as? ([String]))!)
-                achievementCompleterUserAvatars.append((json[i]?["completer_user_infos"]!![2] as? ([String]))!)
+                //achievementCompleterUserId.append((json[i]?["completer_user_infos"]!![0] as? ([Int]))!)
+                //achievementCompleterUserNames.append((json[i]?["completer_user_infos"]!![1] as? ([String]))!)
+                //achievementCompleterUserAvatars.append((json[i]?["completer_user_infos"]!![2] as? ([String]))!)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
                 for postIndex in 0...(postImagesToLoad - 1) {

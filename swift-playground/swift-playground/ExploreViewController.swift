@@ -28,9 +28,6 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     var postUserNames: [String] = []
     var postUserAvatarUrls: [String] = []
     var postUserAvatars: [UIImage] = []
-    var postComments: [[String]] = []
-    var postCommenterNames: [[String]] = []
-    var postCommenterAvatarUrls: [[String]] = []
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
     var morePostsToLoad: Bool = true
@@ -47,10 +44,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
                 postUserIds.append(json[i]?["user_id"] as! Int)
                 postUserNames.append((json[i]?["user_name"])! as! String)
                 postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
-                postComments.append((json[i]?["commenter_infos"]!![3] as? ([String]))!)
                 postCommentCounts.append(json[i]?["comments_count"] as! Int)
-                postCommenterAvatarUrls.append((json[i]?["commenter_infos"]!![0] as? ([String]))!)
-                postCommenterNames.append((json[i]?["commenter_infos"]!![1] as? ([String]))!)
                 postLikeCounts.append(json[i]?["likes_count"] as! Int)
                 
                 fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)

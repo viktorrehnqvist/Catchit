@@ -28,9 +28,6 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     var postUserNames: [String] = []
     var postUserAvatarUrls: [String] = []
     var postUserAvatars: [UIImage] = []
-    var postComments: [[String]] = []
-    var postCommenterNames: [[String]] = []
-    var postCommenterAvatarUrls: [[String]] = []
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
     var morePostsToLoad: Bool = true
@@ -141,36 +138,31 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "showCommentsFromHome" {
-            let vc = segue.destinationViewController as! NewViewController
-            var cellIndex: Int
-            if (sender!.tag != nil) {
-                cellIndex = sender!.tag
-            } else {
-                let point = sender?.view
-                let mainCell = point?.superview
-                let main = mainCell?.superview
-                let thisCell: CollectionViewCell = main as! CollectionViewCell
-                cellIndex = thisCell.commentButton.tag
-            }
-            vc.postId = postIds[cellIndex]
-            vc.achievementDescription = achievementDescriptions[cellIndex]
-            vc.commentsCount = postCommentCounts[cellIndex]
-            vc.likesCount = postLikeCounts[cellIndex]
-            vc.postImage = postImages[cellIndex]
-            vc.achievementScore = achievementScores[cellIndex]
-            vc.userName = postUserNames[cellIndex]
-            vc.userAvatar = postUserAvatars[cellIndex]
-        }
-        
-        if segue.identifier == "showLikesFromHome" {
-            let vc = segue.destinationViewController as! LikesViewController
+        let cellIndex: Int
+        if (sender!.tag != nil) {
+            cellIndex = sender!.tag
+        } else {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
             let thisCell: CollectionViewCell = main as! CollectionViewCell
+            cellIndex = thisCell.commentButton.tag
+        }
+        
+        if segue.identifier == "showCommentsFromHome" {
+            let vc = segue.destinationViewController as! NewViewController
+            vc.postId = postIds[cellIndex]
+        }
+        
+        if segue.identifier == "showLikesFromHome" {
+            let vc = segue.destinationViewController as! LikesViewController
             vc.typeIsPost = true
-            vc.postId = thisCell.commentButton.tag
+            vc.postId = postIds[cellIndex]
+        }
+        
+        if segue.identifier == "showAchievementFromHome" {
+            let vc = segue.destinationViewController as! ShowAchievementViewController
+            vc.achievementId = achievementIds[cellIndex]
         }
         
     }

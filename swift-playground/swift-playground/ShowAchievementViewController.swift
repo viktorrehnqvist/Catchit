@@ -13,24 +13,31 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
+    @IBOutlet weak var collectionView: UICollectionView!
+    var header: AchievementsCollectionReusableView!
+    
+    let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
+    let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
+    var achievementDescription: String!
+    var achievementId: Int!
+    var achievementScore: Int!
+    var achievementCompleterCount: Int!
+    var postIds: [Int] = []
+    var postImageUrls: [String] = []
+    var postImages: [UIImage] = []
+    var postVideoUrls: [String] = []
+    var postUserIds: [Int] = []
+    var postUserNames: [String] = []
+    var postUserAvatarUrls: [String] = []
+    var postUserAvatars: [UIImage] = []
+    var postCommentCounts: [Int] = []
+    var postLikeCounts: [Int] = []
+    var morePostsToLoad: Bool = true
+    
     
     func setPostData(json: AnyObject) {
         print(json)
     }
-    
-    func displayComments(comments: AnyObject) {
-        print(comments)
-    }
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    var header: AchievementsCollectionReusableView!
-    
-    let appleProducts = ["Bestig ett berg", "Posera jämte en polis", "Klappa en igelkott", "Spring ett maraton", "Spring ett maraton"]
-    
-    let imageArray = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "4"), UIImage(named: "3"), UIImage(named: "3") ]
-    
-    let commentsArray = [["Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "2", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt.", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt", "2", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt.", "Hejsan mitt namn är Viktor, vad heter du? Vart kommer du ifrån? Jag kommer ifrån Lessebo. Jag gillar att cykla väldigt långt"], ["test"], [], ["1"], [], ["1", "2", "3"], ["1", "2", "3", "4", "5", "6"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +57,7 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.appleProducts.count
+        return self.postIds.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -67,8 +74,13 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
-        cell.imageView?.image = self.imageArray[indexPath.row]
-        cell.label?.text = self.appleProducts[indexPath.row]
+        cell.imageView?.image = postImages[indexPath.row]
+        cell.label?.text = achievementDescription
+        cell.scoreLabel.text = String(achievementScore) + "p"
+        cell.likeCount.text = String(postLikeCounts[indexPath.row]) + " gilla-markeringar"
+        cell.commentCount.text = String(postCommentCounts[indexPath.row]) + " kommentarer"
+        cell.profileImage.image = postUserAvatars[indexPath.row]
+        cell.profileLabel.text = postUserNames[indexPath.row]
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true
@@ -81,7 +93,7 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
     func collectionView(collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let image = self.imageArray[indexPath.row]!
+        let image = self.postImages[indexPath.row]
         let heightFactor = image.size.height / image.size.width
         let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
         
@@ -96,6 +108,9 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
                                                                                forIndexPath: indexPath) as! AchievementsCollectionReusableView
         let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
         headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
+        headerView.achievementDescription.text = achievementDescription
+        headerView.achievementCompleterCount.text = String(achievementCompleterCount) + " har klarat detta"
+        headerView.achievementScore.text = String(achievementScore) + "p"
         header = headerView
         return headerView
     }
@@ -182,8 +197,8 @@ class ShowAchievementViewController: UIViewController, PostServiceDelegate, UICo
         if segue.identifier == "showCommentsFromShowAchievement" {
             let vc = segue.destinationViewController as! NewViewController
             // Cant send tag from tap gesture, get comments from something else and delete next if
+            print(vc)
             if (sender!.tag != nil) {
-                vc.comments = self.commentsArray[sender!.tag]
             }
         }
         if segue.identifier == "showLikesFromShowAchievement" {

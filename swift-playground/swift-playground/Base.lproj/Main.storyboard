@@ -1367,6 +1367,9 @@
                                         <constraint firstItem="ZLl-Mb-Ila" firstAttribute="trailing" secondItem="L7x-li-HBD" secondAttribute="trailing" id="ueO-jo-T7P"/>
                                     </constraints>
                                     <connections>
+                                        <outlet property="achievementCompleterCount" destination="yEf-YW-Dyl" id="6WM-qh-bOf"/>
+                                        <outlet property="achievementDescription" destination="QYP-eu-IsQ" id="jsK-Ht-6c9"/>
+                                        <outlet property="achievementScore" destination="KpZ-yy-JYX" id="GDi-TH-YS8"/>
                                         <outlet property="bucketlistImage" destination="ZLl-Mb-Ila" id="pEd-MP-wfl"/>
                                     </connections>
                                 </collectionReusableView>
@@ -1822,8 +1825,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4pd-pR-4gV"/>
-        <segue reference="xHK-9p-MYi"/>
-        <segue reference="JTS-hb-4sY"/>
-        <segue reference="zhv-hg-8pY"/>
+        <segue reference="8RT-Zk-lhb"/>
+        <segue reference="QzT-29-F4w"/>
+        <segue reference="djO-lN-Qc8"/>
     </inferredMetricsTieBreakers>
 </document>
