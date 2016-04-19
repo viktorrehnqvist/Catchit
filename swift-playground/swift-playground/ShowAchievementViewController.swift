@@ -46,7 +46,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                 if json["posts"]!!.count > 4 {
                     jsonCountMaxFourPosts = 4
                 } else {
-                    jsonCountMaxFourPosts = json.count
+                    jsonCountMaxFourPosts = json["posts"]!!.count
                 }
                 for i in 0...(jsonCountMaxFourPosts - 1) {
                     postIds.append(json["posts"]!![i]?["id"] as! Int)
