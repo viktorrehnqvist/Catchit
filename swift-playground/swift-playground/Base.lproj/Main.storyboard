@@ -1258,6 +1258,7 @@
                                             <outlet property="likeCount" destination="ONz-wC-hFR" id="bUk-b2-Q89"/>
                                             <outlet property="profileImage" destination="f0g-tz-ESo" id="Xw2-2l-eGQ"/>
                                             <outlet property="profileLabel" destination="Y1c-4X-seT" id="4f2-Pn-ZOA"/>
+                                            <outlet property="scoreLabel" destination="LOf-4T-5h6" id="SeJ-Yd-Smy"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1388,6 +1389,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="2dj-hQ-vpX" id="DEy-Kx-xfE"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromShowAchievement" id="QzT-29-F4w"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromShowAchievement" id="8RT-Zk-lhb"/>
                         <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromShowAchievement" id="djO-lN-Qc8"/>

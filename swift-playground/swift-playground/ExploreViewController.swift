@@ -137,36 +137,26 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showCommentsFromExplore" {
-            let vc = segue.destinationViewController as! NewViewController
-            var cellIndex: Int
-            if (sender!.tag != nil) {
-                cellIndex = sender!.tag
-            } else {
-                let point = sender?.view
-                let mainCell = point?.superview
-                let main = mainCell?.superview
-                let thisCell: CollectionViewCell = main as! CollectionViewCell
-                cellIndex = thisCell.commentButton.tag
-            }
-            vc.postId = postIds[cellIndex]
-            vc.achievementDescription = achievementDescriptions[cellIndex]
-            vc.commentsCount = postCommentCounts[cellIndex]
-            vc.likesCount = postLikeCounts[cellIndex]
-            vc.postImage = postImages[cellIndex]
-            vc.achievementScore = achievementScores[cellIndex]
-            vc.userName = postUserNames[cellIndex]
-            vc.userAvatar = postUserAvatars[cellIndex]
-        }
-        
-        if segue.identifier == "showLikesFromExplore" {
-            let vc = segue.destinationViewController as! LikesViewController
+        var cellIndex: Int
+        if (sender!.tag != nil) {
+            cellIndex = sender!.tag
+        } else {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
             let thisCell: CollectionViewCell = main as! CollectionViewCell
+            cellIndex = thisCell.commentButton.tag
+        }
+        
+        if segue.identifier == "showCommentsFromExplore" {
+            let vc = segue.destinationViewController as! NewViewController
+            vc.postId = postIds[cellIndex]
+        }
+        
+        if segue.identifier == "showLikesFromExplore" {
+            let vc = segue.destinationViewController as! LikesViewController
             vc.typeIsPost = true
-            vc.postId = thisCell.commentButton.tag
+            vc.postId = postIds[cellIndex]
         }
     }
     

@@ -30,7 +30,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementThirdCompleterImages: [UIImage] = []
     var moreAchievementsToLoad: Bool = true
 
-    func setAchievementData(json: AnyObject) {
+    func setAchievementData(json: AnyObject, firstFetch: Bool) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 achievementDescriptions.append((json[i]?["description"])! as! String)
@@ -113,7 +113,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         let bucketlistTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
-        cell.tag = achievementIds[indexPath.row]
+        cell.tag = indexPath.row
         cell.completersImage.addGestureRecognizer(completersTapGesture)
         cell.shareImage.addGestureRecognizer(shareTapGesture)
         cell.bucketlistImage.addGestureRecognizer(bucketlistTapGesture)
@@ -143,15 +143,22 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
+        let cellIndex = thisCell.tag
         if segue.identifier == "showLikesViewFromAchievement" {
             let vc = segue.destinationViewController as! LikesViewController
-            let point = sender?.view
-            let mainCell = point?.superview
-            let main = mainCell?.superview
-            let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
-            vc.achievementId = thisCell.tag
+            vc.achievementId = achievementIds[cellIndex]
             vc.typeIsPost = false
         }
+        
+        if segue.identifier == "showAchievementFromAchievements" {
+            let vc = segue.destinationViewController as! ShowAchievementViewController
+            vc.achievementId = achievementIds[cellIndex]
+        }
+        
     }
     
     @IBAction func showCompleters(sender: AnyObject?) {

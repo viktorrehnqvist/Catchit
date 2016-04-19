@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol AchievementServiceDelegate {
-    func setAchievementData(json: AnyObject)
+    func setAchievementData(json: AnyObject, firstFetch: Bool)
 }
 
 class AchievementService {
@@ -23,12 +23,26 @@ class AchievementService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setAchievementData(JSON)
+                            self.delegate?.setAchievementData(JSON, firstFetch: true)
                         })
                     }
                 }
         }
 
+    }
+    
+    func getAchievement(achievementId: Int) {
+        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/")
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAchievementData(JSON, firstFetch: true)
+                        })
+                    }
+                }
+        }
+        
     }
     
     func fetchMoreAchievements(lastAchievementId: Int) {
@@ -37,12 +51,26 @@ class AchievementService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setAchievementData(JSON)
+                            self.delegate?.setAchievementData(JSON, firstFetch: false)
                         })
                     }
                 }
         }
     }
+    
+    func fetchMorePostsForAchievement(lastPostId: Int, achievementId: Int) {
+        Alamofire.request(.GET, "http://localhost:3000/posts.json", parameters: ["id": lastPostId, "achievement": achievementId])
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAchievementData(JSON, firstFetch: false)
+                        })
+                    }
+                }
+        }
+    }
+    
     
     func getCompleters(achievementId: Int) {
         Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/")
@@ -50,7 +78,7 @@ class AchievementService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setAchievementData(JSON)
+                            self.delegate?.setAchievementData(JSON, firstFetch: true)
                         })
                     }
                 }

@@ -34,7 +34,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         loadAvatars()
     }
     
-    func setAchievementData(json: AnyObject) {    
+    func setAchievementData(json: AnyObject, firstFetch: Bool) {
         userIds = json["completer_infos"]!![0] as! [Int]
         userNames = json["completer_infos"]!![1] as! [String]
         userAvatarUrls = json["completer_infos"]!![2] as! [String]
