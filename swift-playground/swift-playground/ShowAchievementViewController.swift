@@ -163,6 +163,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         headerView.achievementDescription.text = achievementDescription
         headerView.achievementCompleterCount.text = String(achievementCompleterCount) + " har klarat detta"
         headerView.achievementScore.text = String(achievementScore) + "p"
+        headerView.tag = achievementId
         header = headerView
         return headerView
     }
@@ -246,14 +247,37 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
-        if segue.identifier == "showCommentsFromShowAchievement" {
-            let vc = segue.destinationViewController as! NewViewController
-            // Cant send tag from tap gesture, get comments from something else and delete next if
-            print(vc)
-            if (sender!.tag != nil) {
+        let cellIndex: Int
+        
+        if (sender!.tag != nil) {
+            cellIndex = sender!.tag
+        } else {
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            // If sender is a post
+            if let thisCell: CollectionViewCell = main as? CollectionViewCell {
+                cellIndex = thisCell.commentButton.tag
+                if segue.identifier == "showLikesFromShowAchievement" {
+                    let vc = segue.destinationViewController as! LikesViewController
+                    vc.typeIsPost = true
+                    vc.postId = postIds[cellIndex]
+                }
+            } else {
+                // If sender is an achievement
+                let thisCell: AchievementsCollectionReusableView = mainCell as! AchievementsCollectionReusableView
+                cellIndex = thisCell.tag
+                if segue.identifier == "showLikesFromShowAchievement" {
+                    let vc = segue.destinationViewController as! LikesViewController
+                    vc.typeIsPost = false
+                    vc.achievementId = cellIndex
+                }
             }
         }
-        if segue.identifier == "showLikesFromShowAchievement" {
+        
+        if segue.identifier == "showCommentsFromShowAchievement" {
+            let vc = segue.destinationViewController as! NewViewController
+            vc.postId = postIds[cellIndex]
         }
     }
     

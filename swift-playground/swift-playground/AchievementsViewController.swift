@@ -42,20 +42,22 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 //achievementCompleterUserAvatars.append((json[i]?["completer_user_infos"]!![2] as? ([String]))!)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
-                for postIndex in 0...(postImagesToLoad - 1) {
-                    if let completerImageUrl = json[i]["latest_posts"]?![postIndex] as? String {
-                        let url = NSURL(string: "http://localhost:3000" + completerImageUrl)!
-                        let data = NSData(contentsOfURL:url)
-                        if data != nil {
-                            switch postIndex {
-                            case 0:
-                                achievementFirstCompleterImages.append(UIImage(data: data!)!)
-                            case 1:
-                                achievementSecondCompleterImages.append(UIImage(data: data!)!)
-                            case 2:
-                                achievementThirdCompleterImages.append(UIImage(data: data!)!)
-                            default:
-                                print("Switch Error")
+                if postImagesToLoad > 0 {
+                    for postIndex in 0...(postImagesToLoad - 1) {
+                        if let completerImageUrl = json[i]["latest_posts"]?![postIndex] as? String {
+                            let url = NSURL(string: "http://localhost:3000" + completerImageUrl)!
+                            let data = NSData(contentsOfURL:url)
+                            if data != nil {
+                                switch postIndex {
+                                case 0:
+                                    achievementFirstCompleterImages.append(UIImage(data: data!)!)
+                                case 1:
+                                    achievementSecondCompleterImages.append(UIImage(data: data!)!)
+                                case 2:
+                                    achievementThirdCompleterImages.append(UIImage(data: data!)!)
+                                default:
+                                    print("Switch Error")
+                                }
                             }
                         }
                     }
