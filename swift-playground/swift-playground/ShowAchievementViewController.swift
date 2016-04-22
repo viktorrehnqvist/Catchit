@@ -246,16 +246,17 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
-        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed.
         let cellIndex: Int
         
+        // This should be rewritten for better readability.
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
         } else {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
-            // If sender is a post
+            // If sender is a post.
             if let thisCell: CollectionViewCell = main as? CollectionViewCell {
                 cellIndex = thisCell.commentButton.tag
                 if segue.identifier == "showLikesFromShowAchievement" {
@@ -264,7 +265,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                     vc.postId = postIds[cellIndex]
                 }
             } else {
-                // If sender is an achievement
+                // If sender is an achievement.
                 let thisCell: AchievementsCollectionReusableView = mainCell as! AchievementsCollectionReusableView
                 cellIndex = thisCell.tag
                 if segue.identifier == "showLikesFromShowAchievement" {

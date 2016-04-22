@@ -37,6 +37,7 @@
 		F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7B553D01C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7B553D11C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
+		F7CA54001CCACC6D0048574B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */; };
 		F7EEC2731C92E200002378E9 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EEC2721C92E200002378E9 /* NewViewController.swift */; };
 		F7EEC2751C92E31C002378E9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,7 @@
 		F765D5071CBBBB5900D64488 /* AchievementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementService.swift; sourceTree = "<group>"; };
 		F7901CD31C730D97001B9129 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		F7B553CE1C71ABFB00EA9D12 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PostService.swift; sourceTree = "<group>"; tabWidth = 4; };
+		F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		F7EEC2721C92E200002378E9 /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +202,7 @@
 				F7EEC2721C92E200002378E9 /* NewViewController.swift */,
 				F70173A81C6F42F9006F799A /* Post.swift */,
 				F7B553CE1C71ABFB00EA9D12 /* PostService.swift */,
+				F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */,
 				F765D5071CBBBB5900D64488 /* AchievementService.swift */,
 				F74018801C72FEF2004383FE /* SwiftyJSON.swift */,
 				F70173791C6E6EAF006F799A /* Main.storyboard */,
@@ -468,6 +471,7 @@
 				F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */,
 				F761C5301C9DD6CF00E3C334 /* AchievementsViewController.swift in Sources */,
 				F70173A91C6F42F9006F799A /* Post.swift in Sources */,
+				F7CA54001CCACC6D0048574B /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

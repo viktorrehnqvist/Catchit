@@ -14,6 +14,7 @@ import Alamofire
 class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
+    let authService = AuthenticationService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -58,7 +59,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postService.getPosts()
+        authService.authUser()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }

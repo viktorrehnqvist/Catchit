@@ -32,7 +32,6 @@ class PostService {
     }
     
     func getPost(postId: Int) {
-        print("test")
         Alamofire.request(.GET, "http://localhost:3000/posts/\(postId).json/")
             .responseJSON { response in
                 if let JSON = response.result.value {
@@ -166,20 +165,44 @@ class PostService {
             return test
         }
     }
-    
+
     func getWithHeaders() {
         let headers = [
-            "X-User-Email": "ios@ios.com",
-            "X-User-Token": "wxKc3_wy1txSwbLgYpKr"
+            "X-User-Email": "shorts@live.se",
+            "X-User-Token": "_dsnb2Y7zrtXzBkTxFtN"
         ]
     
-        Alamofire.request(.GET, "http://localhost:3000/secret/index", headers: headers)
+        Alamofire.request(.POST, "http://localhost:3000/", headers: headers)
         .responseString { response in
             print("Success: \(response.result.isSuccess)")
             print("Response String: \(response.result.value)")
         }
     }
-
-
+    
+    func registerUser() {
+        let parameters = [
+            "user": [
+                "email": "shorts@live.se",
+                "password": "107154salami",
+            ]
+        ]
+        Alamofire.request(.POST, "http://localhost:3000/users", parameters: parameters)
+            .responseJSON { response in
+                print(response)
+        }
+    }
+    
+    func loginUser() {
+        let parameters = [
+            "user": [
+                "email": "shorts@live.se",
+                "password": "107154salami",
+            ]
+        ]
+        Alamofire.request(.POST, "http://localhost:3000/users/sign_in", parameters: parameters)
+            .responseJSON { response in
+                print(response)
+        }
+    }
 
 }
