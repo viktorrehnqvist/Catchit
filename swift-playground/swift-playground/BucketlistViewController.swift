@@ -12,21 +12,29 @@ import Alamofire
 import MobileCoreServices
 
 @available(iOS 9.0, *)
-class BucketlistViewController:  UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
+class BucketlistViewController:  UIViewController, AchievementServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
     
-    let postService = PostService()
+    let achievementService = AchievementService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    
-    func setPostData(json: AnyObject) {
-        print(json)
-    }
-
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var achievementDescriptions: [String] = []
+    var achievementIds: [Int] = []
+    
+    func setAchievementData(json: AnyObject, firstFetch: Bool) {
+        if json["bucketlist"]!!.count > 0 {
+            for i in 0...(json["bucketlist"]!!.count - 1) {
+                achievementDescriptions.append((json["bucketlist"]!![i]["description"])! as! String)
+                achievementIds.append((json["bucketlist"]!![i]["id"]) as! Int)
+            }
+        }
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        postService.getPosts()
-        self.postService.delegate = self
+        achievementService.getBucketlist()
+        self.achievementService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -40,7 +48,7 @@ class BucketlistViewController:  UIViewController, PostServiceDelegate, UICollec
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return self.achievementIds.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -50,6 +58,8 @@ class BucketlistViewController:  UIViewController, PostServiceDelegate, UICollec
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
         cell.achievementLabel.addGestureRecognizer(achievementTapGesture)
+        cell.achievementLabel.text = achievementDescriptions[indexPath.row]
+        cell.tag = achievementIds[indexPath.row]
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.layer.cornerRadius = 5

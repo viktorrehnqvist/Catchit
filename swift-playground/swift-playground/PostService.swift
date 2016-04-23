@@ -16,10 +16,12 @@ protocol PostServiceDelegate {
 class PostService {
     
     var delegate: PostServiceDelegate?
+    let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
     
     func getPosts() {
-        Alamofire.request(.GET, "http://localhost:3000/posts.json/")
+        Alamofire.request(.GET, "http://localhost:3000/posts.json/", headers: headers)
             .responseJSON { response in
+                print(self.headers)
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -32,7 +34,7 @@ class PostService {
     }
     
     func getPost(postId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/posts/\(postId).json/")
+        Alamofire.request(.GET, "http://localhost:3000/posts/\(postId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -45,7 +47,7 @@ class PostService {
     }
     
     func fetchMorePosts(lastPostId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/posts.json/", parameters: ["id": lastPostId])
+        Alamofire.request(.GET, "http://localhost:3000/posts.json/", parameters: ["id": lastPostId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -58,7 +60,7 @@ class PostService {
     }
     
     func getExplorePosts() {
-        Alamofire.request(.GET, "http://localhost:3000/explore.json/")
+        Alamofire.request(.GET, "http://localhost:3000/explore.json/", headers: headers)
             .responseJSON { response in
                 print(response)
                 if let JSON = response.result.value {
@@ -73,7 +75,7 @@ class PostService {
     }
     
     func fetchMoreExplorePosts(lastPostId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/explore.json/", parameters: ["id": lastPostId])
+        Alamofire.request(.GET, "http://localhost:3000/explore.json/", parameters: ["id": lastPostId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -97,7 +99,7 @@ class PostService {
                 "completed": true
             ]
         ]
-        Alamofire.request(.POST, "http://192.168.1.116:3000/tasks.json", parameters: parameters)
+        Alamofire.request(.POST, "http://192.168.1.116:3000/tasks.json", parameters: parameters, headers: headers)
     }
     
     func updatePost() {
@@ -108,11 +110,11 @@ class PostService {
                 "completed": true
             ]
         ]
-        Alamofire.request(.PUT, "http://192.168.1.116:3000/tasks/1.json", parameters: parameters)
+        Alamofire.request(.PUT, "http://192.168.1.116:3000/tasks/1.json", parameters: parameters, headers: headers)
     }
     
     func destroyPost() {
-        Alamofire.request(.DELETE, "http://192.168.1.116:3000/tasks/1.json")
+        Alamofire.request(.DELETE, "http://192.168.1.116:3000/tasks/1.json", headers: headers)
     }
     
     func uploadImage() {
@@ -121,7 +123,7 @@ class PostService {
                 let data = response.data
                 Alamofire.upload(
                     .POST,
-                    "http://192.168.1.116:3000/uploads",
+                    "http://192.168.1.116:3000/uploads", headers: self.headers,
                     multipartFormData: { multipartFormData in
                         multipartFormData.appendBodyPart(data: data!, name: "avatar", fileName: "test3.png", mimeType: "image/jpeg")
                     },
@@ -147,7 +149,7 @@ class PostService {
             let test = directoryURL.URLByAppendingPathComponent(pathComponent!)
             Alamofire.upload(
                 .POST,
-                "http://192.168.1.116:3000/uploads",
+                "http://192.168.1.116:3000/uploads", headers: self.headers,
                 multipartFormData: { multipartFormData in
                     multipartFormData.appendBodyPart(fileURL: test, name: "avatar", fileName: "test3.mov", mimeType: "video/quicktime")
                 },
@@ -165,44 +167,4 @@ class PostService {
             return test
         }
     }
-
-    func getWithHeaders() {
-        let headers = [
-            "X-User-Email": "shorts@live.se",
-            "X-User-Token": "_dsnb2Y7zrtXzBkTxFtN"
-        ]
-    
-        Alamofire.request(.POST, "http://localhost:3000/", headers: headers)
-        .responseString { response in
-            print("Success: \(response.result.isSuccess)")
-            print("Response String: \(response.result.value)")
-        }
-    }
-    
-    func registerUser() {
-        let parameters = [
-            "user": [
-                "email": "shorts@live.se",
-                "password": "107154salami",
-            ]
-        ]
-        Alamofire.request(.POST, "http://localhost:3000/users", parameters: parameters)
-            .responseJSON { response in
-                print(response)
-        }
-    }
-    
-    func loginUser() {
-        let parameters = [
-            "user": [
-                "email": "shorts@live.se",
-                "password": "107154salami",
-            ]
-        ]
-        Alamofire.request(.POST, "http://localhost:3000/users/sign_in", parameters: parameters)
-            .responseJSON { response in
-                print(response)
-        }
-    }
-
 }

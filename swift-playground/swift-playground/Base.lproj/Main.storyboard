@@ -816,6 +816,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="9Wr-Ip-zqh" id="IpD-aN-aLV"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromBucketlist" id="L9l-gp-JAO"/>
                     </connections>
                 </viewController>
@@ -1826,9 +1827,9 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4pd-pR-4gV"/>
+        <segue reference="L9l-gp-JAO"/>
+        <segue reference="JIk-2X-1Dy"/>
         <segue reference="8RT-Zk-lhb"/>
         <segue reference="QzT-29-F4w"/>
-        <segue reference="djO-lN-Qc8"/>
     </inferredMetricsTieBreakers>
 </document>

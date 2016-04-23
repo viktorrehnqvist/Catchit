@@ -16,9 +16,11 @@ protocol AchievementServiceDelegate {
 class AchievementService {
     
     var delegate: AchievementServiceDelegate?
+    let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as! [String : String]
+    let userId = NSUserDefaults.standardUserDefaults().objectForKey("id") as! Int
     
     func getAchievements() {
-        Alamofire.request(.GET, "http://localhost:3000/achievements.json/")
+        Alamofire.request(.GET, "http://localhost:3000/achievements.json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -32,7 +34,7 @@ class AchievementService {
     }
     
     func getAchievement(achievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/")
+        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -45,8 +47,21 @@ class AchievementService {
         
     }
     
+    func getBucketlist() {
+        Alamofire.request(.GET, "http://localhost:3000/users/\(userId).json/", headers: headers)
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAchievementData(JSON, firstFetch: true)
+                        })
+                    }
+                }
+        }
+    }
+    
     func fetchMoreAchievements(lastAchievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/achievements.json/", parameters: ["achievements": lastAchievementId])
+        Alamofire.request(.GET, "http://localhost:3000/achievements.json/", parameters: ["achievements": lastAchievementId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -59,7 +74,7 @@ class AchievementService {
     }
     
     func fetchMorePostsForAchievement(lastPostId: Int, achievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/posts.json", parameters: ["id": lastPostId, "achievement": achievementId])
+        Alamofire.request(.GET, "http://localhost:3000/posts.json", parameters: ["id": lastPostId, "achievement": achievementId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -73,7 +88,7 @@ class AchievementService {
     
     
     func getCompleters(achievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/")
+        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -105,7 +120,7 @@ class AchievementService {
                 let data = response.data
                 Alamofire.upload(
                     .POST,
-                    "http://192.168.1.116:3000/uploads",
+                    "http://192.168.1.116:3000/uploads", headers: self.headers,
                     multipartFormData: { multipartFormData in
                         multipartFormData.appendBodyPart(data: data!, name: "avatar", fileName: "test3.png", mimeType: "image/jpeg")
                     },
@@ -131,7 +146,7 @@ class AchievementService {
             let fileUrl = directoryURL.URLByAppendingPathComponent(pathComponent!)
             Alamofire.upload(
                 .POST,
-                "http://192.168.1.116:3000/uploads",
+                "http://192.168.1.116:3000/uploads", headers: self.headers,
                 multipartFormData: { multipartFormData in
                     multipartFormData.appendBodyPart(fileURL: fileUrl, name: "avatar", fileName: "test3.mov", mimeType: "video/quicktime")
                 },

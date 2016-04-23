@@ -59,7 +59,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        authService.authUser()
+        postService.getPosts()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
