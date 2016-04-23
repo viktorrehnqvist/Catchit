@@ -16,7 +16,7 @@ protocol AuthenticationServiceDelegate {
 class AuthenticationService {
     
     var delegate: AuthenticationServiceDelegate?
-    let auth = NSUserDefaults.standardUserDefaults()
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     func registerUser(email: String, password: String) {
         let parameters = [
@@ -25,12 +25,19 @@ class AuthenticationService {
                 "password": password,
             ]
         ]
-        auth.setObject(email, forKey: "Email")
-        auth.setObject(password, forKey: "Password")
-        Alamofire.request(.POST, "http://localhost:3000/users", parameters: parameters)
+        Alamofire.request(.POST, "http://localhost:3000/users.json", parameters: parameters)
             .responseJSON { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
+                if response.result.isSuccess {
+                    let json = response.result.value
+                    let userEmail = json!["email"] as! String
+                    let userToken = json!["authentication_token"] as! String
+                    let headers = ["X-User-Email": userEmail, "X-User-Token": userToken]
+                    self.userDefaults.setObject(userEmail, forKey: "email")
+                    self.userDefaults.setObject(userToken, forKey: "token")
+                    self.userDefaults.setObject(headers, forKey: "headers")
+                } else {
+                    print("Could not connect to server")
+                }
         }
     }
     
@@ -41,22 +48,29 @@ class AuthenticationService {
                 "password": password,
             ]
         ]
-        auth.setObject(email, forKey: "Email")
-        auth.setObject(password, forKey: "Password")
-        Alamofire.request(.POST, "http://localhost:3000/users/sign_in", parameters: parameters)
+        Alamofire.request(.POST, "http://localhost:3000/users/sign_in.json", parameters: parameters)
             .responseJSON { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
+                if response.result.isSuccess {
+                    let json = response.result.value
+                    let userEmail = json!["email"] as! String
+                    let userToken = json!["authentication_token"] as! String
+                    let headers = ["X-User-Email": userEmail, "X-User-Token": userToken]
+                    self.userDefaults.setObject(userEmail, forKey: "email")
+                    self.userDefaults.setObject(userToken, forKey: "token")
+                    self.userDefaults.setObject(headers, forKey: "headers")
+                } else {
+                    print("Could not connect to server")
+                }
         }
     }
     
     func authUser() {
         let headers = [
-            "X-User-Email": auth.objectForKey("Email") as! String,
+            "X-User-Email": userDefaults.objectForKey("Email") as! String,
             "X-User-Token": "tuT7RN9m2T3oNcTkUgDA"
         ]
-        
-        Alamofire.request(.GET, "http://localhost:3000/posts.json", headers: headers)
+        print(headers)
+        Alamofire.request(.GET, "http://localhost:3000/posts.json", headers: self.userDefaults.objectForKey("headers") as? [String : String])
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
