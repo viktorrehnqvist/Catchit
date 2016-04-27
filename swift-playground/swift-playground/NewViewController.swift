@@ -1,4 +1,4 @@
-//
+    //
 //  NewViewController.swift
 //  swift-playground
 //
@@ -69,10 +69,9 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postService.getPost(postId!)
+        self.postService.getPost(postId!)
         self.postService.delegate = self
         textField.delegate = self
-        print(postId)
         // Do any additional setup after loading the view.
     }
 

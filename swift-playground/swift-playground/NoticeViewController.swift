@@ -61,6 +61,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showNoticeOrigin(_:)))
         
+        cell.tag = indexPath.row
         cell.noticeLabel.addGestureRecognizer(achievementTapGesture)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -83,7 +84,31 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     
     @IBAction func showNoticeOrigin(sender: AnyObject?) {
         // Check if sender is of type achievement or like and send to correct origin.
-        self.performSegueWithIdentifier("showFromNotice", sender: sender)
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let thisCell: NoticeCollectionViewCell = main as! NoticeCollectionViewCell
+        let cellIndex = thisCell.tag
+        if noticeTypes[cellIndex] == "tip" {
+            self.performSegueWithIdentifier("showAchievementFromNotice", sender: thisCell)
+        } else {
+            self.performSegueWithIdentifier("showPostFromNotice", sender: thisCell)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       let cellIndex = sender!.tag
+        
+        if segue.identifier == "showAchievementFromNotice" {
+            let vc = segue.destinationViewController as! ShowAchievementViewController
+            vc.achievementId = noticeLinkIds[cellIndex]
+        }
+        
+        if segue.identifier == "showPostFromNotice" {
+            let vc = segue.destinationViewController as! NewViewController
+            vc.postId = noticeLinkIds[cellIndex]
+        }
+        
     }
     
     func loadAvatars() {

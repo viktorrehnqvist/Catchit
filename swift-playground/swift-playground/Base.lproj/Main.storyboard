@@ -1501,13 +1501,14 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="xNp-Zb-fTX">
                             <connections>
-                                <segue destination="Egn-Kw-huY" kind="show" id="kk8-J0-6G5"/>
+                                <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromNotice" id="kk8-J0-6G5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="ien-Na-utX" id="kHc-IX-aJM"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromNotice" id="azt-Oc-gww"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromNotice" id="8Bb-Y1-XOB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABu-9s-vFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1829,7 +1830,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UnV-OJ-WQS"/>
-        <segue reference="KBR-5L-ez0"/>
+        <segue reference="8Bb-Y1-XOB"/>
         <segue reference="kk8-J0-6G5"/>
         <segue reference="azt-Oc-gww"/>
     </inferredMetricsTieBreakers>
