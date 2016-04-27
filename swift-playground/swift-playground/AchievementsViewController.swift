@@ -28,6 +28,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementFirstCompleterImages: [UIImage] = []
     var achievementSecondCompleterImages: [UIImage] = []
     var achievementThirdCompleterImages: [UIImage] = []
+    var achievementInBucketlist: [Bool] = []
     var moreAchievementsToLoad: Bool = true
     var segueShouldShowCompleters: Bool = false
 
@@ -38,6 +39,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementIds.append((json[i]?["id"]) as! Int)
                 achievementScores.append(json[i]?["score"] as! Int)
                 achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
+                achievementInBucketlist.append(json[i]?["bucketlist"] as! Bool)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
@@ -125,7 +127,11 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         cell.completersLabel.text! = String(achievementCompleterCounts[indexPath.row]) + " har klarat detta"
         cell.achievementLabel.text! = achievementDescriptions[indexPath.row]
         cell.scoreLabel.text! = String(achievementScores[indexPath.row])
-        cell.bucketlistImage.image = addToBucketlistImage
+        if achievementInBucketlist[indexPath.row] {
+            cell.bucketlistImage.image = removeFromBucketlistImage
+        } else {
+            cell.bucketlistImage.image = addToBucketlistImage
+        }
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.layer.cornerRadius = 5
@@ -180,14 +186,16 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     @IBAction func bucketlistPress(sender: AnyObject?) {
-        // Changes more than one achievement, fix this.
         let point = sender?.view
         let mainCell = point?.superview
         let main = mainCell?.superview
         let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
+        let cellIndex = thisCell.tag
         if thisCell.bucketlistImage.image == addToBucketlistImage {
+            achievementService.addToBucketlist(achievementIds[cellIndex])
             thisCell.bucketlistImage.image = removeFromBucketlistImage
         } else {
+            achievementService.removeFromBucketlist(achievementIds[cellIndex])
             thisCell.bucketlistImage.image = addToBucketlistImage
         }
     }

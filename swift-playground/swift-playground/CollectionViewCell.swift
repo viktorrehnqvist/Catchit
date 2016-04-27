@@ -24,7 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func pressLikeButton(sender: AnyObject) {
-        postService.likePress(commentButton.tag)
+        postService.likePost(commentButton.tag)
         let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)
         let onlyNumberPartOfString = likeCount.text!.substringToIndex(lastPartInString)
         if (likeButton?.titleLabel?.text == "Gilla") {

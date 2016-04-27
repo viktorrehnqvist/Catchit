@@ -87,8 +87,8 @@ class PostService {
         }
     }
     
-    func likePress(postId: Int) {
-        print("like pressed" + String(postId))
+    func likePost(postId: Int) {
+        Alamofire.request(.PUT, "http://192.168.1.116:3000/posts/like/\(postId)", headers: headers)
     }
     
     func createPost() {

@@ -31,6 +31,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     var postUserAvatars: [UIImage] = []
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
+    var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     
     func setPostData(json: AnyObject) {
@@ -47,6 +48,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
                 postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
                 postCommentCounts.append(json[i]?["comments_count"] as! Int)
                 postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                postLike.append(json[i]?["like"] as! Bool)
                 
                 fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
@@ -102,8 +104,13 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
-        cell.commentButton?.tag = indexPath.row
+        cell.commentButton?.tag = postIds[indexPath.row]
         cell.commentCount?.tag = indexPath.row
+        if postLike[indexPath.row] {
+            cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
+        } else {
+            cell.likeButton?.setTitle("Gilla", forState: .Normal)
+        }
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
@@ -147,7 +154,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
             let mainCell = point?.superview
             let main = mainCell?.superview
             let thisCell: CollectionViewCell = main as! CollectionViewCell
-            cellIndex = thisCell.commentButton.tag
+            cellIndex = thisCell.commentCount.tag
         }
         
         if segue.identifier == "showCommentsFromHome" {

@@ -60,6 +60,14 @@ class AchievementService {
         }
     }
     
+    func addToBucketlist(achievementId: Int) {
+        Alamofire.request(.PUT, "http://192.168.1.116:3000/bucket_list/add_bucket_list_item/\(achievementId)", headers: headers)
+    }
+    
+    func removeFromBucketlist(achievementId: Int) {
+        Alamofire.request(.DELETE, "http://192.168.1.116:3000/bucket_list/remove_bucket_list_item/\(achievementId)", headers: headers)
+    }
+    
     func fetchMoreAchievements(lastAchievementId: Int) {
         Alamofire.request(.GET, "http://localhost:3000/achievements.json/", parameters: ["achievements": lastAchievementId], headers: headers)
             .responseJSON { response in
