@@ -34,9 +34,16 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+
+    
     func setPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
+                print(userDefaults.valueForKey("headers"))
+                print(userDefaults.valueForKey("email"))
+                print(userDefaults.valueForKey("token"))
+                print(userDefaults.valueForKey("id"))
                 achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
                 achievementIds.append((json[i]?["achievement_id"]) as! Int)
                 achievementScores.append(json[i]?["achievement_score"] as! Int)
@@ -61,6 +68,10 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.userDefaults.setObject(["X-User-Email": "shorts@live.se", "X-User-Token": "Qq5F4y8bLsFPW2ZATzrQ"], forKey: "headers")
+        self.userDefaults.setObject("shorts@live.se", forKey: "email")
+        self.userDefaults.setObject("Qq5F4y8bLsFPW2ZATzrQ", forKey: "token")
+        self.userDefaults.setInteger(43, forKey: "id")
         postService.getPosts()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
@@ -183,14 +194,14 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
-        let url = NSURL(string: "http://localhost:3000" + fetchUrl)!
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postImages.append(image!)
     }
     
     func fetchDataFromUrlToPostUserAvatars(fetchUrl: String) {
-        let url = NSURL(string: "http://localhost:3000" + fetchUrl)!
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postUserAvatars.append(image!)

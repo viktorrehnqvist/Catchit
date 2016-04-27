@@ -53,14 +53,14 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                     postIds.append(json["posts"]!![i]?["id"] as! Int)
                     postImageUrls.append((json["posts"]!![i]["image"]!!["url"])! as! String)
                     // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
-                    postUserIds.append(json["completer_infos"]!![0][i] as! Int)
-                    postUserNames.append(json["completer_infos"]!![1][i] as! String)
-                    postUserAvatarUrls.append(json["completer_infos"]!![2][i] as! String)
+                    postUserIds.append(((json["completer_infos"] as! NSArray)[0] as! NSArray)[i] as! Int)
+                    postUserNames.append(((json["completer_infos"] as! NSArray)[1] as! NSArray)[i] as! String)
+                    postUserAvatarUrls.append(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
                     postCommentCounts.append(json["posts"]!![i]?["comments_count"] as! Int)
                     postLikeCounts.append(json["posts"]!![i]?["likes_count"] as! Int)
                     
                     fetchDataFromUrlToPostImages(json["posts"]!![i]["image"]!!["url"]! as! String)
-                    fetchDataFromUrlToPostUserAvatars(json["completer_infos"]!![2][i]! as! String)
+                    fetchDataFromUrlToPostUserAvatars(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
                 }
             } else {
                 morePostsToLoad = false
@@ -298,14 +298,14 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     }
     
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
-        let url = NSURL(string: "http://localhost:3000" + fetchUrl)!
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postImages.append(image!)
     }
     
     func fetchDataFromUrlToPostUserAvatars(fetchUrl: String) {
-        let url = NSURL(string: "http://localhost:3000" + fetchUrl)!
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postUserAvatars.append(image!)

@@ -60,10 +60,10 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         commentsCount = json["comments_count"] as! Int
         achievementDescription = json["achievement_description"] as! String
         achievementScore = json["achievement_score"] as! Int
-        commentUserNames = json["commenter_infos"]!![0] as! [String]
-        commentUserAvatarUrls = json["commenter_infos"]!![1] as! [String]
-        commentUserIds = json["commenter_infos"]!![2] as! [Int]
-        comments = json["commenter_infos"]!![3] as! [String]
+        commentUserNames = (json["commenter_infos"] as! NSArray)[0] as! [String]
+        commentUserAvatarUrls = (json["commenter_infos"] as! NSArray)[1] as! [String]
+        commentUserIds = (json["commenter_infos"] as! NSArray)[2] as! [Int]
+        comments = (json["commenter_infos"] as! NSArray)[3] as! [String]
         loadImageFromUrls()
     }
     
@@ -206,7 +206,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     func loadImageFromUrls() {
         if self.commentUserAvatarUrls.count > 0 {
             for avatarUrl in self.commentUserAvatarUrls {
-                let url = NSURL(string: "http://localhost:3000" + avatarUrl)
+                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     commentUserAvatars.append(UIImage(data: data!)!)
@@ -214,12 +214,13 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
             }
             
         }
-        var url = NSURL(string: "http://localhost:3000" + postImageUrl)
+        var url = NSURL(string: "http://192.168.1.116:3000" + postImageUrl)
         var data = NSData(contentsOfURL: url!)
         postImage = UIImage(data: data!)
-        url = NSURL(string: "http://localhost:3000" + userAvatarUrl)
+        url = NSURL(string: "http://192.168.1.116:3000" + userAvatarUrl)
         data = NSData(contentsOfURL: url!)
         userAvatar = UIImage(data: data!)
+
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
 

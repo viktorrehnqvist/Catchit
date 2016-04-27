@@ -25,7 +25,7 @@ class AuthenticationService {
                 "password": password,
             ]
         ]
-        Alamofire.request(.POST, "http://localhost:3000/users.json", parameters: parameters)
+        Alamofire.request(.POST, "http://192.168.1.116:3000/users.json", parameters: parameters)
             .responseJSON { response in
                 if response.result.isSuccess {
                     let json = response.result.value
@@ -55,7 +55,7 @@ class AuthenticationService {
                 "password": password,
             ]
         ]
-        Alamofire.request(.POST, "http://localhost:3000/users/sign_in.json", parameters: parameters)
+        Alamofire.request(.POST, "http://192.168.1.116:3000/users/sign_in.json", parameters: parameters)
             .responseJSON { response in
                 if response.result.isSuccess {
                     let json = response.result.value

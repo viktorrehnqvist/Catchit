@@ -17,9 +17,10 @@ class PostService {
     
     var delegate: PostServiceDelegate?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
+    let url = "http://192.168.1.116:3000/"
     
     func getPosts() {
-        Alamofire.request(.GET, "http://localhost:3000/posts.json/", headers: headers)
+        Alamofire.request(.GET, url + "posts.json/", headers: headers)
             .responseJSON { response in
                 print(self.headers)
                 if let JSON = response.result.value {
@@ -34,7 +35,7 @@ class PostService {
     }
     
     func getPost(postId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/posts/\(postId).json/", headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/posts/\(postId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -47,7 +48,7 @@ class PostService {
     }
     
     func fetchMorePosts(lastPostId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/posts.json/", parameters: ["id": lastPostId], headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/posts.json/", parameters: ["id": lastPostId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -60,7 +61,7 @@ class PostService {
     }
     
     func getExplorePosts() {
-        Alamofire.request(.GET, "http://localhost:3000/explore.json/", headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/explore.json/", headers: headers)
             .responseJSON { response in
                 print(response)
                 if let JSON = response.result.value {
@@ -75,7 +76,7 @@ class PostService {
     }
     
     func fetchMoreExplorePosts(lastPostId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/explore.json/", parameters: ["id": lastPostId], headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/explore.json/", parameters: ["id": lastPostId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {

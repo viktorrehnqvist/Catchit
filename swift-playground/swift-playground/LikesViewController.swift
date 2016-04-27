@@ -29,23 +29,23 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     }
     
     func setPostData(json: AnyObject) {
-        userNames = json["like_infos"]!![0] as! [String]
-        userAvatarUrls = json["like_infos"]!![1] as! [String]
-        userIds = json["like_infos"]!![2] as! [Int]
+        userNames = (json["like_infos"] as! NSArray)[0] as! [String]
+        userAvatarUrls = (json["like_infos"] as! NSArray)[1] as! [String]
+        userIds = (json["like_infos"] as! NSArray)[2] as! [Int]
         loadAvatars()
     }
     
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
-        userIds = json["completer_infos"]!![0] as! [Int]
-        userNames = json["completer_infos"]!![1] as! [String]
-        userAvatarUrls = json["completer_infos"]!![2] as! [String]
+        userIds = (json["completer_infos"] as! NSArray)[0] as! [Int]
+        userNames = (json["completer_infos"] as! NSArray)[1] as! [String]
+        userAvatarUrls = (json["completer_infos"] as! NSArray)[2] as! [String]
         loadAvatars()
     }
     
     func setUserData(json: AnyObject) {
-        userNames = json["follow_infos"]!![0] as! [String]
-        userAvatarUrls = json["follow_infos"]!![1] as! [String]
-        userIds = json["follow_infos"]!![2] as! [Int]
+        userNames = (json["follow_infos"] as! NSArray)[0] as! [String]
+        userAvatarUrls = (json["follow_infos"] as! NSArray)[1] as! [String]
+        userIds = (json["follow_infos"] as! NSArray)[2] as! [Int]
         loadAvatars()
     }
     
@@ -117,7 +117,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         if self.userAvatarUrls.count > 0 {
             for avatarUrl in self.userAvatarUrls {
                 print(avatarUrl)
-                let url = NSURL(string: "http://localhost:3000" + avatarUrl)
+                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     userAvatars.append(UIImage(data: data!)!)

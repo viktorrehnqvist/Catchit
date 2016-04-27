@@ -16,11 +16,11 @@ protocol UserServiceDelegate {
 class UserService {
     
     var delegate: UserServiceDelegate?
-    let userId = NSUserDefaults.standardUserDefaults().objectForKey("id") as! Int
+    let userId = NSUserDefaults.standardUserDefaults().objectForKey("id") as? Int
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
     
     func getCurrentUserData() {
-        Alamofire.request(.GET, "http://localhost:3000/users/\(userId).json/", headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/users/\(userId!).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {

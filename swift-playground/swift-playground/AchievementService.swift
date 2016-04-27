@@ -16,11 +16,11 @@ protocol AchievementServiceDelegate {
 class AchievementService {
     
     var delegate: AchievementServiceDelegate?
-    let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as! [String : String]
-    let userId = NSUserDefaults.standardUserDefaults().objectForKey("id") as! Int
+    let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
+    let userId = NSUserDefaults.standardUserDefaults().objectForKey("id") as? Int
     
     func getAchievements() {
-        Alamofire.request(.GET, "http://localhost:3000/achievements.json/", headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements.json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -34,7 +34,7 @@ class AchievementService {
     }
     
     func getAchievement(achievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/", headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements/\(achievementId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -48,7 +48,7 @@ class AchievementService {
     }
     
     func getBucketlist() {
-        Alamofire.request(.GET, "http://localhost:3000/users/\(userId).json/", headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/users/\(userId!).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -69,7 +69,7 @@ class AchievementService {
     }
     
     func fetchMoreAchievements(lastAchievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/achievements.json/", parameters: ["achievements": lastAchievementId], headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements.json/", parameters: ["achievements": lastAchievementId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -82,7 +82,7 @@ class AchievementService {
     }
     
     func fetchMorePostsForAchievement(lastPostId: Int, achievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/posts.json", parameters: ["id": lastPostId, "achievement": achievementId], headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/posts.json", parameters: ["id": lastPostId, "achievement": achievementId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -96,7 +96,7 @@ class AchievementService {
     
     
     func getCompleters(achievementId: Int) {
-        Alamofire.request(.GET, "http://localhost:3000/achievements/\(achievementId).json/", headers: headers)
+        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements/\(achievementId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {

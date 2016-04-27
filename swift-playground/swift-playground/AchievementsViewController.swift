@@ -44,8 +44,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
                     for postIndex in 0...(postImagesToLoad - 1) {
-                        if let completerImageUrl = json[i]["latest_posts"]?![postIndex] as? String {
-                            let url = NSURL(string: "http://localhost:3000" + completerImageUrl)!
+                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[postIndex] as? String {
+                            let url = NSURL(string: "http://192.168.1.116:3000" + completerImageUrl)!
                             let data = NSData(contentsOfURL:url)
                             if data != nil {
                                 switch postIndex {

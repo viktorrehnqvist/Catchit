@@ -11,21 +11,34 @@ import Foundation
 import Alamofire
 
 @available(iOS 9.0, *)
-class NoticeViewController:  UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class NoticeViewController:  UIViewController, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    let postService = PostService()
+    let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    
-    func setPostData(json: AnyObject) {
-        print(json)
-    }
-    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var noticeMessages: [String] = []
+    var noticeUserIds: [Int] = []
+    var noticeUserAvatarUrls: [String] = []
+    var noticeUserAvatars: [UIImage] = []
+    var noticeTypes: [String] = []
+    var noticeLinkIds: [Int] = []
+    var noticeSeen: [AnyObject] = []
+    
+    func setUserData(json: AnyObject) {
+        noticeUserIds = (json["notice_infos"] as! NSArray)[0] as! [Int]
+        noticeUserAvatarUrls = (json["notice_infos"] as! NSArray)[1] as! [String]
+        noticeMessages = (json["notice_infos"] as! NSArray)[2] as! [String]
+        noticeTypes = (json["notice_infos"] as! NSArray)[3] as! [String]
+        noticeLinkIds = (json["notice_infos"] as! NSArray)[4] as! [Int]
+        noticeSeen = (json["notice_infos"] as! NSArray)[5] as! [AnyObject]
+        loadAvatars()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postService.getPosts()
-        self.postService.delegate = self
+        userService.getCurrentUserData()
+        self.userService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -39,22 +52,22 @@ class NoticeViewController:  UIViewController, PostServiceDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return self.noticeMessages.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noticeCell", forIndexPath: indexPath) as! NoticeCollectionViewCell
         
-        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
+        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showNoticeOrigin(_:)))
         
         cell.noticeLabel.addGestureRecognizer(achievementTapGesture)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-        cell.noticeImage.image = UIImage(named: "avatar")
-        cell.noticeLabel.text! = "Mikael har kommenterat din post"
+        cell.noticeImage.image = noticeUserAvatars[indexPath.row]
+        cell.noticeLabel.text! = noticeMessages[indexPath.row]
         
         return cell
         
@@ -68,9 +81,23 @@ class NoticeViewController:  UIViewController, PostServiceDelegate, UICollection
             return size
     }
     
-    @IBAction func showAchievement(sender: AnyObject?) {
-        self.performSegueWithIdentifier("showAchievementFromNotice", sender: sender)
+    @IBAction func showNoticeOrigin(sender: AnyObject?) {
+        // Check if sender is of type achievement or like and send to correct origin.
+        self.performSegueWithIdentifier("showFromNotice", sender: sender)
     }
     
+    func loadAvatars() {
+        if self.noticeUserAvatarUrls.count > 0 {
+            for avatarUrl in self.noticeUserAvatarUrls {
+                print(avatarUrl)
+                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
+                let data = NSData(contentsOfURL:url!)
+                if data != nil {
+                    noticeUserAvatars.append(UIImage(data: data!)!)
+                }
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
+    }
     
 }

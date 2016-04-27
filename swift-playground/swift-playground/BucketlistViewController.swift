@@ -33,7 +33,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        achievementService.getBucketlist()
+        self.achievementService.getBucketlist()
         self.achievementService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
