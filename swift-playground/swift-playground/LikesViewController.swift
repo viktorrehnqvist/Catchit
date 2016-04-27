@@ -8,12 +8,13 @@
 
 import UIKit
 
-class LikesViewController: UIViewController, PostServiceDelegate, AchievementServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class LikesViewController: UIViewController, PostServiceDelegate, AchievementServiceDelegate, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
     let achievementService = AchievementService()
+    let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    var typeIsPost: Bool!
+    var typeIs: String!
     var postId: Int?
     var achievementId: Int?
     var userNames: [String] = []
@@ -41,16 +42,30 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         loadAvatars()
     }
     
+    func setUserData(json: AnyObject) {
+        userNames = json["follow_infos"]!![0] as! [String]
+        userAvatarUrls = json["follow_infos"]!![1] as! [String]
+        userIds = json["follow_infos"]!![2] as! [Int]
+        loadAvatars()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if typeIsPost == true {
+        
+        switch typeIs! {
+        case "post":
             self.postService.delegate = self
             postService.getPost(postId!)
-        } else {
+        case "achievementCompleters":
             self.achievementService.delegate = self
             achievementService.getCompleters(achievementId!)
+        case "achievementShare":
+            self.userService.delegate = self
+            userService.getCurrentUserData()
+        default:
+            print("Switch case error")
         }
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,7 +115,6 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     
     func loadAvatars() {
         if self.userAvatarUrls.count > 0 {
-            print("avatars loaded")
             for avatarUrl in self.userAvatarUrls {
                 print(avatarUrl)
                 let url = NSURL(string: "http://localhost:3000" + avatarUrl)

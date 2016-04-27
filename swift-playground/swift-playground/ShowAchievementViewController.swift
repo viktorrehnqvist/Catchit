@@ -33,6 +33,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
     var morePostsToLoad: Bool = true
+    var segueShouldShowCompleters: Bool = false
     
     
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
@@ -182,6 +183,16 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.performSegueWithIdentifier("showCommentsFromShowAchievement", sender: sender)
     }
     
+    @IBAction func showCompleters(sender: AnyObject?) {
+        self.segueShouldShowCompleters = true
+        self.performSegueWithIdentifier("showLikesFromShowAchievement", sender: sender)
+    }
+    
+    @IBAction func shareAchievement(sender: AnyObject?) {
+        self.segueShouldShowCompleters = false
+        self.performSegueWithIdentifier("showLikesFromShowAchievement", sender: sender)
+    }
+    
     @IBAction func showLikes(sender: AnyObject?) {
         self.performSegueWithIdentifier("showLikesFromShowAchievement", sender: sender)
     }
@@ -261,7 +272,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                 cellIndex = thisCell.commentButton.tag
                 if segue.identifier == "showLikesFromShowAchievement" {
                     let vc = segue.destinationViewController as! LikesViewController
-                    vc.typeIsPost = true
+                    vc.typeIs = "post"
                     vc.postId = postIds[cellIndex]
                 }
             } else {
@@ -270,8 +281,12 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                 cellIndex = thisCell.tag
                 if segue.identifier == "showLikesFromShowAchievement" {
                     let vc = segue.destinationViewController as! LikesViewController
-                    vc.typeIsPost = false
                     vc.achievementId = cellIndex
+                    if segueShouldShowCompleters {
+                        vc.typeIs = "achievementCompleters"
+                    } else {
+                        vc.typeIs = "achievementShare"
+                    }
                 }
             }
         }

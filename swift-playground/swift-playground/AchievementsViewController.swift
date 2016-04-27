@@ -29,6 +29,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementSecondCompleterImages: [UIImage] = []
     var achievementThirdCompleterImages: [UIImage] = []
     var moreAchievementsToLoad: Bool = true
+    var segueShouldShowCompleters: Bool = false
 
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
         if json.count > 0 {
@@ -37,9 +38,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementIds.append((json[i]?["id"]) as! Int)
                 achievementScores.append(json[i]?["score"] as! Int)
                 achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
-                //achievementCompleterUserId.append((json[i]?["completer_user_infos"]!![0] as? ([Int]))!)
-                //achievementCompleterUserNames.append((json[i]?["completer_user_infos"]!![1] as? ([String]))!)
-                //achievementCompleterUserAvatars.append((json[i]?["completer_user_infos"]!![2] as? ([String]))!)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
@@ -153,7 +151,11 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         if segue.identifier == "showLikesViewFromAchievement" {
             let vc = segue.destinationViewController as! LikesViewController
             vc.achievementId = achievementIds[cellIndex]
-            vc.typeIsPost = false
+            if segueShouldShowCompleters {
+                vc.typeIs = "achievementCompleters"
+            } else {
+                vc.typeIs = "achievementShare"
+            }
         }
         
         if segue.identifier == "showAchievementFromAchievements" {
@@ -164,10 +166,12 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     @IBAction func showCompleters(sender: AnyObject?) {
+        self.segueShouldShowCompleters = true
         self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
     }
     
     @IBAction func shareAchievement(sender: AnyObject?) {
+        self.segueShouldShowCompleters = false
         self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
     }
     

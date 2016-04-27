@@ -157,7 +157,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         
         if segue.identifier == "showLikesFromHome" {
             let vc = segue.destinationViewController as! LikesViewController
-            vc.typeIsPost = true
+            vc.typeIs = "post"
             vc.postId = postIds[cellIndex]
         }
         

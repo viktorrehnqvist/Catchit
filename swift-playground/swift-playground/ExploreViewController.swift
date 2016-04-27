@@ -155,7 +155,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         
         if segue.identifier == "showLikesFromExplore" {
             let vc = segue.destinationViewController as! LikesViewController
-            vc.typeIsPost = true
+            vc.typeIs = "post"
             vc.postId = postIds[cellIndex]
         }
     }
