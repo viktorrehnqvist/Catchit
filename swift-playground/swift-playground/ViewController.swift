@@ -14,7 +14,6 @@ import Alamofire
 class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
-    let authService = AuthenticationService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -68,10 +67,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.userDefaults.setObject(["X-User-Email": "shorts@live.se", "X-User-Token": "Qq5F4y8bLsFPW2ZATzrQ"], forKey: "headers")
-        self.userDefaults.setObject("shorts@live.se", forKey: "email")
-        self.userDefaults.setObject("Qq5F4y8bLsFPW2ZATzrQ", forKey: "token")
-        self.userDefaults.setInteger(43, forKey: "id")
+        print(NSUserDefaults.standardUserDefaults().objectForKey("headers"))
         postService.getPosts()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.

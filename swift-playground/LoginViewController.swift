@@ -8,10 +8,24 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, AuthenticationServiceDelegate {
+    
+    let authService = AuthenticationService()
+    
+    @IBOutlet weak var emailLabel: UITextField!
+    @IBOutlet weak var passwordLabel: UITextField!
+    
+    func setAuthenticationData(json: AnyObject) {
+        if json as! Bool == true {
+            self.performSegueWithIdentifier("LoginFromLoginView", sender: nil)
+        } else {
+            print("Failed login")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.authService.delegate = self
         print("Login view")
         // Do any additional setup after loading the view.
     }
@@ -21,6 +35,9 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func loginUser(sender: AnyObject?) {
+        self.authService.loginUser(self.emailLabel.text!, password: self.passwordLabel.text!)
+    }
 
     /*
     // MARK: - Navigation

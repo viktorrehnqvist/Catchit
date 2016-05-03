@@ -291,7 +291,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Mov-A6-gvQ" kind="showDetail" id="jz4-PZ-Pla"/>
+                                    <action selector="loginUser:" destination="oaG-zJ-hso" eventType="touchUpInside" id="k6P-Y0-T3g"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Is-LS-LCn">
@@ -328,6 +328,11 @@
                             <constraint firstItem="6n3-IA-ezJ" firstAttribute="trailing" secondItem="GMD-4u-HdC" secondAttribute="trailing" id="vAk-Cj-eFZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailLabel" destination="75N-yA-zm7" id="b0E-pc-8Kl"/>
+                        <outlet property="passwordLabel" destination="6n3-IA-ezJ" id="NyT-XI-Po7"/>
+                        <segue destination="Mov-A6-gvQ" kind="show" identifier="LoginFromLoginView" id="2pF-mY-u1R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9oJ-5q-UQO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -394,7 +399,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Mov-A6-gvQ" kind="showDetail" id="a8o-NG-Iuc"/>
+                                    <action selector="registerUser:" destination="pTY-6l-dlQ" eventType="touchUpInside" id="6wi-o1-1Dk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfB-4d-UPe">
@@ -434,10 +439,16 @@
                             <constraint firstItem="Zv6-i1-GME" firstAttribute="top" secondItem="c5t-EF-tts" secondAttribute="bottom" constant="8" symbolic="YES" id="wSC-yl-UGx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailLabel" destination="Zv6-i1-GME" id="tY7-Za-q1w"/>
+                        <outlet property="passwordLabel" destination="rZf-S1-QCm" id="CnR-3f-cgL"/>
+                        <outlet property="usernameLabel" destination="NMa-A6-wes" id="XrS-Mf-jJC"/>
+                        <segue destination="Mov-A6-gvQ" kind="show" identifier="LoginFromRegistrationView" id="JiC-qu-bKm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1GI-8T-ikT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="-1004"/>
+            <point key="canvasLocation" x="904" y="-1004"/>
         </scene>
         <!--Explore View Controller-->
         <scene sceneID="ZaU-jv-hU5">
@@ -2030,7 +2041,7 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jz4-PZ-Pla"/>
+        <segue reference="JiC-qu-bKm"/>
         <segue reference="dwR-E4-82o"/>
         <segue reference="N5Z-XD-MLh"/>
         <segue reference="KBR-5L-ez0"/>

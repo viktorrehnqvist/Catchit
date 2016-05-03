@@ -18,16 +18,23 @@ class AuthenticationService {
     var delegate: AuthenticationServiceDelegate?
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    func registerUser(email: String, password: String) {
+    func registerUser(email: String, username: String, password: String) {
         let parameters = [
             "user": [
                 "email": email,
-                "password": password,
+                "username": username,
+                "password": password
             ]
         ]
         Alamofire.request(.POST, "http://192.168.1.116:3000/users.json", parameters: parameters)
             .responseJSON { response in
                 if response.result.isSuccess {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAuthenticationData(true)
+                        })
+                    }
+
                     let json = response.result.value
                     // True if registration is complete. This should be changed for better readability.
                     if json!.count > 1 {
@@ -41,8 +48,18 @@ class AuthenticationService {
                         self.userDefaults.setObject(headers, forKey: "headers")
                     } else {
                         print("Could not create user")
+                        if self.delegate != nil {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.delegate?.setAuthenticationData(false)
+                            })
+                        }
                     }
                 } else {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAuthenticationData(false)
+                        })
+                    }
                     print("Could not connect to server")
                 }
         }			
@@ -52,7 +69,7 @@ class AuthenticationService {
         let parameters = [
             "user": [
                 "email": email,
-                "password": password,
+                "password": password
             ]
         ]
         Alamofire.request(.POST, "http://192.168.1.116:3000/users/sign_in.json", parameters: parameters)
@@ -60,6 +77,11 @@ class AuthenticationService {
                 if response.result.isSuccess {
                     let json = response.result.value
                     // True if email and password is corrent. This should be changed for better readability.
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAuthenticationData(true)
+                        })
+                    }
                     if json!.count > 1 {
                         let userEmail = json?["email"] as! String
                         let userToken = json?["authentication_token"] as! String
@@ -71,9 +93,19 @@ class AuthenticationService {
                         self.userDefaults.setObject(headers, forKey: "headers")
                     } else {
                         print("Wrong email or password")
+                        if self.delegate != nil {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.delegate?.setAuthenticationData(false)
+                            })
+                        }
                     }
                 } else {
                     print("Could not connect to server")
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setAuthenticationData(false)
+                        })
+                    }
                 }
         }
     }

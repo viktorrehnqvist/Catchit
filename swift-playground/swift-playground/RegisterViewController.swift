@@ -8,11 +8,25 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
 
+    let authService = AuthenticationService()
+    
+    @IBOutlet weak var emailLabel: UITextField!
+    @IBOutlet weak var usernameLabel: UITextField!
+    @IBOutlet weak var passwordLabel: UITextField!
+    
+    func setAuthenticationData(json: AnyObject) {
+        if json as! Bool == true {
+            self.performSegueWithIdentifier("LoginFromRegistrationView", sender: nil)
+        } else {
+            print("Failed login")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Register view")
+        self.authService.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -21,6 +35,9 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func registerUser(sender: AnyObject?) {
+        self.authService.registerUser(self.emailLabel.text!, username: self.usernameLabel.text!, password: self.passwordLabel.text!)
+    }
 
     /*
     // MARK: - Navigation
