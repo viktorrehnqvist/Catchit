@@ -10,16 +10,56 @@ import UIKit
 
 class ProfileViewController: UIViewController, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
-
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    var userId: Int!
+    var userId: Int = 43
+    var username: String?
+    var userAvatar: UIImage?
+    var userAvatarUrl: String?
+    var userFollowsCount: Int?
+    var userFollowersCount: Int?
+    var userScore: Int?
+    var userAchievementCount: Int?
+    var follow: Bool?
+    var followIds: [Int] = []
+    var followerIds: [Int] = []
+    var achievementDescriptions: [String] = []
+    var achievementIds: [Int] = []
+    var achievementScores: [Int] = []
+    var postIds: [Int] = []
+    var postImageUrls: [String] = []
+    var postImages: [UIImage] = []
+    var postVideoUrls: [String] = []
+    var postCommentCounts: [Int] = []
+    var postLikeCounts: [Int] = []
+    var postLike: [Bool] = []
+    var morePostsToLoad: Bool = true
     
     func setUserData(json: AnyObject) {
-        print(json)
+        fetchDataFromUrlToUserAvatar((json["avatar"]!!["avatar"]!!["url"] as! String))
+        if (json["posts"] as! NSArray).count > 0 {
+            for i in 0...((json["posts"] as! NSArray).count - 1) {
+                print((json["posts"] as! NSArray)[i])
+                //achievementDescriptions.append(((json["posts"] as! NSArray)[i]["achievement_desc"])! as! String)
+                achievementIds.append((json["posts"] as! NSArray)[i]["achievement_id"] as! Int)
+                //achievementScores.append((json["posts"] as! NSArray)[i]["achievement_score"] as! Int)
+                postIds.append((json["posts"] as! NSArray)[i]["id"] as! Int)
+                postImageUrls.append((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
+                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                postCommentCounts.append((json["posts"] as! NSArray)[i]["comments_count"] as! Int)
+                postLikeCounts.append((json["posts"] as! NSArray)[i]["likes_count"] as! Int)
+                postLike.append((json["posts"] as! NSArray)[i]["like"] as! Bool)
+                
+                fetchDataFromUrlToPostImages((json["posts"] as! NSArray)[i]["image_url"] as! String)
+            }
+        } else {
+            morePostsToLoad = false
+        }
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         userService.getUserData(userId)
@@ -37,7 +77,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.appleProducts.count
+        return self.postIds.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -51,8 +91,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
-        cell.imageView?.image = self.imageArray[indexPath.row]
-        cell.label?.text = self.appleProducts[indexPath.row]
+        cell.imageView?.image = self.postImages[indexPath.row]
+        cell.label?.text = self.achievementDescriptions[indexPath.row]
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.layer.shouldRasterize = true
@@ -62,14 +102,14 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         
     }
     
-    func collectionView(collectionView: UICollectionView,
+   func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let image = self.imageArray[indexPath.row]!
-            let heightFactor = image.size.height / image.size.width
-            let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
+        let image = self.postImages[indexPath.row]
+        let heightFactor = image.size.height / image.size.width
+        let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
             
-            return size
+        return size
     }
     
     func collectionView(collectionView: UICollectionView,
@@ -106,14 +146,28 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
         if segue.identifier == "showCommentsFromProfile" {
-            let vc = segue.destinationViewController as! NewViewController
+            //let vc = segue.destinationViewController as! NewViewController
             // Cant send tag from tap gesture, get comments from something else and delete next if
             if (sender!.tag != nil) {
-                vc.comments = self.commentsArray[sender!.tag]
+                //vc.comments = self.commentsArray[sender!.tag]
             }
         }
         if segue.identifier == "showLikesFromProfile" {
         }
+    }
+    
+    func fetchDataFromUrlToPostImages(fetchUrl: String) {
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let data = NSData(contentsOfURL:url)
+        let image = UIImage(data: data!)
+        self.postImages.append(image!)
+    }
+    
+    func fetchDataFromUrlToUserAvatar(fetchUrl: String) {
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let data = NSData(contentsOfURL:url)
+        let image = UIImage(data: data!)
+        self.userAvatar = image
     }
     
 }

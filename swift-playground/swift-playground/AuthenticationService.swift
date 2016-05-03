@@ -45,7 +45,7 @@ class AuthenticationService {
                 } else {
                     print("Could not connect to server")
                 }
-        }
+        }			
     }
     
     func loginUser(email: String, password: String) {
