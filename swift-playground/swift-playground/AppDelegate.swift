@@ -13,9 +13,18 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers")
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        if headers != nil {
+            print("test")
+            let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("InitViewController") as UIViewController
+            rootVC.view.frame = UIScreen.mainScreen().bounds
+            UIView.transitionWithView(self.window!, duration: 0.5, options: .TransitionCrossDissolve, animations: {
+                self.window!.rootViewController = rootVC
+                }, completion: nil)
+        }
         return true
     }
 
@@ -105,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
 
 }
 

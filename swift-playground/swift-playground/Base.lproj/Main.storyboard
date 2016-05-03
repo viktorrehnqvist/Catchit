@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--ViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="swift_playground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="swift_playground" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -208,7 +208,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="hGf-hV-2oi">
             <objects>
-                <tabBarController id="Mov-A6-gvQ" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="InitViewController" id="Mov-A6-gvQ" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="HXh-VS-Ci0">
                         <barButtonItem key="leftBarButtonItem" style="done" id="v3b-aX-AQN">
                             <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sök..." textAlignment="natural" minimumFontSize="17" id="KPt-ue-BEM">
@@ -2031,9 +2031,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jz4-PZ-Pla"/>
-        <segue reference="JTS-hb-4sY"/>
-        <segue reference="zhv-hg-8pY"/>
-        <segue reference="4pd-pR-4gV"/>
-        <segue reference="xHK-9p-MYi"/>
+        <segue reference="dwR-E4-82o"/>
+        <segue reference="N5Z-XD-MLh"/>
+        <segue reference="KBR-5L-ez0"/>
+        <segue reference="UnV-OJ-WQS"/>
     </inferredMetricsTieBreakers>
 </document>
