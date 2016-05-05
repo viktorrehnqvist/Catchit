@@ -43,9 +43,9 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         if (json["posts"] as! NSArray).count > 0 {
             for i in 0...((json["posts"] as! NSArray).count - 1) {
                 print((json["posts"] as! NSArray)[i])
-                //achievementDescriptions.append(((json["posts"] as! NSArray)[i]["achievement_desc"])! as! String)
+                achievementDescriptions.append((json["achievements"] as! NSArray)[i]["description"] as! String)
                 achievementIds.append((json["posts"] as! NSArray)[i]["achievement_id"] as! Int)
-                //achievementScores.append((json["posts"] as! NSArray)[i]["achievement_score"] as! Int)
+                achievementScores.append((json["achievements"] as! NSArray)[i]["score"] as! Int)
                 postIds.append((json["posts"] as! NSArray)[i]["id"] as! Int)
                 postImageUrls.append((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
                 // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)

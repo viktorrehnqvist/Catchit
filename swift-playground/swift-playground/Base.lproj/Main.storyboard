@@ -1297,6 +1297,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="jjL-YQ-7zg" id="b6q-9y-x7a"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromProfile" id="LZO-0g-si8"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromProfile" id="6oL-8J-eNe"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromProfile" id="HsH-hq-pfh"/>
@@ -2042,9 +2043,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="dwR-E4-82o"/>
         <segue reference="N5Z-XD-MLh"/>
-        <segue reference="KBR-5L-ez0"/>
-        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="LZO-0g-si8"/>
+        <segue reference="6oL-8J-eNe"/>
+        <segue reference="HsH-hq-pfh"/>
     </inferredMetricsTieBreakers>
 </document>
