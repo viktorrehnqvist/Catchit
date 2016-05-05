@@ -38,7 +38,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var morePostsToLoad: Bool = true
     
     func setUserData(json: AnyObject) {
-        fetchDataFromUrlToUserAvatar((json["avatar"]!!["avatar"]!!["url"] as! String))
+        print(json)
+        fetchDataFromUrlToUserAvatar((json["avatar_url"] as! String))
         if (json["posts"] as! NSArray).count > 0 {
             for i in 0...((json["posts"] as! NSArray).count - 1) {
                 print((json["posts"] as! NSArray)[i])
@@ -50,9 +51,10 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
                 // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
                 postCommentCounts.append((json["posts"] as! NSArray)[i]["comments_count"] as! Int)
                 postLikeCounts.append((json["posts"] as! NSArray)[i]["likes_count"] as! Int)
-                postLike.append((json["posts"] as! NSArray)[i]["like"] as! Bool)
+                // Check if current user likes the post
+                //postLike.append((json["posts"] as! NSArray)[i]["like"] as! Bool)
                 
-                fetchDataFromUrlToPostImages((json["posts"] as! NSArray)[i]["image_url"] as! String)
+                fetchDataFromUrlToPostImages((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
             }
         } else {
             morePostsToLoad = false

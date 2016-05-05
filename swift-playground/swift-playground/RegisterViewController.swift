@@ -17,7 +17,9 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     @IBOutlet weak var passwordLabel: UITextField!
     
     func setAuthenticationData(json: AnyObject) {
+        print(json)
         if json as! Bool == true {
+            print("Registration complete")
             self.performSegueWithIdentifier("LoginFromRegistrationView", sender: nil)
         } else {
             print("Failed login")
