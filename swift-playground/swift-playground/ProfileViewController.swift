@@ -12,9 +12,11 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
+    let postService = PostService()
     @IBOutlet weak var collectionView: UICollectionView!
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    var userId: Int = 43
+    var userId: Int?
     var username: String?
     var userAvatar: UIImage?
     var userAvatarUrl: String?
@@ -38,6 +40,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var morePostsToLoad: Bool = true
     
     func setUserData(json: AnyObject, follow: Bool) {
+        print(json)
         username = json["name"] as? String
         userAchievementCount = (json["achievements"] as! NSArray).count
         userScore = json["user_score"] as! Int
@@ -68,7 +71,13 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        userService.getUserData(userId)
+        if (userId != nil) {
+            userService.getUserData(userId!)
+        } else {
+            // If no id is set, fetch current user
+            userId = userDefaults.objectForKey("id")! as? Int
+            userService.getCurrentUserData()
+        }
         self.userService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -88,6 +97,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        loadMore(indexPath.row)
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! CollectionViewCell
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
@@ -95,9 +106,14 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
         cell.tag = indexPath.row
+        cell.profileImage.image = userAvatar
+        cell.profileLabel.text = username
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
+        cell.commentCount.text! = String(postCommentCounts[indexPath.row]) + " kommentarer"
+        cell.likeCount.text! = String(postLikeCounts[indexPath.row]) + " gilla-markeringar"
+        cell.scoreLabel.text! = String(achievementScores[indexPath.row]) + "p"
         cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         cell.commentButton?.tag = indexPath.row
@@ -106,6 +122,11 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
         return cell
+        //if postLike[indexPath.row] {
+          //  cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
+        //} else {
+          //  cell.likeButton?.setTitle("Gilla", forState: .Normal)
+        //}
         
     }
     
@@ -129,8 +150,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         headerView.score.text = String(userScore) + "P"
         headerView.followCount.text = String(userFollowsCount) + " Följer"
         headerView.followersCount.text = String(userFollowersCount) + " Följare"
-        headerView.followCount.tag = userId
-        headerView.followersCount.tag = userId
+        headerView.followCount.tag = userId!
+        headerView.followersCount.tag = userId!
         headerView.userAvatar.image = userAvatar
         headerView.username.text = username
         return headerView
@@ -224,5 +245,12 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let image = UIImage(data: data!)
         self.userAvatar = image
     }
+    
+    func loadMore(cellIndex: Int) {
+        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            postService.fetchMorePosts(postIds.last!)
+        }
+    }
+
     
 }

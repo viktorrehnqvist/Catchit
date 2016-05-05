@@ -180,6 +180,11 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
             vc.achievementId = achievementIds[cellIndex]
         }
         
+        if segue.identifier == "showProfileFromHome" {
+            let vc = segue.destinationViewController as! ProfileViewController
+            vc.userId = postUserIds[cellIndex]
+        }
+        
     }
     
     
