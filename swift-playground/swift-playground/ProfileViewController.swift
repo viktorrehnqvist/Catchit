@@ -18,10 +18,10 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var username: String?
     var userAvatar: UIImage?
     var userAvatarUrl: String?
-    var userFollowsCount: Int?
-    var userFollowersCount: Int?
-    var userScore: Int?
-    var userAchievementCount: Int?
+    var userFollowsCount: Int = 0
+    var userFollowersCount: Int = 0
+    var userScore: Int = 0
+    var userAchievementCount: Int = 0
     var follow: Bool?
     var followIds: [Int] = []
     var followerIds: [Int] = []
@@ -38,7 +38,11 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var morePostsToLoad: Bool = true
     
     func setUserData(json: AnyObject) {
-        print(json)
+        username = json["name"] as? String
+        userAchievementCount = (json["achievements"] as! NSArray).count
+        userScore = json["user_score"] as! Int
+        userFollowsCount = (json["follow_infos"] as! NSArray)[0].count
+        userFollowersCount = (json["follower_infos"] as! NSArray)[0].count
         fetchDataFromUrlToUserAvatar((json["avatar_url"] as! String))
         if (json["posts"] as! NSArray).count > 0 {
             for i in 0...((json["posts"] as! NSArray).count - 1) {
@@ -53,7 +57,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
                 postLikeCounts.append((json["posts"] as! NSArray)[i]["likes_count"] as! Int)
                 // Check if current user likes the post
                 //postLike.append((json["posts"] as! NSArray)[i]["like"] as! Bool)
-                
+                // Check if current user follows the displayed user
                 fetchDataFromUrlToPostImages((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
             }
         } else {
@@ -119,7 +123,13 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                       withReuseIdentifier: "profileTopBar",
-                                                                      forIndexPath: indexPath)
+                                                                      forIndexPath: indexPath) as! ProfileCollectionReusableView
+        headerView.achievementCount.text = String(userAchievementCount) + "st"
+        headerView.score.text = String(userScore) + "P"
+        headerView.followCount.text = String(userFollowsCount) + " Följer"
+        headerView.followersCount.text = String(userFollowersCount) + " Följare"
+        headerView.userAvatar.image = userAvatar
+        headerView.username.text = username
         return headerView
     }
     
