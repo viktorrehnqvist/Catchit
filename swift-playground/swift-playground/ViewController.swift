@@ -111,7 +111,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
-        cell.commentButton?.tag = postIds[indexPath.row]
+        cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         if postLike[indexPath.row] {
             cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)

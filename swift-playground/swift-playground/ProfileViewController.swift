@@ -94,6 +94,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
+        cell.tag = indexPath.row
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
@@ -157,17 +158,31 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        let cellIndex: Int
+        if (sender!.tag != nil) {
+            cellIndex = sender!.tag
+        } else {
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            let thisCell: CollectionViewCell = main as! CollectionViewCell
+            cellIndex = thisCell.tag
+        }
         if segue.identifier == "showCommentsFromProfile" {
-            //let vc = segue.destinationViewController as! NewViewController
-            // Cant send tag from tap gesture, get comments from something else and delete next if
-            if (sender!.tag != nil) {
-                //vc.comments = self.commentsArray[sender!.tag]
-            }
+            let vc = segue.destinationViewController as! NewViewController
+            vc.postId = postIds[cellIndex]
         }
         if segue.identifier == "showLikesFromProfile" {
+            let vc = segue.destinationViewController as! LikesViewController
+            vc.typeIs = "post"
+            vc.postId = postIds[cellIndex]
+        }
+        if segue.identifier == "showAchievementFromProfile" {
+            let vc = segue.destinationViewController as! ShowAchievementViewController
+            vc.achievementId = achievementIds[cellIndex]
         }
     }
-    
+
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
