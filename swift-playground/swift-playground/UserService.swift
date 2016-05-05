@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol UserServiceDelegate {
-    func setUserData(json: AnyObject)
+    func setUserData(json: AnyObject, follow: Bool)
 }
 
 class UserService {
@@ -25,7 +25,7 @@ class UserService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setUserData(JSON)
+                            self.delegate?.setUserData(JSON, follow: true)
                         })
                     }
                 }
@@ -39,7 +39,22 @@ class UserService {
                 if let JSON = response.result.value {
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.delegate?.setUserData(JSON)
+                            self.delegate?.setUserData(JSON, follow: true)
+                        })
+                    }
+                }
+                
+        }
+
+    }
+    
+    func getFollowData(userId: Int, follow: Bool) {
+        Alamofire.request(.GET, "http://192.168.1.116:3000/users/\(userId).json/", headers: headers)
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setUserData(JSON, follow: follow)
                         })
                     }
                 }

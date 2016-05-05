@@ -15,6 +15,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     var typeIs: String!
+    var userId: Int?
     var postId: Int?
     var achievementId: Int?
     var userNames: [String] = []
@@ -42,10 +43,16 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         loadAvatars()
     }
     
-    func setUserData(json: AnyObject) {
-        userNames = (json["follow_infos"] as! NSArray)[0] as! [String]
-        userAvatarUrls = (json["follow_infos"] as! NSArray)[1] as! [String]
-        userIds = (json["follow_infos"] as! NSArray)[2] as! [Int]
+    func setUserData(json: AnyObject, follow: Bool) {
+        if follow {
+            userNames = (json["follow_infos"] as! NSArray)[0] as! [String]
+            userAvatarUrls = (json["follow_infos"] as! NSArray)[1] as! [String]
+            userIds = (json["follow_infos"] as! NSArray)[2] as! [Int]
+        } else {
+            userNames = (json["follower_infos"] as! NSArray)[0] as! [String]
+            userAvatarUrls = (json["follower_infos"] as! NSArray)[1] as! [String]
+            userIds = (json["follower_infos"] as! NSArray)[2] as! [Int]
+        }
         loadAvatars()
     }
     
@@ -62,6 +69,12 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         case "achievementShare":
             self.userService.delegate = self
             userService.getCurrentUserData()
+        case "follows":
+            self.userService.delegate = self
+            userService.getFollowData(userId!, follow: true)
+        case "followers":
+            self.userService.delegate = self
+            userService.getFollowData(userId!, follow: false)
         default:
             print("Switch case error")
         }

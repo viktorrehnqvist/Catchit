@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     
-    func setUserData(json: AnyObject) {
+    func setUserData(json: AnyObject, follow: Bool) {
         username = json["name"] as? String
         userAchievementCount = (json["achievements"] as! NSArray).count
         userScore = json["user_score"] as! Int
@@ -129,6 +129,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         headerView.score.text = String(userScore) + "P"
         headerView.followCount.text = String(userFollowsCount) + " Följer"
         headerView.followersCount.text = String(userFollowersCount) + " Följare"
+        headerView.followCount.tag = userId
+        headerView.followersCount.tag = userId
         headerView.userAvatar.image = userAvatar
         headerView.username.text = username
         return headerView
@@ -146,6 +148,14 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         self.performSegueWithIdentifier("showAchievementFromProfile", sender: sender)
     }
     
+    @IBAction func showFollowsFromProfile(sender: AnyObject) {
+        self.performSegueWithIdentifier("showFollowsFromProfile", sender: sender)
+    }
+    
+    @IBAction func showFollowersFromProfile(sender: AnyObject) {
+        self.performSegueWithIdentifier("showFollowersFromProfile", sender: sender)
+    }
+    
     @IBAction func followUser(sender: UIButton) {
         if sender.titleForState(.Normal) == "Följ" {
             sender.setTitle("Sluta följ", forState: .Normal)
@@ -158,28 +168,46 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
-        let cellIndex: Int
+        var cellIndex: Int?
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
         } else {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
-            let thisCell: CollectionViewCell = main as! CollectionViewCell
-            cellIndex = thisCell.tag
+            if let thisCell: CollectionViewCell = main as? CollectionViewCell {
+                cellIndex = thisCell.tag
+            }
         }
+        
         if segue.identifier == "showCommentsFromProfile" {
             let vc = segue.destinationViewController as! NewViewController
-            vc.postId = postIds[cellIndex]
+            vc.postId = postIds[cellIndex!]
         }
+        
         if segue.identifier == "showLikesFromProfile" {
             let vc = segue.destinationViewController as! LikesViewController
-            vc.typeIs = "post"
-            vc.postId = postIds[cellIndex]
+            if cellIndex != nil {
+                vc.typeIs = "post"
+                vc.postId = postIds[cellIndex!]
+            }
         }
+        
         if segue.identifier == "showAchievementFromProfile" {
             let vc = segue.destinationViewController as! ShowAchievementViewController
-            vc.achievementId = achievementIds[cellIndex]
+            vc.achievementId = achievementIds[cellIndex!]
+        }
+        
+        if segue.identifier == "showFollowsFromProfile" {
+            let vc = segue.destinationViewController as! LikesViewController
+            vc.typeIs = "follows"
+            vc.userId = userId
+        }
+        
+        if segue.identifier == "showFollowersFromProfile" {
+            let vc = segue.destinationViewController as! LikesViewController
+            vc.typeIs = "followers"
+            vc.userId = userId
         }
     }
 

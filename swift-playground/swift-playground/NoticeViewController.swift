@@ -25,7 +25,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     var noticeLinkIds: [Int] = []
     var noticeSeen: [AnyObject] = []
     
-    func setUserData(json: AnyObject) {
+    func setUserData(json: AnyObject, follow: Bool) {
         noticeUserIds = (json["notice_infos"] as! NSArray)[0] as! [Int]
         noticeUserAvatarUrls = (json["notice_infos"] as! NSArray)[1] as! [String]
         noticeMessages = (json["notice_infos"] as! NSArray)[2] as! [String]
