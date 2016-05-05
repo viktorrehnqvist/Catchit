@@ -12,15 +12,17 @@ import Alamofire
 import MobileCoreServices
 
 @available(iOS 9.0, *)
-class AchievementsViewController: UIViewController, AchievementServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AchievementsViewController: UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     let achievementService = AchievementService()
+    let uploadService = UploadService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
+    var uploadAchievementId: Int?
     
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
-    let noPostImage = UIImage(named: "post")
+    var noPostImage = UIImage(named: "post")
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
     var achievementScores: [Int] = []
@@ -84,10 +86,17 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
+    func setUploadedResult(json: AnyObject) {
+        let postId = json["id"] as! Int
+        print(postId)
+        self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         achievementService.getAchievements()
         self.achievementService.delegate = self
+        self.uploadService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -135,6 +144,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.layer.cornerRadius = 5
+        cell.uploadButton.tag = achievementIds[indexPath.row]
         
         return cell
         
@@ -149,26 +159,31 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let point = sender?.view
-        let mainCell = point?.superview
-        let main = mainCell?.superview
-        let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
-        let cellIndex = thisCell.tag
-        if segue.identifier == "showLikesViewFromAchievement" {
-            let vc = segue.destinationViewController as! LikesViewController
-            vc.achievementId = achievementIds[cellIndex]
-            if segueShouldShowCompleters {
-                vc.typeIs = "achievementCompleters"
-            } else {
-                vc.typeIs = "achievementShare"
+        if sender?.integerValue != nil {
+            // Uploaded post, send to specific post, this should be changed for better readability.
+            let vc = segue.destinationViewController as! NewViewController
+            vc.postId = sender?.integerValue
+        } else {
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
+            let cellIndex = thisCell.tag
+            if segue.identifier == "showLikesViewFromAchievement" {
+                let vc = segue.destinationViewController as! LikesViewController
+                vc.achievementId = achievementIds[cellIndex]
+                if segueShouldShowCompleters {
+                    vc.typeIs = "achievementCompleters"
+                } else {
+                    vc.typeIs = "achievementShare"
+                }
+            }
+            
+            if segue.identifier == "showAchievementFromAchievements" {
+                let vc = segue.destinationViewController as! ShowAchievementViewController
+                vc.achievementId = achievementIds[cellIndex]
             }
         }
-        
-        if segue.identifier == "showAchievementFromAchievements" {
-            let vc = segue.destinationViewController as! ShowAchievementViewController
-            vc.achievementId = achievementIds[cellIndex]
-        }
-        
     }
     
     @IBAction func showCompleters(sender: AnyObject?) {
@@ -201,7 +216,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     @IBAction func uploadPost(sender: AnyObject?) {
-        // Make this a delegate.
+        uploadAchievementId = sender!.tag
         let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
         existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
             self.useLibrary()
@@ -230,18 +245,18 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
         self.presentViewController(imageFromSource, animated: true, completion: nil)
     }
-    
+        
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType]
-        var image: UIImage?
-        var videoUrl: String?
         if mediaType!.isEqualToString(kUTTypeImage as String) {
-            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let imageData: NSData = UIImagePNGRepresentation(image!)!
+            uploadService.uploadImage(imageData, achievementId: uploadAchievementId!)
         } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
-            videoUrl = info[UIImagePickerControllerMediaURL] as? String
+            let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
+            uploadService.uploadVideo(pickedVideo, achievementId: uploadAchievementId!)
         }
-        print(image)
-        print(videoUrl)
+
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

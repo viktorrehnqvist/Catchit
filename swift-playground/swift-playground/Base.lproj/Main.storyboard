@@ -923,6 +923,7 @@
                         <outlet property="collectionView" destination="1fs-MO-ro8" id="qgU-kQ-S22"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesViewFromAchievement" id="S0S-yH-cd5"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromAchievements" id="Ftt-UR-dJW"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromAchievements" id="KhT-yk-Sfv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cs6-JP-pci" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2056,9 +2057,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="N5Z-XD-MLh"/>
-        <segue reference="wkG-4I-Mfd"/>
-        <segue reference="6oL-8J-eNe"/>
-        <segue reference="HsH-hq-pfh"/>
+        <segue reference="Ftt-UR-dJW"/>
+        <segue reference="S0S-yH-cd5"/>
+        <segue reference="KhT-yk-Sfv"/>
+        <segue reference="3Ph-BA-daD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -26,6 +26,7 @@
 		F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */; };
 		F728AFCA1CD910E100F5A1DF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */; };
 		F728AFCC1CDB627900F5A1DF /* ProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */; };
+		F728AFCE1CDBD6A800F5A1DF /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */; };
 		F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */; };
 		F73A51CF1CA046BA0029779D /* BucketlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */; };
 		F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */; };
@@ -103,6 +104,7 @@
 		F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionReusableView.swift; sourceTree = "<group>"; };
+		F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				F7EEC2721C92E200002378E9 /* NewViewController.swift */,
 				F70173A81C6F42F9006F799A /* Post.swift */,
 				F7B553CE1C71ABFB00EA9D12 /* PostService.swift */,
+				F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */,
 				F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */,
 				F7CA54031CD0AA830048574B /* UserService.swift */,
 				F765D5071CBBBB5900D64488 /* AchievementService.swift */,
@@ -461,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F728AFCE1CDBD6A800F5A1DF /* UploadService.swift in Sources */,
 				F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */,
 				F721AD531C9B503300BF0BEA /* CommentsCollectionViewCell.swift in Sources */,
 				F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */,
