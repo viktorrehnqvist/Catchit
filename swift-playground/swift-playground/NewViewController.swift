@@ -33,6 +33,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var currentUsername: String?
+    var achievementId: Int!
     var userId: Int!
     var postImage: UIImage!
     var postImageUrl: String!
@@ -58,6 +59,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     func setPostData(json: AnyObject) {
         postImageUrl = json["image_url"] as! String
         userId = json["user_id"] as! Int
+        achievementId = json["achievement_id"] as! Int
         userName = json["user_name"] as! String
         userAvatarUrl = json["user_avatar_url"] as! String
         likesCount = json["likes_count"] as! Int
@@ -230,6 +232,10 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
             vc.postId = postId
         }
         
+        if segue.identifier == "showAchievementFromComments" {
+            let vc = segue.destinationViewController as! ShowAchievementViewController
+            vc.achievementId = achievementId
+        }
 
     }
     

@@ -30,6 +30,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     var postUserAvatars: [UIImage] = []
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
+    var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     
     func setPostData(json: AnyObject) {
@@ -46,6 +47,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
                 postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
                 postCommentCounts.append(json[i]?["comments_count"] as! Int)
                 postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                postLike.append(json[i]?["like"] as! Bool)
                 
                 fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
@@ -103,6 +105,12 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
+        cell.postId = postIds[indexPath.row]
+        if postLike[indexPath.row] {
+            cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
+        } else {
+            cell.likeButton?.setTitle("Gilla", forState: .Normal)
+        }
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
@@ -153,11 +161,22 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
             vc.postId = postIds[cellIndex]
         }
         
+        if segue.identifier == "showAchievementFromExplore" {
+            let vc = segue.destinationViewController as! ShowAchievementViewController
+            vc.achievementId = achievementIds[cellIndex]
+        }
+        
         if segue.identifier == "showLikesFromExplore" {
             let vc = segue.destinationViewController as! LikesViewController
             vc.typeIs = "post"
             vc.postId = postIds[cellIndex]
         }
+        
+        if segue.identifier == "showProfileFromExplore" {
+            let vc = segue.destinationViewController as! ProfileViewController
+            vc.userId = postUserIds[cellIndex]
+        }
+        
     }
     
     

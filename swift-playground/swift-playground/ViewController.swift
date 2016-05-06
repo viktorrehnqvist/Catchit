@@ -39,10 +39,6 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     func setPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
-                print(userDefaults.valueForKey("headers"))
-                print(userDefaults.valueForKey("email"))
-                print(userDefaults.valueForKey("token"))
-                print(userDefaults.valueForKey("id"))
                 achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
                 achievementIds.append((json[i]?["achievement_id"]) as! Int)
                 achievementScores.append(json[i]?["achievement_score"] as! Int)
