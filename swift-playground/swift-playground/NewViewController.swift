@@ -30,7 +30,9 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
     let postService = PostService()
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
+    var currentUsername: String?
     var postImage: UIImage!
     var postImageUrl: String!
     var likesCount: Int!
@@ -71,6 +73,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         super.viewDidLoad()
         self.postService.getPost(postId!)
         self.postService.delegate = self
+        self.currentUsername = userDefaults.objectForKey("email") as? String
         textField.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -174,11 +177,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     }
     
     func createComment () {
-        // Insert code to send comment to API
         // This should not use all this counts, bad for the performance, check if atIndex really is needed.
+        postService.createComment(textField.text!, postId: postId)
         let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
         comments.insert(textField.text!, atIndex: self.comments.count)
-        commentUserNames.insert("Sholle", atIndex: self.commentUserNames.count)
+        commentUserNames.insert(currentUsername!, atIndex: self.commentUserNames.count)
         commentUserAvatars.insert(UIImage(named: "avatar")!, atIndex: self.commentUserAvatars.count)
         collectionView.insertItemsAtIndexPaths([indexPath])
         textField.text = ""
