@@ -1621,6 +1621,7 @@
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromShowAchievement" id="QzT-29-F4w"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromShowAchievement" id="8RT-Zk-lhb"/>
                         <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromShowAchievement" id="djO-lN-Qc8"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromAchievement" id="jal-hA-pvU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqP-rR-Od6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2058,8 +2059,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
         <segue reference="Ftt-UR-dJW"/>
-        <segue reference="S0S-yH-cd5"/>
-        <segue reference="KhT-yk-Sfv"/>
-        <segue reference="3Ph-BA-daD"/>
+        <segue reference="QzT-29-F4w"/>
+        <segue reference="djO-lN-Qc8"/>
+        <segue reference="jal-hA-pvU"/>
     </inferredMetricsTieBreakers>
 </document>

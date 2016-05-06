@@ -9,9 +9,10 @@
 import UIKit
 import MobileCoreServices
 
-class ShowAchievementViewController: UIViewController, AchievementServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ShowAchievementViewController: UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     let achievementService = AchievementService()
+    let uploadService = UploadService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     var header: AchievementsCollectionReusableView!
@@ -89,10 +90,15 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
+    func setUploadedResult(json: AnyObject) {
+        let postId = json["id"] as! Int
+        self.performSegueWithIdentifier("showPostFromAchievement", sender: postId)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         achievementService.getAchievement(achievementId)
+        self.uploadService.delegate = self
         self.achievementService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -136,6 +142,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         cell.profileLabel.text = postUserNames[indexPath.row]
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
+        cell.postId = postIds[indexPath.row]
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
@@ -171,13 +178,16 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     
     @IBAction func bucketlistPress(sender: AnyObject?) {
-        // Check for better compare method, without string comparing
-        if header.bucketlistImage.image == UIImage(named: "achievement_button_icon3") {
-            header.bucketlistImage.image = UIImage(named: "bucketlist-remove_icon")
+        if header.bucketlistImage.image == addToBucketlistImage {
+            achievementService.addToBucketlist(achievementId)
+            header.bucketlistImage.image = removeFromBucketlistImage
         } else {
-            header.bucketlistImage.image = UIImage(named: "achievement_button_icon3")
+            achievementService.removeFromBucketlist(achievementId)
+            header.bucketlistImage.image = addToBucketlistImage
         }
     }
+    
+
     
     @IBAction func pressCommentButton(sender: AnyObject?) {
         self.performSegueWithIdentifier("showCommentsFromShowAchievement", sender: sender)
@@ -208,6 +218,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             sender.setTitle("Följ", forState: .Normal)
         }
     }
+    
     
     @IBAction func uploadPost(sender: AnyObject?) {
         let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
@@ -241,15 +252,15 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType]
-        var image: UIImage?
-        var videoUrl: String?
         if mediaType!.isEqualToString(kUTTypeImage as String) {
-            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let imageData: NSData = UIImagePNGRepresentation(image!)!
+            uploadService.uploadImage(imageData, achievementId: achievementId)
         } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
-            videoUrl = info[UIImagePickerControllerMediaURL] as? String
+            let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
+            uploadService.uploadVideo(pickedVideo, achievementId: achievementId)
         }
-        print(image)
-        print(videoUrl)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -258,7 +269,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed.
-        let cellIndex: Int
+        var cellIndex: Int = 0
         
         // This should be rewritten for better readability.
         if (sender!.tag != nil) {
@@ -277,15 +288,16 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                 }
             } else {
                 // If sender is an achievement.
-                let thisCell: AchievementsCollectionReusableView = mainCell as! AchievementsCollectionReusableView
-                cellIndex = thisCell.tag
-                if segue.identifier == "showLikesFromShowAchievement" {
-                    let vc = segue.destinationViewController as! LikesViewController
-                    vc.achievementId = cellIndex
-                    if segueShouldShowCompleters {
-                        vc.typeIs = "achievementCompleters"
-                    } else {
-                        vc.typeIs = "achievementShare"
+                if let thisCell: AchievementsCollectionReusableView = mainCell as? AchievementsCollectionReusableView {
+                    cellIndex = thisCell.tag
+                    if segue.identifier == "showLikesFromShowAchievement" {
+                        let vc = segue.destinationViewController as! LikesViewController
+                        vc.achievementId = cellIndex
+                        if segueShouldShowCompleters {
+                            vc.typeIs = "achievementCompleters"
+                        } else {
+                            vc.typeIs = "achievementShare"
+                        }
                     }
                 }
             }
@@ -294,6 +306,11 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         if segue.identifier == "showCommentsFromShowAchievement" {
             let vc = segue.destinationViewController as! NewViewController
             vc.postId = postIds[cellIndex]
+        }
+        
+        if segue.identifier == "showPostFromAchievement" {
+            let vc = segue.destinationViewController as! NewViewController
+            vc.postId = sender!.integerValue
         }
     }
     

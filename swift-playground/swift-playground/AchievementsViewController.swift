@@ -88,7 +88,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     func setUploadedResult(json: AnyObject) {
         let postId = json["id"] as! Int
-        print(postId)
         self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
     }
     
