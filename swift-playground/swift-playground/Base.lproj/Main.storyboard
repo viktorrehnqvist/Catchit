@@ -1031,6 +1031,7 @@
                     <connections>
                         <outlet property="collectionView" destination="9Wr-Ip-zqh" id="IpD-aN-aLV"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromBucketlist" id="L9l-gp-JAO"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromBucketlist" id="qca-Hm-Suw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6q-t7-DCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2058,9 +2059,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="Ftt-UR-dJW"/>
+        <segue reference="JIk-2X-1Dy"/>
+        <segue reference="L9l-gp-JAO"/>
+        <segue reference="qca-Hm-Suw"/>
         <segue reference="QzT-29-F4w"/>
-        <segue reference="djO-lN-Qc8"/>
-        <segue reference="jal-hA-pvU"/>
     </inferredMetricsTieBreakers>
 </document>

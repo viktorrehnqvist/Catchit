@@ -14,9 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers")
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        userDefaults.setObject("http://178.62.99.216/", forKey: "url")
         if headers != nil {
             let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("InitViewController") as UIViewController
             rootVC.view.frame = UIScreen.mainScreen().bounds

@@ -17,7 +17,7 @@ class UploadService {
     
     var delegate: UploadServiceDelegate?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
-    let url = "http://192.168.1.116:3000/"
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     
     func createPost() {
         let parameters = [
@@ -26,13 +26,13 @@ class UploadService {
                 "completed": true
             ]
         ]
-        Alamofire.request(.POST, "http://192.168.1.116:3000/tasks.json", parameters: parameters, headers: headers)
+        Alamofire.request(.POST, url + "tasks.json", parameters: parameters, headers: headers)
     }
     
     func uploadImage(imageData: NSData, achievementId: Int) {
         Alamofire.upload(
             .POST,
-            "http://192.168.1.116:3000/posts.json", headers: self.headers,
+            url + "posts.json", headers: self.headers,
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(data: imageData, name: "image", fileName: "test3.png", mimeType: "image/jpeg")
                 multipartFormData.appendBodyPart(data: "\(achievementId)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "achievement_id")
@@ -59,7 +59,7 @@ class UploadService {
     func uploadVideo(videoUrl: NSURL, achievementId: Int) {
         Alamofire.upload(
             .POST,
-            "http://192.168.1.116:3000/posts.json", headers: self.headers,
+            url + "posts.json", headers: self.headers,
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(fileURL: videoUrl, name: "video", fileName: "test3.mov", mimeType: "video/quicktime")
                 multipartFormData.appendBodyPart(data: "\(achievementId)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "achievement_id")

@@ -17,7 +17,7 @@ class PostService {
     
     var delegate: PostServiceDelegate?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
-    let url = "http://192.168.1.116:3000/"
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     
     func getPosts() {
         Alamofire.request(.GET, url + "posts.json/", headers: headers)
@@ -35,7 +35,7 @@ class PostService {
     }
     
     func getPost(postId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/posts/\(postId).json/", headers: headers)
+        Alamofire.request(.GET, url + "posts/\(postId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -48,7 +48,7 @@ class PostService {
     }
     
     func fetchMorePosts(lastPostId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/posts.json/", parameters: ["id": lastPostId], headers: headers)
+        Alamofire.request(.GET, url + "posts.json/", parameters: ["id": lastPostId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -61,7 +61,7 @@ class PostService {
     }
     
     func getExplorePosts() {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/explore.json/", headers: headers)
+        Alamofire.request(.GET, url + "explore.json/", headers: headers)
             .responseJSON { response in
                 print(response)
                 if let JSON = response.result.value {
@@ -76,7 +76,7 @@ class PostService {
     }
     
     func fetchMoreExplorePosts(lastPostId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/explore.json/", parameters: ["id": lastPostId], headers: headers)
+        Alamofire.request(.GET, url + "explore.json/", parameters: ["id": lastPostId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -89,7 +89,7 @@ class PostService {
     }
     
     func likePost(postId: Int) {
-        Alamofire.request(.PUT, "http://192.168.1.116:3000/posts/like/\(postId)", headers: headers)
+        Alamofire.request(.PUT, url + "posts/like/\(postId)", headers: headers)
     }
     
     func createComment(comment: String, postId: Int) {
@@ -100,7 +100,7 @@ class PostService {
                 "commenter_type": "post"
             ]
         ]
-        Alamofire.request(.POST, "http://192.168.1.116:3000/comments?commenter_id=\(postId)&commenter_type=post", parameters: parameters, headers: headers)
+        Alamofire.request(.POST, url + "/comments?commenter_id=\(postId)&commenter_type=post", parameters: parameters, headers: headers)
     }
     
 }

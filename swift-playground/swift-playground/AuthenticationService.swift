@@ -17,6 +17,7 @@ class AuthenticationService {
     
     var delegate: AuthenticationServiceDelegate?
     let userDefaults = NSUserDefaults.standardUserDefaults()
+    let url = "http://178.62.99.216/"
     
     func registerUser(email: String, username: String, password: String) {
         let parameters = [
@@ -26,7 +27,7 @@ class AuthenticationService {
                 "password": password
             ]
         ]
-        Alamofire.request(.POST, "http://192.168.1.116:3000/users.json", parameters: parameters)
+        Alamofire.request(.POST, url + "users.json", parameters: parameters)
             .responseJSON { response in
                 if response.result.isSuccess {
                     let json = response.result.value
@@ -79,7 +80,7 @@ class AuthenticationService {
                 "password": password
             ]
         ]
-        Alamofire.request(.POST, "http://192.168.1.116:3000/users/sign_in.json", parameters: parameters)
+        Alamofire.request(.POST, url + "users/sign_in.json", parameters: parameters)
             .responseJSON { response in
                 if response.result.isSuccess {
                     let json = response.result.value

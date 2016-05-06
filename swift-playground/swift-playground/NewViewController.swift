@@ -242,7 +242,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     func loadImageFromUrls() {
         if self.commentUserAvatarUrls.count > 0 {
             for avatarUrl in self.commentUserAvatarUrls {
-                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
+                let url = NSURL(string: "http://178.62.99.216" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     commentUserAvatars.append(UIImage(data: data!)!)
@@ -250,10 +250,10 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
             }
             
         }
-        var url = NSURL(string: "http://192.168.1.116:3000" + postImageUrl)
+        var url = NSURL(string: "http://178.62.99.216" + postImageUrl)
         var data = NSData(contentsOfURL: url!)
         postImage = UIImage(data: data!)
-        url = NSURL(string: "http://192.168.1.116:3000" + userAvatarUrl)
+        url = NSURL(string: "http://178.62.99.216" + userAvatarUrl)
         data = NSData(contentsOfURL: url!)
         userAvatar = UIImage(data: data!)
 

@@ -18,9 +18,10 @@ class UserService {
     var delegate: UserServiceDelegate?
     let currentUserId = NSUserDefaults.standardUserDefaults().objectForKey("id") as? Int
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     
     func getCurrentUserData() {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/users/\(currentUserId!).json/", headers: headers)
+        Alamofire.request(.GET, url + "users/\(currentUserId!).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -34,7 +35,7 @@ class UserService {
     }
     
     func getUserData(userId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/users/\(userId).json/", headers: headers)
+        Alamofire.request(.GET, url + "users/\(userId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -49,7 +50,7 @@ class UserService {
     }
     
     func getFollowData(userId: Int, follow: Bool) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/users/\(userId).json/", headers: headers)
+        Alamofire.request(.GET, url + "users/\(userId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {

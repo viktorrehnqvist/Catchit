@@ -187,14 +187,14 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
-        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let url = NSURL(string: "http://178.62.99.216" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postImages.append(image!)
     }
     
     func fetchDataFromUrlToPostUserAvatars(fetchUrl: String) {
-        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let url = NSURL(string: "http://178.62.99.216" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postUserAvatars.append(image!)

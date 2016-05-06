@@ -18,9 +18,10 @@ class AchievementService {
     var delegate: AchievementServiceDelegate?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
     let userId = NSUserDefaults.standardUserDefaults().objectForKey("id") as? Int
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     
     func getAchievements() {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements.json/", headers: headers)
+        Alamofire.request(.GET, url + "achievements.json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -34,7 +35,7 @@ class AchievementService {
     }
     
     func getAchievement(achievementId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements/\(achievementId).json/", headers: headers)
+        Alamofire.request(.GET, url + "achievements/\(achievementId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -48,7 +49,7 @@ class AchievementService {
     }
     
     func getBucketlist() {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/users/\(userId!).json/", headers: headers)
+        Alamofire.request(.GET, url + "users/\(userId!).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -61,15 +62,15 @@ class AchievementService {
     }
     
     func addToBucketlist(achievementId: Int) {
-        Alamofire.request(.PUT, "http://192.168.1.116:3000/bucket_list/add_bucket_list_item/\(achievementId)", headers: headers)
+        Alamofire.request(.PUT, url + "bucket_list/add_bucket_list_item/\(achievementId)", headers: headers)
     }
     
     func removeFromBucketlist(achievementId: Int) {
-        Alamofire.request(.DELETE, "http://192.168.1.116:3000/bucket_list/remove_bucket_list_item/\(achievementId)", headers: headers)
+        Alamofire.request(.DELETE, url + "bucket_list/remove_bucket_list_item/\(achievementId)", headers: headers)
     }
     
     func fetchMoreAchievements(lastAchievementId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements.json/", parameters: ["achievements": lastAchievementId], headers: headers)
+        Alamofire.request(.GET, url + "achievements.json/", parameters: ["achievements": lastAchievementId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -82,7 +83,7 @@ class AchievementService {
     }
     
     func fetchMorePostsForAchievement(lastPostId: Int, achievementId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/posts.json", parameters: ["id": lastPostId, "achievement": achievementId], headers: headers)
+        Alamofire.request(.GET, url + "posts.json", parameters: ["id": lastPostId, "achievement": achievementId], headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -96,7 +97,7 @@ class AchievementService {
     
     
     func getCompleters(achievementId: Int) {
-        Alamofire.request(.GET, "http://192.168.1.116:3000/achievements/\(achievementId).json/", headers: headers)
+        Alamofire.request(.GET, url + "achievements/\(achievementId).json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -128,7 +129,7 @@ class AchievementService {
                 let data = response.data
                 Alamofire.upload(
                     .POST,
-                    "http://192.168.1.116:3000/uploads", headers: self.headers,
+                    self.url + "uploads", headers: self.headers,
                     multipartFormData: { multipartFormData in
                         multipartFormData.appendBodyPart(data: data!, name: "avatar", fileName: "test3.png", mimeType: "image/jpeg")
                     },
@@ -147,14 +148,14 @@ class AchievementService {
     }
     
     func uploadVideo() {
-        Alamofire.download(.GET, "http://192.168.1.116:3000/capturedvideo.mov") { temporaryURL, response in
+        Alamofire.download(.GET, url + "capturedvideo.mov") { temporaryURL, response in
             let fileManager = NSFileManager.defaultManager()
             let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
             let pathComponent = response.suggestedFilename
             let fileUrl = directoryURL.URLByAppendingPathComponent(pathComponent!)
             Alamofire.upload(
                 .POST,
-                "http://192.168.1.116:3000/uploads", headers: self.headers,
+                self.url + "uploads", headers: self.headers,
                 multipartFormData: { multipartFormData in
                     multipartFormData.appendBodyPart(fileURL: fileUrl, name: "avatar", fileName: "test3.mov", mimeType: "video/quicktime")
                 },
