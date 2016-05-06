@@ -96,6 +96,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         
         let noticeCellTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
+        cell.tag = indexPath.row
         cell.addGestureRecognizer(noticeCellTapGesture)
         cell.noticeLabel.text! = userNames[indexPath.row]
         cell.noticeImage.image = userAvatars[indexPath.row]
@@ -116,15 +117,26 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
             return size
     }
     
+    @IBAction func showProfile(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showProfileFromLikes", sender: sender)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        
+        let point = sender?.view
+        let thisCell: NoticeCollectionViewCell = point as! NoticeCollectionViewCell
+        let cellIndex = thisCell.tag
+        
+        if segue.identifier == "showProfileFromLikes" {
+            let vc = segue.destinationViewController as! ProfileViewController
+            vc.userId = userIds[cellIndex]
+        }
     }
     
-    @IBAction func showProfile(sender: AnyObject?) {
-        self.performSegueWithIdentifier("showProfileFromLikes", sender: sender)
-    }
+
     
     func loadAvatars() {
         if self.userAvatarUrls.count > 0 {
