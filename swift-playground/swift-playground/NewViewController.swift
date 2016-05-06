@@ -33,6 +33,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var currentUsername: String?
+    var userId: Int!
     var postImage: UIImage!
     var postImageUrl: String!
     var likesCount: Int!
@@ -56,6 +57,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     
     func setPostData(json: AnyObject) {
         postImageUrl = json["image_url"] as! String
+        userId = json["user_id"] as! Int
         userName = json["user_name"] as! String
         userAvatarUrl = json["user_avatar_url"] as! String
         likesCount = json["likes_count"] as! Int
@@ -100,6 +102,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         cell.profileLabel.text = self.commentUserNames[indexPath.row]
         cell.profileImage.image = self.commentUserAvatars[indexPath.row]
         cell.label.numberOfLines = 0
+        cell.tag = indexPath.row
         
         return cell
         
@@ -203,6 +206,31 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        
+        var cellIndex: Int?
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        if let thisCell: CommentsCollectionViewCell = main as? CommentsCollectionViewCell {
+            cellIndex = thisCell.tag
+            if segue.identifier == "showProfileFromComments" {
+                let vc = segue.destinationViewController as! ProfileViewController
+                vc.userId = commentUserIds[cellIndex!]
+            }
+        } else {
+            if segue.identifier == "showProfileFromComments" {
+                let vc = segue.destinationViewController as! ProfileViewController
+                vc.userId = userId
+            }
+        }
+        
+        if segue.identifier == "showLikesFromComments" {
+            let vc = segue.destinationViewController as! LikesViewController
+            vc.typeIs = "post"
+            vc.postId = postId
+        }
+        
+
     }
     
     func loadImageFromUrls() {
