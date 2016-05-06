@@ -113,6 +113,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
+        cell.postId = postIds[indexPath.row]
         if postLike[indexPath.row] {
             cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
         } else {

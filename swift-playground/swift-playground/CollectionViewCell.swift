@@ -11,6 +11,7 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     let postService = PostService()
+    var postId: Int?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
@@ -24,7 +25,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func pressLikeButton(sender: AnyObject) {
-        postService.likePost(commentButton.tag)
+        postService.likePost(postId!)
         let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)
         let onlyNumberPartOfString = likeCount.text!.substringToIndex(lastPartInString)
         if (likeButton?.titleLabel?.text == "Gilla") {
