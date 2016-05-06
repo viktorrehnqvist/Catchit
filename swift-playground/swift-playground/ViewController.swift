@@ -157,18 +157,22 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         let cellIndex: Int
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
+            if segue.identifier == "showCommentsFromHome" {
+                let vc = segue.destinationViewController as! NewViewController
+                vc.postId = postIds[cellIndex]
+            }
         } else {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
             let thisCell: CollectionViewCell = main as! CollectionViewCell
-            cellIndex = thisCell.commentCount.tag
+            cellIndex = thisCell.commentButton.tag
+            if segue.identifier == "showCommentsFromHome" {
+                let vc = segue.destinationViewController as! NewViewController
+                vc.postId = thisCell.postId!
+            }
         }
         
-        if segue.identifier == "showCommentsFromHome" {
-            let vc = segue.destinationViewController as! NewViewController
-            vc.postId = postIds[cellIndex]
-        }
         
         if segue.identifier == "showLikesFromHome" {
             let vc = segue.destinationViewController as! LikesViewController
