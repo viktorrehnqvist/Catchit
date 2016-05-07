@@ -197,6 +197,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         commentUserAvatars.insert(UIImage(named: "avatar")!, atIndex: self.commentUserAvatars.count)
         collectionView.insertItemsAtIndexPaths([indexPath])
         textField.text = ""
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
     }
     
     @IBAction func showAchievement(sender: AnyObject?) {
