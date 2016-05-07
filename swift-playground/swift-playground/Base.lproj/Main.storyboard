@@ -188,6 +188,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="k0F-ZP-tjg">
+                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" id="D4S-qw-KUK"/>
                             </connections>
@@ -638,6 +639,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="x59-OH-39U">
+                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromExplore" id="jJ1-6D-cDh"/>
                             </connections>
@@ -917,6 +919,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="RvJ-jF-rlC">
+                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" id="3Ph-BA-daD"/>
                             </connections>
@@ -1026,6 +1029,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="7iW-ah-UpB">
+                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" id="JIk-2X-1Dy"/>
                             </connections>
@@ -1734,6 +1738,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="xNp-Zb-fTX">
+                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromNotice" id="kk8-J0-6G5"/>
                             </connections>
@@ -2064,9 +2069,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="N5Z-XD-MLh"/>
-        <segue reference="HsH-hq-pfh"/>
-        <segue reference="wkG-4I-Mfd"/>
-        <segue reference="6oL-8J-eNe"/>
+        <segue reference="4pd-pR-4gV"/>
+        <segue reference="xHK-9p-MYi"/>
+        <segue reference="zhv-hg-8pY"/>
+        <segue reference="JTS-hb-4sY"/>
     </inferredMetricsTieBreakers>
 </document>
