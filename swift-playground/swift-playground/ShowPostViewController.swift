@@ -100,7 +100,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("commentCell", forIndexPath: indexPath) as! CommentsCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("commentCell", forIndexPath: indexPath) as! ShowPostCollectionViewCell
         
         let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
@@ -221,7 +221,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         let point = sender?.view
         let mainCell = point?.superview
         let main = mainCell?.superview
-        if let thisCell: CommentsCollectionViewCell = main as? CommentsCollectionViewCell {
+        if let thisCell: ShowPostCollectionViewCell = main as? ShowPostCollectionViewCell {
             cellIndex = thisCell.tag
             if segue.identifier == "showProfileFromComments" {
                 let vc = segue.destinationViewController as! ProfileViewController

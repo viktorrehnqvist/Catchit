@@ -1,5 +1,5 @@
 //
-//  CommentsCollectionViewCell.swift
+//  ShowPostCollectionViewCell.swift
 //  swift-playground
 //
 //  Created by viktor johansson on 17/03/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentsCollectionViewCell: UICollectionViewCell {
+class ShowPostCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!

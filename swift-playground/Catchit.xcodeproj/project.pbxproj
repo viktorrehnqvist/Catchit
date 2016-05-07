@@ -22,7 +22,7 @@
 		F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */; };
 		F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */; };
 		F71290541CAC459500639DA0 /* PostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290531CAC459500639DA0 /* PostCollectionReusableView.swift */; };
-		F721AD531C9B503300BF0BEA /* CommentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F721AD521C9B503300BF0BEA /* CommentsCollectionViewCell.swift */; };
+		F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */; };
 		F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */; };
 		F728AFCA1CD910E100F5A1DF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */; };
 		F728AFCC1CDB627900F5A1DF /* ProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */; };
@@ -100,7 +100,7 @@
 		F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAchievementViewController.swift; sourceTree = "<group>"; };
 		F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsCollectionReusableView.swift; sourceTree = "<group>"; };
 		F71290531CAC459500639DA0 /* PostCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCollectionReusableView.swift; sourceTree = "<group>"; };
-		F721AD521C9B503300BF0BEA /* CommentsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 				F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */,
 				F71290531CAC459500639DA0 /* PostCollectionReusableView.swift */,
 				F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */,
-				F721AD521C9B503300BF0BEA /* CommentsCollectionViewCell.swift */,
+				F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */,
 				F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */,
 				F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */,
 				F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */,
@@ -466,7 +466,7 @@
 			files = (
 				F728AFCE1CDBD6A800F5A1DF /* UploadService.swift in Sources */,
 				F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */,
-				F721AD531C9B503300BF0BEA /* CommentsCollectionViewCell.swift in Sources */,
+				F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */,
 				F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */,
 				F70173781C6E6EAF006F799A /* HomeViewController.swift in Sources */,
 				F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */,
