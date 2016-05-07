@@ -1288,6 +1288,7 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="achievementCount" destination="dUy-UP-81p" id="fg4-P2-fpa"/>
+                                        <outlet property="followButton" destination="uM7-7O-e4z" id="aFp-vV-6b2"/>
                                         <outlet property="followCount" destination="KJx-4M-nYz" id="wuN-Cg-pTP"/>
                                         <outlet property="followersCount" destination="DGI-FP-Dmp" id="CS0-or-Fsq"/>
                                         <outlet property="score" destination="jkl-pT-vNn" id="mY9-Hr-Z6D"/>
@@ -2060,8 +2061,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
         <segue reference="JIk-2X-1Dy"/>
-        <segue reference="L9l-gp-JAO"/>
-        <segue reference="qca-Hm-Suw"/>
-        <segue reference="QzT-29-F4w"/>
+        <segue reference="wkG-4I-Mfd"/>
+        <segue reference="6oL-8J-eNe"/>
+        <segue reference="HsH-hq-pfh"/>
     </inferredMetricsTieBreakers>
 </document>

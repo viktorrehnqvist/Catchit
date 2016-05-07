@@ -16,4 +16,6 @@ class ProfileCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var score: UILabel!
     @IBOutlet weak var followCount: UILabel!
     @IBOutlet weak var followersCount: UILabel!
+    @IBOutlet weak var followButton: UIButton!
+    
 }

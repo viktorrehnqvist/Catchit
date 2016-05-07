@@ -63,5 +63,14 @@ class UserService {
         }
 
     }
+    
+    func followUserChange(userId: Int, follow: Bool) {
+        if follow {
+        Alamofire.request(.PUT, url + "users/\(userId)/follow", headers: headers)
+        } else {
+            Alamofire.request(.PUT, url + "users/\(userId)/unfollow", headers: headers)
+        }
+    }
+    
 
 }

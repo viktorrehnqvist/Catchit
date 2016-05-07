@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var username: String?
     var userAvatar: UIImage?
     var userAvatarUrl: String?
+    var userFollowed: Bool = false
     var userFollowsCount: Int = 0
     var userFollowersCount: Int = 0
     var userScore: Int = 0
@@ -46,10 +47,10 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         userScore = json["user_score"] as! Int
         userFollowsCount = (json["follow_infos"] as! NSArray)[0].count
         userFollowersCount = (json["follower_infos"] as! NSArray)[0].count
+        userFollowed = json["follow"] as! Bool
         fetchDataFromUrlToUserAvatar((json["avatar_url"] as! String))
         if (json["posts"] as! NSArray).count > 0 {
             for i in 0...((json["posts"] as! NSArray).count - 1) {
-                print((json["posts"] as! NSArray)[i])
                 achievementDescriptions.append((json["achievements"] as! NSArray)[i]["description"] as! String)
                 achievementIds.append((json["posts"] as! NSArray)[i]["achievement_id"] as! Int)
                 achievementScores.append((json["achievements"] as! NSArray)[i]["score"] as! Int)
@@ -71,6 +72,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(userFollowed)
         if (userId != nil) {
             userService.getUserData(userId!)
         } else {
@@ -154,6 +156,9 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         headerView.followersCount.tag = userId!
         headerView.userAvatar.image = userAvatar
         headerView.username.text = username
+        if self.userFollowed {
+            headerView.followButton.setTitle("Sluta följ", forState: .Normal)
+        }
         return headerView
     }
     
@@ -179,8 +184,10 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     @IBAction func followUser(sender: UIButton) {
         if sender.titleForState(.Normal) == "Följ" {
+            userService.followUserChange(userId!, follow: true)
             sender.setTitle("Sluta följ", forState: .Normal)
         } else {
+            userService.followUserChange(userId!, follow: false)
             sender.setTitle("Följ", forState: .Normal)
         }
     }
