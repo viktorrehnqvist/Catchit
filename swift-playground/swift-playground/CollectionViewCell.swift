@@ -29,17 +29,13 @@ class CollectionViewCell: UICollectionViewCell {
         let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)
         let onlyNumberPartOfString = likeCount.text!.substringToIndex(lastPartInString)
         if (likeButton?.titleLabel?.text == "Gilla") {
-            if onlyNumberPartOfString == "Inga" {
-                likeCount?.text = "1 gilla-markeringar"
-            } else {
-                let newLikeCount:Int! = Int(onlyNumberPartOfString)! + 1
-                likeCount?.text = String(newLikeCount) + " gilla-markeringar"
-            }
+            let newLikeCount:Int! = Int(onlyNumberPartOfString)! + 1
+            likeCount?.text = String(newLikeCount) + " gilla-markeringar"
             likeButton?.setTitle("Sluta gilla", forState: .Normal)
         } else {
             let newLikeCount:Int! = Int(onlyNumberPartOfString)! - 1
             if newLikeCount == 0 {
-                likeCount?.text = "Inga gilla-markeringar"
+                likeCount?.text = "0 gilla-markeringar"
             } else {
                 likeCount?.text = String(newLikeCount) + " gilla-markeringar"
             }
