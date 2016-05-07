@@ -186,9 +186,11 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         if sender.titleForState(.Normal) == "Följ" {
             userService.followUserChange(userId!, follow: true)
             sender.setTitle("Sluta följ", forState: .Normal)
+            userFollowed = true
         } else {
             userService.followUserChange(userId!, follow: false)
             sender.setTitle("Följ", forState: .Normal)
+            userFollowed = false
         }
     }
     
