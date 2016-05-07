@@ -1060,11 +1060,11 @@
                                     <size key="itemSize" width="250" height="362"/>
                                     <size key="headerReferenceSize" width="250" height="80"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                                    <inset key="sectionInset" minX="0.0" minY="1" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="profileCell" id="v7h-xe-7Gg" customClass="CollectionViewCell" customModule="swift_playground" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="144" width="250" height="362"/>
+                                        <rect key="frame" x="0.0" y="145" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="362"/>
@@ -2065,8 +2065,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
         <segue reference="N5Z-XD-MLh"/>
-        <segue reference="UnV-OJ-WQS"/>
-        <segue reference="KBR-5L-ez0"/>
-        <segue reference="dwR-E4-82o"/>
+        <segue reference="HsH-hq-pfh"/>
+        <segue reference="wkG-4I-Mfd"/>
+        <segue reference="6oL-8J-eNe"/>
     </inferredMetricsTieBreakers>
 </document>
