@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 
 @available(iOS 9.0, *)
-class ExploreViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -21,6 +21,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     var achievementIds: [Int] = []
     var achievementScores: [Int] = []
     var postIds: [Int] = []
+    var postCreatedAt: [String] = []
+    var postUpdatedAt: [String] = []
     var postImageUrls: [String] = []
     var postImages: [UIImage] = []
     var postVideoUrls: [String] = []
@@ -32,7 +34,10 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     var postLikeCounts: [Int] = []
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
+    var justCheckedForNewPosts: Bool = true
     
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+
     func setPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
@@ -40,6 +45,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
                 achievementIds.append((json[i]?["achievement_id"]) as! Int)
                 achievementScores.append(json[i]?["achievement_score"] as! Int)
                 postIds.append(json[i]?["id"] as! Int)
+                postCreatedAt.append(json[i]?["created_at"] as! String)
+                postUpdatedAt.append(json[i]?["updated_at"] as! String)
                 postImageUrls.append((json[i]?["image_url"])! as! String)
                 // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
                 postUserIds.append(json[i]?["user_id"] as! Int)
@@ -49,8 +56,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
                 postLikeCounts.append(json[i]?["likes_count"] as! Int)
                 postLike.append(json[i]?["like"] as! Bool)
                 
-                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
-                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
+                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String, new: false)
+                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: false)
             }
         } else {
             morePostsToLoad = false
@@ -59,22 +66,60 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
     }
     
     func updatePostData(json: AnyObject) {
-        
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                let postId = json[i]?["id"] as! Int
+                if let cellIndex = postIds.indexOf({$0 == postId}) {
+                    achievementScores[cellIndex] = json[i]?["achievement_score"] as! Int
+                    postUpdatedAt[cellIndex] = json[i]?["updated_at"] as! String
+                    postCommentCounts[cellIndex] = json[i]?["comments_count"] as! Int
+                    postLikeCounts[cellIndex] = json[i]?["likes_count"] as! Int
+                    postLike[cellIndex] = json[i]?["like"] as! Bool
+                }
+                
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
     }
     
     func setNewPostData(json: AnyObject) {
-        
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                print(json)
+                achievementDescriptions.insert(((json[i]?["achievement_desc"])! as! String), atIndex: 0)
+                achievementIds.insert(((json[i]?["achievement_id"]) as! Int), atIndex: 0)
+                achievementScores.insert((json[i]?["achievement_score"] as! Int), atIndex: 0)
+                postIds.insert((json[i]?["id"] as! Int), atIndex: 0)
+                postCreatedAt.insert((json[i]?["created_at"] as! String), atIndex: 0)
+                postUpdatedAt.insert((json[i]?["updated_at"] as! String), atIndex: 0)
+                postImageUrls.insert(((json[i]?["image_url"])! as! String), atIndex: 0)
+                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                postUserIds.insert((json[i]?["user_id"] as! Int), atIndex: 0)
+                postUserNames.insert(((json[i]?["user_name"])! as! String), atIndex: 0)
+                postUserAvatarUrls.insert(((json[i]?["user_avatar_url"])! as! String), atIndex: 0)
+                postCommentCounts.insert((json[i]?["comments_count"] as! Int), atIndex: 0)
+                postLikeCounts.insert((json[i]?["likes_count"] as! Int), atIndex: 0)
+                postLike.insert((json[i]?["like"] as! Bool), atIndex: 0)
+                
+                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String, new: true)
+                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: true)
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         postService.getExplorePosts()
         self.postService.delegate = self
+        self.collectionView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        postService.updatePosts(postIds, updatedAt: postUpdatedAt)
+        justCheckedForNewPosts = false
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
@@ -156,28 +201,31 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         var cellIndex: Int
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
+            if segue.identifier == "showCommentsFromExplore" {
+                let vc = segue.destinationViewController as! NewViewController
+                vc.postId = postIds[cellIndex]
+            }
         } else {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
             let thisCell: CollectionViewCell = main as! CollectionViewCell
             cellIndex = thisCell.commentButton.tag
-        }
-        
-        if segue.identifier == "showCommentsFromExplore" {
-            let vc = segue.destinationViewController as! NewViewController
-            vc.postId = postIds[cellIndex]
-        }
-        
-        if segue.identifier == "showAchievementFromExplore" {
-            let vc = segue.destinationViewController as! ShowAchievementViewController
-            vc.achievementId = achievementIds[cellIndex]
+            if segue.identifier == "showCommentsFromExplore" {
+                let vc = segue.destinationViewController as! NewViewController
+                vc.postId = thisCell.postId!
+            }
         }
         
         if segue.identifier == "showLikesFromExplore" {
             let vc = segue.destinationViewController as! LikesViewController
             vc.typeIs = "post"
             vc.postId = postIds[cellIndex]
+        }
+        
+        if segue.identifier == "showAchievementFromExplore" {
+            let vc = segue.destinationViewController as! ShowAchievementViewController
+            vc.achievementId = achievementIds[cellIndex]
         }
         
         if segue.identifier == "showProfileFromExplore" {
@@ -187,25 +235,39 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         
     }
     
-    
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
             postService.fetchMoreExplorePosts(postIds.last!)
         }
     }
     
-    func fetchDataFromUrlToPostImages(fetchUrl: String) {
+    func fetchDataFromUrlToPostImages(fetchUrl: String, new: Bool) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
-        self.postImages.append(image!)
+        if new {
+            self.postImages.insert(image!, atIndex: 0)
+        } else {
+            self.postImages.append(image!)
+        }
     }
     
-    func fetchDataFromUrlToPostUserAvatars(fetchUrl: String) {
+    func fetchDataFromUrlToPostUserAvatars(fetchUrl: String, new: Bool) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
-        self.postUserAvatars.append(image!)
+        if new {
+            self.postUserAvatars.insert(image!, atIndex: 0)
+        } else {
+            self.postUserAvatars.append(image!)
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
+            postService.getNewPosts(postIds.first!)
+            justCheckedForNewPosts = true
+        }
     }
     
 }

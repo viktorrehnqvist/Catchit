@@ -14,7 +14,6 @@ import Alamofire
 class ViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
-    var scrollView = UIScrollView()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -39,7 +38,6 @@ class ViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegat
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
-    
     func setPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
@@ -119,7 +117,6 @@ class ViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegat
     }
     
     override func viewWillAppear(animated: Bool) {
-        print(postIds)
         self.navigationController?.navigationBarHidden = false
         postService.updatePosts(postIds, updatedAt: postUpdatedAt)
         justCheckedForNewPosts = false
@@ -201,7 +198,6 @@ class ViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegat
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         let cellIndex: Int
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
@@ -220,7 +216,6 @@ class ViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegat
                 vc.postId = thisCell.postId!
             }
         }
-        
         
         if segue.identifier == "showLikesFromHome" {
             let vc = segue.destinationViewController as! LikesViewController
