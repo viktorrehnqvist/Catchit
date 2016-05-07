@@ -157,9 +157,15 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         headerView.followersCount.tag = userId!
         headerView.userAvatar.image = userAvatar
         headerView.username.text = username
+        
+        if userId == userDefaults.objectForKey("id")?.integerValue {
+            headerView.followButton.hidden = true
+        }
+        
         if self.userFollowed {
             headerView.followButton.setTitle("Sluta följ", forState: .Normal)
         }
+        
         header = headerView
         return headerView
     }
