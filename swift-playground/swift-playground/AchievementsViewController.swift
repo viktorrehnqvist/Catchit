@@ -158,6 +158,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var cellIndex: Int = 0
         if sender?.integerValue != nil {
             // Uploaded post, send to specific post, this should be changed for better readability.
             let vc = segue.destinationViewController as! NewViewController
@@ -166,8 +167,9 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
-            let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
-            let cellIndex = thisCell.tag
+            if let thisCell: AchievementCollectionViewCell = main as? AchievementCollectionViewCell {
+                cellIndex = thisCell.tag
+            }
             if segue.identifier == "showLikesViewFromAchievement" {
                 let vc = segue.destinationViewController as! LikesViewController
                 vc.achievementId = achievementIds[cellIndex]

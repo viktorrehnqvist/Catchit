@@ -37,13 +37,20 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userService.getCurrentUserData()
         self.userService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        self.noticeMessages = []
+        self.noticeUserIds = []
+        self.noticeUserAvatarUrls = []
+        self.noticeUserAvatars = []
+        self.noticeTypes = []
+        self.noticeLinkIds = []
+        self.noticeSeen = []
+        userService.getCurrentUserData()
     }
     
     override func didReceiveMemoryWarning() {

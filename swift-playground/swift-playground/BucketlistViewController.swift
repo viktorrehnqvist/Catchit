@@ -40,7 +40,6 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.achievementService.getBucketlist()
         self.achievementService.delegate = self
         self.uploadService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
@@ -48,6 +47,9 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        self.achievementDescriptions = []
+        self.achievementIds = []
+        self.achievementService.getBucketlist()
     }
     
     override func didReceiveMemoryWarning() {
