@@ -21,6 +21,8 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     var achievementIds: [Int] = []
     var achievementScores: [Int] = []
     var postIds: [Int] = []
+    var postCreatedAt: [String] = []
+    var postUpdatedAt: [String] = []
     var postImageUrls: [String] = []
     var postImages: [UIImage] = []
     var postVideoUrls: [String] = []
@@ -43,6 +45,8 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
                 achievementIds.append((json[i]?["achievement_id"]) as! Int)
                 achievementScores.append(json[i]?["achievement_score"] as! Int)
                 postIds.append(json[i]?["id"] as! Int)
+                postCreatedAt.append(json[i]?["created_at"] as! String)
+                postUpdatedAt.append(json[i]?["updated_at"] as! String)
                 postImageUrls.append((json[i]?["image_url"])! as! String)
                 // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
                 postUserIds.append(json[i]?["user_id"] as! Int)
@@ -61,9 +65,25 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
+    func updatePostData(json: AnyObject) {
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                let postId = json[i]?["id"] as! Int
+                if let cellIndex = postIds.indexOf({$0 == postId}) {
+                    achievementScores[cellIndex] = json[i]?["achievement_score"] as! Int
+                    postUpdatedAt[cellIndex] = json[i]?["updated_at"] as! String
+                    postCommentCounts[cellIndex] = json[i]?["comments_count"] as! Int
+                    postLikeCounts[cellIndex] = json[i]?["likes_count"] as! Int
+                    postLike[cellIndex] = json[i]?["like"] as! Bool
+                }
+
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(NSUserDefaults.standardUserDefaults().objectForKey("headers"))
         postService.getPosts()
         self.postService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
@@ -71,6 +91,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        postService.updatePosts(postIds, updatedAt: postUpdatedAt)
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
@@ -196,14 +217,14 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     }
     
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
-        let url = NSURL(string: "http://178.62.99.216" + fetchUrl)!
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postImages.append(image!)
     }
     
     func fetchDataFromUrlToPostUserAvatars(fetchUrl: String) {
-        let url = NSURL(string: "http://178.62.99.216" + fetchUrl)!
+        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postUserAvatars.append(image!)

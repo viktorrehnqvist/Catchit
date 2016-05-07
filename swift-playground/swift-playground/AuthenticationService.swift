@@ -17,7 +17,7 @@ class AuthenticationService {
     
     var delegate: AuthenticationServiceDelegate?
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    let url = "http://178.62.99.216/"
+    let url = "http://192.168.1.116:3000/"
     
     func registerUser(email: String, username: String, password: String) {
         let parameters = [

@@ -47,7 +47,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 if postImagesToLoad > 0 {
                     for postIndex in 0...(postImagesToLoad - 1) {
                         if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[postIndex] as? String {
-                            let url = NSURL(string: "http://178.62.99.216" + completerImageUrl)!
+                            let url = NSURL(string: "http://192.168.1.116:3000" + completerImageUrl)!
                             let data = NSData(contentsOfURL:url)
                             if data != nil {
                                 switch postIndex {

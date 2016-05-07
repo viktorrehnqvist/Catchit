@@ -11,6 +11,7 @@ import Alamofire
 
 protocol PostServiceDelegate {
     func setPostData(json: AnyObject)
+    func updatePostData(json: AnyObject)
 }
 
 class PostService {
@@ -31,6 +32,19 @@ class PostService {
                     }
                 }
                 
+        }
+    }
+    
+    func updatePosts(postIds: [Int], updatedAt: [String]) {
+        Alamofire.request(.GET, url + "posts.json/", parameters: ["reload": postIds, "updated_at": updatedAt], headers: headers)
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.updatePostData(JSON)
+                        })
+                    }
+                }
         }
     }
     

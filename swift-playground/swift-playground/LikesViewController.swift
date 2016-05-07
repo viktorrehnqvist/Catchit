@@ -36,6 +36,10 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         loadAvatars()
     }
     
+    func updatePostData(json: AnyObject) {
+        
+    }
+    
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
         userIds = (json["completer_infos"] as! NSArray)[0] as! [Int]
         userNames = (json["completer_infos"] as! NSArray)[1] as! [String]
@@ -142,7 +146,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         if self.userAvatarUrls.count > 0 {
             for avatarUrl in self.userAvatarUrls {
                 print(avatarUrl)
-                let url = NSURL(string: "http://178.62.99.216" + avatarUrl)
+                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     userAvatars.append(UIImage(data: data!)!)
