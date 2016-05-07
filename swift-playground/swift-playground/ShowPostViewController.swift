@@ -26,7 +26,7 @@ extension UILabel{
 
 class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostServiceDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
-    var header: PostCollectionReusableView!
+    var header: ShowPostCollectionReusableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
     let postService = PostService()
@@ -137,7 +137,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
                                                           atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                                withReuseIdentifier: "commentsTopBar",
-                                                                               forIndexPath: indexPath) as! PostCollectionReusableView
+                                                                               forIndexPath: indexPath) as! ShowPostCollectionReusableView
         //let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
         //headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))

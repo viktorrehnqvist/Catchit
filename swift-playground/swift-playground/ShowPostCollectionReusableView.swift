@@ -1,5 +1,5 @@
 //
-//  PostCollectionReusableView.swift
+//  ShowPostCollectionReusableView.swift
 //  swift-playground
 //
 //  Created by viktor johansson on 30/03/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostCollectionReusableView: UICollectionReusableView {
+class ShowPostCollectionReusableView: UICollectionReusableView {
         
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var profileLabel: UILabel!

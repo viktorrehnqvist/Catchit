@@ -1832,7 +1832,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="commentsTopBar" id="JuK-dK-xbf" customClass="PostCollectionReusableView" customModule="Catchit" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="commentsTopBar" id="JuK-dK-xbf" customClass="ShowPostCollectionReusableView" customModule="Catchit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="294"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
