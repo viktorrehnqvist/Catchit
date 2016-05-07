@@ -82,7 +82,7 @@
 		8CFB3433DA85D79A0DAEACC2 /* Pods-swift-playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-playground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swift-playground/Pods-swift-playground.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C83969EC488B28C18D62CF0 /* Pods_swift_playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swift_playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A781472916FFA0E7BC567A75 /* Pods-swift-playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-playground.release.xcconfig"; path = "Pods/Target Support Files/Pods-swift-playground/Pods-swift-playground.release.xcconfig"; sourceTree = "<group>"; };
-		F70173721C6E6EAF006F799A /* swift-playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swift-playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70173721C6E6EAF006F799A /* Catchit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catchit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70173751C6E6EAF006F799A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F70173771C6E6EAF006F799A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F701737A1C6E6EAF006F799A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,10 +90,10 @@
 		F701737F1C6E6EAF006F799A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F70173821C6E6EAF006F799A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F70173841C6E6EAF006F799A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F70173891C6E6EAF006F799A /* swift-playgroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-playgroundTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70173891C6E6EAF006F799A /* Catchit.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Catchit.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F701738D1C6E6EAF006F799A /* swift_playgroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_playgroundTests.swift; sourceTree = "<group>"; };
 		F701738F1C6E6EAF006F799A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F70173941C6E6EAF006F799A /* swift-playgroundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-playgroundUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70173941C6E6EAF006F799A /* Catchit.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Catchit.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_playgroundUITests.swift; sourceTree = "<group>"; };
 		F701739A1C6E6EAF006F799A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F70173A81C6F42F9006F799A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -183,9 +183,9 @@
 		F70173731C6E6EAF006F799A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F70173721C6E6EAF006F799A /* swift-playground.app */,
-				F70173891C6E6EAF006F799A /* swift-playgroundTests.xctest */,
-				F70173941C6E6EAF006F799A /* swift-playgroundUITests.xctest */,
+				F70173721C6E6EAF006F799A /* Catchit.app */,
+				F70173891C6E6EAF006F799A /* Catchit.xctest */,
+				F70173941C6E6EAF006F799A /* Catchit.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -259,9 +259,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F70173711C6E6EAF006F799A /* swift-playground */ = {
+		F70173711C6E6EAF006F799A /* Catchit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F701739D1C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "swift-playground" */;
+			buildConfigurationList = F701739D1C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "Catchit" */;
 			buildPhases = (
 				16C8AD99193811DB1C4CFB7A /* Check Pods Manifest.lock */,
 				F701736E1C6E6EAF006F799A /* Sources */,
@@ -274,14 +274,14 @@
 			);
 			dependencies = (
 			);
-			name = "swift-playground";
+			name = Catchit;
 			productName = "swift-playground";
-			productReference = F70173721C6E6EAF006F799A /* swift-playground.app */;
+			productReference = F70173721C6E6EAF006F799A /* Catchit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F70173881C6E6EAF006F799A /* swift-playgroundTests */ = {
+		F70173881C6E6EAF006F799A /* CatchitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F70173A01C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "swift-playgroundTests" */;
+			buildConfigurationList = F70173A01C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "CatchitTests" */;
 			buildPhases = (
 				F70173851C6E6EAF006F799A /* Sources */,
 				F70173861C6E6EAF006F799A /* Frameworks */,
@@ -292,14 +292,14 @@
 			dependencies = (
 				F701738B1C6E6EAF006F799A /* PBXTargetDependency */,
 			);
-			name = "swift-playgroundTests";
+			name = CatchitTests;
 			productName = "swift-playgroundTests";
-			productReference = F70173891C6E6EAF006F799A /* swift-playgroundTests.xctest */;
+			productReference = F70173891C6E6EAF006F799A /* Catchit.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F70173931C6E6EAF006F799A /* swift-playgroundUITests */ = {
+		F70173931C6E6EAF006F799A /* CatchitUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F70173A31C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "swift-playgroundUITests" */;
+			buildConfigurationList = F70173A31C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "CatchitUITests" */;
 			buildPhases = (
 				F70173901C6E6EAF006F799A /* Sources */,
 				F70173911C6E6EAF006F799A /* Frameworks */,
@@ -310,9 +310,9 @@
 			dependencies = (
 				F70173961C6E6EAF006F799A /* PBXTargetDependency */,
 			);
-			name = "swift-playgroundUITests";
+			name = CatchitUITests;
 			productName = "swift-playgroundUITests";
-			productReference = F70173941C6E6EAF006F799A /* swift-playgroundUITests.xctest */;
+			productReference = F70173941C6E6EAF006F799A /* Catchit.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -341,7 +341,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F701736D1C6E6EAF006F799A /* Build configuration list for PBXProject "swift-playground" */;
+			buildConfigurationList = F701736D1C6E6EAF006F799A /* Build configuration list for PBXProject "Catchit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -360,9 +360,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				F70173711C6E6EAF006F799A /* swift-playground */,
-				F70173881C6E6EAF006F799A /* swift-playgroundTests */,
-				F70173931C6E6EAF006F799A /* swift-playgroundUITests */,
+				F70173711C6E6EAF006F799A /* Catchit */,
+				F70173881C6E6EAF006F799A /* CatchitTests */,
+				F70173931C6E6EAF006F799A /* CatchitUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -520,12 +520,12 @@
 /* Begin PBXTargetDependency section */
 		F701738B1C6E6EAF006F799A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F70173711C6E6EAF006F799A /* swift-playground */;
+			target = F70173711C6E6EAF006F799A /* Catchit */;
 			targetProxy = F701738A1C6E6EAF006F799A /* PBXContainerItemProxy */;
 		};
 		F70173961C6E6EAF006F799A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F70173711C6E6EAF006F799A /* swift-playground */;
+			target = F70173711C6E6EAF006F799A /* Catchit */;
 			targetProxy = F70173951C6E6EAF006F799A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -642,7 +642,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sholle.swift-playground";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Catchit;
 			};
 			name = Debug;
 		};
@@ -655,7 +655,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sholle.swift-playground";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Catchit;
 			};
 			name = Release;
 		};
@@ -666,8 +666,8 @@
 				INFOPLIST_FILE = "swift-playgroundTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sholle.swift-playgroundTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/swift-playground.app/swift-playground";
+				PRODUCT_NAME = Catchit;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Catchit.app/Catchit";
 			};
 			name = Debug;
 		};
@@ -678,8 +678,8 @@
 				INFOPLIST_FILE = "swift-playgroundTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sholle.swift-playgroundTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/swift-playground.app/swift-playground";
+				PRODUCT_NAME = Catchit;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Catchit.app/Catchit";
 			};
 			name = Release;
 		};
@@ -689,7 +689,7 @@
 				INFOPLIST_FILE = "swift-playgroundUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sholle.swift-playgroundUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Catchit;
 				TEST_TARGET_NAME = "swift-playground";
 				USES_XCTRUNNER = YES;
 			};
@@ -701,7 +701,7 @@
 				INFOPLIST_FILE = "swift-playgroundUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sholle.swift-playgroundUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Catchit;
 				TEST_TARGET_NAME = "swift-playground";
 				USES_XCTRUNNER = YES;
 			};
@@ -710,7 +710,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F701736D1C6E6EAF006F799A /* Build configuration list for PBXProject "swift-playground" */ = {
+		F701736D1C6E6EAF006F799A /* Build configuration list for PBXProject "Catchit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F701739B1C6E6EAF006F799A /* Debug */,
@@ -719,7 +719,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F701739D1C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "swift-playground" */ = {
+		F701739D1C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "Catchit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F701739E1C6E6EAF006F799A /* Debug */,
@@ -728,7 +728,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F70173A01C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "swift-playgroundTests" */ = {
+		F70173A01C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "CatchitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F70173A11C6E6EAF006F799A /* Debug */,
@@ -737,7 +737,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F70173A31C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "swift-playgroundUITests" */ = {
+		F70173A31C6E6EAF006F799A /* Build configuration list for PBXNativeTarget "CatchitUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F70173A41C6E6EAF006F799A /* Debug */,
