@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ExploreViewController.swift
 //  swift-playground
 //
 //  Created by viktor johansson on 12/02/16.

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D3EE7B604ECDE709BFC0605B /* Pods_swift_playground.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C83969EC488B28C18D62CF0 /* Pods_swift_playground.framework */; };
 		F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173751C6E6EAF006F799A /* AppDelegate.swift */; };
-		F70173781C6E6EAF006F799A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173771C6E6EAF006F799A /* ViewController.swift */; };
+		F70173781C6E6EAF006F799A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173771C6E6EAF006F799A /* HomeViewController.swift */; };
 		F701737B1C6E6EAF006F799A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70173791C6E6EAF006F799A /* Main.storyboard */; };
 		F701737E1C6E6EAF006F799A /* swift_playground.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F701737C1C6E6EAF006F799A /* swift_playground.xcdatamodeld */; };
 		F70173801C6E6EAF006F799A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F701737F1C6E6EAF006F799A /* Assets.xcassets */; };
@@ -84,7 +84,7 @@
 		A781472916FFA0E7BC567A75 /* Pods-swift-playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-playground.release.xcconfig"; path = "Pods/Target Support Files/Pods-swift-playground/Pods-swift-playground.release.xcconfig"; sourceTree = "<group>"; };
 		F70173721C6E6EAF006F799A /* Catchit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catchit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70173751C6E6EAF006F799A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F70173771C6E6EAF006F799A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F70173771C6E6EAF006F799A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F701737A1C6E6EAF006F799A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F701737D1C6E6EAF006F799A /* swift_playground.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = swift_playground.xcdatamodel; sourceTree = "<group>"; };
 		F701737F1C6E6EAF006F799A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 				F70173751C6E6EAF006F799A /* AppDelegate.swift */,
 				F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */,
 				F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */,
-				F70173771C6E6EAF006F799A /* ViewController.swift */,
+				F70173771C6E6EAF006F799A /* HomeViewController.swift */,
 				F761C52B1C9DD60200E3C334 /* ExploreViewController.swift */,
 				F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */,
 				F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */,
@@ -468,7 +468,7 @@
 				F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */,
 				F721AD531C9B503300BF0BEA /* CommentsCollectionViewCell.swift in Sources */,
 				F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */,
-				F70173781C6E6EAF006F799A /* ViewController.swift in Sources */,
+				F70173781C6E6EAF006F799A /* HomeViewController.swift in Sources */,
 				F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */,
 				F761C52C1C9DD60200E3C334 /* ExploreViewController.swift in Sources */,
 				F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */,

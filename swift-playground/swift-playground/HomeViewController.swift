@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  swift-playground
 //
 //  Created by viktor johansson on 12/02/16.
@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 
 @available(iOS 9.0, *)
-class ViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
