@@ -222,7 +222,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         }
         
         if segue.identifier == "showCommentsFromProfile" {
-            let vc = segue.destinationViewController as! NewViewController
+            let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = postIds[cellIndex!]
         }
         

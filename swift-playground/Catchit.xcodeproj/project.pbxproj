@@ -43,7 +43,7 @@
 		F7B553D11C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7CA54001CCACC6D0048574B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */; };
 		F7CA54041CD0AA830048574B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CA54031CD0AA830048574B /* UserService.swift */; };
-		F7EEC2731C92E200002378E9 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EEC2721C92E200002378E9 /* NewViewController.swift */; };
+		F7EEC2731C92E200002378E9 /* ShowPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EEC2721C92E200002378E9 /* ShowPostViewController.swift */; };
 		F7EEC2751C92E31C002378E9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,7 +120,7 @@
 		F7B553CE1C71ABFB00EA9D12 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PostService.swift; sourceTree = "<group>"; tabWidth = 4; };
 		F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthenticationService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F7CA54031CD0AA830048574B /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F7EEC2721C92E200002378E9 /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		F7EEC2721C92E200002378E9 /* ShowPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostViewController.swift; sourceTree = "<group>"; };
 		F7EEC2741C92E31C002378E9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,6 +204,7 @@
 				F73A51DC1CA1690D0029779D /* ProfileViewController.swift */,
 				F73A51D91CA127430029779D /* LikesViewController.swift */,
 				F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */,
+				F7EEC2721C92E200002378E9 /* ShowPostViewController.swift */,
 				F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */,
 				F71290531CAC459500639DA0 /* PostCollectionReusableView.swift */,
 				F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */,
@@ -212,7 +213,6 @@
 				F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */,
 				F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */,
 				F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */,
-				F7EEC2721C92E200002378E9 /* NewViewController.swift */,
 				F70173A81C6F42F9006F799A /* Post.swift */,
 				F7B553CE1C71ABFB00EA9D12 /* PostService.swift */,
 				F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */,
@@ -480,7 +480,7 @@
 				F761C5341C9DD70F00E3C334 /* NoticeViewController.swift in Sources */,
 				F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */,
 				F73A51DA1CA127430029779D /* LikesViewController.swift in Sources */,
-				F7EEC2731C92E200002378E9 /* NewViewController.swift in Sources */,
+				F7EEC2731C92E200002378E9 /* ShowPostViewController.swift in Sources */,
 				F765D5081CBBBB5900D64488 /* AchievementService.swift in Sources */,
 				F728AFCC1CDB627900F5A1DF /* ProfileCollectionReusableView.swift in Sources */,
 				F73A51CF1CA046BA0029779D /* BucketlistCollectionViewCell.swift in Sources */,

@@ -107,7 +107,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         }
         
         if segue.identifier == "showPostFromBucketlist" {
-            let vc = segue.destinationViewController as! NewViewController
+            let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = sender!.integerValue
         }
         

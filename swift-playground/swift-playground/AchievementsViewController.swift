@@ -161,7 +161,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         var cellIndex: Int = 0
         if sender?.integerValue != nil {
             // Uploaded post, send to specific post, this should be changed for better readability.
-            let vc = segue.destinationViewController as! NewViewController
+            let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = sender?.integerValue
         } else {
             let point = sender?.view

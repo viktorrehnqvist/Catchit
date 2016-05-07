@@ -202,7 +202,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
             if segue.identifier == "showCommentsFromExplore" {
-                let vc = segue.destinationViewController as! NewViewController
+                let vc = segue.destinationViewController as! ShowPostViewController
                 vc.postId = postIds[cellIndex]
             }
         } else {
@@ -212,7 +212,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
             let thisCell: CollectionViewCell = main as! CollectionViewCell
             cellIndex = thisCell.commentButton.tag
             if segue.identifier == "showCommentsFromExplore" {
-                let vc = segue.destinationViewController as! NewViewController
+                let vc = segue.destinationViewController as! ShowPostViewController
                 vc.postId = thisCell.postId!
             }
         }

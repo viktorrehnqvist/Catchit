@@ -202,7 +202,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
             if segue.identifier == "showCommentsFromHome" {
-                let vc = segue.destinationViewController as! NewViewController
+                let vc = segue.destinationViewController as! ShowPostViewController
                 vc.postId = postIds[cellIndex]
             }
         } else {
@@ -212,7 +212,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             let thisCell: CollectionViewCell = main as! CollectionViewCell
             cellIndex = thisCell.commentButton.tag
             if segue.identifier == "showCommentsFromHome" {
-                let vc = segue.destinationViewController as! NewViewController
+                let vc = segue.destinationViewController as! ShowPostViewController
                 vc.postId = thisCell.postId!
             }
         }

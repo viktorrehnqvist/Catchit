@@ -1,5 +1,5 @@
-    //
-//  NewViewController.swift
+//
+//  ShowPostViewController.swift
 //  swift-playground
 //
 //  Created by viktor johansson on 11/03/16.
@@ -24,7 +24,7 @@ extension UILabel{
     }
 }
 
-class NewViewController: UIViewController, UICollectionViewDelegate, PostServiceDelegate, UICollectionViewDataSource, UITextFieldDelegate {
+class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostServiceDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
     var header: PostCollectionReusableView!
     @IBOutlet weak var collectionView: UICollectionView!

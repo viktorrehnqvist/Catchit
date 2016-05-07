@@ -305,12 +305,12 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
         
         if segue.identifier == "showCommentsFromShowAchievement" {
-            let vc = segue.destinationViewController as! NewViewController
+            let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = postIds[cellIndex]
         }
         
         if segue.identifier == "showPostFromAchievement" {
-            let vc = segue.destinationViewController as! NewViewController
+            let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = sender!.integerValue
         }
     }

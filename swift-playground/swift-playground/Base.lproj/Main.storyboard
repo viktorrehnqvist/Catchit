@@ -1754,10 +1754,10 @@
             </objects>
             <point key="canvasLocation" x="926" y="720"/>
         </scene>
-        <!--New View Controller-->
+        <!--Show Post View Controller-->
         <scene sceneID="qZl-Lw-Vrz">
             <objects>
-                <viewController id="Umm-fh-qXz" customClass="NewViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Umm-fh-qXz" customClass="ShowPostViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FOk-Cu-5Xp"/>
                         <viewControllerLayoutGuide type="bottom" id="QA7-8T-vFw"/>
@@ -2069,9 +2069,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="N5Z-XD-MLh"/>
-        <segue reference="UnV-OJ-WQS"/>
         <segue reference="KBR-5L-ez0"/>
-        <segue reference="dwR-E4-82o"/>
+        <segue reference="OC7-hT-lCd"/>
+        <segue reference="wDe-rl-syz"/>
+        <segue reference="76D-eb-acg"/>
     </inferredMetricsTieBreakers>
 </document>

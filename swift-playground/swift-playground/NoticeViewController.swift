@@ -112,7 +112,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         }
         
         if segue.identifier == "showPostFromNotice" {
-            let vc = segue.destinationViewController as! NewViewController
+            let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = noticeLinkIds[cellIndex]
         }
         
