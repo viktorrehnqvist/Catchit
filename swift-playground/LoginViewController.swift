@@ -19,14 +19,15 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate {
         if json as! Bool == true {
             self.performSegueWithIdentifier("LoginFromLoginView", sender: nil)
         } else {
-            print("Failed login")
+            let ac = UIAlertController(title: "Felaktiga inloggningsuppgifter", message: "De angivna inloggningsuppgifterna är felaktiga. Försök igen.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.authService.delegate = self
-        print("Login view")
         // Do any additional setup after loading the view.
     }
 
@@ -38,7 +39,11 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate {
     @IBAction func loginUser(sender: AnyObject?) {
         self.authService.loginUser(self.emailLabel.text!, password: self.passwordLabel.text!)
     }
-
+    
+    @IBAction func resignKeyboard(sender: AnyObject) {
+        self.view.endEditing(true)
+    }
+    
     /*
     // MARK: - Navigation
 

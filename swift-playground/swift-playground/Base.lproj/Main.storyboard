@@ -273,14 +273,21 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="resignKeyboard:" destination="oaG-zJ-hso" eventType="editingDidEndOnExit" id="Gyy-Md-ygY"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lösenord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6n3-IA-ezJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lösenord" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6n3-IA-ezJ">
                                 <rect key="frame" x="180" y="315" width="240" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="BjY-z0-Co9"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="resignKeyboard:" destination="oaG-zJ-hso" eventType="editingDidEndOnExit" id="gi6-Yu-icS"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMD-4u-HdC">
                                 <rect key="frame" x="180" y="353" width="240" height="30"/>
@@ -292,6 +299,7 @@
                                 </state>
                                 <connections>
                                     <action selector="loginUser:" destination="oaG-zJ-hso" eventType="touchUpInside" id="k6P-Y0-T3g"/>
+                                    <action selector="resignKeyboard:" destination="oaG-zJ-hso" eventType="touchUpInside" id="IRz-Xa-3D3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Is-LS-LCn">
@@ -373,6 +381,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="resignKeyboard:" destination="pTY-6l-dlQ" eventType="editingDidEndOnExit" id="krF-8m-lNf"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lösenord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZf-S1-QCm">
                                 <rect key="frame" x="180" y="315" width="240" height="30"/>
@@ -380,7 +391,10 @@
                                     <constraint firstAttribute="height" constant="30" id="7iH-HL-cF2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="resignKeyboard:" destination="pTY-6l-dlQ" eventType="editingDidEndOnExit" id="zcq-vt-Sc6"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOy-ON-9CH">
                                 <rect key="frame" x="180" y="353" width="240" height="30"/>
@@ -392,6 +406,7 @@
                                 </state>
                                 <connections>
                                     <action selector="registerUser:" destination="pTY-6l-dlQ" eventType="touchUpInside" id="6wi-o1-1Dk"/>
+                                    <action selector="resignKeyboard:" destination="pTY-6l-dlQ" eventType="touchUpInside" id="zWd-Lz-IZE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfB-4d-UPe">
@@ -2049,9 +2064,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
+        <segue reference="N5Z-XD-MLh"/>
+        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="KBR-5L-ez0"/>
         <segue reference="dwR-E4-82o"/>
-        <segue reference="jal-hA-pvU"/>
-        <segue reference="djO-lN-Qc8"/>
-        <segue reference="QzT-29-F4w"/>
     </inferredMetricsTieBreakers>
 </document>

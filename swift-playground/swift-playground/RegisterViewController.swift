@@ -21,7 +21,9 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
             print("Registration complete")
             self.performSegueWithIdentifier("LoginFromRegistrationView", sender: nil)
         } else {
-            print("Failed login")
+            let ac = UIAlertController(title: "Felaktiga registreringsuppgifter", message: "De angivna registreringsuppgifterna är felaktiga. Försök igen.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         }
     }
     
@@ -38,6 +40,10 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     
     @IBAction func registerUser(sender: AnyObject?) {
         self.authService.registerUser(self.emailLabel.text!, password: self.passwordLabel.text!)
+    }
+    
+    @IBAction func resignKeyboard(sender: AnyObject) {
+        sender.resignFirstResponder()
     }
 
     /*

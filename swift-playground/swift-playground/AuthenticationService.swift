@@ -34,8 +34,8 @@ class AuthenticationService {
                     // True if registration is complete. This should be changed for better readability.
                     if json!.count > 1 {
                         let userEmail = json?["email"] as! String
-                        let username = json?["name"] as! String
                         if let userToken = json?["authentication_token"] as? String {
+                            let username = json?["name"] as! String
                             let userId = json?["id"] as! Int
                             let headers = ["X-User-Email": userEmail, "X-User-Token": userToken]
                             self.userDefaults.setObject(userEmail, forKey: "email")
