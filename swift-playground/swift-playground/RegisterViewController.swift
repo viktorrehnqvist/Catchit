@@ -13,7 +13,6 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     let authService = AuthenticationService()
     
     @IBOutlet weak var emailLabel: UITextField!
-    @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
     
     func setAuthenticationData(json: AnyObject) {
@@ -38,7 +37,7 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     }
     
     @IBAction func registerUser(sender: AnyObject?) {
-        self.authService.registerUser(self.emailLabel.text!, username: self.usernameLabel.text!, password: self.passwordLabel.text!)
+        self.authService.registerUser(self.emailLabel.text!, password: self.passwordLabel.text!)
     }
 
     /*

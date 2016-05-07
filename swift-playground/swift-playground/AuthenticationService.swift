@@ -19,7 +19,7 @@ class AuthenticationService {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let url = "http://192.168.1.116:3000/"
     
-    func registerUser(email: String, username: String, password: String) {
+    func registerUser(email: String, password: String) {
         let parameters = [
             "user": [
                 "email": email,
@@ -34,6 +34,7 @@ class AuthenticationService {
                     // True if registration is complete. This should be changed for better readability.
                     if json!.count > 1 {
                         let userEmail = json?["email"] as! String
+                        let username = json?["name"] as! String
                         if let userToken = json?["authentication_token"] as? String {
                             let userId = json?["id"] as! Int
                             let headers = ["X-User-Email": userEmail, "X-User-Token": userToken]
@@ -41,6 +42,7 @@ class AuthenticationService {
                             self.userDefaults.setObject(userToken, forKey: "token")
                             self.userDefaults.setInteger(userId, forKey: "id")
                             self.userDefaults.setObject(headers, forKey: "headers")
+                            self.userDefaults.setObject(username, forKey: "name")
                             if self.delegate != nil {
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     self.delegate?.setAuthenticationData(true)
@@ -86,6 +88,7 @@ class AuthenticationService {
                     let json = response.result.value
                     // True if email and password is corrent. This should be changed for better readability.
                     if json!.count > 1 {
+                        let username = json?["name"] as! String
                         let userEmail = json?["email"] as! String
                         let userToken = json?["authentication_token"] as! String
                         let userId = json?["id"] as! Int
@@ -94,6 +97,7 @@ class AuthenticationService {
                         self.userDefaults.setObject(userToken, forKey: "token")
                         self.userDefaults.setInteger(userId, forKey: "id")
                         self.userDefaults.setObject(headers, forKey: "headers")
+                        self.userDefaults.setObject(username, forKey: "name")
                         if self.delegate != nil {
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 self.delegate?.setAuthenticationData(true)

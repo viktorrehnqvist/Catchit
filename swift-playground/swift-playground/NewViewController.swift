@@ -84,7 +84,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
         super.viewDidLoad()
         self.postService.getPost(postId!)
         self.postService.delegate = self
-        self.currentUsername = userDefaults.objectForKey("email") as? String
+        self.currentUsername = userDefaults.objectForKey("name") as? String
         textField.delegate = self
         // Do any additional setup after loading the view.
     }
