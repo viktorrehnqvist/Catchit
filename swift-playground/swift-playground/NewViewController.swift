@@ -76,6 +76,10 @@ class NewViewController: UIViewController, UICollectionViewDelegate, PostService
     func updatePostData(json: AnyObject) {
     }
     
+    func setNewPostData(json: AnyObject) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.postService.getPost(postId!)

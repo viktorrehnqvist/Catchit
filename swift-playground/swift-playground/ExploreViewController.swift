@@ -62,6 +62,10 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UICollection
         
     }
     
+    func setNewPostData(json: AnyObject) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         postService.getExplorePosts()

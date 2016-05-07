@@ -11,9 +11,10 @@ import Foundation
 import Alamofire
 
 @available(iOS 9.0, *)
-class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let postService = PostService()
+    var scrollView = UIScrollView()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -34,6 +35,7 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
     var postLikeCounts: [Int] = []
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
+    var justCheckedForNewPosts: Bool = true
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
@@ -56,8 +58,8 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
                 postLikeCounts.append(json[i]?["likes_count"] as! Int)
                 postLike.append(json[i]?["like"] as! Bool)
                 
-                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
-                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
+                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String, new: false)
+                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: false)
             }
         } else {
             morePostsToLoad = false
@@ -82,16 +84,45 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         }
     }
     
+    func setNewPostData(json: AnyObject) {
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                print(json)
+                achievementDescriptions.insert(((json[i]?["achievement_desc"])! as! String), atIndex: 0)
+                achievementIds.insert(((json[i]?["achievement_id"]) as! Int), atIndex: 0)
+                achievementScores.insert((json[i]?["achievement_score"] as! Int), atIndex: 0)
+                postIds.insert((json[i]?["id"] as! Int), atIndex: 0)
+                postCreatedAt.insert((json[i]?["created_at"] as! String), atIndex: 0)
+                postUpdatedAt.insert((json[i]?["updated_at"] as! String), atIndex: 0)
+                postImageUrls.insert(((json[i]?["image_url"])! as! String), atIndex: 0)
+                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                postUserIds.insert((json[i]?["user_id"] as! Int), atIndex: 0)
+                postUserNames.insert(((json[i]?["user_name"])! as! String), atIndex: 0)
+                postUserAvatarUrls.insert(((json[i]?["user_avatar_url"])! as! String), atIndex: 0)
+                postCommentCounts.insert((json[i]?["comments_count"] as! Int), atIndex: 0)
+                postLikeCounts.insert((json[i]?["likes_count"] as! Int), atIndex: 0)
+                postLike.insert((json[i]?["like"] as! Bool), atIndex: 0)
+                
+                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String, new: true)
+                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: true)
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         postService.getPosts()
         self.postService.delegate = self
+        self.collectionView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(animated: Bool) {
+        print(postIds)
         self.navigationController?.navigationBarHidden = false
         postService.updatePosts(postIds, updatedAt: postUpdatedAt)
+        justCheckedForNewPosts = false
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
@@ -209,27 +240,41 @@ class ViewController: UIViewController, PostServiceDelegate, UICollectionViewDel
         
     }
     
-    
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
             postService.fetchMorePosts(postIds.last!)
         }
     }
     
-    func fetchDataFromUrlToPostImages(fetchUrl: String) {
+    func fetchDataFromUrlToPostImages(fetchUrl: String, new: Bool) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
-        self.postImages.append(image!)
+        if new {
+            self.postImages.insert(image!, atIndex: 0)
+        } else {
+            self.postImages.append(image!)
+        }
     }
     
-    func fetchDataFromUrlToPostUserAvatars(fetchUrl: String) {
+    func fetchDataFromUrlToPostUserAvatars(fetchUrl: String, new: Bool) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
-        self.postUserAvatars.append(image!)
+        if new {
+            self.postUserAvatars.insert(image!, atIndex: 0)
+        } else {
+            self.postUserAvatars.append(image!)
+        }
     }
-
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
+            postService.getNewPosts(postIds.first!)
+            justCheckedForNewPosts = true
+        }
+    }
+    
 }
 
 

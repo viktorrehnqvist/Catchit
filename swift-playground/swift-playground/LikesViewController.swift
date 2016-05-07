@@ -40,6 +40,10 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         
     }
     
+    func setNewPostData(json: AnyObject) {
+        
+    }
+    
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
         userIds = (json["completer_infos"] as! NSArray)[0] as! [Int]
         userNames = (json["completer_infos"] as! NSArray)[1] as! [String]
