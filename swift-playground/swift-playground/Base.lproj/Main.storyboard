@@ -1590,6 +1590,7 @@
                                         <outlet property="achievementDescription" destination="QYP-eu-IsQ" id="jsK-Ht-6c9"/>
                                         <outlet property="achievementScore" destination="KpZ-yy-JYX" id="GDi-TH-YS8"/>
                                         <outlet property="bucketlistImage" destination="ZLl-Mb-Ila" id="pEd-MP-wfl"/>
+                                        <outlet property="uploadButton" destination="L7x-li-HBD" id="iRz-KY-ZCv"/>
                                     </connections>
                                 </collectionReusableView>
                                 <connections>
@@ -2049,8 +2050,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
         <segue reference="dwR-E4-82o"/>
-        <segue reference="UnV-OJ-WQS"/>
-        <segue reference="N5Z-XD-MLh"/>
-        <segue reference="KBR-5L-ez0"/>
+        <segue reference="jal-hA-pvU"/>
+        <segue reference="djO-lN-Qc8"/>
+        <segue reference="QzT-29-F4w"/>
     </inferredMetricsTieBreakers>
 </document>

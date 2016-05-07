@@ -172,6 +172,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         headerView.achievementCompleterCount.text = String(achievementCompleterCount) + " har klarat detta"
         headerView.achievementScore.text = String(achievementScore) + "p"
         headerView.tag = achievementId
+        headerView.uploadButton.layer.cornerRadius = 5
         header = headerView
         return headerView
     }

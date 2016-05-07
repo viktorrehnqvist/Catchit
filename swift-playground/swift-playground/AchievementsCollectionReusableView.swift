@@ -14,5 +14,6 @@ class AchievementsCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var achievementDescription: UILabel!
     @IBOutlet weak var achievementCompleterCount: UILabel!
     @IBOutlet weak var achievementScore: UILabel!
+    @IBOutlet weak var uploadButton: UIButton!
     
 }
