@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     let userService = UserService()
     let postService = PostService()
     @IBOutlet weak var collectionView: UICollectionView!
+    var header: ProfileCollectionReusableView!
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var userId: Int?
@@ -159,6 +160,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         if self.userFollowed {
             headerView.followButton.setTitle("Sluta följ", forState: .Normal)
         }
+        header = headerView
         return headerView
     }
     
@@ -186,12 +188,15 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         if sender.titleForState(.Normal) == "Följ" {
             userService.followUserChange(userId!, follow: true)
             sender.setTitle("Sluta följ", forState: .Normal)
-            userFollowed = true
+            self.userFollowed = true
+            self.userFollowersCount += 1
         } else {
             userService.followUserChange(userId!, follow: false)
             sender.setTitle("Följ", forState: .Normal)
             userFollowed = false
+            self.userFollowersCount -= 1
         }
+        header.followersCount.text = String(userFollowersCount) + " Följare"
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
