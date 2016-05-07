@@ -136,7 +136,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         
         loadMore(indexPath.row)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! PostsCollectionViewCell
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
@@ -209,7 +209,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
-            let thisCell: CollectionViewCell = main as! CollectionViewCell
+            let thisCell: PostsCollectionViewCell = main as! PostsCollectionViewCell
             cellIndex = thisCell.commentButton.tag
             if segue.identifier == "showCommentsFromHome" {
                 let vc = segue.destinationViewController as! ShowPostViewController

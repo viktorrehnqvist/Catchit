@@ -136,7 +136,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         
         loadMore(indexPath.row)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! PostsCollectionViewCell
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
@@ -209,7 +209,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
-            let thisCell: CollectionViewCell = main as! CollectionViewCell
+            let thisCell: PostsCollectionViewCell = main as! PostsCollectionViewCell
             cellIndex = thisCell.commentButton.tag
             if segue.identifier == "showCommentsFromExplore" {
                 let vc = segue.destinationViewController as! ShowPostViewController

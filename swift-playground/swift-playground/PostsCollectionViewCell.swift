@@ -1,5 +1,5 @@
 //
-//  CollectionViewCell.swift
+//  PostsCollectionViewCell.swift
 //  swift-playground
 //
 //  Created by viktor johansson on 11/03/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class PostsCollectionViewCell: UICollectionViewCell {
     
     let postService = PostService()
     var postId: Int?

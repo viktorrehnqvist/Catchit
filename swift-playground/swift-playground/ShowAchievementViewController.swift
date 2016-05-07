@@ -121,7 +121,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         
         loadMore(indexPath.row)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("showAchievementCell", forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("showAchievementCell", forIndexPath: indexPath) as! PostsCollectionViewCell
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.pressCommentButton(_:)))
@@ -280,7 +280,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             let mainCell = point?.superview
             let main = mainCell?.superview
             // If sender is a post.
-            if let thisCell: CollectionViewCell = main as? CollectionViewCell {
+            if let thisCell: PostsCollectionViewCell = main as? PostsCollectionViewCell {
                 cellIndex = thisCell.commentButton.tag
                 if segue.identifier == "showLikesFromShowAchievement" {
                     let vc = segue.destinationViewController as! LikesViewController

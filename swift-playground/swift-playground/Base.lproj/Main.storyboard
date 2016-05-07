@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="cell" id="s9q-bA-xns" customClass="CollectionViewCell" customModule="Catchit" customModuleProvider="target">
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="cell" id="s9q-bA-xns" customClass="PostsCollectionViewCell" customModule="Catchit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="64" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -476,7 +476,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="exploreCell" id="oQX-pO-Lvo" customClass="CollectionViewCell" customModule="Catchit" customModuleProvider="target">
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="exploreCell" id="oQX-pO-Lvo" customClass="PostsCollectionViewCell" customModule="Catchit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="64" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1067,7 +1067,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="1" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="profileCell" id="v7h-xe-7Gg" customClass="CollectionViewCell" customModule="Catchit" customModuleProvider="target">
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="profileCell" id="v7h-xe-7Gg" customClass="PostsCollectionViewCell" customModule="Catchit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="145" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1362,7 +1362,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="showAchievementCell" id="m5w-MS-in6" customClass="CollectionViewCell" customModule="Catchit" customModuleProvider="target">
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="showAchievementCell" id="m5w-MS-in6" customClass="PostsCollectionViewCell" customModule="Catchit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="342" width="250" height="362"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2069,9 +2069,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="KBR-5L-ez0"/>
-        <segue reference="OC7-hT-lCd"/>
-        <segue reference="wDe-rl-syz"/>
-        <segue reference="76D-eb-acg"/>
+        <segue reference="4pd-pR-4gV"/>
+        <segue reference="xHK-9p-MYi"/>
+        <segue reference="zhv-hg-8pY"/>
+        <segue reference="JTS-hb-4sY"/>
     </inferredMetricsTieBreakers>
 </document>

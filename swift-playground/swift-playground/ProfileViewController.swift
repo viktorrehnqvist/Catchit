@@ -102,7 +102,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         
         loadMore(indexPath.row)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! PostsCollectionViewCell
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
@@ -216,7 +216,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
-            if let thisCell: CollectionViewCell = main as? CollectionViewCell {
+            if let thisCell: PostsCollectionViewCell = main as? PostsCollectionViewCell {
                 cellIndex = thisCell.tag
             }
         }
