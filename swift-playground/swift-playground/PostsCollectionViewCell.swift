@@ -10,6 +10,7 @@ import UIKit
 
 class PostsCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Setup
     let postService = PostService()
     var postId: Int?
     
@@ -24,6 +25,7 @@ class PostsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    // MARK: User Interaction
     @IBAction func pressLikeButton(sender: AnyObject) {
         postService.likePost(postId!)
         let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)

@@ -10,11 +10,12 @@ import UIKit
 
 class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
 
+    // MARK: Setup
     let authService = AuthenticationService()
-    
     @IBOutlet weak var emailLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
     
+    // MARK: Lifecycle
     func setAuthenticationData(json: AnyObject) {
         print(json)
         if json as! Bool == true {
@@ -27,6 +28,7 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
         }
     }
     
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.authService.delegate = self
@@ -38,6 +40,7 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: User Interaction
     @IBAction func registerUser(sender: AnyObject?) {
         self.authService.registerUser(self.emailLabel.text!, password: self.passwordLabel.text!)
     }

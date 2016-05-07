@@ -13,6 +13,7 @@ import Alamofire
 @available(iOS 9.0, *)
 class NoticeViewController:  UIViewController, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // MARK: Setup
     let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
@@ -25,6 +26,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     var noticeLinkIds: [Int] = []
     var noticeSeen: [AnyObject] = []
     
+    // MARK: Lifecycle
     func setUserData(json: AnyObject, follow: Bool) {
         noticeUserIds = (json["notice_infos"] as! NSArray)[0] as! [Int]
         noticeUserAvatarUrls = (json["notice_infos"] as! NSArray)[1] as! [String]
@@ -35,6 +37,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         loadAvatars()
     }
     
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.userService.delegate = self
@@ -58,6 +61,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.noticeMessages.count
     }
@@ -89,6 +93,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
             return size
     }
     
+    // MARK: User Interaction
     @IBAction func showNoticeOrigin(sender: AnyObject?) {
         // Check if sender is of type achievement or like and send to correct origin.
         let point = sender?.view
@@ -103,6 +108,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         }
     }
     
+    // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        let cellIndex = sender!.tag
         
@@ -118,6 +124,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         
     }
     
+    // MARK: Additional Helpers
     func loadAvatars() {
         if self.noticeUserAvatarUrls.count > 0 {
             for avatarUrl in self.noticeUserAvatarUrls {

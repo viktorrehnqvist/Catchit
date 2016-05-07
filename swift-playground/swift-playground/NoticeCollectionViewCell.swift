@@ -10,6 +10,7 @@ import UIKit
 
 class NoticeCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Setup
     @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var noticeImage: UIImageView!
     

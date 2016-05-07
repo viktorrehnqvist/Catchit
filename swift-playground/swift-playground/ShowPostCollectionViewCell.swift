@@ -9,6 +9,7 @@
 import UIKit
 
 class ShowPostCollectionViewCell: UICollectionViewCell {
+    // MARK: Setup
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!

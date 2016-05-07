@@ -9,16 +9,19 @@
 import Foundation
 import Alamofire
 
+// MARK: Protocols
 protocol AuthenticationServiceDelegate {
     func setAuthenticationData(json: AnyObject)
 }
 
 class AuthenticationService {
     
+    // MARK: Setup
     var delegate: AuthenticationServiceDelegate?
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let url = "http://192.168.1.116:3000/"
     
+    // MARK: POST-Requests
     func registerUser(email: String, password: String) {
         let parameters = [
             "user": [

@@ -14,6 +14,7 @@ import MobileCoreServices
 @available(iOS 9.0, *)
 class AchievementsViewController: UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    // MARK: Setup
     let achievementService = AchievementService()
     let uploadService = UploadService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -33,7 +34,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementInBucketlist: [Bool] = []
     var moreAchievementsToLoad: Bool = true
     var segueShouldShowCompleters: Bool = false
-
+    
+    // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
@@ -91,6 +93,13 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
     }
     
+    func loadMore(cellIndex: Int) {
+        if cellIndex == self.achievementDescriptions.count - 1 && moreAchievementsToLoad {
+            achievementService.fetchMoreAchievements(achievementIds.last!)
+        }
+    }
+    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         achievementService.getAchievements()
@@ -108,6 +117,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.achievementDescriptions.count
     }
@@ -157,36 +167,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             return size
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var cellIndex: Int = 0
-        if sender?.integerValue != nil {
-            // Uploaded post, send to specific post, this should be changed for better readability.
-            let vc = segue.destinationViewController as! ShowPostViewController
-            vc.postId = sender?.integerValue
-        } else {
-            let point = sender?.view
-            let mainCell = point?.superview
-            let main = mainCell?.superview
-            if let thisCell: AchievementCollectionViewCell = main as? AchievementCollectionViewCell {
-                cellIndex = thisCell.tag
-            }
-            if segue.identifier == "showLikesViewFromAchievement" {
-                let vc = segue.destinationViewController as! LikesViewController
-                vc.achievementId = achievementIds[cellIndex]
-                if segueShouldShowCompleters {
-                    vc.typeIs = "achievementCompleters"
-                } else {
-                    vc.typeIs = "achievementShare"
-                }
-            }
-            
-            if segue.identifier == "showAchievementFromAchievements" {
-                let vc = segue.destinationViewController as! ShowAchievementViewController
-                vc.achievementId = achievementIds[cellIndex]
-            }
-        }
-    }
-    
+    // MARK: User Interaction
     @IBAction func showCompleters(sender: AnyObject?) {
         self.segueShouldShowCompleters = true
         self.performSegueWithIdentifier("showLikesViewFromAchievement", sender: sender)
@@ -261,10 +242,36 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func loadMore(cellIndex: Int) {
-        if cellIndex == self.achievementDescriptions.count - 1 && moreAchievementsToLoad {
-            achievementService.fetchMoreAchievements(achievementIds.last!)
+    // MARK: Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var cellIndex: Int = 0
+        if sender?.integerValue != nil {
+            // Uploaded post, send to specific post, this should be changed for better readability.
+            let vc = segue.destinationViewController as! ShowPostViewController
+            vc.postId = sender?.integerValue
+        } else {
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            if let thisCell: AchievementCollectionViewCell = main as? AchievementCollectionViewCell {
+                cellIndex = thisCell.tag
+            }
+            if segue.identifier == "showLikesViewFromAchievement" {
+                let vc = segue.destinationViewController as! LikesViewController
+                vc.achievementId = achievementIds[cellIndex]
+                if segueShouldShowCompleters {
+                    vc.typeIs = "achievementCompleters"
+                } else {
+                    vc.typeIs = "achievementShare"
+                }
+            }
+            
+            if segue.identifier == "showAchievementFromAchievements" {
+                let vc = segue.destinationViewController as! ShowAchievementViewController
+                vc.achievementId = achievementIds[cellIndex]
+            }
         }
     }
+    
     
 }

@@ -26,6 +26,7 @@ extension UILabel{
 
 class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostServiceDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
+    // MARK: Setup
     var header: ShowPostCollectionReusableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
@@ -52,10 +53,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     var commentUserIds: [Int] = []
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
-    @IBAction func backButton(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
+    // MARK: Lifecycle
     func setPostData(json: AnyObject) {
         postImageUrl = json["image_url"] as! String
         userId = json["user_id"] as! Int
@@ -80,6 +78,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         
     }
     
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.postService.getPost(postId!)
@@ -161,7 +160,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         return headerView
     }
 
-    
+    // MARK: User Interaction
     func textFieldDidBeginEditing(textField: UITextField) {
         animateViewMoving(true, moveValue: 165, moveSpeed: 0.5)
     }
@@ -176,30 +175,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         return true
     }
     
-    
-    // Lifting the view up
-    func animateViewMoving (up:Bool, moveValue :CGFloat, moveSpeed:Double){
-        let movementDuration:NSTimeInterval = moveSpeed
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        UIView.beginAnimations( "animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration)
-        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
-        UIView.commitAnimations()
-    }
-    
-    func createComment () {
-        // This should not use all this counts, bad for the performance, check if atIndex really is needed.
-        postService.createComment(textField.text!, postId: postId)
-        let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
-        comments.insert(textField.text!, atIndex: self.comments.count)
-        commentUserNames.insert(currentUsername!, atIndex: self.commentUserNames.count)
-        commentUserAvatars.insert(UIImage(named: "avatar")!, atIndex: self.commentUserAvatars.count)
-        collectionView.insertItemsAtIndexPaths([indexPath])
-        textField.text = ""
-        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
-    }
-    
     @IBAction func showAchievement(sender: AnyObject?) {
         self.performSegueWithIdentifier("showAchievementFromComments", sender: sender)
     }
@@ -212,6 +187,11 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         self.performSegueWithIdentifier("showProfileFromComments", sender: sender)
     }
     
+    @IBAction func backButton(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
@@ -247,6 +227,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
 
     }
     
+    // MARK: Additional Helpers
     func loadImageFromUrls() {
         if self.commentUserAvatarUrls.count > 0 {
             for avatarUrl in self.commentUserAvatarUrls {
@@ -266,6 +247,29 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         userAvatar = UIImage(data: data!)
 
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat, moveSpeed:Double){
+        // Lifts the view
+        let movementDuration:NSTimeInterval = moveSpeed
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
+    
+    func createComment () {
+        // Check if counts actually is needed.
+        postService.createComment(textField.text!, postId: postId)
+        let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
+        comments.insert(textField.text!, atIndex: self.comments.count)
+        commentUserNames.insert(currentUsername!, atIndex: self.commentUserNames.count)
+        commentUserAvatars.insert(UIImage(named: "avatar")!, atIndex: self.commentUserAvatars.count)
+        collectionView.insertItemsAtIndexPaths([indexPath])
+        textField.text = ""
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
     }
 
 }

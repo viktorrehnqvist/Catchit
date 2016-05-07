@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileCollectionReusableView: UICollectionReusableView {
-        
+    // MARK: Setup
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var userAvatar: UIImageView!
     @IBOutlet weak var achievementCount: UILabel!

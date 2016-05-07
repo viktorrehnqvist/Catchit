@@ -9,16 +9,19 @@
 import Foundation
 import Alamofire
 
+// MARK: Protocols
 protocol UploadServiceDelegate {
     func setUploadedResult(json: AnyObject)
 }
 
 class UploadService {
     
+    // MARK: Setup
     var delegate: UploadServiceDelegate?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     
+    // MARK: POST-Requests
     func createPost() {
         let parameters = [
             "task": [

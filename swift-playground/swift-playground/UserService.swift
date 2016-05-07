@@ -9,17 +9,20 @@
 import Foundation
 import Alamofire
 
+// MARK: Protocols
 protocol UserServiceDelegate {
     func setUserData(json: AnyObject, follow: Bool)
 }
 
 class UserService {
     
+    // MARK: Setup
     var delegate: UserServiceDelegate?
     let currentUserId = NSUserDefaults.standardUserDefaults().objectForKey("id") as? Int
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     
+    // MARK: GET-Requests
     func getCurrentUserData() {
         Alamofire.request(.GET, url + "users/\(currentUserId!).json/", headers: headers)
             .responseJSON { response in
@@ -64,6 +67,7 @@ class UserService {
 
     }
     
+    // MARK: PUT-Requests
     func followUserChange(userId: Int, follow: Bool) {
         if follow {
         Alamofire.request(.PUT, url + "users/\(userId)/follow", headers: headers)

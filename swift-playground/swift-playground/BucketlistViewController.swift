@@ -14,6 +14,7 @@ import MobileCoreServices
 @available(iOS 9.0, *)
 class BucketlistViewController:  UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
     
+    // MARK: Setup
     let achievementService = AchievementService()
     let uploadService = UploadService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -23,6 +24,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
     
+    // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
         if json["bucketlist"]!!.count > 0 {
             for i in 0...(json["bucketlist"]!!.count - 1) {
@@ -38,6 +40,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         self.performSegueWithIdentifier("showPostFromBucketlist", sender: postId)
     }
     
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.achievementService.delegate = self
@@ -57,6 +60,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.achievementIds.count
     }
@@ -89,30 +93,10 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
             return size
     }
     
+    // MARK: User Interaction
     @IBAction func showAchievement(sender: AnyObject?) {
         self.performSegueWithIdentifier("showAchievementFromBucketlist", sender: sender)
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        let point = sender?.view
-        let mainCell = point?.superview
-        let main = mainCell?.superview
-        if let thisCell: BucketlistCollectionViewCell = main as? BucketlistCollectionViewCell {
-            let cellIndex = thisCell.tag
-            if segue.identifier == "showAchievementFromBucketlist" {
-                let vc = segue.destinationViewController as! ShowAchievementViewController
-                vc.achievementId = achievementIds[cellIndex]
-            }
-        }
-        
-        if segue.identifier == "showPostFromBucketlist" {
-            let vc = segue.destinationViewController as! ShowPostViewController
-            vc.postId = sender!.integerValue
-        }
-        
-    }
-
     
     @IBAction func uploadPost(sender: AnyObject?) {
         uploadAchievementId = sender!.tag
@@ -158,6 +142,25 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
+    // MARK: Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        if let thisCell: BucketlistCollectionViewCell = main as? BucketlistCollectionViewCell {
+            let cellIndex = thisCell.tag
+            if segue.identifier == "showAchievementFromBucketlist" {
+                let vc = segue.destinationViewController as! ShowAchievementViewController
+                vc.achievementId = achievementIds[cellIndex]
+            }
+        }
+        
+        if segue.identifier == "showPostFromBucketlist" {
+            let vc = segue.destinationViewController as! ShowPostViewController
+            vc.postId = sender!.integerValue
+        }
+        
+    }
     
 }

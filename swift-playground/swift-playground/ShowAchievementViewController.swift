@@ -11,6 +11,7 @@ import MobileCoreServices
 
 class ShowAchievementViewController: UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    // MARK: Setup
     let achievementService = AchievementService()
     let uploadService = UploadService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -36,7 +37,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     var morePostsToLoad: Bool = true
     var segueShouldShowCompleters: Bool = false
     
-    
+    // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
         if firstFetch {
             achievementScore = json["score"] as! Int
@@ -95,6 +96,13 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.performSegueWithIdentifier("showPostFromAchievement", sender: postId)
     }
     
+    func loadMore(cellIndex: Int) {
+        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            achievementService.fetchMorePostsForAchievement(postIds.last!, achievementId: achievementId)
+        }
+    }
+    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         achievementService.getAchievement(achievementId)
@@ -112,7 +120,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.postIds.count
     }
@@ -177,7 +185,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         return headerView
     }
     
-    
+    // MARK: User Interaction
     @IBAction func bucketlistPress(sender: AnyObject?) {
         if header.bucketlistImage.image == addToBucketlistImage {
             achievementService.addToBucketlist(achievementId)
@@ -187,8 +195,6 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             header.bucketlistImage.image = addToBucketlistImage
         }
     }
-    
-
     
     @IBAction func pressCommentButton(sender: AnyObject?) {
         self.performSegueWithIdentifier("showCommentsFromShowAchievement", sender: sender)
@@ -219,7 +225,6 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             sender.setTitle("Följ", forState: .Normal)
         }
     }
-    
     
     @IBAction func uploadPost(sender: AnyObject?) {
         let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
@@ -265,7 +270,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
+    // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
@@ -315,6 +320,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
     }
     
+    // MARK: Additional Helpers
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
@@ -327,12 +333,6 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postUserAvatars.append(image!)
-    }
-    
-    func loadMore(cellIndex: Int) {
-        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            achievementService.fetchMorePostsForAchievement(postIds.last!, achievementId: achievementId)
-        }
     }
     
 }

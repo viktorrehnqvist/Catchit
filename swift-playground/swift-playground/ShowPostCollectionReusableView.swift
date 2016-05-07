@@ -9,7 +9,7 @@
 import UIKit
 
 class ShowPostCollectionReusableView: UICollectionReusableView {
-        
+    // MARK: Setup
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!

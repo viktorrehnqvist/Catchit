@@ -13,6 +13,7 @@ import Alamofire
 @available(iOS 9.0, *)
 class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // MARK: Setup
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
@@ -38,6 +39,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
+    // MARK: Lifecycle
     func setPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
@@ -108,6 +110,20 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         }
     }
     
+    func loadMore(cellIndex: Int) {
+        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            postService.fetchMorePosts(postIds.last!)
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
+            postService.getNewPosts(postIds.first!)
+            justCheckedForNewPosts = true
+        }
+    }
+    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         postService.getPosts()
@@ -128,6 +144,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.postIds.count
     }
@@ -181,6 +198,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             return size
     }
     
+    // MARK: User Interaction
     @IBAction func pressCommentButton(sender: AnyObject?) {
         self.performSegueWithIdentifier("showCommentsFromHome", sender: sender)
     }
@@ -197,6 +215,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         self.performSegueWithIdentifier("showProfileFromHome", sender: sender)
     }
     
+    // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cellIndex: Int
         if (sender!.tag != nil) {
@@ -235,12 +254,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         
     }
     
-    func loadMore(cellIndex: Int) {
-        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            postService.fetchMorePosts(postIds.last!)
-        }
-    }
-    
+    // MARK: Additional Helpers
     func fetchDataFromUrlToPostImages(fetchUrl: String, new: Bool) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
@@ -260,13 +274,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             self.postUserAvatars.insert(image!, atIndex: 0)
         } else {
             self.postUserAvatars.append(image!)
-        }
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
-            postService.getNewPosts(postIds.first!)
-            justCheckedForNewPosts = true
         }
     }
     

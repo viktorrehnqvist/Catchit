@@ -9,7 +9,7 @@
 import UIKit
 
 class AchievementsCollectionReusableView: UICollectionReusableView {
-    
+    // MARK: Setup
     @IBOutlet weak var bucketlistImage: UIImageView!
     @IBOutlet weak var achievementDescription: UILabel!
     @IBOutlet weak var achievementCompleterCount: UILabel!

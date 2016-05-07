@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // MARK: Setup
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
     let postService = PostService()
@@ -41,6 +42,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     
+    // MARK: Lifecycle
     func setUserData(json: AnyObject, follow: Bool) {
         print(json)
         username = json["name"] as? String
@@ -70,7 +72,14 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
-
+    
+    func loadMore(cellIndex: Int) {
+        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            postService.fetchMorePosts(postIds.last!)
+        }
+    }
+    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         print(userFollowed)
@@ -94,6 +103,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.postIds.count
     }
@@ -170,6 +180,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         return headerView
     }
     
+    // MARK: User Interaction
     @IBAction func pressCommentButton(sender: AnyObject?) {
         self.performSegueWithIdentifier("showCommentsFromProfile", sender: sender)
     }
@@ -205,6 +216,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         header.followersCount.text = String(userFollowersCount) + " Följare"
     }
     
+    // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
@@ -251,7 +263,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
             vc.userId = userId
         }
     }
-
+    
+    // MARK: Additional Helpers
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
         let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
         let data = NSData(contentsOfURL:url)
@@ -265,12 +278,5 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let image = UIImage(data: data!)
         self.userAvatar = image
     }
-    
-    func loadMore(cellIndex: Int) {
-        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            postService.fetchMorePosts(postIds.last!)
-        }
-    }
-
     
 }

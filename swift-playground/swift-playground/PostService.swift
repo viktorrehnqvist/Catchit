@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+// MARK: Protocols
 protocol PostServiceDelegate {
     func setPostData(json: AnyObject)
     func updatePostData(json: AnyObject)
@@ -17,10 +18,12 @@ protocol PostServiceDelegate {
 
 class PostService {
     
+    // MARK: Setup
     var delegate: PostServiceDelegate?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     
+    // MARK: GET-Requests
     func getPosts() {
         Alamofire.request(.GET, url + "posts.json/", headers: headers)
             .responseJSON { response in
@@ -115,10 +118,12 @@ class PostService {
         }
     }
     
+    // MARK: PUT-Requests
     func likePost(postId: Int) {
         Alamofire.request(.PUT, url + "posts/like/\(postId)", headers: headers)
     }
     
+    // MARK: POST-Requests
     func createComment(comment: String, postId: Int) {
         let parameters = [
             "comment": [

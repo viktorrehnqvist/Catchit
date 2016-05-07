@@ -10,10 +10,13 @@ import UIKit
 
 class LikesViewController: UIViewController, PostServiceDelegate, AchievementServiceDelegate, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // MARK: Setup
     let postService = PostService()
     let achievementService = AchievementService()
     let userService = UserService()
+    @IBOutlet weak var collectionView: UICollectionView!
     var screenSize: CGRect = UIScreen.mainScreen().bounds
+    
     var typeIs: String!
     var userId: Int?
     var postId: Int?
@@ -22,13 +25,8 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     var userIds: [Int] = []
     var userAvatarUrls: [String] = []
     var userAvatars: [UIImage] = []
-
-    @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBAction func backButton(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
+    // MARK: Lifecycle
     func setPostData(json: AnyObject) {
         userNames = (json["like_infos"] as! NSArray)[0] as! [String]
         userAvatarUrls = (json["like_infos"] as! NSArray)[1] as! [String]
@@ -37,11 +35,9 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     }
     
     func updatePostData(json: AnyObject) {
-        
     }
     
     func setNewPostData(json: AnyObject) {
-        
     }
     
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
@@ -64,9 +60,9 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         loadAvatars()
     }
     
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         switch typeIs! {
         case "post":
             self.postService.delegate = self
@@ -94,6 +90,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userIds.count
     }
@@ -125,10 +122,16 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
             return size
     }
     
+    // MARK: User Interaction
     @IBAction func showProfile(sender: AnyObject?) {
         self.performSegueWithIdentifier("showProfileFromLikes", sender: sender)
     }
     
+    @IBAction func backButton(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    // Mark: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
@@ -144,8 +147,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         }
     }
     
-
-    
+    // MARK: Additional Helpers
     func loadAvatars() {
         if self.userAvatarUrls.count > 0 {
             for avatarUrl in self.userAvatarUrls {
