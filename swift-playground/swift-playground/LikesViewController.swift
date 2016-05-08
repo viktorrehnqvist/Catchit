@@ -50,6 +50,9 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     func updateAchievementsData(json: AnyObject) {
     }
     
+    func setNewAchievementData(json: AnyObject) {
+    }
+    
     func setUserData(json: AnyObject, follow: Bool) {
         if follow {
             userNames = (json["follow_infos"] as! NSArray)[0] as! [String]

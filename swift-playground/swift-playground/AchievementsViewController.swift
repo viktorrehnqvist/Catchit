@@ -39,7 +39,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
-        print(json)
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 achievementCreatedAt.append((json[i]?["created_at"])! as! String)
@@ -146,6 +145,58 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         }
     }
     
+    func setNewAchievementData(json: AnyObject) {
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                achievementCreatedAt.insert(((json[i]?["created_at"])! as! String), atIndex: 0)
+                achievementUpdatedAt.insert(((json[i]?["updated_at"])! as! String), atIndex: 0)
+                achievementDescriptions.insert(((json[i]?["description"])! as! String), atIndex: 0)
+                achievementIds.insert(((json[i]?["id"]) as! Int), atIndex: 0)
+                achievementScores.insert((json[i]?["score"] as! Int), atIndex: 0)
+                achievementCompleterCounts.insert((json[i]?["posts_count"] as! Int), atIndex: 0)
+                achievementInBucketlist.insert((json[i]?["bucketlist"] as! Bool), atIndex: 0)
+                let postImagesToLoad = json[i]["latest_posts"]!!.count
+                // Load first three postes for achievement
+                if postImagesToLoad > 0 {
+                    for postIndex in 0...(postImagesToLoad - 1) {
+                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[postIndex] as? String {
+                            let url = NSURL(string: "http://192.168.1.116:3000" + completerImageUrl)!
+                            let data = NSData(contentsOfURL:url)
+                            if data != nil {
+                                switch postIndex {
+                                case 0:
+                                    achievementFirstCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
+                                case 1:
+                                    achievementSecondCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
+                                case 2:
+                                    achievementThirdCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
+                                default:
+                                    print("Switch Error")
+                                }
+                            }
+                        }
+                    }
+                }
+                var postsAlreadyLoaded = postImagesToLoad
+                while postsAlreadyLoaded < 3 {
+                    switch postsAlreadyLoaded {
+                    case 0:
+                        achievementFirstCompleterImages.insert((noPostImage!), atIndex: 0)
+                    case 1:
+                        achievementSecondCompleterImages.insert((noPostImage!), atIndex: 0)
+                    case 2:
+                        achievementThirdCompleterImages.insert((noPostImage!), atIndex: 0)
+                    default:
+                        print("Switch Error")
+                    }
+                    postsAlreadyLoaded! += 1
+                }
+            }
+        }
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        collectionView.setContentOffset(CGPointMake(0, -collectionView.contentInset.top), animated:true)
+    }
+    
     func setUploadedResult(json: AnyObject) {
         let postId = json["id"] as! Int
         self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
@@ -163,12 +214,16 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         achievementService.getAchievements()
         self.achievementService.delegate = self
         self.uploadService.delegate = self
+        self.collectionView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
         achievementService.updateAchievements(achievementIds, updatedAt: achievementUpdatedAt)
+        if achievementIds.first != nil {
+            achievementService.getNewAchievements(achievementIds.first!)
+        }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     

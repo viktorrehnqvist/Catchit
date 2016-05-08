@@ -13,6 +13,7 @@ import Alamofire
 protocol AchievementServiceDelegate {
     func setAchievementData(json: AnyObject, firstFetch: Bool)
     func updateAchievementsData(json: AnyObject)
+    func setNewAchievementData(json: AnyObject)
 }
 
 class AchievementService {
@@ -62,6 +63,20 @@ class AchievementService {
                         })
                     }
                 }
+        }
+    }
+    
+    func getNewAchievements(achievementId: Int) {
+        Alamofire.request(.GET, url + "achievements.json/", parameters: ["new": achievementId], headers: headers)
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setNewAchievementData(JSON)
+                        })
+                    }
+                }
+                
         }
     }
     

@@ -37,6 +37,9 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     
     func updateAchievementsData(json: AnyObject) {
     }
+    
+    func setNewAchievementData(json: AnyObject) {
+    }
 
     func setUploadedResult(json: AnyObject) {
         let postId = json["id"] as! Int
