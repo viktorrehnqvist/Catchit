@@ -93,7 +93,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     func updateAchievementsData(json: AnyObject) {
-        print(json)
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 let achievementId = json[i]?["id"] as! Int

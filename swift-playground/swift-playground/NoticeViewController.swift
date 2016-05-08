@@ -128,7 +128,6 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     func loadAvatars() {
         if self.noticeUserAvatarUrls.count > 0 {
             for avatarUrl in self.noticeUserAvatarUrls {
-                print(avatarUrl)
                 let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {

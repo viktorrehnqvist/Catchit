@@ -44,7 +44,6 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     // MARK: Lifecycle
     func setUserData(json: AnyObject, follow: Bool) {
-        print(json)
         username = json["name"] as? String
         userAchievementCount = (json["achievements"] as! NSArray).count
         userScore = json["user_score"] as! Int
@@ -62,7 +61,6 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
                 // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
                 postCommentCounts.append((json["posts"] as! NSArray)[i]["comments_count"] as! Int)
                 postLikeCounts.append((json["posts"] as! NSArray)[i]["likes_count"] as! Int)
-                // Check if current user likes the post
                 //postLike.append((json["posts"] as! NSArray)[i]["like"] as! Bool)
                 // Check if current user follows the displayed user
                 fetchDataFromUrlToPostImages((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
@@ -82,7 +80,6 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(userFollowed)
         if (userId != nil) {
             userService.getUserData(userId!)
         } else {
@@ -131,15 +128,11 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
+        cell.postId = postIds[indexPath.row]
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         
         return cell
-        //if postLike[indexPath.row] {
-          //  cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
-        //} else {
-          //  cell.likeButton?.setTitle("Gilla", forState: .Normal)
-        //}
         
     }
     

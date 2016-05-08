@@ -17,9 +17,7 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     
     // MARK: Lifecycle
     func setAuthenticationData(json: AnyObject) {
-        print(json)
         if json as! Bool == true {
-            print("Registration complete")
             self.performSegueWithIdentifier("LoginFromRegistrationView", sender: nil)
         } else {
             let ac = UIAlertController(title: "Felaktiga registreringsuppgifter", message: "De angivna registreringsuppgifterna är felaktiga. Försök igen.", preferredStyle: .Alert)

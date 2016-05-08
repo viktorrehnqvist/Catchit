@@ -157,7 +157,6 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     func loadAvatars() {
         if self.userAvatarUrls.count > 0 {
             for avatarUrl in self.userAvatarUrls {
-                print(avatarUrl)
                 let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {

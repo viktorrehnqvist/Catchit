@@ -87,7 +87,6 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     func setNewPostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
-                print(json)
                 achievementDescriptions.insert(((json[i]?["achievement_desc"])! as! String), atIndex: 0)
                 achievementIds.insert(((json[i]?["achievement_id"]) as! Int), atIndex: 0)
                 achievementScores.insert((json[i]?["achievement_score"] as! Int), atIndex: 0)

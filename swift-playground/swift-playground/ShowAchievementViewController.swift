@@ -75,7 +75,6 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         } else {
             if json.count > 0 {
                 for i in 0...(json.count - 1) {
-                    print(json)
                     postIds.append(json[i]?["id"] as! Int)
                     postImageUrls.append((json[i]?["image_url"])! as! String)
                     // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)

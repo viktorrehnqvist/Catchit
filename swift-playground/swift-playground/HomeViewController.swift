@@ -68,7 +68,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     }
     
     func updatePostData(json: AnyObject) {
-        print(json)
         if json.count > 0 {
             for i in 0...(json.count - 1) {
                 let postId = json[i]?["id"] as! Int
