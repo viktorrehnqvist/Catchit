@@ -192,9 +192,9 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     postsAlreadyLoaded! += 1
                 }
             }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            collectionView.setContentOffset(CGPointMake(0, -collectionView.contentInset.top), animated:true)
         }
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
-        collectionView.setContentOffset(CGPointMake(0, -collectionView.contentInset.top), animated:true)
     }
     
     func setUploadedResult(json: AnyObject) {
