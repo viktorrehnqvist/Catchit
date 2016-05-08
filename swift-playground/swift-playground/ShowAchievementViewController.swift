@@ -12,6 +12,7 @@ import MobileCoreServices
 class ShowAchievementViewController: UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     // MARK: Setup
+    
     let achievementService = AchievementService()
     let uploadService = UploadService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -24,6 +25,8 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     var achievementId: Int!
     var achievementScore: Int = 0
     var achievementCompleterCount: Int = 0
+    var achievementInBucketlist: Bool = false
+    var achievementCompleted: Bool = false
     var postIds: [Int] = []
     var postImageUrls: [String] = []
     var postImages: [UIImage] = []
@@ -40,6 +43,8 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
         if firstFetch {
+            achievementInBucketlist = json["bucketlist"] as! Bool
+            achievementCompleted = json["completed"] as! Bool
             achievementScore = json["score"] as! Int
             achievementCompleterCount = json["posts"]!!.count
             achievementDescription = json["description"] as! String
@@ -187,6 +192,11 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         headerView.achievementScore.text = String(achievementScore) + "p"
         headerView.tag = achievementId
         headerView.uploadButton.layer.cornerRadius = 5
+        if achievementInBucketlist {
+            headerView.bucketlistImage.image = removeFromBucketlistImage
+        } else {
+            headerView.bucketlistImage.image = addToBucketlistImage
+        }
         header = headerView
         return headerView
     }
