@@ -24,6 +24,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
     var noPostImage = UIImage(named: "post")
+    var achievementCreatedAt: [String] = []
+    var achievementUpdatedAt: [String] = []
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
     var achievementScores: [Int] = []
@@ -37,8 +39,11 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
+        print(json)
         if json.count > 0 {
             for i in 0...(json.count - 1) {
+                achievementCreatedAt.append((json[i]?["created_at"])! as! String)
+                achievementUpdatedAt.append((json[i]?["updated_at"])! as! String)
                 achievementDescriptions.append((json[i]?["description"])! as! String)
                 achievementIds.append((json[i]?["id"]) as! Int)
                 achievementScores.append(json[i]?["score"] as! Int)
@@ -83,9 +88,62 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             }
         } else {
             moreAchievementsToLoad = false
-            achievementThirdCompleterImages.append(noPostImage!)
+            //achievementThirdCompleterImages.append(noPostImage!)
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+    
+    func updateAchievementsData(json: AnyObject) {
+        print(json)
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                let achievementId = json[i]?["id"] as! Int
+                if let cellIndex = achievementIds.indexOf({$0 == achievementId}) {
+                    achievementScores[cellIndex] = json[i]?["score"] as! Int
+                    achievementUpdatedAt[cellIndex] = json[i]?["updated_at"] as! String
+                    achievementCompleterCounts[cellIndex] = json[i]?["posts_count"] as! Int
+                    achievementInBucketlist[cellIndex] = json[i]?["bucketlist"] as! Bool
+                    let postImagesToLoad = json[i]["latest_posts"]!!.count
+                    if postImagesToLoad > 0 {
+                        for postIndex in 0...(postImagesToLoad - 1) {
+                            if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[postIndex] as? String {
+                                let url = NSURL(string: "http://192.168.1.116:3000" + completerImageUrl)!
+                                let data = NSData(contentsOfURL:url)
+                                if data != nil {
+                                    switch postIndex {
+                                    case 0:
+                                        achievementFirstCompleterImages[cellIndex] = UIImage(data: data!)!
+                                    case 1:
+                                        achievementSecondCompleterImages[cellIndex] = UIImage(data: data!)!
+                                    case 2:
+                                        achievementThirdCompleterImages[cellIndex] = UIImage(data: data!)!
+                                    default:
+                                        print("Switch Error")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    var postsAlreadyLoaded = postImagesToLoad
+                    while postsAlreadyLoaded < 3 {
+                        switch postsAlreadyLoaded {
+                        case 0:
+                            achievementFirstCompleterImages[cellIndex] = noPostImage!
+                        case 1:
+                            achievementSecondCompleterImages[cellIndex] = noPostImage!
+                        case 2:
+                            achievementThirdCompleterImages[cellIndex] = noPostImage!
+                        default:
+                            print("Switch Error")
+                        }
+                        postsAlreadyLoaded! += 1
+                    }
+
+                }
+                
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        }
     }
     
     func setUploadedResult(json: AnyObject) {
@@ -110,6 +168,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        achievementService.updateAchievements(achievementIds, updatedAt: achievementUpdatedAt)
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     override func didReceiveMemoryWarning() {

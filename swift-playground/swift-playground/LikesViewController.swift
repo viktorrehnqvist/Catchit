@@ -47,6 +47,9 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         loadAvatars()
     }
     
+    func updateAchievementsData(json: AnyObject) {
+    }
+    
     func setUserData(json: AnyObject, follow: Bool) {
         if follow {
             userNames = (json["follow_infos"] as! NSArray)[0] as! [String]

@@ -34,6 +34,9 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
+    
+    func updateAchievementsData(json: AnyObject) {
+    }
 
     func setUploadedResult(json: AnyObject) {
         let postId = json["id"] as! Int
