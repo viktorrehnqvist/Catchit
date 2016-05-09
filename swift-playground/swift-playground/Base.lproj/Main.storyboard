@@ -888,6 +888,7 @@
                                             <outlet property="bucketlistImage" destination="KcK-Mp-dk4" id="jq8-Rf-h7D"/>
                                             <outlet property="completersImage" destination="tVm-jL-3PC" id="JVA-vC-iyO"/>
                                             <outlet property="completersLabel" destination="WhQ-C5-B96" id="AVw-8y-bzX"/>
+                                            <outlet property="lockImage" destination="1HT-W8-Ba0" id="TV7-ua-sKb"/>
                                             <outlet property="scoreLabel" destination="lT6-U7-iEy" id="HYF-T5-r5F"/>
                                             <outlet property="shareImage" destination="Y4n-lP-Lw9" id="Iby-EZ-rs7"/>
                                             <outlet property="uploadButton" destination="005-uw-xuh" id="Zfs-3S-1Bc"/>
@@ -1609,6 +1610,7 @@
                                         <outlet property="achievementDescription" destination="QYP-eu-IsQ" id="jsK-Ht-6c9"/>
                                         <outlet property="achievementScore" destination="KpZ-yy-JYX" id="GDi-TH-YS8"/>
                                         <outlet property="bucketlistImage" destination="ZLl-Mb-Ila" id="pEd-MP-wfl"/>
+                                        <outlet property="lockImage" destination="44u-44-hGY" id="68i-uH-vNW"/>
                                         <outlet property="uploadButton" destination="L7x-li-HBD" id="iRz-KY-ZCv"/>
                                     </connections>
                                 </collectionReusableView>
@@ -2068,10 +2070,10 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JiC-qu-bKm"/>
-        <segue reference="4pd-pR-4gV"/>
-        <segue reference="xHK-9p-MYi"/>
-        <segue reference="zhv-hg-8pY"/>
-        <segue reference="JTS-hb-4sY"/>
+        <segue reference="2pF-mY-u1R"/>
+        <segue reference="Ftt-UR-dJW"/>
+        <segue reference="jal-hA-pvU"/>
+        <segue reference="djO-lN-Qc8"/>
+        <segue reference="QzT-29-F4w"/>
     </inferredMetricsTieBreakers>
 </document>

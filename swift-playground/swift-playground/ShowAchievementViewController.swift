@@ -21,6 +21,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
+    let unlockedIcon = UIImage(named: "unlocked_icon")
     var achievementDescription: String!
     var achievementId: Int!
     var achievementScore: Int = 0
@@ -195,6 +196,9 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             headerView.bucketlistImage.image = removeFromBucketlistImage
         } else {
             headerView.bucketlistImage.image = addToBucketlistImage
+        }
+        if achievementCompleted {
+            headerView.lockImage.image = unlockedIcon
         }
         header = headerView
         return headerView

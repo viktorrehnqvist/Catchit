@@ -23,6 +23,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
+    let unlockedIcon = UIImage(named: "unlocked_icon")
+    let lockedIcon = UIImage(named: "lock_icon")
     var noPostImage = UIImage(named: "post")
     var achievementCreatedAt: [String] = []
     var achievementUpdatedAt: [String] = []
@@ -34,6 +36,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementSecondCompleterImages: [UIImage] = []
     var achievementThirdCompleterImages: [UIImage] = []
     var achievementInBucketlist: [Bool] = []
+    var achievementCompleted: [Bool] = []
     var moreAchievementsToLoad: Bool = true
     var segueShouldShowCompleters: Bool = false
     
@@ -48,6 +51,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementScores.append(json[i]?["score"] as! Int)
                 achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
                 achievementInBucketlist.append(json[i]?["bucketlist"] as! Bool)
+                achievementCompleted.append(json[i]?["completed"] as! Bool)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
@@ -101,6 +105,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     achievementUpdatedAt[cellIndex] = json[i]?["updated_at"] as! String
                     achievementCompleterCounts[cellIndex] = json[i]?["posts_count"] as! Int
                     achievementInBucketlist[cellIndex] = json[i]?["bucketlist"] as! Bool
+                    achievementCompleted[cellIndex] = json[i]?["completed"] as! Bool
                     let postImagesToLoad = json[i]["latest_posts"]!!.count
                     if postImagesToLoad > 0 {
                         for postIndex in 0...(postImagesToLoad - 1) {
@@ -154,6 +159,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementScores.insert((json[i]?["score"] as! Int), atIndex: 0)
                 achievementCompleterCounts.insert((json[i]?["posts_count"] as! Int), atIndex: 0)
                 achievementInBucketlist.insert((json[i]?["bucketlist"] as! Bool), atIndex: 0)
+                achievementCompleted.insert((json[i]?["completed"] as! Bool), atIndex: 0)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
@@ -263,6 +269,11 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             cell.bucketlistImage.image = removeFromBucketlistImage
         } else {
             cell.bucketlistImage.image = addToBucketlistImage
+        }
+        if achievementCompleted[indexPath.row] {
+            cell.lockImage.image = unlockedIcon
+        } else {
+            cell.lockImage.image = lockedIcon
         }
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale

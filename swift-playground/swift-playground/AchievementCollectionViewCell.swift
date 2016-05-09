@@ -21,5 +21,6 @@ class AchievementCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var completersImage: UIImageView!
     @IBOutlet weak var shareImage: UIImageView!
     @IBOutlet weak var bucketlistImage: UIImageView!
+    @IBOutlet weak var lockImage: UIImageView!
 
 }
