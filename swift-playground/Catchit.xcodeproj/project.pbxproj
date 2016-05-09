@@ -35,6 +35,7 @@
 		F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */; };
 		F761C5341C9DD70F00E3C334 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */; };
 		F765D5081CBBBB5900D64488 /* AchievementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F765D5071CBBBB5900D64488 /* AchievementService.swift */; };
+		F7B503861CE0EB65009E2B4F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B503851CE0EB65009E2B4F /* SearchViewController.swift */; };
 		F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7B553D01C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7B553D11C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
@@ -113,6 +114,7 @@
 		F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		F765D5071CBBBB5900D64488 /* AchievementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AchievementService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F7901CD31C730D97001B9129 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		F7B503851CE0EB65009E2B4F /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F7B553CE1C71ABFB00EA9D12 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PostService.swift; sourceTree = "<group>"; tabWidth = 4; };
 		F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthenticationService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F7CA54031CD0AA830048574B /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -197,6 +199,7 @@
 				F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */,
 				F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */,
 				F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */,
+				F7B503851CE0EB65009E2B4F /* SearchViewController.swift */,
 				F73A51DC1CA1690D0029779D /* ProfileViewController.swift */,
 				F73A51D91CA127430029779D /* LikesViewController.swift */,
 				F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */,
@@ -481,6 +484,7 @@
 				F73A51CF1CA046BA0029779D /* BucketlistCollectionViewCell.swift in Sources */,
 				F74018811C72FEF2004383FE /* SwiftyJSON.swift in Sources */,
 				F701737E1C6E6EAF006F799A /* swift_playground.xcdatamodeld in Sources */,
+				F7B503861CE0EB65009E2B4F /* SearchViewController.swift in Sources */,
 				F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */,
 				F7CA54041CD0AA830048574B /* UserService.swift in Sources */,
 				F761C5301C9DD6CF00E3C334 /* AchievementsViewController.swift in Sources */,

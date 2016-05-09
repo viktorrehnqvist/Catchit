@@ -214,6 +214,10 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         self.performSegueWithIdentifier("showProfileFromHome", sender: sender)
     }
     
+    @IBAction func showSearch(sender: AnyObject) {
+        self.performSegueWithIdentifier("showSearchFromHome", sender: sender)
+    }
+    
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cellIndex: Int

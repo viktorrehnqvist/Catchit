@@ -307,6 +307,10 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         self.performSegueWithIdentifier("showAchievementFromAchievements", sender: sender)
     }
     
+    @IBAction func showSearch(sender: AnyObject) {
+        self.performSegueWithIdentifier("showSearchFromAchievements", sender: sender)
+    }
+    
     @IBAction func bucketlistPress(sender: AnyObject?) {
         let point = sender?.view
         let mainCell = point?.superview

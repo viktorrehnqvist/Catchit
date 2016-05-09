@@ -214,6 +214,10 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         self.performSegueWithIdentifier("showProfileFromExplore", sender: sender)
     }
     
+    @IBAction func showSearch(sender: AnyObject) {
+        self.performSegueWithIdentifier("showSearchFromExplore", sender: sender)
+    }
+    
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var cellIndex: Int

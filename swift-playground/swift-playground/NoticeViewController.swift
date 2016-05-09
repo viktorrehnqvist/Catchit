@@ -108,6 +108,10 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         }
     }
     
+    @IBAction func showSearch(sender: AnyObject) {
+        self.performSegueWithIdentifier("showSearchFromNotice", sender: sender)
+    }
+    
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        let cellIndex = sender!.tag

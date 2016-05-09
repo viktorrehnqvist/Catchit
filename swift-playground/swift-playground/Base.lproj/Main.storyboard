@@ -180,11 +180,14 @@
                     <navigationItem key="navigationItem" id="CFx-Ce-W6f">
                         <barButtonItem key="backBarButtonItem" title="Tillbaka" id="Jti-aL-mQD"/>
                         <barButtonItem key="leftBarButtonItem" width="130" id="hKN-2c-DhL">
-                            <textField key="customView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="8Kn-2a-pXb">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="8Kn-2a-pXb">
                                 <rect key="frame" x="20" y="7" width="253" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="showSearch:" destination="BYZ-38-t0r" eventType="touchDown" id="NVe-uW-q0d"/>
+                                </connections>
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="k0F-ZP-tjg">
@@ -200,6 +203,7 @@
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromHome" id="KBR-5L-ez0"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromHome" id="dwR-E4-82o"/>
                         <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromHome" id="N5Z-XD-MLh"/>
+                        <segue destination="SWf-Jd-IBW" kind="show" identifier="showSearchFromHome" animates="NO" id="OvH-UW-Jlq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -631,11 +635,14 @@
                     <navigationItem key="navigationItem" id="eYF-cv-7Hc">
                         <barButtonItem key="backBarButtonItem" title="Tillbaka" id="eS0-3f-X1l"/>
                         <barButtonItem key="leftBarButtonItem" width="130" id="yUe-he-sJd">
-                            <textField key="customView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="Txj-DR-s8L">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="Txj-DR-s8L">
                                 <rect key="frame" x="20" y="7" width="253" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="showSearch:" destination="pc2-b1-3Nb" eventType="touchDown" id="Yzj-AV-96u"/>
+                                </connections>
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="x59-OH-39U">
@@ -651,6 +658,7 @@
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromExplore" id="zhv-hg-8pY"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromExplore" id="4pd-pR-4gV"/>
                         <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromExplore" id="xHK-9p-MYi"/>
+                        <segue destination="SWf-Jd-IBW" kind="show" identifier="showSearchFromExplore" animates="NO" id="8jf-T0-H7W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ8-HB-1jf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -912,11 +920,14 @@
                     <navigationItem key="navigationItem" id="XRV-U9-ZE2">
                         <barButtonItem key="backBarButtonItem" title="Tillbaka" id="zsI-So-lI3"/>
                         <barButtonItem key="leftBarButtonItem" width="130" id="uLU-dD-rxl">
-                            <textField key="customView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="jbG-zg-nQK">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="jbG-zg-nQK">
                                 <rect key="frame" x="20" y="7" width="253" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="showSearch:" destination="wZV-hz-tXx" eventType="touchDown" id="xTP-X1-07Q"/>
+                                </connections>
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="RvJ-jF-rlC">
@@ -931,6 +942,7 @@
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesViewFromAchievement" id="S0S-yH-cd5"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromAchievements" id="Ftt-UR-dJW"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromAchievements" id="KhT-yk-Sfv"/>
+                        <segue destination="SWf-Jd-IBW" kind="show" identifier="showSearchFromAchievements" animates="NO" id="GxL-aq-8sZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cs6-JP-pci" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1022,11 +1034,14 @@
                     <navigationItem key="navigationItem" id="Ls1-DJ-9xU">
                         <barButtonItem key="backBarButtonItem" title="Tillbaka" id="OTR-u0-BAa"/>
                         <barButtonItem key="leftBarButtonItem" width="130" id="arV-jz-5hE">
-                            <textField key="customView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="aK4-WJ-UtV">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="aK4-WJ-UtV">
                                 <rect key="frame" x="20" y="7" width="253" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="showSearch:" destination="dcD-Gz-shw" eventType="touchDown" id="diE-9o-WQw"/>
+                                </connections>
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="7iW-ah-UpB">
@@ -1040,6 +1055,7 @@
                         <outlet property="collectionView" destination="9Wr-Ip-zqh" id="IpD-aN-aLV"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromBucketlist" id="L9l-gp-JAO"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromBucketlist" id="qca-Hm-Suw"/>
+                        <segue destination="SWf-Jd-IBW" kind="show" identifier="showSearchFromBucketlist" animates="NO" id="qnV-sV-0kd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6q-t7-DCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1655,6 +1671,47 @@
             </objects>
             <point key="canvasLocation" x="248" y="1526"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="PiH-49-fgv">
+            <objects>
+                <viewController id="SWf-Jd-IBW" customClass="SearchViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xk4-NK-mxF"/>
+                        <viewControllerLayoutGuide type="bottom" id="HuA-AR-39S"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e25-ao-RQT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="IaN-SH-z5s">
+                        <barButtonItem key="leftBarButtonItem" title="Item" width="110" id="0qQ-V3-bTp">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="sul-om-o6i">
+                                <rect key="frame" x="20" y="7" width="253" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="resignKeyboard:" destination="SWf-Jd-IBW" eventType="editingDidEndOnExit" id="QHb-rH-qBy"/>
+                                    <action selector="showSearch:" destination="BYZ-38-t0r" eventType="touchDown" id="OTj-l5-jZ8"/>
+                                </connections>
+                            </textField>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Bakåt" id="1wc-Pm-qk7">
+                            <color key="tintColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="back:" destination="SWf-Jd-IBW" id="uEh-ME-Nen"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchField" destination="sul-om-o6i" id="DXW-Wq-KBZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8fK-Og-ysd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="904" y="1526"/>
+        </scene>
         <!--Notice View Controller-->
         <scene sceneID="690-Pf-STc">
             <objects>
@@ -1732,11 +1789,14 @@
                     <navigationItem key="navigationItem" id="eKH-2m-VAz">
                         <barButtonItem key="backBarButtonItem" title="Tillbaka" id="KcG-WL-zAh"/>
                         <barButtonItem key="leftBarButtonItem" width="130" id="oKO-bh-Jc6">
-                            <textField key="customView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="gUo-GL-hCX">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Sök..." minimumFontSize="17" id="gUo-GL-hCX">
                                 <rect key="frame" x="20" y="7" width="253" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="showSearch:" destination="n1Y-MO-kZk" eventType="touchDown" id="x5U-sf-VVQ"/>
+                                </connections>
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="xNp-Zb-fTX">
@@ -1750,6 +1810,7 @@
                         <outlet property="collectionView" destination="ien-Na-utX" id="kHc-IX-aJM"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromNotice" id="azt-Oc-gww"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromNotice" id="8Bb-Y1-XOB"/>
+                        <segue destination="SWf-Jd-IBW" kind="show" identifier="showSearchFromNotice" animates="NO" id="ym3-FU-EDl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABu-9s-vFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2071,9 +2132,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="Ftt-UR-dJW"/>
-        <segue reference="jal-hA-pvU"/>
-        <segue reference="djO-lN-Qc8"/>
-        <segue reference="QzT-29-F4w"/>
+        <segue reference="ym3-FU-EDl"/>
+        <segue reference="4pd-pR-4gV"/>
+        <segue reference="xHK-9p-MYi"/>
+        <segue reference="zhv-hg-8pY"/>
+        <segue reference="JTS-hb-4sY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -104,6 +104,10 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         self.performSegueWithIdentifier("showAchievementFromBucketlist", sender: sender)
     }
     
+    @IBAction func showSearch(sender: AnyObject) {
+        self.performSegueWithIdentifier("showSearchFromBucketlist", sender: sender)
+    }
+    
     @IBAction func uploadPost(sender: AnyObject?) {
         uploadAchievementId = sender!.tag
         let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
