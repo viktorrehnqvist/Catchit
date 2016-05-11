@@ -163,7 +163,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         headerView.username.text = username
         
         if userId == userDefaults.objectForKey("id")?.integerValue {
-            headerView.followButton.hidden = true
+            headerView.followButton.setTitle("Inställningar", forState: .Normal)
         }
         
         if self.userFollowed {
@@ -201,11 +201,13 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
             sender.setTitle("Sluta följ", forState: .Normal)
             self.userFollowed = true
             self.userFollowersCount += 1
-        } else {
+        } else if sender.titleForState(.Normal) == "Sluta följ" {
             userService.followUserChange(userId!, follow: false)
             sender.setTitle("Följ", forState: .Normal)
             userFollowed = false
             self.userFollowersCount -= 1
+        } else {
+            self.performSegueWithIdentifier("showSettingsFromProfile", sender: sender)
         }
         header.followersCount.text = String(userFollowersCount) + " Följare"
     }
