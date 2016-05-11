@@ -23,7 +23,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "achievement_icon_white.png",
+      "filename" : "achievement-icon-blue-3.png",
       "scale" : "2x"
     },
     {
@@ -54,19 +54,19 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "achievement_icon_white-1.png",
+      "filename" : "achievement-icon-blue-2.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "achievement_icon_white-2.png",
+      "filename" : "achievement-icon-blue-1.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "achievement_icon_white-3.png",
+      "filename" : "achievement-icon-blue.png",
       "scale" : "2x"
     }
   ],
