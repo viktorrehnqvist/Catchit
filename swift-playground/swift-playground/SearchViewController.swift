@@ -12,7 +12,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate{
 
     // MARK: Setup
     let postService = PostService()
-    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var searchField: UITextField!        
     
     // MARK: Lifecycle
     

@@ -91,7 +91,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
             }
         } else {
             moreAchievementsToLoad = false
-            //achievementThirdCompleterImages.append(noPostImage!)
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
@@ -272,6 +271,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         }
         if achievementCompleted[indexPath.row] {
             cell.lockImage.image = unlockedIcon
+            cell.bucketlistImage.gestureRecognizers?.removeAll()
         } else {
             cell.lockImage.image = lockedIcon
         }

@@ -199,6 +199,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
         if achievementCompleted {
             headerView.lockImage.image = unlockedIcon
+            headerView.bucketlistImage.gestureRecognizers?.removeAll()
         }
         header = headerView
         return headerView
