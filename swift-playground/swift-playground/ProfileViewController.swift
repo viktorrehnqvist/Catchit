@@ -44,8 +44,9 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     // MARK: Lifecycle
     func setUserData(json: AnyObject, follow: Bool) {
+        print(json)
         username = json["name"] as? String
-        userAchievementCount = (json["achievements"] as! NSArray).count
+        userAchievementCount = json["achievement_count"] as! Int
         userScore = json["user_score"] as! Int
         userFollowsCount = (json["follow_infos"] as! NSArray)[0].count
         userFollowersCount = (json["follower_infos"] as! NSArray)[0].count
