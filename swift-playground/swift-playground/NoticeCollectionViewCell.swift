@@ -13,5 +13,6 @@ class NoticeCollectionViewCell: UICollectionViewCell {
     // MARK: Setup
     @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var noticeImage: UIImageView!
+    @IBOutlet weak var noticeButton: UIButton!
     
 }

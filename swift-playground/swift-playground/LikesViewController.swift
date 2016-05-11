@@ -116,6 +116,12 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
         
+        if typeIs == "achievementShare" {
+            cell.noticeButton.hidden = false
+            let noticeButtonTapGesture = UITapGestureRecognizer(target: self, action: #selector (shareAchievement(_:)))
+            cell.noticeButton.addGestureRecognizer(noticeButtonTapGesture)
+        }
+        
         return cell
         
     }
@@ -135,6 +141,17 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     
     @IBAction func backButton(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func shareAchievement(sender: AnyObject?) {
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let thisCell: NoticeCollectionViewCell = main as! NoticeCollectionViewCell
+        thisCell.noticeButton.hidden = true
+        let cellIndex = thisCell.tag
+        let noticeUserId = userIds[cellIndex]
+        userService.shareAchievement(noticeUserId, achievementId: achievementId!)
     }
     
     // Mark: Navigation

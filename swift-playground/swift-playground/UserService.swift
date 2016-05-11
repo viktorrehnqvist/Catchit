@@ -76,5 +76,13 @@ class UserService {
         }
     }
     
+    // MARK: POST-Requests
+    func shareAchievement(userId: Int, achievementId: Int) {
+        let parameters = [
+            "achievement_id": achievementId
+        ]
+        Alamofire.request(.POST, url + "users/\(userId)/tip.json", parameters: parameters, headers: headers)
+    }
+    
 
 }
