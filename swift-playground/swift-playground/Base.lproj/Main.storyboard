@@ -1741,15 +1741,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YM6-sm-Aqw">
-                                                    <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YM6-sm-Aqw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="LBJ-6O-cYs"/>
+                                                        <constraint firstAttribute="width" constant="46" id="uXG-Vb-zRW"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-95-2R7">
-                                                    <rect key="frame" x="46" y="8" width="196" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-95-2R7">
+                                                    <rect key="frame" x="54" y="0.0" width="188" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1758,13 +1758,13 @@
                                         </view>
                                         <color key="backgroundColor" red="0.99625748400000003" green="0.99363070730000003" blue="0.99299103020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="top" secondItem="Url-HF-9Ut" secondAttribute="topMargin" id="ahK-bd-fJ0"/>
-                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="bottom" secondItem="Url-HF-9Ut" secondAttribute="bottomMargin" id="bI1-B6-hEL"/>
-                                            <constraint firstItem="YM6-sm-Aqw" firstAttribute="leading" secondItem="Url-HF-9Ut" secondAttribute="leadingMargin" id="cK2-8B-Urg"/>
-                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="top" secondItem="YM6-sm-Aqw" secondAttribute="top" id="lAA-3X-sYG"/>
-                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="trailing" secondItem="Url-HF-9Ut" secondAttribute="trailingMargin" id="rNZ-2Z-WWC"/>
-                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="bottom" secondItem="YM6-sm-Aqw" secondAttribute="bottom" id="vIE-Wd-ue6"/>
-                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="leading" secondItem="YM6-sm-Aqw" secondAttribute="trailing" constant="8" symbolic="YES" id="zFu-7L-6jv"/>
+                                            <constraint firstItem="YM6-sm-Aqw" firstAttribute="leading" secondItem="Url-HF-9Ut" secondAttribute="leading" id="0RQ-Z9-yxf"/>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="leading" secondItem="YM6-sm-Aqw" secondAttribute="trailing" constant="8" symbolic="YES" id="7MB-Pf-BTP"/>
+                                            <constraint firstItem="YM6-sm-Aqw" firstAttribute="top" secondItem="2Hf-95-2R7" secondAttribute="top" id="IJ2-Iy-Qgq"/>
+                                            <constraint firstItem="YM6-sm-Aqw" firstAttribute="bottom" secondItem="2Hf-95-2R7" secondAttribute="bottom" id="MYU-As-KRK"/>
+                                            <constraint firstAttribute="bottom" secondItem="YM6-sm-Aqw" secondAttribute="bottom" id="SxG-T1-m0S"/>
+                                            <constraint firstItem="YM6-sm-Aqw" firstAttribute="top" secondItem="Url-HF-9Ut" secondAttribute="top" id="vht-x6-CfE"/>
+                                            <constraint firstItem="2Hf-95-2R7" firstAttribute="trailing" secondItem="Url-HF-9Ut" secondAttribute="trailingMargin" id="vil-Hb-Byg"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="noticeImage" destination="YM6-sm-Aqw" id="wTY-xE-8Ec"/>
@@ -2132,10 +2132,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
+        <segue reference="kk8-J0-6G5"/>
         <segue reference="ym3-FU-EDl"/>
-        <segue reference="4pd-pR-4gV"/>
-        <segue reference="xHK-9p-MYi"/>
+        <segue reference="azt-Oc-gww"/>
+        <segue reference="8Bb-Y1-XOB"/>
         <segue reference="zhv-hg-8pY"/>
-        <segue reference="JTS-hb-4sY"/>
     </inferredMetricsTieBreakers>
 </document>

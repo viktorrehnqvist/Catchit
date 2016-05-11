@@ -70,10 +70,12 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noticeCell", forIndexPath: indexPath) as! NoticeCollectionViewCell
         
-        let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showNoticeOrigin(_:)))
+        let noticeTapGesture = UITapGestureRecognizer(target: self, action: #selector(showNoticeOrigin(_:)))
+        let avatarTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
         cell.tag = indexPath.row
-        cell.noticeLabel.addGestureRecognizer(achievementTapGesture)
+        cell.noticeLabel.addGestureRecognizer(noticeTapGesture)
+        cell.noticeImage.addGestureRecognizer(avatarTapGesture)
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1
@@ -108,6 +110,10 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         }
     }
     
+    @IBAction func showProfile(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showProfileFromNotice", sender: sender)
+    }
+    
     @IBAction func showSearch(sender: AnyObject) {
         self.performSegueWithIdentifier("showSearchFromNotice", sender: sender)
     }
@@ -124,6 +130,16 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         if segue.identifier == "showPostFromNotice" {
             let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = noticeLinkIds[cellIndex]
+        }
+        
+        if segue.identifier == "showProfileFromNotice" {
+            let point = sender?.view
+            let mainCell = point?.superview
+            let main = mainCell?.superview
+            let thisCell: NoticeCollectionViewCell = main as! NoticeCollectionViewCell
+            let cellIndex = thisCell.tag
+            let vc = segue.destinationViewController as! ProfileViewController
+            vc.userId = noticeUserIds[cellIndex]
         }
         
     }
