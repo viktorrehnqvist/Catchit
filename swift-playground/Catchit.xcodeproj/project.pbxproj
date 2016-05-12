@@ -24,6 +24,9 @@
 		F728AFCA1CD910E100F5A1DF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */; };
 		F728AFCC1CDB627900F5A1DF /* ProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */; };
 		F728AFCE1CDBD6A800F5A1DF /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */; };
+		F73520A31CE48868002A9B20 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73520A21CE48868002A9B20 /* ChangePasswordViewController.swift */; };
+		F73520A51CE48877002A9B20 /* ChangeAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73520A41CE48877002A9B20 /* ChangeAvatarViewController.swift */; };
+		F73520A71CE48889002A9B20 /* ChangeUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73520A61CE48889002A9B20 /* ChangeUsernameViewController.swift */; };
 		F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */; };
 		F73A51CF1CA046BA0029779D /* BucketlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */; };
 		F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */; };
@@ -102,6 +105,9 @@
 		F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionReusableView.swift; sourceTree = "<group>"; };
 		F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UploadService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F73520A21CE48868002A9B20 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		F73520A41CE48877002A9B20 /* ChangeAvatarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAvatarViewController.swift; sourceTree = "<group>"; };
+		F73520A61CE48889002A9B20 /* ChangeUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewController.swift; sourceTree = "<group>"; };
 		F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -192,31 +198,13 @@
 			isa = PBXGroup;
 			children = (
 				F70173751C6E6EAF006F799A /* AppDelegate.swift */,
-				F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */,
-				F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */,
-				F70173771C6E6EAF006F799A /* HomeViewController.swift */,
-				F761C52B1C9DD60200E3C334 /* ExploreViewController.swift */,
-				F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */,
-				F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */,
-				F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */,
-				F7B503851CE0EB65009E2B4F /* SearchViewController.swift */,
-				F73A51DC1CA1690D0029779D /* ProfileViewController.swift */,
-				F73A51D91CA127430029779D /* LikesViewController.swift */,
-				F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */,
-				F7EEC2721C92E200002378E9 /* ShowPostViewController.swift */,
-				F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */,
-				F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */,
-				F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */,
-				F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */,
-				F7EEC2741C92E31C002378E9 /* PostsCollectionViewCell.swift */,
-				F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */,
-				F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */,
-				F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */,
-				F7B553CE1C71ABFB00EA9D12 /* PostService.swift */,
-				F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */,
-				F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */,
-				F7CA54031CD0AA830048574B /* UserService.swift */,
-				F765D5071CBBBB5900D64488 /* AchievementService.swift */,
+				F73520AB1CE4892D002A9B20 /* AuthenticationViews */,
+				F73520AA1CE488F6002A9B20 /* TabBarViews */,
+				F73520AF1CE489F6002A9B20 /* TopBarViews */,
+				F73520AC1CE48979002A9B20 /* DetailViews */,
+				F73520A91CE488C1002A9B20 /* CollectionViews */,
+				F73520A81CE488A4002A9B20 /* Services */,
+				F735209F1CE48839002A9B20 /* UserViews */,
 				F74018801C72FEF2004383FE /* SwiftyJSON.swift */,
 				F70173791C6E6EAF006F799A /* Main.storyboard */,
 				F701737F1C6E6EAF006F799A /* Assets.xcassets */,
@@ -243,6 +231,83 @@
 				F701739A1C6E6EAF006F799A /* Info.plist */,
 			);
 			path = "swift-playgroundUITests";
+			sourceTree = "<group>";
+		};
+		F735209F1CE48839002A9B20 /* UserViews */ = {
+			isa = PBXGroup;
+			children = (
+				F73A51DC1CA1690D0029779D /* ProfileViewController.swift */,
+				F73520A21CE48868002A9B20 /* ChangePasswordViewController.swift */,
+				F73520A41CE48877002A9B20 /* ChangeAvatarViewController.swift */,
+				F73520A61CE48889002A9B20 /* ChangeUsernameViewController.swift */,
+			);
+			name = UserViews;
+			sourceTree = "<group>";
+		};
+		F73520A81CE488A4002A9B20 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F7B553CE1C71ABFB00EA9D12 /* PostService.swift */,
+				F728AFCD1CDBD6A800F5A1DF /* UploadService.swift */,
+				F7CA53FF1CCACC6D0048574B /* AuthenticationService.swift */,
+				F7CA54031CD0AA830048574B /* UserService.swift */,
+				F765D5071CBBBB5900D64488 /* AchievementService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		F73520A91CE488C1002A9B20 /* CollectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */,
+				F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */,
+				F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */,
+				F7EEC2741C92E31C002378E9 /* PostsCollectionViewCell.swift */,
+				F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */,
+				F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */,
+				F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */,
+				F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */,
+			);
+			name = CollectionViews;
+			sourceTree = "<group>";
+		};
+		F73520AA1CE488F6002A9B20 /* TabBarViews */ = {
+			isa = PBXGroup;
+			children = (
+				F70173771C6E6EAF006F799A /* HomeViewController.swift */,
+				F761C52B1C9DD60200E3C334 /* ExploreViewController.swift */,
+				F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */,
+				F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */,
+				F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */,
+			);
+			name = TabBarViews;
+			sourceTree = "<group>";
+		};
+		F73520AB1CE4892D002A9B20 /* AuthenticationViews */ = {
+			isa = PBXGroup;
+			children = (
+				F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */,
+				F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */,
+			);
+			name = AuthenticationViews;
+			sourceTree = "<group>";
+		};
+		F73520AC1CE48979002A9B20 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				F73A51D91CA127430029779D /* LikesViewController.swift */,
+				F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */,
+				F7EEC2721C92E200002378E9 /* ShowPostViewController.swift */,
+			);
+			name = DetailViews;
+			sourceTree = "<group>";
+		};
+		F73520AF1CE489F6002A9B20 /* TopBarViews */ = {
+			isa = PBXGroup;
+			children = (
+				F7B503851CE0EB65009E2B4F /* SearchViewController.swift */,
+			);
+			name = TopBarViews;
 			sourceTree = "<group>";
 		};
 		F7901CD41C730D97001B9129 /* Products */ = {
@@ -472,11 +537,14 @@
 				F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */,
 				F71290541CAC459500639DA0 /* ShowPostCollectionReusableView.swift in Sources */,
 				F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */,
+				F73520A71CE48889002A9B20 /* ChangeUsernameViewController.swift in Sources */,
 				F7EEC2751C92E31C002378E9 /* PostsCollectionViewCell.swift in Sources */,
 				F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */,
+				F73520A31CE48868002A9B20 /* ChangePasswordViewController.swift in Sources */,
 				F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */,
 				F761C5341C9DD70F00E3C334 /* NoticeViewController.swift in Sources */,
 				F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */,
+				F73520A51CE48877002A9B20 /* ChangeAvatarViewController.swift in Sources */,
 				F73A51DA1CA127430029779D /* LikesViewController.swift in Sources */,
 				F7EEC2731C92E200002378E9 /* ShowPostViewController.swift in Sources */,
 				F765D5081CBBBB5900D64488 /* AchievementService.swift in Sources */,
