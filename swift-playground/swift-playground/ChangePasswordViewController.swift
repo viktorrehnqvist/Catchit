@@ -8,11 +8,28 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController {
-
+class ChangePasswordViewController: UIViewController, SettingsServiceDelegate {
+    
+    // MARK: Setup
+    let settingsService = SettingsService()
+    @IBOutlet weak var currentPassword: UITextField!
+    @IBOutlet weak var newPassword: UITextField!
+    
+    // MARK: Lifecycle
+    func setSettingsData(json: AnyObject) {
+        if json["result"] as! Bool != false {
+            self.navigationController?.popViewControllerAnimated(true)
+        } else {
+            let ac = UIAlertController(title: "Felaktigt lösenord", message: "Det angivna lösenordet är felaktigt. Försök igen.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        settingsService.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -21,15 +38,13 @@ class ChangePasswordViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: User Interaction
+    @IBAction func saveSettings(sender: AnyObject) {
+        settingsService.changePassword(currentPassword.text!, newPassword: newPassword.text!)
     }
-    */
-
+    
+    @IBAction func cancel(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
 }

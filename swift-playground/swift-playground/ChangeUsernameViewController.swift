@@ -8,11 +8,21 @@
 
 import UIKit
 
-class ChangeUsernameViewController: UIViewController {
-
+class ChangeUsernameViewController: UIViewController, SettingsServiceDelegate {
+    
+    // MARK: Setup
+    let settingsService = SettingsService()
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    @IBOutlet weak var username: UITextField!
+    
+    // MARK: Lifecycle
+    func setSettingsData(json: AnyObject) {
+    }
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        username.text = (userDefaults.objectForKey("name") as! String)
         // Do any additional setup after loading the view.
     }
 
@@ -21,15 +31,16 @@ class ChangeUsernameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: User Interaction
+    @IBAction func saveSettings(sender: AnyObject) {
+        settingsService.changeUsername(username.text!)
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 
-    /*
+    @IBAction func cancel(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    // MARK: Additional Helpers
 }
