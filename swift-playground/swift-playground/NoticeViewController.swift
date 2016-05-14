@@ -36,6 +36,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         noticeLinkIds = (json["notice_infos"] as! NSArray)[4] as! [Int]
         noticeSeen = (json["notice_infos"] as! NSArray)[5] as! [AnyObject]
         loadAvatars()
+        print(json)
     }
     
     func updateUserData(json: AnyObject) {
@@ -109,6 +110,8 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         let cellIndex = thisCell.tag
         if noticeTypes[cellIndex] == "tip" {
             self.performSegueWithIdentifier("showAchievementFromNotice", sender: thisCell)
+        } else if noticeTypes[cellIndex] == "follow" {
+            self.performSegueWithIdentifier("showProfileFromNotice", sender: sender)
         } else {
             self.performSegueWithIdentifier("showPostFromNotice", sender: thisCell)
         }
@@ -136,14 +139,15 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
             vc.postId = noticeLinkIds[cellIndex]
         }
         
-        if segue.identifier == "showProfileFromNotice" && sender!.tag == nil {
+        if segue.identifier == "showProfileFromNotice" {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
-            let thisCell: NoticeCollectionViewCell = main as! NoticeCollectionViewCell
-            let cellIndex = thisCell.tag
-            let vc = segue.destinationViewController as! ProfileViewController
-            vc.userId = noticeUserIds[cellIndex]
+            if let thisCell: NoticeCollectionViewCell = main as? NoticeCollectionViewCell {
+                let cellIndex = thisCell.tag
+                let vc = segue.destinationViewController as! ProfileViewController
+                vc.userId = noticeUserIds[cellIndex]
+            }
         }
         
     }
