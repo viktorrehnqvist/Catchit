@@ -13,5 +13,6 @@ class BucketlistCollectionViewCell: UICollectionViewCell {
     // MARK: Setup
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var achievementLabel: UILabel!
+    @IBOutlet weak var removeButton: UIButton!
     
 }

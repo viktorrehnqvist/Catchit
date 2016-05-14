@@ -984,55 +984,66 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="WtL-hh-5DW">
-                                    <size key="itemSize" width="250" height="46"/>
+                                    <size key="itemSize" width="600" height="46"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="bucketlistCell" id="HdM-16-ChC" customClass="BucketlistCollectionViewCell" customModule="Catchit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="250" height="46"/>
+                                        <rect key="frame" x="0.0" y="64" width="600" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="46"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cykla med en hund till affären och handla" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iih-4e-Ruu">
-                                                    <rect key="frame" x="8" y="4" width="148" height="38"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50v-fF-uY3">
-                                                    <rect key="frame" x="168" y="4" width="74" height="38"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etI-91-XY4">
+                                                    <rect key="frame" x="518" y="4" width="74" height="38"/>
                                                     <color key="backgroundColor" red="0.17254901959999999" green="0.48627450979999998" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="74" id="frw-WB-N7T"/>
+                                                        <constraint firstAttribute="width" constant="74" id="UxB-u0-3ga"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Ladda upp">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="uploadPost:" destination="dcD-Gz-shw" eventType="touchUpInside" id="iaH-nT-xd1"/>
+                                                        <action selector="uploadPost:" destination="dcD-Gz-shw" eventType="touchUpInside" id="FDw-GK-y6B"/>
                                                     </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segla över havet och sjung en bra sång samtidigt som du äter godis" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfI-ja-nw4">
+                                                    <rect key="frame" x="8" y="0.0" width="457" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ8-Mp-tqj">
+                                                    <rect key="frame" x="473" y="3" width="38" height="39"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="38" id="omD-T4-uuP"/>
+                                                    </constraints>
+                                                    <state key="normal" image="bucketlist-remove_icon"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.99625748400000003" green="0.99363070730000003" blue="0.99299103020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="leading" secondItem="HdM-16-ChC" secondAttribute="leadingMargin" id="2fn-RN-gMh"/>
-                                            <constraint firstItem="50v-fF-uY3" firstAttribute="top" secondItem="Iih-4e-Ruu" secondAttribute="top" id="5kb-aE-hJe"/>
-                                            <constraint firstItem="50v-fF-uY3" firstAttribute="leading" secondItem="Iih-4e-Ruu" secondAttribute="trailing" constant="12" id="M6B-od-Vj6"/>
-                                            <constraint firstItem="50v-fF-uY3" firstAttribute="trailing" secondItem="HdM-16-ChC" secondAttribute="trailingMargin" id="WuE-PI-1sv"/>
-                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="centerY" secondItem="HdM-16-ChC" secondAttribute="centerY" id="eF4-Xi-fQF"/>
-                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="topMargin" constant="-4" id="gbA-CV-PyH"/>
-                                            <constraint firstItem="Iih-4e-Ruu" firstAttribute="bottom" secondItem="50v-fF-uY3" secondAttribute="bottom" id="mej-rB-u76"/>
+                                            <constraint firstAttribute="bottom" secondItem="LfI-ja-nw4" secondAttribute="bottom" id="BFm-Gm-GyB"/>
+                                            <constraint firstItem="etI-91-XY4" firstAttribute="trailing" secondItem="HdM-16-ChC" secondAttribute="trailingMargin" id="GjW-Zb-rTR"/>
+                                            <constraint firstItem="etI-91-XY4" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="topMargin" constant="-4" id="Ogr-Gt-Iea"/>
+                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="centerY" secondItem="etI-91-XY4" secondAttribute="centerY" id="QZR-G3-k4f"/>
+                                            <constraint firstItem="etI-91-XY4" firstAttribute="leading" secondItem="aQ8-Mp-tqj" secondAttribute="trailing" constant="7" id="RM0-hj-PXW"/>
+                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="top" id="aLA-Da-pAu"/>
+                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="leading" secondItem="HdM-16-ChC" secondAttribute="leadingMargin" id="fKk-4Z-Fyu"/>
+                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="leading" secondItem="LfI-ja-nw4" secondAttribute="trailing" constant="8" symbolic="YES" id="q5H-C6-Ww1"/>
+                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="centerY" secondItem="aQ8-Mp-tqj" secondAttribute="centerY" id="vce-CM-Eps"/>
+                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="bottom" secondItem="etI-91-XY4" secondAttribute="bottom" id="ycm-MO-zbQ"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="achievementLabel" destination="Iih-4e-Ruu" id="4u5-Ol-IVy"/>
-                                            <outlet property="uploadButton" destination="50v-fF-uY3" id="iGN-LX-2dH"/>
+                                            <outlet property="achievementLabel" destination="LfI-ja-nw4" id="6eO-sN-foc"/>
+                                            <outlet property="removeButton" destination="aQ8-Mp-tqj" id="an2-29-eKs"/>
+                                            <outlet property="uploadButton" destination="etI-91-XY4" id="gEi-U0-0RA"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -2658,6 +2669,7 @@
         <image name="avatar" width="159" height="159"/>
         <image name="avatarsmall" width="30" height="24"/>
         <image name="bucketlist-add-icon" width="38" height="38"/>
+        <image name="bucketlist-remove_icon" width="50" height="50"/>
         <image name="bucketlist_icon" width="32" height="32"/>
         <image name="explore_icon" width="32" height="32"/>
         <image name="home_icon" width="64" height="64"/>
@@ -2665,11 +2677,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="azt-Oc-gww"/>
+        <segue reference="L9l-gp-JAO"/>
         <segue reference="JiC-qu-bKm"/>
         <segue reference="UnV-OJ-WQS"/>
-        <segue reference="kk8-J0-6G5"/>
-        <segue reference="8Bb-Y1-XOB"/>
-        <segue reference="ym3-FU-EDl"/>
+        <segue reference="qca-Hm-Suw"/>
+        <segue reference="qnV-sV-0kd"/>
+        <segue reference="JIk-2X-1Dy"/>
     </inferredMetricsTieBreakers>
 </document>

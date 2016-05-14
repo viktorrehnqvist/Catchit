@@ -85,6 +85,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.layer.cornerRadius = 5
         cell.uploadButton.tag = achievementIds[indexPath.row]
+        cell.removeButton.addTarget(self, action: #selector(removeFromBucketlist(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
         
@@ -107,6 +108,18 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     
     @IBAction func showSearch(sender: AnyObject) {
         self.performSegueWithIdentifier("showSearchFromBucketlist", sender: sender)
+    }
+    
+    func removeFromBucketlist(sender: AnyObject) {
+        let cell: BucketlistCollectionViewCell = sender.superview!!.superview! as! BucketlistCollectionViewCell
+        let cellIndexPath = collectionView.indexPathForCell(cell)
+        let cellIndex = cellIndexPath!.row
+        let achievementId = achievementIds[cellIndex]
+        achievementService.removeFromBucketlist(achievementId)
+        achievementDescriptions.removeAtIndex(cellIndex)
+        achievementIds.removeAtIndex(cellIndex)
+        collectionView.deleteItemsAtIndexPaths([cellIndexPath!])
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     @IBAction func uploadPost(sender: AnyObject?) {
