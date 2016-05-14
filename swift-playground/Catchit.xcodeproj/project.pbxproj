@@ -28,6 +28,7 @@
 		F73520A51CE48877002A9B20 /* ChangeAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73520A41CE48877002A9B20 /* ChangeAvatarViewController.swift */; };
 		F73520A71CE48889002A9B20 /* ChangeUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73520A61CE48889002A9B20 /* ChangeUsernameViewController.swift */; };
 		F73520B11CE48BF9002A9B20 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73520B01CE48BF9002A9B20 /* SettingsService.swift */; };
+		F73520B31CE5DF77002A9B20 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73520B21CE5DF77002A9B20 /* SearchCollectionViewCell.swift */; };
 		F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */; };
 		F73A51CF1CA046BA0029779D /* BucketlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */; };
 		F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */; };
@@ -110,6 +111,7 @@
 		F73520A41CE48877002A9B20 /* ChangeAvatarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAvatarViewController.swift; sourceTree = "<group>"; };
 		F73520A61CE48889002A9B20 /* ChangeUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewController.swift; sourceTree = "<group>"; };
 		F73520B01CE48BF9002A9B20 /* SettingsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		F73520B21CE5DF77002A9B20 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */,
 				F728AFCB1CDB627900F5A1DF /* ProfileCollectionReusableView.swift */,
 				F7EEC2741C92E31C002378E9 /* PostsCollectionViewCell.swift */,
+				F73520B21CE5DF77002A9B20 /* SearchCollectionViewCell.swift */,
 				F73A51C91C9ED2160029779D /* AchievementCollectionViewCell.swift */,
 				F73A51CE1CA046BA0029779D /* BucketlistCollectionViewCell.swift */,
 				F73A51D21CA084F10029779D /* NoticeCollectionViewCell.swift */,
@@ -532,6 +535,7 @@
 			files = (
 				F728AFCE1CDBD6A800F5A1DF /* UploadService.swift in Sources */,
 				F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */,
+				F73520B31CE5DF77002A9B20 /* SearchCollectionViewCell.swift in Sources */,
 				F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */,
 				F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */,
 				F70173781C6E6EAF006F799A /* HomeViewController.swift in Sources */,

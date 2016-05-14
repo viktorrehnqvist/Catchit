@@ -8,17 +8,21 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITextFieldDelegate{
-
+class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     // MARK: Setup
     let postService = PostService()
     @IBOutlet weak var searchField: UITextField!        
+    @IBOutlet weak var collectionView: UICollectionView!
+    var screenSize: CGRect = UIScreen.mainScreen().bounds
+    var resultCount: Int = 1
     
     // MARK: Lifecycle
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
         searchField.delegate = self
         searchField.becomeFirstResponder()
         // Do any additional setup after loading the view.
@@ -30,7 +34,25 @@ class SearchViewController: UIViewController, UITextFieldDelegate{
     }
     
     // MARK: Layout
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return resultCount
+    }
     
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! SearchCollectionViewCell
+    
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.mainScreen().scale
+        cell.resultButton.layer.cornerRadius = 5
+        
+        return cell
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: screenSize.width, height: 46)
+    }
     
     // MARK: User Interaction
     @IBAction func back(sender: AnyObject) {
