@@ -38,6 +38,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementThirdCompleterImages: [UIImage] = []
     var achievementInBucketlist: [Bool] = []
     var achievementCompleted: [Bool] = []
+    var achievementCompletedPostIds: [Int] = []
     var moreAchievementsToLoad: Bool = true
     var segueShouldShowCompleters: Bool = false
     
@@ -53,6 +54,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
                 achievementInBucketlist.append(json[i]?["bucketlist"] as! Bool)
                 achievementCompleted.append(json[i]?["completed"] as! Bool)
+                achievementCompletedPostIds.append(json[i]?["post_id"] as! Int)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
@@ -106,6 +108,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     achievementCompleterCounts[cellIndex] = json[i]?["posts_count"] as! Int
                     achievementInBucketlist[cellIndex] = json[i]?["bucketlist"] as! Bool
                     achievementCompleted[cellIndex] = json[i]?["completed"] as! Bool
+                    achievementCompletedPostIds[cellIndex] = json[i]?["post_id"] as! Int
                     let postImagesToLoad = json[i]["latest_posts"]!!.count
                     if postImagesToLoad > 0 {
                         for postIndex in 0...(postImagesToLoad - 1) {
@@ -160,6 +163,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementCompleterCounts.insert((json[i]?["posts_count"] as! Int), atIndex: 0)
                 achievementInBucketlist.insert((json[i]?["bucketlist"] as! Bool), atIndex: 0)
                 achievementCompleted.insert((json[i]?["completed"] as! Bool), atIndex: 0)
+                achievementCompletedPostIds.insert((json[i]?["post_id"] as! Int), atIndex: 0)
                 let postImagesToLoad = json[i]["latest_posts"]!!.count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
@@ -273,13 +277,15 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         if achievementCompleted[indexPath.row] {
             cell.lockImage.image = unlockedIcon
             cell.bucketlistImage.gestureRecognizers?.removeAll()
+            cell.uploadButton.setTitle("Visa mitt inlägg", forState: .Normal)
         } else {
             cell.lockImage.image = lockedIcon
+            cell.uploadButton.setTitle(("Ladda upp"), forState: .Normal)
         }
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.layer.cornerRadius = 5
-        cell.uploadButton.tag = achievementIds[indexPath.row]
+        cell.uploadButton.tag = indexPath.row
         
         return cell
         
@@ -328,16 +334,20 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     @IBAction func uploadPost(sender: AnyObject?) {
-        uploadAchievementId = sender!.tag
-        let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
-        existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
-            self.useLibrary()
-        })
-        existingOrNewMediaController.addAction(UIAlertAction(title: "Ta bild eller video", style: .Default) { (UIAlertAction) in
-            self.useCamera()
-        })
-        existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
-        self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+        uploadAchievementId = achievementIds[sender!.tag]
+        if achievementCompleted[sender!.tag] {
+            self.performSegueWithIdentifier("showPostFromAchievements", sender: achievementCompletedPostIds[sender!.tag])
+        } else {
+            let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
+            existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
+                self.useLibrary()
+                })
+            existingOrNewMediaController.addAction(UIAlertAction(title: "Ta bild eller video", style: .Default) { (UIAlertAction) in
+                self.useCamera()
+                })
+            existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
+            self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+        }
     }
     
     func useLibrary() {

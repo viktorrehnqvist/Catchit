@@ -863,7 +863,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="lPu-J7-4ro"/>
                                                     </constraints>
-                                                    <state key="normal" title="Ladda upp">
+                                                    <state key="normal">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -1610,7 +1610,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="38" id="CDd-5p-Ll4"/>
                                             </constraints>
-                                            <state key="normal" title="Ladda upp">
+                                            <state key="normal">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
@@ -2665,11 +2665,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="azt-Oc-gww"/>
+        <segue reference="Ftt-UR-dJW"/>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="S0S-yH-cd5"/>
-        <segue reference="kk8-J0-6G5"/>
-        <segue reference="8Bb-Y1-XOB"/>
-        <segue reference="ym3-FU-EDl"/>
+        <segue reference="GxL-aq-8sZ"/>
+        <segue reference="QzT-29-F4w"/>
+        <segue reference="djO-lN-Qc8"/>
+        <segue reference="jal-hA-pvU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -29,6 +29,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     var achievementCompleterCount: Int = 0
     var achievementInBucketlist: Bool = false
     var achievementCompleted: Bool = false
+    var achievementCompletedPostId: Int = 0
     var postIds: [Int] = []
     var postImageUrls: [String] = []
     var postImages: [UIImage] = []
@@ -47,6 +48,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         if firstFetch {
             achievementInBucketlist = json["bucketlist"] as! Bool
             achievementCompleted = json["completed"] as! Bool
+            achievementCompletedPostId = json["post_id"] as! Int
             achievementScore = json["score"] as! Int
             achievementCompleterCount = json["posts"]!!.count
             achievementDescription = json["description"] as! String
@@ -201,6 +203,9 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         if achievementCompleted {
             headerView.lockImage.image = unlockedIcon
             headerView.bucketlistImage.gestureRecognizers?.removeAll()
+            headerView.uploadButton.setTitle("Visa mitt inlägg", forState: .Normal)
+        } else {
+            headerView.uploadButton.setTitle(("Ladda upp"), forState: .Normal)
         }
         header = headerView
         return headerView
@@ -248,15 +253,19 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     }
     
     @IBAction func uploadPost(sender: AnyObject?) {
-        let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
-        existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
-            self.useLibrary()
-            })
-        existingOrNewMediaController.addAction(UIAlertAction(title: "Ta bild eller video", style: .Default) { (UIAlertAction) in
-            self.useCamera()
-            })
-        existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
-        self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+        if achievementCompleted {
+            self.performSegueWithIdentifier("showPostFromAchievement", sender: achievementCompletedPostId)
+        } else {
+            let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
+            existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
+                self.useLibrary()
+                })
+            existingOrNewMediaController.addAction(UIAlertAction(title: "Ta bild eller video", style: .Default) { (UIAlertAction) in
+                self.useCamera()
+                })
+            existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
+            self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+        }
     }
     
     func useLibrary() {
