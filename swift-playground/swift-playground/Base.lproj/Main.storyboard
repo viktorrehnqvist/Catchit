@@ -2163,7 +2163,7 @@
                                 </connections>
                             </textField>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="xNp-Zb-fTX">
+                        <barButtonItem key="rightBarButtonItem" tag="1" image="avatarsmall" id="xNp-Zb-fTX">
                             <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromNotice" id="kk8-J0-6G5"/>
@@ -2665,11 +2665,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ftt-UR-dJW"/>
+        <segue reference="azt-Oc-gww"/>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="GxL-aq-8sZ"/>
-        <segue reference="QzT-29-F4w"/>
-        <segue reference="djO-lN-Qc8"/>
-        <segue reference="jal-hA-pvU"/>
+        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="kk8-J0-6G5"/>
+        <segue reference="8Bb-Y1-XOB"/>
+        <segue reference="ym3-FU-EDl"/>
     </inferredMetricsTieBreakers>
 </document>

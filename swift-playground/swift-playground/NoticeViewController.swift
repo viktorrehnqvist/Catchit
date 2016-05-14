@@ -136,7 +136,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
             vc.postId = noticeLinkIds[cellIndex]
         }
         
-        if segue.identifier == "showProfileFromNotice" {
+        if segue.identifier == "showProfileFromNotice" && sender!.tag == nil {
             let point = sender?.view
             let mainCell = point?.superview
             let main = mainCell?.superview
