@@ -38,6 +38,9 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         loadAvatars()
     }
     
+    func updateUserData(json: AnyObject) {
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

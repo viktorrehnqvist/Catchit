@@ -45,7 +45,6 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     // MARK: Lifecycle
     func setUserData(json: AnyObject, follow: Bool) {
-        print(json)
         username = json["name"] as? String
         userAchievementCount = json["achievement_count"] as! Int
         userScore = json["user_score"] as! Int
@@ -73,6 +72,17 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
+    func updateUserData(json: AnyObject) {
+        username = json["name"] as? String
+        userAchievementCount = json["achievement_count"] as! Int
+        userScore = json["user_score"] as! Int
+        userFollowsCount = (json["follow_infos"] as! NSArray)[0].count
+        userFollowersCount = (json["follower_infos"] as! NSArray)[0].count
+        userFollowed = json["follow"] as! Bool
+        fetchDataFromUrlToUserAvatar((json["avatar_url"] as! String))
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+    
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
             postService.fetchMorePosts(postIds.last!)
@@ -94,6 +104,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     }
     
     override func viewWillAppear(animated: Bool) {
+        userService.updateUserData(userId!)
         self.navigationController?.navigationBarHidden = false
     }
     

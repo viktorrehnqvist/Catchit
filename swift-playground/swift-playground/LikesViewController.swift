@@ -67,6 +67,9 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         loadAvatars()
     }
     
+    func updateUserData(json: AnyObject) {
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

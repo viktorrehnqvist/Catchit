@@ -12,6 +12,7 @@ import Alamofire
 // MARK: Protocols
 protocol UserServiceDelegate {
     func setUserData(json: AnyObject, follow: Bool)
+    func updateUserData(json: AnyObject)
 }
 
 class UserService {
@@ -50,6 +51,19 @@ class UserService {
                 
         }
 
+    }
+    
+    func updateUserData(userId: Int) {
+        Alamofire.request(.GET, url + "users/\(userId).json/", headers: headers)
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.updateUserData(JSON)
+                        })
+                    }
+                }
+        }
     }
     
     func getFollowData(userId: Int, follow: Bool) {
