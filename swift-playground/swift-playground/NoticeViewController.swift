@@ -16,6 +16,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     // MARK: Setup
     let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
     
     var noticeMessages: [String] = []
@@ -148,7 +149,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     func loadAvatars() {
         if self.noticeUserAvatarUrls.count > 0 {
             for avatarUrl in self.noticeUserAvatarUrls {
-                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
+                let url = NSURL(string: self.url + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     noticeUserAvatars.append(UIImage(data: data!)!)

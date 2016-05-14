@@ -14,6 +14,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     let postService = PostService()
     let achievementService = AchievementService()
     let userService = UserService()
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
@@ -174,7 +175,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     func loadAvatars() {
         if self.userAvatarUrls.count > 0 {
             for avatarUrl in self.userAvatarUrls {
-                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
+                let url = NSURL(string: self.url + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     userAvatars.append(UIImage(data: data!)!)

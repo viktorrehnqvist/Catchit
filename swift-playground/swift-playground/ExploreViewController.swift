@@ -17,6 +17,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
+    
     
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
@@ -259,7 +261,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     
     // MARK: Additional Helpers
     func fetchDataFromUrlToPostImages(fetchUrl: String, new: Bool) {
-        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let url = NSURL(string: self.url + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         if new {
@@ -270,7 +272,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     }
     
     func fetchDataFromUrlToPostUserAvatars(fetchUrl: String, new: Bool) {
-        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let url = NSURL(string: self.url + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         if new {

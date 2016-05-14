@@ -18,6 +18,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     let achievementService = AchievementService()
     let uploadService = UploadService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
     var uploadAchievementId: Int?
     

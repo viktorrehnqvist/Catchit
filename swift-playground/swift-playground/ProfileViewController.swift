@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
     let postService = PostService()
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
     var header: ProfileCollectionReusableView!
     let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -262,14 +263,14 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     // MARK: Additional Helpers
     func fetchDataFromUrlToPostImages(fetchUrl: String) {
-        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let url = NSURL(string: self.url + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.postImages.append(image!)
     }
     
     func fetchDataFromUrlToUserAvatar(fetchUrl: String) {
-        let url = NSURL(string: "http://192.168.1.116:3000" + fetchUrl)!
+        let url = NSURL(string: self.url + fetchUrl)!
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.userAvatar = image

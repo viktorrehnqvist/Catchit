@@ -30,6 +30,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     var header: ShowPostCollectionReusableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     let postService = PostService()
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
@@ -231,7 +232,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     func loadImageFromUrls() {
         if self.commentUserAvatarUrls.count > 0 {
             for avatarUrl in self.commentUserAvatarUrls {
-                let url = NSURL(string: "http://192.168.1.116:3000" + avatarUrl)
+                let url = NSURL(string: self.url + avatarUrl)
                 let data = NSData(contentsOfURL:url!)
                 if data != nil {
                     commentUserAvatars.append(UIImage(data: data!)!)
@@ -239,10 +240,10 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
             }
             
         }
-        var url = NSURL(string: "http://192.168.1.116:3000" + postImageUrl)
+        var url = NSURL(string: self.url + postImageUrl)
         var data = NSData(contentsOfURL: url!)
         postImage = UIImage(data: data!)
-        url = NSURL(string: "http://192.168.1.116:3000" + userAvatarUrl)
+        url = NSURL(string: self.url + userAvatarUrl)
         data = NSData(contentsOfURL: url!)
         userAvatar = UIImage(data: data!)
 
