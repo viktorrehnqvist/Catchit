@@ -2095,7 +2095,7 @@
                                     <size key="itemSize" width="250" height="46"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="noticeCell" id="Url-HF-9Ut" customClass="NoticeCollectionViewCell" customModule="Catchit" customModuleProvider="target">
@@ -2144,10 +2144,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ien-Na-utX" firstAttribute="top" secondItem="Xfz-Wl-Vys" secondAttribute="top" id="CxM-a5-2i6"/>
-                            <constraint firstItem="ien-Na-utX" firstAttribute="bottom" secondItem="qS2-58-mhC" secondAttribute="top" id="NyX-tL-9g4"/>
-                            <constraint firstItem="ien-Na-utX" firstAttribute="leading" secondItem="Xfz-Wl-Vys" secondAttribute="leading" id="ZNs-01-ZMe"/>
-                            <constraint firstAttribute="trailing" secondItem="ien-Na-utX" secondAttribute="trailing" id="ouY-Do-ogA"/>
+                            <constraint firstItem="ien-Na-utX" firstAttribute="top" secondItem="Xfz-Wl-Vys" secondAttribute="top" id="KKE-Dv-QoH"/>
+                            <constraint firstItem="ien-Na-utX" firstAttribute="leading" secondItem="Xfz-Wl-Vys" secondAttribute="leading" id="MCx-GO-BYZ"/>
+                            <constraint firstItem="ien-Na-utX" firstAttribute="bottom" secondItem="qS2-58-mhC" secondAttribute="top" id="RQa-j3-XKA"/>
+                            <constraint firstAttribute="trailing" secondItem="ien-Na-utX" secondAttribute="trailing" id="jYI-jb-iYZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eKH-2m-VAz">
@@ -2665,11 +2665,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dwR-E4-82o"/>
+        <segue reference="azt-Oc-gww"/>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="OvH-UW-Jlq"/>
-        <segue reference="QzT-29-F4w"/>
-        <segue reference="djO-lN-Qc8"/>
-        <segue reference="jal-hA-pvU"/>
+        <segue reference="S0S-yH-cd5"/>
+        <segue reference="kk8-J0-6G5"/>
+        <segue reference="8Bb-Y1-XOB"/>
+        <segue reference="ym3-FU-EDl"/>
     </inferredMetricsTieBreakers>
 </document>
