@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         userFollowsCount = (json["follow_infos"] as! NSArray)[0].count
         userFollowersCount = (json["follower_infos"] as! NSArray)[0].count
         userFollowed = json["follow"] as! Bool
+        postLike = (json["like"] as! NSArray) as! [Bool]
         fetchDataFromUrlToUserAvatar((json["avatar_url"] as! String))
         if (json["posts"] as! NSArray).count > 0 {
             for i in 0...((json["posts"] as! NSArray).count - 1) {
@@ -62,7 +63,6 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
                 // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
                 postCommentCounts.append((json["posts"] as! NSArray)[i]["comments_count"] as! Int)
                 postLikeCounts.append((json["posts"] as! NSArray)[i]["likes_count"] as! Int)
-                //postLike.append((json["posts"] as! NSArray)[i]["like"] as! Bool)
                 // Check if current user follows the displayed user
                 fetchDataFromUrlToPostImages((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
             }
@@ -139,6 +139,11 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.scoreLabel.text! = String(achievementScores[indexPath.row]) + "p"
         cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
+        if postLike[indexPath.row] {
+            cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
+        } else {
+            cell.likeButton?.setTitle("Gilla", forState: .Normal)
+        }
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.postId = postIds[indexPath.row]
