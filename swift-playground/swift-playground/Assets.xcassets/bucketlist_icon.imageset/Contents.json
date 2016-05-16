@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "bucketlist_icon.png",
+      "filename" : "bucketlist-icon 2-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "bucketlist-icon 2-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "bucketlist-icon 2.png",
       "scale" : "3x"
     }
   ],

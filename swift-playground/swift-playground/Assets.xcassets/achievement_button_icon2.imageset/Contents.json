@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "achievement_button_icon2.png",
+      "filename" : "fi-share-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "fi-share-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "fi-share.png",
       "scale" : "3x"
     }
   ],
