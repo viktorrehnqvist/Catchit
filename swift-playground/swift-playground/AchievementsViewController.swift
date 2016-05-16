@@ -294,7 +294,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let size = CGSize(width: screenSize.width, height: 320)
+            let size = CGSize(width: screenSize.width, height: screenSize.width)
             
             return size
     }

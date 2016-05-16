@@ -154,13 +154,17 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         
     }
     
-   func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let image = self.postImages[indexPath.row]
-        let heightFactor = image.size.height / image.size.width
-        let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
-            
+        var height = image.size.height
+        if image.size.width > screenSize.width {
+            let resizeFactor = screenSize.width / image.size.width
+            height = resizeFactor * image.size.height
+        }
+        let size = CGSize(width: screenSize.width, height: height + 150)
+        
         return size
     }
     

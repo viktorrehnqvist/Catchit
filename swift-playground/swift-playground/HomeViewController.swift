@@ -189,13 +189,17 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     }
     
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let image = self.postImages[indexPath.row]
-            let heightFactor = image.size.height / image.size.width
-            let size = CGSize(width: 320, height: heightFactor * 320 + 150)
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let image = self.postImages[indexPath.row]
+        var height = image.size.height
+        if image.size.width > screenSize.width {
+            let resizeFactor = screenSize.width / image.size.width
+            height = resizeFactor * image.size.height
+        }
+        let size = CGSize(width: screenSize.width, height: height + 150)
         
-            return size
+        return size
     }
     
     // MARK: User Interaction
