@@ -294,9 +294,13 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let size = CGSize(width: screenSize.width, height: screenSize.width)
+        var height = CGFloat(320)
+        if screenSize.width > height {
+            height = screenSize.width * 0.9
+        }
+        let size = CGSize(width: screenSize.width, height: height)
             
-            return size
+        return size
     }
     
     // MARK: User Interaction
