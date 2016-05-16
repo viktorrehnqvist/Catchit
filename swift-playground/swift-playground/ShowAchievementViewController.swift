@@ -177,7 +177,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let image = self.postImages[indexPath.row]
         let heightFactor = image.size.height / image.size.width
-        let size = CGSize(width: screenSize.width, height: heightFactor * screenSize.width + 160)
+        let size = CGSize(width: 320, height: heightFactor * 320 + 150)
         
         return size
     }
