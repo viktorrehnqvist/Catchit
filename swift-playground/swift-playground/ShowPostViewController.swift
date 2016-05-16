@@ -112,6 +112,13 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         cell.profileImage.image = self.commentUserAvatars[indexPath.row]
         cell.label.numberOfLines = 0
         cell.tag = indexPath.row
+        let border = CALayer()
+        let width = CGFloat(0.5)
+        border.borderColor = UIColor.lightGrayColor().CGColor
+        border.frame = CGRect(x: 0, y: 0, width:  cell.frame.size.width, height: 1)
+        border.borderWidth = width
+        cell.layer.addSublayer(border)
+        cell.layer.masksToBounds = true
         
         return cell
         
