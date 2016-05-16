@@ -13,6 +13,10 @@ class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, UII
 
     // MARK: Setup
     @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var pickImageButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
     let settingsService = SettingsService()
     // MARK: Lifecycle
     func setSettingsData(json: AnyObject) {
@@ -22,6 +26,7 @@ class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, UII
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        roundButtons()
         self.settingsService.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -29,6 +34,13 @@ class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, UII
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Layout
+    func roundButtons() {
+        pickImageButton.layer.cornerRadius = 5
+        saveButton.layer.cornerRadius = 5
+        cancelButton.layer.cornerRadius = 5
     }
     
     // MARK: User Interaction

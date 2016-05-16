@@ -2168,6 +2168,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="wgU-e9-lhc" id="JGx-50-vJU"/>
+                        <outlet property="saveButton" destination="Xfs-DV-yJ8" id="1LW-st-iRg"/>
                         <outlet property="username" destination="w03-hP-Kll" id="Xmc-eU-bLm"/>
                     </connections>
                 </viewController>
@@ -2664,8 +2666,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="vIg-Fk-mqg" id="qOl-Zi-QWa"/>
                         <outlet property="currentPassword" destination="XMT-eb-KBI" id="KRt-FA-2ju"/>
                         <outlet property="newPassword" destination="e7E-QA-QCo" id="wR2-Rh-OyN"/>
+                        <outlet property="saveButton" destination="4FH-bz-Bfl" id="KXV-gD-ySc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WXm-cX-ghe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2751,6 +2755,9 @@
                     </view>
                     <connections>
                         <outlet property="avatar" destination="cg7-zm-Od9" id="MZJ-1v-yBv"/>
+                        <outlet property="cancelButton" destination="BWU-Qd-P4n" id="Th7-4B-Nvg"/>
+                        <outlet property="pickImageButton" destination="eec-aO-Cw0" id="XkW-Ev-YGN"/>
+                        <outlet property="saveButton" destination="7ms-Hg-dtC" id="rKj-MT-fhU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yF5-dB-Wcm" userLabel="First Responder" sceneMemberID="firstResponder"/>

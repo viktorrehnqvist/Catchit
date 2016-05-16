@@ -14,6 +14,8 @@ class ChangeUsernameViewController: UIViewController, SettingsServiceDelegate {
     let settingsService = SettingsService()
     let userDefaults = NSUserDefaults.standardUserDefaults()
     @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: Lifecycle
     func setSettingsData(json: AnyObject) {
@@ -22,6 +24,7 @@ class ChangeUsernameViewController: UIViewController, SettingsServiceDelegate {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        roundButtons()
         username.text = (userDefaults.objectForKey("name") as! String)
         // Do any additional setup after loading the view.
     }
@@ -29,6 +32,12 @@ class ChangeUsernameViewController: UIViewController, SettingsServiceDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Layout
+    func roundButtons() {
+        saveButton.layer.cornerRadius = 5
+        cancelButton.layer.cornerRadius = 5
     }
     
     // MARK: User Interaction

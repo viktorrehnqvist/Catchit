@@ -14,6 +14,8 @@ class ChangePasswordViewController: UIViewController, SettingsServiceDelegate {
     let settingsService = SettingsService()
     @IBOutlet weak var currentPassword: UITextField!
     @IBOutlet weak var newPassword: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: Lifecycle
     func setSettingsData(json: AnyObject) {
@@ -29,6 +31,7 @@ class ChangePasswordViewController: UIViewController, SettingsServiceDelegate {
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        roundButtons()
         settingsService.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -36,6 +39,12 @@ class ChangePasswordViewController: UIViewController, SettingsServiceDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Layout
+    func roundButtons() {
+        saveButton.layer.cornerRadius = 5
+        cancelButton.layer.cornerRadius = 5
     }
     
     // MARK: User Interaction
