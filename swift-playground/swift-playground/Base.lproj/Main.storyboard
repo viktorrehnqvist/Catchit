@@ -1044,10 +1044,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etI-91-XY4">
-                                                    <rect key="frame" x="518" y="4" width="74" height="38"/>
+                                                    <rect key="frame" x="527" y="0.0" width="73" height="46"/>
                                                     <color key="backgroundColor" red="0.17254901959999999" green="0.48627450979999998" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="74" id="UxB-u0-3ga"/>
+                                                        <constraint firstAttribute="width" constant="73" id="tZP-64-lxn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Ladda upp">
@@ -1057,16 +1057,16 @@
                                                         <action selector="uploadPost:" destination="dcD-Gz-shw" eventType="touchUpInside" id="FDw-GK-y6B"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segla över havet och sjung en bra sång samtidigt som du äter godis" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfI-ja-nw4">
-                                                    <rect key="frame" x="8" y="0.0" width="457" height="46"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segla över havet och sjung en bra sång samtidigt som du äter godis" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfI-ja-nw4">
+                                                    <rect key="frame" x="8" y="0.0" width="467" height="46"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ8-Mp-tqj">
-                                                    <rect key="frame" x="473" y="3" width="38" height="39"/>
+                                                    <rect key="frame" x="483" y="3" width="38" height="39"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="38" id="omD-T4-uuP"/>
+                                                        <constraint firstAttribute="width" constant="38" id="KiX-s0-0iU"/>
                                                     </constraints>
                                                     <state key="normal" image="bucketlist-remove_icon"/>
                                                 </button>
@@ -1075,19 +1075,19 @@
                                         </view>
                                         <color key="backgroundColor" red="0.99625748400000003" green="0.99363070730000003" blue="0.99299103020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="LfI-ja-nw4" secondAttribute="bottom" id="BFm-Gm-GyB"/>
-                                            <constraint firstItem="etI-91-XY4" firstAttribute="trailing" secondItem="HdM-16-ChC" secondAttribute="trailingMargin" id="GjW-Zb-rTR"/>
-                                            <constraint firstItem="etI-91-XY4" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="topMargin" constant="-4" id="Ogr-Gt-Iea"/>
-                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="centerY" secondItem="etI-91-XY4" secondAttribute="centerY" id="QZR-G3-k4f"/>
-                                            <constraint firstItem="etI-91-XY4" firstAttribute="leading" secondItem="aQ8-Mp-tqj" secondAttribute="trailing" constant="7" id="RM0-hj-PXW"/>
-                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="top" id="aLA-Da-pAu"/>
-                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="leading" secondItem="HdM-16-ChC" secondAttribute="leadingMargin" id="fKk-4Z-Fyu"/>
-                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="leading" secondItem="LfI-ja-nw4" secondAttribute="trailing" constant="8" symbolic="YES" id="q5H-C6-Ww1"/>
-                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="centerY" secondItem="aQ8-Mp-tqj" secondAttribute="centerY" id="vce-CM-Eps"/>
-                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="bottom" secondItem="etI-91-XY4" secondAttribute="bottom" id="ycm-MO-zbQ"/>
+                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="bottom" secondItem="etI-91-XY4" secondAttribute="bottom" id="7rN-B9-fvb"/>
+                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="leading" secondItem="HdM-16-ChC" secondAttribute="leadingMargin" id="E5Y-9V-6jD"/>
+                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="top" secondItem="etI-91-XY4" secondAttribute="top" id="L05-AS-mxK"/>
+                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="topMargin" constant="-5" id="Tpa-BN-REC"/>
+                                            <constraint firstItem="LfI-ja-nw4" firstAttribute="top" secondItem="HdM-16-ChC" secondAttribute="top" id="YNp-VP-4Pv"/>
+                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="leading" secondItem="LfI-ja-nw4" secondAttribute="trailing" constant="8" symbolic="YES" id="iLB-UD-Byi"/>
+                                            <constraint firstItem="aQ8-Mp-tqj" firstAttribute="centerY" secondItem="etI-91-XY4" secondAttribute="centerY" id="llz-D4-KUc"/>
+                                            <constraint firstAttribute="bottom" secondItem="LfI-ja-nw4" secondAttribute="bottom" id="nM3-Wb-7xl"/>
+                                            <constraint firstAttribute="trailing" secondItem="etI-91-XY4" secondAttribute="trailing" id="o7O-F8-iuq"/>
+                                            <constraint firstItem="etI-91-XY4" firstAttribute="leading" secondItem="aQ8-Mp-tqj" secondAttribute="trailing" constant="6" id="oqf-fh-9dK"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="achievementLabel" destination="LfI-ja-nw4" id="6eO-sN-foc"/>
+                                            <outlet property="achievementLabel" destination="LfI-ja-nw4" id="rFp-zx-XqG"/>
                                             <outlet property="removeButton" destination="aQ8-Mp-tqj" id="an2-29-eKs"/>
                                             <outlet property="uploadButton" destination="etI-91-XY4" id="gEi-U0-0RA"/>
                                         </connections>
@@ -2786,11 +2786,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="blo-6f-H6Y"/>
-        <segue reference="S0S-yH-cd5"/>
+        <segue reference="JIk-2X-1Dy"/>
         <segue reference="JiC-qu-bKm"/>
-        <segue reference="ym3-FU-EDl"/>
-        <segue reference="azt-Oc-gww"/>
-        <segue reference="8Bb-Y1-XOB"/>
+        <segue reference="S0S-yH-cd5"/>
+        <segue reference="L9l-gp-JAO"/>
+        <segue reference="qca-Hm-Suw"/>
+        <segue reference="qnV-sV-0kd"/>
     </inferredMetricsTieBreakers>
 </document>
