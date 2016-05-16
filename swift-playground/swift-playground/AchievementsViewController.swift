@@ -276,7 +276,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         }
         if achievementCompleted[indexPath.row] {
             cell.lockImage.image = unlockedIcon
-            cell.bucketlistImage.gestureRecognizers?.removeAll()
             cell.uploadButton.setTitle("Visa mitt inlägg", forState: .Normal)
         } else {
             cell.lockImage.image = lockedIcon
@@ -328,12 +327,18 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         let main = mainCell?.superview
         let thisCell: AchievementCollectionViewCell = main as! AchievementCollectionViewCell
         let cellIndex = thisCell.tag
-        if thisCell.bucketlistImage.image == addToBucketlistImage {
-            achievementService.addToBucketlist(achievementIds[cellIndex])
-            thisCell.bucketlistImage.image = removeFromBucketlistImage
+        if achievementCompleted[cellIndex] {
+            let ac = UIAlertController(title: "Avklarat uppdrag", message: "Du har redan klarat detta uppdrag och kan därför inte lägga till det i din lista", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         } else {
-            achievementService.removeFromBucketlist(achievementIds[cellIndex])
-            thisCell.bucketlistImage.image = addToBucketlistImage
+            if thisCell.bucketlistImage.image == addToBucketlistImage {
+                achievementService.addToBucketlist(achievementIds[cellIndex])
+                thisCell.bucketlistImage.image = removeFromBucketlistImage
+            } else {
+                achievementService.removeFromBucketlist(achievementIds[cellIndex])
+                thisCell.bucketlistImage.image = addToBucketlistImage
+            }
         }
     }
     
