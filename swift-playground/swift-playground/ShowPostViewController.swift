@@ -86,6 +86,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         self.postService.delegate = self
         self.currentUsername = userDefaults.objectForKey("name") as? String
         textField.delegate = self
+        borderBottom(collectionView)
         // Do any additional setup after loading the view.
     }
 
@@ -98,6 +99,8 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         return self.comments.count
     }
     
+    
+    // MARK: Layout
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("commentCell", forIndexPath: indexPath) as! ShowPostCollectionViewCell
@@ -172,6 +175,16 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         
         header = headerView
         return headerView
+    }
+    
+    func borderBottom(view: AnyObject) {
+        let border = CALayer()
+        let width = CGFloat(3)
+        border.borderColor = UIColor.lightGrayColor().CGColor
+        border.frame = CGRect(x: 0, y: view.frame.size.height - width, width:  view.frame.size.width, height: view.frame.size.height)
+        border.borderWidth = width
+        // This should be fixed to add border to the frame end of scroll view before using it.
+        // view.layer.addSublayer(border)
     }
 
     // MARK: User Interaction
