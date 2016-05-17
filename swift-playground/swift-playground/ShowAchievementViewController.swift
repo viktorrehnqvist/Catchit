@@ -206,7 +206,6 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
         if achievementCompleted {
             headerView.lockImage.image = unlockedIcon
-            headerView.bucketlistImage.gestureRecognizers?.removeAll()
             headerView.uploadButton.setTitle("Visa mitt inlägg", forState: .Normal)
         } else {
             headerView.uploadButton.setTitle(("Ladda upp"), forState: .Normal)
@@ -217,12 +216,18 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     // MARK: User Interaction
     @IBAction func bucketlistPress(sender: AnyObject?) {
-        if header.bucketlistImage.image == addToBucketlistImage {
-            achievementService.addToBucketlist(achievementId)
-            header.bucketlistImage.image = removeFromBucketlistImage
+        if achievementCompleted {
+            let ac = UIAlertController(title: "Avklarat uppdrag", message: "Du har redan klarat detta uppdrag och kan därför inte lägga till det i din lista", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         } else {
-            achievementService.removeFromBucketlist(achievementId)
-            header.bucketlistImage.image = addToBucketlistImage
+            if header.bucketlistImage.image == addToBucketlistImage {
+                achievementService.addToBucketlist(achievementId)
+                header.bucketlistImage.image = removeFromBucketlistImage
+            } else {
+                achievementService.removeFromBucketlist(achievementId)
+                header.bucketlistImage.image = addToBucketlistImage
+            }
         }
     }
     
