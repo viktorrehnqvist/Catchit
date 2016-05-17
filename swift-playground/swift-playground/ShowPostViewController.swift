@@ -119,6 +119,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         border.borderWidth = width
         cell.layer.addSublayer(border)
         cell.layer.masksToBounds = true
+        cell.label.sizeToFit()
         
         return cell
         
@@ -127,15 +128,20 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let label = UILabel(frame: CGRectMake(0, 0, screenSize.width - 100, 0))
+            let label = UILabel(frame: CGRectMake(0, 0, 120, 0))
             label.text = self.comments[indexPath.row]
             label.font = label.font.fontWithSize(12)
-            // Calculates the required height for this comment depending on content
+            label.numberOfLines = 0
+            // Calculates the required height for this comment depending on content.
+            // Requires fix.
             var newLabelHeight = label.requiredHeight()
-            if newLabelHeight < 30 {
-                newLabelHeight = 35
-            }
-            let size = CGSize(width: screenSize.width, height: newLabelHeight + 10)
+            if newLabelHeight < 45 {
+                newLabelHeight = 50
+            } else if newLabelHeight < 75 {
+                newLabelHeight = 65
+        }
+            let size = CGSize(width: screenSize.width, height: newLabelHeight * 0.8)
+        
             return size
     }
     
