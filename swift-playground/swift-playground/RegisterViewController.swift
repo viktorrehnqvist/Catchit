@@ -8,13 +8,17 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
+class RegisterViewController: UIViewController, AuthenticationServiceDelegate, UIScrollViewDelegate, UITextFieldDelegate {
 
     // MARK: Setup
     let authService = AuthenticationService()
     @IBOutlet weak var emailLabel: UITextField!
     @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var marginTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: Lifecycle
     func setAuthenticationData(json: AnyObject) {
@@ -30,6 +34,11 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        marginTopConstraint.constant = 0.15 * screenSize.height
+        emailLabel.delegate = self
+        usernameLabel.delegate = self
+        passwordLabel.delegate = self
+        scrollView.delegate = self
         self.authService.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -45,7 +54,18 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     }
     
     @IBAction func resignKeyboard(sender: AnyObject) {
-        sender.resignFirstResponder()
+        self.view.endEditing(true)
+        if screenSize.height < 500 {
+            logo.hidden = false
+        }
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if screenSize.height < 500 {
+            logo.hidden = true
+        }
+    }
+    
+    
 
 }

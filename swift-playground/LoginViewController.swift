@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, AuthenticationServiceDelegate, UIScrollViewDelegate, UITextFieldDelegate{
+class LoginViewController: UIViewController, AuthenticationServiceDelegate, UIScrollViewDelegate, UITextFieldDelegate {
     
     // MARK: Setup
     let authService = AuthenticationService()
