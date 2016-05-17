@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate, UISc
     @IBOutlet weak var scrollView: UIScrollView!
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var marginTopConstraint: NSLayoutConstraint!
     
      // MARK: Lifecycle
     func setAuthenticationData(json: AnyObject) {
@@ -32,6 +33,7 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate, UISc
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        marginTopConstraint.constant = 0.15 * screenSize.height
         emailLabel.delegate = self
         passwordLabel.delegate = self
         scrollView.delegate = self

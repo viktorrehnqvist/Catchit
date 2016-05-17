@@ -48,11 +48,11 @@ public class KeyboardLayoutConstraint: NSLayoutConstraint {
                 let frame = frameValue.CGRectValue()
                 let screenSize: CGRect = UIScreen.mainScreen().bounds
                 if screenSize.height < 500 {
-                    keyboardVisibleHeight = frame.size.height - 50
+                    keyboardVisibleHeight = frame.size.height - 75
                 } else if screenSize.height < 600 {
-                    keyboardVisibleHeight = frame.size.height - 125
+                    keyboardVisibleHeight = frame.size.height - 175
                 } else {
-                    keyboardVisibleHeight = frame.size.height - 185
+                    keyboardVisibleHeight = frame.size.height - 205
                 }
             }
             

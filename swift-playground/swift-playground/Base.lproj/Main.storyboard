@@ -286,10 +286,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_high_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hg7-TL-drE">
-                                                <rect key="frame" x="236" y="110" width="128" height="128"/>
+                                                <rect key="frame" x="236" y="70" width="128" height="128"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Catchit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fct-De-AyK">
-                                                <rect key="frame" x="180" y="246" width="240" height="21"/>
+                                                <rect key="frame" x="180" y="206" width="240" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="240" id="W41-yA-Rm9"/>
                                                 </constraints>
@@ -298,7 +298,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-postadress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TsN-sC-Pfc">
-                                                <rect key="frame" x="180" y="275" width="240" height="30"/>
+                                                <rect key="frame" x="180" y="235" width="240" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -308,33 +308,8 @@
                                                     <action selector="resignKeyboard:" destination="oaG-zJ-hso" eventType="primaryActionTriggered" id="v0C-7G-bCd"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQn-ZJ-iM5">
-                                                <rect key="frame" x="180" y="351" width="240" height="30"/>
-                                                <state key="normal" title="Logga in">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="loginUser:" destination="oaG-zJ-hso" eventType="touchUpInside" id="YrR-XI-TOa"/>
-                                                    <action selector="resignKeyboardWithAnimation:" destination="oaG-zJ-hso" eventType="touchUpInside" id="odq-HS-nAS"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONP-hn-pln">
-                                                <rect key="frame" x="180" y="389" width="240" height="30"/>
-                                                <state key="normal" title="Bli medlem">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Har du glömt dina inloggningsuppgifter?            Klicka här." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-ba-yPG">
-                                                <rect key="frame" x="180" y="427" width="240" height="63"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="63" id="CCt-uO-ez3"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lösenord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IKj-Yg-SYH">
-                                                <rect key="frame" x="180" y="313" width="240" height="30"/>
+                                                <rect key="frame" x="180" y="273" width="240" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
@@ -343,28 +318,58 @@
                                                     <action selector="resignKeyboard:" destination="oaG-zJ-hso" eventType="editingDidEnd" id="dnX-49-v2v"/>
                                                 </connections>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQn-ZJ-iM5">
+                                                <rect key="frame" x="180" y="311" width="240" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="DJL-iS-o5E"/>
+                                                </constraints>
+                                                <state key="normal" title="Logga in">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loginUser:" destination="oaG-zJ-hso" eventType="touchUpInside" id="YrR-XI-TOa"/>
+                                                    <action selector="resignKeyboard:" destination="oaG-zJ-hso" eventType="touchUpInside" id="ywS-Dp-sEo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONP-hn-pln">
+                                                <rect key="frame" x="180" y="349" width="240" height="30"/>
+                                                <state key="normal" title="Bli medlem">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="pTY-6l-dlQ" kind="show" id="pBw-mo-JVp"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Har du glömt dina inloggningsuppgifter?            Klicka här." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-ba-yPG">
+                                                <rect key="frame" x="180" y="387" width="240" height="63"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="63" id="CCt-uO-ez3"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="UQn-ZJ-iM5" firstAttribute="top" secondItem="IKj-Yg-SYH" secondAttribute="bottom" constant="8" symbolic="YES" id="2vg-lF-ctw"/>
                                             <constraint firstItem="cZn-ba-yPG" firstAttribute="top" secondItem="ONP-hn-pln" secondAttribute="bottom" constant="8" symbolic="YES" id="3UK-qG-liS"/>
                                             <constraint firstItem="Fct-De-AyK" firstAttribute="top" secondItem="hg7-TL-drE" secondAttribute="bottom" constant="8" symbolic="YES" id="6Ns-sp-hJv"/>
+                                            <constraint firstItem="ONP-hn-pln" firstAttribute="trailing" secondItem="IKj-Yg-SYH" secondAttribute="trailing" id="CDV-yY-fUd"/>
                                             <constraint firstItem="Fct-De-AyK" firstAttribute="trailing" secondItem="TsN-sC-Pfc" secondAttribute="trailing" id="CUt-dn-h3J"/>
                                             <constraint firstItem="IKj-Yg-SYH" firstAttribute="top" secondItem="TsN-sC-Pfc" secondAttribute="bottom" constant="8" symbolic="YES" id="DQR-pV-afX"/>
                                             <constraint firstItem="ONP-hn-pln" firstAttribute="trailing" secondItem="cZn-ba-yPG" secondAttribute="trailing" id="Etk-7G-VJD"/>
                                             <constraint firstItem="TsN-sC-Pfc" firstAttribute="top" secondItem="Fct-De-AyK" secondAttribute="bottom" constant="8" symbolic="YES" id="GNY-Bt-qvS"/>
                                             <constraint firstItem="TsN-sC-Pfc" firstAttribute="leading" secondItem="IKj-Yg-SYH" secondAttribute="leading" id="GhY-ec-IpJ"/>
-                                            <constraint firstItem="UQn-ZJ-iM5" firstAttribute="leading" secondItem="ONP-hn-pln" secondAttribute="leading" id="NxC-00-Tii"/>
-                                            <constraint firstItem="ONP-hn-pln" firstAttribute="top" secondItem="UQn-ZJ-iM5" secondAttribute="bottom" constant="8" symbolic="YES" id="TkG-6C-Rei"/>
-                                            <constraint firstItem="IKj-Yg-SYH" firstAttribute="leading" secondItem="UQn-ZJ-iM5" secondAttribute="leading" id="XjX-oO-2il"/>
-                                            <constraint firstItem="hg7-TL-drE" firstAttribute="top" secondItem="vLy-HT-A1v" secondAttribute="top" constant="110" id="Z7A-ta-ake"/>
+                                            <constraint firstItem="ONP-hn-pln" firstAttribute="top" secondItem="IKj-Yg-SYH" secondAttribute="bottom" constant="46" id="JAo-RW-zXi"/>
+                                            <constraint firstItem="hg7-TL-drE" firstAttribute="top" secondItem="vLy-HT-A1v" secondAttribute="top" constant="70" id="Z7A-ta-ake"/>
                                             <constraint firstItem="Fct-De-AyK" firstAttribute="leading" secondItem="TsN-sC-Pfc" secondAttribute="leading" id="dXM-SZ-f2x"/>
                                             <constraint firstItem="ONP-hn-pln" firstAttribute="leading" secondItem="cZn-ba-yPG" secondAttribute="leading" id="fRk-Z8-Px8"/>
+                                            <constraint firstItem="UQn-ZJ-iM5" firstAttribute="leading" secondItem="IKj-Yg-SYH" secondAttribute="leading" id="hkQ-A3-zpU"/>
                                             <constraint firstItem="hg7-TL-drE" firstAttribute="centerX" secondItem="vLy-HT-A1v" secondAttribute="centerX" id="moZ-Zs-6YZ"/>
-                                            <constraint firstItem="IKj-Yg-SYH" firstAttribute="trailing" secondItem="UQn-ZJ-iM5" secondAttribute="trailing" id="mtf-0u-R6Z"/>
-                                            <constraint firstItem="UQn-ZJ-iM5" firstAttribute="trailing" secondItem="ONP-hn-pln" secondAttribute="trailing" id="pBe-di-G6l"/>
                                             <constraint firstItem="hg7-TL-drE" firstAttribute="centerX" secondItem="Fct-De-AyK" secondAttribute="centerX" id="pdG-fu-KHH"/>
+                                            <constraint firstItem="UQn-ZJ-iM5" firstAttribute="top" secondItem="IKj-Yg-SYH" secondAttribute="bottom" constant="8" symbolic="YES" id="ttl-Jb-uyL"/>
                                             <constraint firstItem="TsN-sC-Pfc" firstAttribute="trailing" secondItem="IKj-Yg-SYH" secondAttribute="trailing" id="ue5-Cz-xYk"/>
+                                            <constraint firstItem="ONP-hn-pln" firstAttribute="leading" secondItem="IKj-Yg-SYH" secondAttribute="leading" id="vCW-bo-GtR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -392,6 +397,7 @@
                     <connections>
                         <outlet property="emailLabel" destination="TsN-sC-Pfc" id="Urc-OB-7cG"/>
                         <outlet property="logo" destination="hg7-TL-drE" id="Aim-Ml-XhZ"/>
+                        <outlet property="marginTopConstraint" destination="Z7A-ta-ake" id="Pfk-E8-Ws1"/>
                         <outlet property="passwordLabel" destination="IKj-Yg-SYH" id="MHr-0t-CiM"/>
                         <outlet property="scrollView" destination="XgP-HL-Phw" id="KBz-2Z-1Kk"/>
                         <segue destination="Mov-A6-gvQ" kind="show" identifier="LoginFromLoginView" id="2pF-mY-u1R"/>
