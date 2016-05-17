@@ -22,11 +22,11 @@ class AuthenticationService {
     let url = "http://192.168.1.116:3000/"
     
     // MARK: POST-Requests
-    func registerUser(email: String, password: String) {
+    func registerUser(email: String, password: String, username: String) {
         let parameters = [
             "user": [
                 "email": email,
-                //"username": username,
+                "name": username,
                 "password": password
             ]
         ]
@@ -34,6 +34,7 @@ class AuthenticationService {
             .responseJSON { response in
                 if response.result.isSuccess {
                     let json = response.result.value
+                    print(json)
                     // True if registration is complete. This should be changed for better readability.
                     if json!.count > 1 {
                         let userEmail = json?["email"] as! String

@@ -8,12 +8,15 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, AuthenticationServiceDelegate {
+class LoginViewController: UIViewController, AuthenticationServiceDelegate, UIScrollViewDelegate, UITextFieldDelegate{
     
     // MARK: Setup
     let authService = AuthenticationService()
     @IBOutlet weak var emailLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    @IBOutlet weak var logo: UIImageView!
     
      // MARK: Lifecycle
     func setAuthenticationData(json: AnyObject) {
@@ -29,6 +32,9 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate {
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailLabel.delegate = self
+        passwordLabel.delegate = self
+        scrollView.delegate = self
         self.authService.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -45,6 +51,15 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate {
     
     @IBAction func resignKeyboard(sender: AnyObject) {
         self.view.endEditing(true)
+        if screenSize.height < 500 {
+            logo.hidden = false
+        }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if screenSize.height < 500 {
+            logo.hidden = true
+        }
     }
     
     /*
@@ -56,5 +71,7 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: Additional Helpers
 
 }

@@ -13,6 +13,7 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     // MARK: Setup
     let authService = AuthenticationService()
     @IBOutlet weak var emailLabel: UITextField!
+    @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
     
     // MARK: Lifecycle
@@ -40,21 +41,11 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate {
     
     // MARK: User Interaction
     @IBAction func registerUser(sender: AnyObject?) {
-        self.authService.registerUser(self.emailLabel.text!, password: self.passwordLabel.text!)
+        self.authService.registerUser(self.emailLabel.text!, password: self.passwordLabel.text!, username: self.usernameLabel.text!)
     }
     
     @IBAction func resignKeyboard(sender: AnyObject) {
         sender.resignFirstResponder()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
 }
