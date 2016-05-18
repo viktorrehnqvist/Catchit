@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         UITabBar.appearance().tintColor = UIColor(red: 0.1647, green: 0.2157, blue: 0.2902, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = UIColor(red:0.21, green:0.27, blue:0.36, alpha:1.0)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().translucent = false
         userDefaults.setObject("http://192.168.1.116:3000/", forKey: "url")
         if headers != nil {
             let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("InitViewController") as UIViewController

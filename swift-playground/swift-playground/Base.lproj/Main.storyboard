@@ -215,7 +215,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="k0F-ZP-tjg">
-                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" id="D4S-qw-KUK"/>
                             </connections>
@@ -759,7 +759,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="x59-OH-39U">
-                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromExplore" id="jJ1-6D-cDh"/>
                             </connections>
@@ -1065,7 +1065,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="RvJ-jF-rlC">
-                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" id="3Ph-BA-daD"/>
                             </connections>
@@ -1190,7 +1190,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="avatarsmall" id="7iW-ah-UpB">
-                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" id="JIk-2X-1Dy"/>
                             </connections>
@@ -1993,10 +1993,10 @@
             </objects>
             <point key="canvasLocation" x="904" y="1526"/>
         </scene>
-        <!--Inställningar-->
+        <!--Settings Table View Controller-->
         <scene sceneID="KOo-xs-Kmm">
             <objects>
-                <viewController title="Inställningar" id="hSN-h3-a3P" customClass="SettingsTableViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hSN-h3-a3P" customClass="SettingsTableViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qf5-eF-uD9"/>
                         <viewControllerLayoutGuide type="bottom" id="j6z-S8-Am7"/>
@@ -2334,7 +2334,7 @@
                             </textField>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="1" image="avatarsmall" id="xNp-Zb-fTX">
-                            <color key="tintColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromNotice" id="kk8-J0-6G5"/>
                             </connections>
@@ -2858,10 +2858,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="dwR-E4-82o"/>
-        <segue reference="OvH-UW-Jlq"/>
-        <segue reference="UnV-OJ-WQS"/>
-        <segue reference="KBR-5L-ez0"/>
-        <segue reference="N5Z-XD-MLh"/>
+        <segue reference="ym3-FU-EDl"/>
+        <segue reference="azt-Oc-gww"/>
+        <segue reference="8Bb-Y1-XOB"/>
+        <segue reference="kk8-J0-6G5"/>
+        <segue reference="S0S-yH-cd5"/>
     </inferredMetricsTieBreakers>
 </document>
