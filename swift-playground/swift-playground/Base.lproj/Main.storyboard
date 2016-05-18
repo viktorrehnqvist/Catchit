@@ -2849,7 +2849,7 @@
         <image name="avatarsmall" width="32" height="32"/>
         <image name="bucketlist-add-icon" width="60" height="60"/>
         <image name="bucketlist-remove_icon" width="60" height="60"/>
-        <image name="bucketlist_icon" width="60" height="60"/>
+        <image name="bucketlist_icon" width="32" height="32"/>
         <image name="explore_icon" width="32" height="32"/>
         <image name="home_icon" width="32" height="32"/>
         <image name="lock_icon" width="30" height="30"/>
@@ -2858,10 +2858,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="KhT-yk-Sfv"/>
-        <segue reference="GxL-aq-8sZ"/>
-        <segue reference="S0S-yH-cd5"/>
-        <segue reference="Ftt-UR-dJW"/>
-        <segue reference="3Ph-BA-daD"/>
+        <segue reference="dwR-E4-82o"/>
+        <segue reference="OvH-UW-Jlq"/>
+        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="KBR-5L-ez0"/>
+        <segue reference="N5Z-XD-MLh"/>
     </inferredMetricsTieBreakers>
 </document>
