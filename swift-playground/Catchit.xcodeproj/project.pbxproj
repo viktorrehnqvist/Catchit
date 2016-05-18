@@ -17,6 +17,7 @@
 		F701738E1C6E6EAF006F799A /* swift_playgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701738D1C6E6EAF006F799A /* swift_playgroundTests.swift */; };
 		F70173991C6E6EAF006F799A /* swift_playgroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */; };
 		F70BDBC11CEB62DE00799F2B /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraint.swift */; };
+		F70BDBC71CEC8D9C00799F2B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70BDBC61CEC8D9C00799F2B /* SettingsTableViewController.swift */; };
 		F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */; };
 		F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */; };
 		F71290541CAC459500639DA0 /* ShowPostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */; };
@@ -101,6 +102,7 @@
 		F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_playgroundUITests.swift; sourceTree = "<group>"; };
 		F701739A1C6E6EAF006F799A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
+		F70BDBC61CEC8D9C00799F2B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAchievementViewController.swift; sourceTree = "<group>"; };
 		F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsCollectionReusableView.swift; sourceTree = "<group>"; };
 		F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				F73A51DC1CA1690D0029779D /* ProfileViewController.swift */,
+				F70BDBC61CEC8D9C00799F2B /* SettingsTableViewController.swift */,
 				F73520A21CE48868002A9B20 /* ChangePasswordViewController.swift */,
 				F73520A41CE48877002A9B20 /* ChangeAvatarViewController.swift */,
 				F73520A61CE48889002A9B20 /* ChangeUsernameViewController.swift */,
@@ -542,6 +545,7 @@
 				F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */,
 				F73A51D31CA084F10029779D /* NoticeCollectionViewCell.swift in Sources */,
 				F70173781C6E6EAF006F799A /* HomeViewController.swift in Sources */,
+				F70BDBC71CEC8D9C00799F2B /* SettingsTableViewController.swift in Sources */,
 				F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */,
 				F761C52C1C9DD60200E3C334 /* ExploreViewController.swift in Sources */,
 				F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */,
