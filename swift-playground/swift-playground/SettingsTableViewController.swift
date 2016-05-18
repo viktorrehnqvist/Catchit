@@ -38,6 +38,8 @@ class SettingsTableViewController: UITableViewController {
     }
  
     @IBAction func logOut(sender: AnyObject) {
+        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
         let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
         rootVC.view.frame = UIScreen.mainScreen().bounds
         UIView.transitionWithView(self.view.window!, duration: 0.5, options: .TransitionCrossDissolve, animations: {
