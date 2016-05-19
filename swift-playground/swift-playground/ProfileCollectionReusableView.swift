@@ -17,5 +17,12 @@ class ProfileCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var followCount: UILabel!
     @IBOutlet weak var followersCount: UILabel!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var completeLabel: UILabel!
+    @IBOutlet weak var completeProgressView: UIProgressView! {
+        didSet { resize(4, sender: self.completeProgressView) }
+    }
     
+    func resize(factor: Int, sender: UIProgressView) {
+        sender.transform = CGAffineTransformMakeScale(1, 4)
+    }
 }

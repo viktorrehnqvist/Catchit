@@ -10,6 +10,9 @@ import UIKit
 
 class ProfileViewController: UIViewController, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
+
+
+    
     // MARK: Setup
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
@@ -18,6 +21,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     @IBOutlet weak var collectionView: UICollectionView!
     var header: ProfileCollectionReusableView!
     let userDefaults = NSUserDefaults.standardUserDefaults()
+    var counter: Float = 0
+    var timer = NSTimer()
     
     var userId: Int?
     var username: String?
@@ -42,6 +47,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var postLikeCounts: [Int] = []
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
+    var totalAchievements: Int = 10
+    var completeFactor: Float?
     
     // MARK: Lifecycle
     func setUserData(json: AnyObject, follow: Bool) {
@@ -70,6 +77,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
             morePostsToLoad = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        startTimer()
     }
     
     func updateUserData(json: AnyObject) {
@@ -182,6 +190,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         headerView.followersCount.tag = userId!
         headerView.userAvatar.image = userAvatar
         headerView.username.text = username
+        headerView.completeLabel.text = String(userAchievementCount) + "/" + String(totalAchievements)
         
         if userId == userDefaults.objectForKey("id")?.integerValue {
             headerView.followButton.setTitle("Inställningar", forState: .Normal)
@@ -294,6 +303,23 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.userAvatar = image
+    }
+    
+
+    func startTimer() {
+        if userAchievementCount > 0 {
+            completeFactor = Float(userAchievementCount) / Float(totalAchievements)
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.005, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func timerAction() {
+        counter += 0.002
+        header.completeProgressView.progress = counter
+        if completeFactor < counter {
+            timer.invalidate()
+            return
+        }
     }
     
 }
