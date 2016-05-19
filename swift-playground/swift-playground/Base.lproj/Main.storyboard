@@ -980,7 +980,7 @@
                                                         <constraint firstAttribute="height" constant="60" id="9Ji-eH-fET"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon2" translatesAutoresizingMaskIntoConstraints="NO" id="Y4n-lP-Lw9">
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="achievement_button_icon2" translatesAutoresizingMaskIntoConstraints="NO" id="Y4n-lP-Lw9">
                                                     <rect key="frame" x="262" y="192" width="77" height="60"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
@@ -2940,11 +2940,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OC7-hT-lCd"/>
-        <segue reference="JTS-hb-4sY"/>
+        <segue reference="QzT-29-F4w"/>
+        <segue reference="Ftt-UR-dJW"/>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="8jf-T0-H7W"/>
-        <segue reference="wDe-rl-syz"/>
-        <segue reference="76D-eb-acg"/>
+        <segue reference="GxL-aq-8sZ"/>
+        <segue reference="jal-hA-pvU"/>
+        <segue reference="djO-lN-Qc8"/>
     </inferredMetricsTieBreakers>
 </document>
