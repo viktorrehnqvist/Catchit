@@ -288,7 +288,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     }
     
     func createComment () {
-        // Check if counts actually is needed.
         postService.createComment(textField.text!, postId: postId)
         let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
         comments.insert(textField.text!, atIndex: self.comments.count)
