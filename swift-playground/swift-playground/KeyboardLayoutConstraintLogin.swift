@@ -22,7 +22,7 @@
 
 import UIKit
 
-public class KeyboardLayoutConstraint: NSLayoutConstraint {
+public class KeyboardLayoutConstraintLogin: NSLayoutConstraint {
     
     private var offset : CGFloat = 0
     private var keyboardVisibleHeight : CGFloat = 0
@@ -32,8 +32,8 @@ public class KeyboardLayoutConstraint: NSLayoutConstraint {
         
         offset = constant
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KeyboardLayoutConstraint.keyboardWillShowNotification(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KeyboardLayoutConstraint.keyboardWillHideNotification(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KeyboardLayoutConstraintLogin.keyboardWillShowNotification(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KeyboardLayoutConstraintLogin.keyboardWillHideNotification(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     deinit {

@@ -16,7 +16,7 @@
 		F70173831C6E6EAF006F799A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70173811C6E6EAF006F799A /* LaunchScreen.storyboard */; };
 		F701738E1C6E6EAF006F799A /* swift_playgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701738D1C6E6EAF006F799A /* swift_playgroundTests.swift */; };
 		F70173991C6E6EAF006F799A /* swift_playgroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */; };
-		F70BDBC11CEB62DE00799F2B /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraint.swift */; };
+		F70BDBC11CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift */; };
 		F70BDBC71CEC8D9C00799F2B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70BDBC61CEC8D9C00799F2B /* SettingsTableViewController.swift */; };
 		F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */; };
 		F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */; };
@@ -42,6 +42,7 @@
 		F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */; };
 		F761C5341C9DD70F00E3C334 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */; };
 		F765D5081CBBBB5900D64488 /* AchievementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F765D5071CBBBB5900D64488 /* AchievementService.swift */; };
+		F76DEB111CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76DEB101CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift */; };
 		F7B503861CE0EB65009E2B4F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B503851CE0EB65009E2B4F /* SearchViewController.swift */; };
 		F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
 		F7B553D01C71ABFB00EA9D12 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B553CE1C71ABFB00EA9D12 /* PostService.swift */; };
@@ -101,7 +102,7 @@
 		F70173941C6E6EAF006F799A /* Catchit.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Catchit.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70173981C6E6EAF006F799A /* swift_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_playgroundUITests.swift; sourceTree = "<group>"; };
 		F701739A1C6E6EAF006F799A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
+		F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraintLogin.swift; sourceTree = "<group>"; };
 		F70BDBC61CEC8D9C00799F2B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAchievementViewController.swift; sourceTree = "<group>"; };
 		F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketlistViewController.swift; sourceTree = "<group>"; };
 		F761C5331C9DD70F00E3C334 /* NoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		F765D5071CBBBB5900D64488 /* AchievementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AchievementService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F76DEB101CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraintComment.swift; sourceTree = "<group>"; };
 		F7901CD31C730D97001B9129 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		F7B503851CE0EB65009E2B4F /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F7B553CE1C71ABFB00EA9D12 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PostService.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -214,7 +216,8 @@
 				F73520A81CE488A4002A9B20 /* Services */,
 				F735209F1CE48839002A9B20 /* UserViews */,
 				F74018801C72FEF2004383FE /* SwiftyJSON.swift */,
-				F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraint.swift */,
+				F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift */,
+				F76DEB101CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift */,
 				F70173791C6E6EAF006F799A /* Main.storyboard */,
 				F701737F1C6E6EAF006F799A /* Assets.xcassets */,
 				F70173811C6E6EAF006F799A /* LaunchScreen.storyboard */,
@@ -554,12 +557,13 @@
 				F73520A71CE48889002A9B20 /* ChangeUsernameViewController.swift in Sources */,
 				F7EEC2751C92E31C002378E9 /* PostsCollectionViewCell.swift in Sources */,
 				F70173761C6E6EAF006F799A /* AppDelegate.swift in Sources */,
+				F76DEB111CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift in Sources */,
 				F73520A31CE48868002A9B20 /* ChangePasswordViewController.swift in Sources */,
 				F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */,
 				F761C5341C9DD70F00E3C334 /* NoticeViewController.swift in Sources */,
 				F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */,
 				F73520A51CE48877002A9B20 /* ChangeAvatarViewController.swift in Sources */,
-				F70BDBC11CEB62DE00799F2B /* KeyboardLayoutConstraint.swift in Sources */,
+				F70BDBC11CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift in Sources */,
 				F73520B11CE48BF9002A9B20 /* SettingsService.swift in Sources */,
 				F73A51DA1CA127430029779D /* LikesViewController.swift in Sources */,
 				F7EEC2731C92E200002378E9 /* ShowPostViewController.swift in Sources */,

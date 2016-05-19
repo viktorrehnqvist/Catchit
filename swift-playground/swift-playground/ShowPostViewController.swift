@@ -188,14 +188,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     }
 
     // MARK: User Interaction
-    func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 165, moveSpeed: 0.5)
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 165, moveSpeed: 0)
-    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         createComment()
@@ -288,6 +280,9 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     }
     
     func createComment () {
+        guard !textField.text!.isEmpty else {
+            return
+        }
         postService.createComment(textField.text!, postId: postId)
         let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
         comments.insert(textField.text!, atIndex: self.comments.count)
