@@ -84,6 +84,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.uploadButton.tag = achievementIds[indexPath.row]
+        cell.uploadButton.layer.cornerRadius = 5
         cell.removeButton.addTarget(self, action: #selector(removeFromBucketlist(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
