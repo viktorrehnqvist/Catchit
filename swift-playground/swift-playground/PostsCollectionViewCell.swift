@@ -14,11 +14,15 @@ class PostsCollectionViewCell: UICollectionViewCell {
     // MARK: Setup
     let postService = PostService()
     var postId: Int?
+    let likeActiveImage = UIImage(named: "heart-icon-active")
+    let likeInactiveImage = UIImage(named: "heart-icon-inactive")
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeImageView: UIImageView!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var commentImageView: UIImageView!
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var commentCount: UILabel!
     @IBOutlet weak var buttonContainer: UIStackView!
@@ -29,20 +33,14 @@ class PostsCollectionViewCell: UICollectionViewCell {
     // MARK: User Interaction
     @IBAction func pressLikeButton(sender: AnyObject) {
         postService.likePost(postId!)
-        let lastPartInString = likeCount.text!.endIndex.advancedBy(-18)
-        let onlyNumberPartOfString = likeCount.text!.substringToIndex(lastPartInString)
-        if (likeButton?.titleLabel?.text == "Gilla") {
-            let newLikeCount:Int! = Int(onlyNumberPartOfString)! + 1
-            likeCount?.text = String(newLikeCount) + " gilla-markeringar"
-            likeButton?.setTitle("Sluta gilla", forState: .Normal)
+        if (likeButton?.currentImage == likeInactiveImage) {
+            let newLikeCount:Int! = Int(likeCount.text!)! + 1
+            likeCount?.text = String(newLikeCount)
+            likeButton?.setImage(likeActiveImage, forState: .Normal)
         } else {
-            let newLikeCount:Int! = Int(onlyNumberPartOfString)! - 1
-            if newLikeCount == 0 {
-                likeCount?.text = "0 gilla-markeringar"
-            } else {
-                likeCount?.text = String(newLikeCount) + " gilla-markeringar"
-            }
-            likeButton?.setTitle("Gilla", forState: .Normal)
+            let newLikeCount:Int! = Int(likeCount.text!)! - 1
+            likeCount?.text = String(newLikeCount)
+            likeButton?.setImage(likeInactiveImage, forState: .Normal)
         }
     }
     

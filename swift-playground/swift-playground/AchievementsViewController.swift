@@ -62,20 +62,20 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
                     for postIndex in 0...(postImagesToLoad - 1) {
-                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[0][postIndex] as? String {
+                        if let completerImageUrl = ((json[i]["latest_posts"] as! NSArray)[0] as! NSArray)[postIndex] as? String {
                             let url = NSURL(string: self.url + completerImageUrl)!
                             let data = NSData(contentsOfURL:url)
                             if data != nil {
                                 switch postIndex {
                                 case 0:
                                     achievementFirstCompleterImages.append(UIImage(data: data!)!)
-                                    achievementFirstCompleterPostIds.append((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int)
+                                    achievementFirstCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
                                 case 1:
                                     achievementSecondCompleterImages.append(UIImage(data: data!)!)
-                                    achievementSecondCompleterPostIds.append((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int)
+                                    achievementSecondCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
                                 case 2:
                                     achievementThirdCompleterImages.append(UIImage(data: data!)!)
-                                    achievementThirdCompleterPostIds.append((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int)
+                                    achievementThirdCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
                                 default:
                                     print("Switch Error")
                                 }
@@ -121,20 +121,20 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     let postImagesToLoad = json[i]["latest_posts"]!![0].count
                     if postImagesToLoad > 0 {
                         for postIndex in 0...(postImagesToLoad - 1) {
-                            if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[0][postIndex] as? String {
+                            if let completerImageUrl = ((json[i]["latest_posts"] as! NSArray)[0] as! NSArray)[postIndex] as? String {
                                 let url = NSURL(string: self.url + completerImageUrl)!
                                 let data = NSData(contentsOfURL:url)
                                 if data != nil {
                                     switch postIndex {
                                     case 0:
                                         achievementFirstCompleterImages[cellIndex] = UIImage(data: data!)!
-                                        achievementFirstCompleterPostIds[cellIndex] = (json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int
+                                        achievementFirstCompleterPostIds[cellIndex] = ((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int
                                     case 1:
                                         achievementSecondCompleterImages[cellIndex] = UIImage(data: data!)!
-                                        achievementSecondCompleterPostIds[cellIndex] = (json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int
+                                        achievementSecondCompleterPostIds[cellIndex] = ((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int
                                     case 2:
                                         achievementThirdCompleterImages[cellIndex] = UIImage(data: data!)!
-                                        achievementThirdCompleterPostIds[cellIndex] = (json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int
+                                        achievementThirdCompleterPostIds[cellIndex] = ((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int
                                     default:
                                         print("Switch Error")
                                     }
@@ -183,20 +183,20 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
                     for postIndex in 0...(postImagesToLoad - 1) {
-                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[0][postIndex] as? String {
+                        if let completerImageUrl = ((json[i]["latest_posts"] as! NSArray)[0] as! NSArray)[postIndex] as? String {
                             let url = NSURL(string: self.url + completerImageUrl)!
                             let data = NSData(contentsOfURL:url)
                             if data != nil {
                                 switch postIndex {
                                 case 0:
                                     achievementFirstCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
-                                    achievementFirstCompleterPostIds.insert((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int, atIndex: 0)
+                                    achievementFirstCompleterPostIds.insert(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int, atIndex: 0)
                                 case 1:
                                     achievementSecondCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
-                                    achievementSecondCompleterPostIds.insert((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int, atIndex: 0)
+                                    achievementSecondCompleterPostIds.insert(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int, atIndex: 0)
                                 case 2:
                                     achievementThirdCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
-                                    achievementThirdCompleterPostIds.insert((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int, atIndex: 0)
+                                    achievementThirdCompleterPostIds.insert(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int, atIndex: 0)
                                 default:
                                     print("Switch Error")
                                 }

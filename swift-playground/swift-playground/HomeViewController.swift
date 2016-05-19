@@ -18,6 +18,8 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
+    let likeActiveImage = UIImage(named: "heart-icon-active")
+    let likeInactiveImage = UIImage(named: "heart-icon-inactive")
     
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
@@ -161,25 +163,29 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
+        // Should be changed cause gesture recognizers only apply once.
         cell.likeCount.addGestureRecognizer(likesTapGesture)
+        cell.likeImageView.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
+        cell.commentImageView.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
+        
         cell.profileImage.image = self.postUserAvatars[indexPath.row]
         cell.profileLabel.text! = self.postUserNames[indexPath.row]
         cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
-        cell.commentCount.text! = String(self.postCommentCounts[indexPath.row]) + " kommentarer"
-        cell.likeCount.text! = String(self.postLikeCounts[indexPath.row]) + " gilla-markeringar"
+        cell.commentCount.text! = String(self.postCommentCounts[indexPath.row])
+        cell.likeCount.text! = String(self.postLikeCounts[indexPath.row])
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.postId = postIds[indexPath.row]
         if postLike[indexPath.row] {
-            cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
+            cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
         } else {
-            cell.likeButton?.setTitle("Gilla", forState: .Normal)
+            cell.likeButton?.setImage(likeInactiveImage, forState: .Normal)
         }
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -197,7 +203,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             let resizeFactor = screenSize.width / image.size.width
             height = resizeFactor * image.size.height
         }
-        let size = CGSize(width: screenSize.width, height: height + 150)
+        let size = CGSize(width: screenSize.width, height: height + 180)
         
         return size
     }
