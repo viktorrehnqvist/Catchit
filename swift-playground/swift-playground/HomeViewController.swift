@@ -164,9 +164,9 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
         // Should be changed cause gesture recognizers only apply once.
-        cell.likeCount.addGestureRecognizer(likesTapGesture)
+        // cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.likeImageView.addGestureRecognizer(likesTapGesture)
-        cell.commentCount.addGestureRecognizer(commentsTapGesture)
+        // cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.commentImageView.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
