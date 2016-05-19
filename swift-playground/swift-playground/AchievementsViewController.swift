@@ -36,6 +36,9 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var achievementFirstCompleterImages: [UIImage] = []
     var achievementSecondCompleterImages: [UIImage] = []
     var achievementThirdCompleterImages: [UIImage] = []
+    var achievementFirstCompleterPostIds: [Int] = []
+    var achievementSecondCompleterPostIds: [Int] = []
+    var achievementThirdCompleterPostIds: [Int] = []
     var achievementInBucketlist: [Bool] = []
     var achievementCompleted: [Bool] = []
     var achievementCompletedPostIds: [Int] = []
@@ -55,21 +58,24 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementInBucketlist.append(json[i]?["bucketlist"] as! Bool)
                 achievementCompleted.append(json[i]?["completed"] as! Bool)
                 achievementCompletedPostIds.append(json[i]?["post_id"] as! Int)
-                let postImagesToLoad = json[i]["latest_posts"]!!.count
+                let postImagesToLoad = json[i]["latest_posts"]!![0].count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
                     for postIndex in 0...(postImagesToLoad - 1) {
-                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[postIndex] as? String {
+                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[0][postIndex] as? String {
                             let url = NSURL(string: self.url + completerImageUrl)!
                             let data = NSData(contentsOfURL:url)
                             if data != nil {
                                 switch postIndex {
                                 case 0:
                                     achievementFirstCompleterImages.append(UIImage(data: data!)!)
+                                    achievementFirstCompleterPostIds.append((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int)
                                 case 1:
                                     achievementSecondCompleterImages.append(UIImage(data: data!)!)
+                                    achievementSecondCompleterPostIds.append((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int)
                                 case 2:
                                     achievementThirdCompleterImages.append(UIImage(data: data!)!)
+                                    achievementThirdCompleterPostIds.append((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int)
                                 default:
                                     print("Switch Error")
                                 }
@@ -82,10 +88,13 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     switch postsAlreadyLoaded {
                     case 0:
                         achievementFirstCompleterImages.append(noPostImage!)
+                        achievementFirstCompleterPostIds.append(0)
                     case 1:
                         achievementSecondCompleterImages.append(noPostImage!)
+                        achievementSecondCompleterPostIds.append(0)
                     case 2:
                         achievementThirdCompleterImages.append(noPostImage!)
+                        achievementThirdCompleterPostIds.append(0)
                     default:
                         print("Switch Error")
                     }
@@ -109,20 +118,23 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     achievementInBucketlist[cellIndex] = json[i]?["bucketlist"] as! Bool
                     achievementCompleted[cellIndex] = json[i]?["completed"] as! Bool
                     achievementCompletedPostIds[cellIndex] = json[i]?["post_id"] as! Int
-                    let postImagesToLoad = json[i]["latest_posts"]!!.count
+                    let postImagesToLoad = json[i]["latest_posts"]!![0].count
                     if postImagesToLoad > 0 {
                         for postIndex in 0...(postImagesToLoad - 1) {
-                            if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[postIndex] as? String {
+                            if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[0][postIndex] as? String {
                                 let url = NSURL(string: self.url + completerImageUrl)!
                                 let data = NSData(contentsOfURL:url)
                                 if data != nil {
                                     switch postIndex {
                                     case 0:
                                         achievementFirstCompleterImages[cellIndex] = UIImage(data: data!)!
+                                        achievementFirstCompleterPostIds[cellIndex] = (json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int
                                     case 1:
                                         achievementSecondCompleterImages[cellIndex] = UIImage(data: data!)!
+                                        achievementSecondCompleterPostIds[cellIndex] = (json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int
                                     case 2:
                                         achievementThirdCompleterImages[cellIndex] = UIImage(data: data!)!
+                                        achievementThirdCompleterPostIds[cellIndex] = (json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int
                                     default:
                                         print("Switch Error")
                                     }
@@ -135,10 +147,13 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                         switch postsAlreadyLoaded {
                         case 0:
                             achievementFirstCompleterImages[cellIndex] = noPostImage!
+                            achievementFirstCompleterPostIds[cellIndex] = 0
                         case 1:
                             achievementSecondCompleterImages[cellIndex] = noPostImage!
+                            achievementSecondCompleterPostIds[cellIndex] = 0
                         case 2:
                             achievementThirdCompleterImages[cellIndex] = noPostImage!
+                            achievementThirdCompleterPostIds[cellIndex] = 0
                         default:
                             print("Switch Error")
                         }
@@ -164,21 +179,24 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 achievementInBucketlist.insert((json[i]?["bucketlist"] as! Bool), atIndex: 0)
                 achievementCompleted.insert((json[i]?["completed"] as! Bool), atIndex: 0)
                 achievementCompletedPostIds.insert((json[i]?["post_id"] as! Int), atIndex: 0)
-                let postImagesToLoad = json[i]["latest_posts"]!!.count
+                let postImagesToLoad = json[i]["latest_posts"]!![0].count
                 // Load first three postes for achievement
                 if postImagesToLoad > 0 {
                     for postIndex in 0...(postImagesToLoad - 1) {
-                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[postIndex] as? String {
+                        if let completerImageUrl = (json[i]["latest_posts"] as! NSArray)[0][postIndex] as? String {
                             let url = NSURL(string: self.url + completerImageUrl)!
                             let data = NSData(contentsOfURL:url)
                             if data != nil {
                                 switch postIndex {
                                 case 0:
                                     achievementFirstCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
+                                    achievementFirstCompleterPostIds.insert((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int, atIndex: 0)
                                 case 1:
                                     achievementSecondCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
+                                    achievementSecondCompleterPostIds.insert((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int, atIndex: 0)
                                 case 2:
                                     achievementThirdCompleterImages.insert((UIImage(data: data!)!), atIndex: 0)
+                                    achievementThirdCompleterPostIds.insert((json[i]["latest_posts"] as! NSArray)[1][postIndex] as! Int, atIndex: 0)
                                 default:
                                     print("Switch Error")
                                 }
@@ -191,10 +209,13 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                     switch postsAlreadyLoaded {
                     case 0:
                         achievementFirstCompleterImages.insert((noPostImage!), atIndex: 0)
+                        achievementFirstCompleterPostIds.insert(0, atIndex: 0)
                     case 1:
                         achievementSecondCompleterImages.insert((noPostImage!), atIndex: 0)
+                        achievementSecondCompleterPostIds.insert(0, atIndex: 0)
                     case 2:
                         achievementThirdCompleterImages.insert((noPostImage!), atIndex: 0)
+                        achievementThirdCompleterPostIds.insert(0, atIndex: 0)
                     default:
                         print("Switch Error")
                     }
@@ -257,7 +278,14 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         let bucketlistTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         
+        let firstCompleterImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showFirstCompleter(_:)))
+        let secondCompleterImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showSecondCompleter(_:)))
+        let thirdCompleterImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showThirdCompleter(_:)))
+        
         cell.tag = indexPath.row
+        cell.achievementImage1.addGestureRecognizer(firstCompleterImageTapGesture)
+        cell.achievementImage2.addGestureRecognizer(secondCompleterImageTapGesture)
+        cell.achievementImage3.addGestureRecognizer(thirdCompleterImageTapGesture)
         cell.completersImage.addGestureRecognizer(completersTapGesture)
         cell.shareImage.addGestureRecognizer(shareTapGesture)
         cell.bucketlistImage.addGestureRecognizer(bucketlistTapGesture)
@@ -356,6 +384,36 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 })
             existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
             self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+        }
+    }
+    
+    func showFirstCompleter(sender: AnyObject?) {
+        let point = sender?.view.superview!.superview!.superview
+        let thisCell: AchievementCollectionViewCell = point as! AchievementCollectionViewCell
+        let cellIndex = thisCell.tag
+        let postId = achievementFirstCompleterPostIds[cellIndex]
+        if postId != 0 {
+            self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
+        }
+    }
+    
+    func showSecondCompleter(sender: AnyObject?) {
+        let point = sender?.view.superview!.superview!.superview
+        let thisCell: AchievementCollectionViewCell = point as! AchievementCollectionViewCell
+        let cellIndex = thisCell.tag
+        let postId = achievementSecondCompleterPostIds[cellIndex]
+        if postId != 0 {
+            self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
+        }
+    }
+    
+    func showThirdCompleter(sender: AnyObject?) {
+        let point = sender?.view.superview!.superview!.superview
+        let thisCell: AchievementCollectionViewCell = point as! AchievementCollectionViewCell
+        let cellIndex = thisCell.tag
+        let postId = achievementThirdCompleterPostIds[cellIndex]
+        if postId != 0 {
+            self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
         }
     }
     

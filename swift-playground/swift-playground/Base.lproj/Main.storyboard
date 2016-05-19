@@ -952,13 +952,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5AB-en-h4q">
                                                     <rect key="frame" x="0.0" y="80" width="600" height="85"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="gOt-u6-Q9s">
+                                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="gOt-u6-Q9s">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="85"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="EsX-vc-jTU">
+                                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="EsX-vc-jTU">
                                                             <rect key="frame" x="200" y="0.0" width="200" height="85"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="RBe-oP-ly5">
+                                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="RBe-oP-ly5">
                                                             <rect key="frame" x="400" y="0.0" width="200" height="85"/>
                                                         </imageView>
                                                     </subviews>
@@ -2882,10 +2882,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="JIk-2X-1Dy"/>
-        <segue reference="qnV-sV-0kd"/>
-        <segue reference="HsH-hq-pfh"/>
-        <segue reference="wkG-4I-Mfd"/>
-        <segue reference="6oL-8J-eNe"/>
+        <segue reference="3Ph-BA-daD"/>
+        <segue reference="KhT-yk-Sfv"/>
+        <segue reference="S0S-yH-cd5"/>
+        <segue reference="GxL-aq-8sZ"/>
+        <segue reference="Ftt-UR-dJW"/>
     </inferredMetricsTieBreakers>
 </document>
