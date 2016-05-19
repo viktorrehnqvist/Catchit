@@ -167,8 +167,8 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         headerView.profileImage.addGestureRecognizer(profileImageTapGesture)
         headerView.postImage.image = postImage
         headerView.achievementLabel.text = achievementDescription
-        headerView.commentsCount.text = String(commentsCount) + " kommentarer"
-        headerView.likesCount.text = String(likesCount) + " gilla-markeringar"
+        headerView.commentsCount.text = String(commentsCount)
+        headerView.likesCount.text = String(likesCount)
         headerView.profileLabel.text = userName
         headerView.profileImage.image = userAvatar
         headerView.scoreLabel.text = String(achievementScore) + "p"
@@ -283,6 +283,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         guard !textField.text!.isEmpty else {
             return
         }
+        header.commentsCount.text = String(Int(header.commentsCount.text!)! + 1)
         postService.createComment(textField.text!, postId: postId)
         let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
         comments.insert(textField.text!, atIndex: self.comments.count)
