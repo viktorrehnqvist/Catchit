@@ -367,6 +367,12 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             let vc = segue.destinationViewController as! ShowPostViewController
             vc.postId = sender!.integerValue
         }
+        
+        if segue.identifier == "showProfileFromShowAchievement" {
+            let vc = segue.destinationViewController as! ProfileViewController
+            vc.userId = postUserIds[cellIndex]
+        }
+        
     }
     
     // MARK: Additional Helpers
