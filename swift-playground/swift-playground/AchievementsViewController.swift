@@ -20,6 +20,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchField: UITextField!
     var uploadAchievementId: Int?
     
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
@@ -242,6 +243,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         achievementService.getAchievements()
+        searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         self.achievementService.delegate = self
         self.uploadService.delegate = self
         self.collectionView.delegate = self

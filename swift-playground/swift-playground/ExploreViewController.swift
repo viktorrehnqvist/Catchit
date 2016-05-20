@@ -21,6 +21,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     let likeActiveImage = UIImage(named: "heart-icon-active")
     let likeInactiveImage = UIImage(named: "heart-icon-inactive")
+    @IBOutlet weak var searchField: UITextField!
     
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
@@ -130,6 +131,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     override func viewDidLoad() {
         super.viewDidLoad()
         postService.getExplorePosts()
+        searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         self.postService.delegate = self
         self.collectionView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.

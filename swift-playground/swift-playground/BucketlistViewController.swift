@@ -20,6 +20,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchField: UITextField!
     var uploadAchievementId: Int?
     
     var achievementDescriptions: [String] = []
@@ -50,6 +51,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         self.achievementService.delegate = self
         self.uploadService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.

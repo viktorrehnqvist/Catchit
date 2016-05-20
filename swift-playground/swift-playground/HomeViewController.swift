@@ -17,10 +17,12 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     let postService = PostService()
     let achievementService = AchievementService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
+    @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     let likeActiveImage = UIImage(named: "heart-icon-active")
     let likeInactiveImage = UIImage(named: "heart-icon-inactive")
+    @IBOutlet weak var searchField: UITextField!
     
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
@@ -129,6 +131,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         postService.getPosts()
         self.postService.delegate = self
         self.collectionView.delegate = self
