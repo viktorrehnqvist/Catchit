@@ -110,7 +110,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wPn-vG-oXA">
                                                     <rect key="frame" x="5" y="286" width="590" height="60"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gV-1F-Yb3">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gV-1F-Yb3">
                                                             <rect key="frame" x="0.0" y="0.0" width="197" height="60"/>
                                                             <color key="backgroundColor" red="0.39468091726303101" green="0.59193956851959229" blue="0.091398365795612335" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -128,7 +128,7 @@
                                                                 <action selector="pressLikeButton:" destination="s9q-bA-xns" eventType="touchUpInside" id="MTj-Vw-INR"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04S-c7-960">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04S-c7-960">
                                                             <rect key="frame" x="197" y="0.0" width="196" height="60"/>
                                                             <color key="backgroundColor" red="0.39468091726303101" green="0.59193956851959229" blue="0.091398365795612335" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <state key="normal" image="comment-icon">
@@ -138,7 +138,7 @@
                                                                 <action selector="pressCommentButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b1l-Yx-Mpp"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeA-ho-cRA">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeA-ho-cRA">
                                                             <rect key="frame" x="393" y="0.0" width="197" height="60"/>
                                                             <color key="backgroundColor" red="0.39468091729999999" green="0.59193956849999996" blue="0.091398365800000006" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -152,6 +152,9 @@
                                                                     <exclude reference="SMP-kd-tB3"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <action selector="showMore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QQr-Wm-csu"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -200,6 +203,7 @@
                                             <outlet property="likeButton" destination="2gV-1F-Yb3" id="ZOE-u6-10O"/>
                                             <outlet property="likeCount" destination="0se-Ja-eJQ" id="Bgm-d7-pU5"/>
                                             <outlet property="likeImageView" destination="IYb-NL-biO" id="pmT-Wc-6Q3"/>
+                                            <outlet property="moreButton" destination="KeA-ho-cRA" id="Weu-hL-7sh"/>
                                             <outlet property="profileImage" destination="zhm-BZ-D1T" id="pyD-p5-bOG"/>
                                             <outlet property="profileLabel" destination="Adf-hO-eR6" id="hSW-12-WaO"/>
                                             <outlet property="scoreLabel" destination="iUx-TM-WY7" id="OsR-b1-BJc"/>
@@ -2940,11 +2944,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QzT-29-F4w"/>
-        <segue reference="Ftt-UR-dJW"/>
-        <segue reference="2pF-mY-u1R"/>
         <segue reference="GxL-aq-8sZ"/>
-        <segue reference="jal-hA-pvU"/>
-        <segue reference="djO-lN-Qc8"/>
+        <segue reference="2pF-mY-u1R"/>
+        <segue reference="3Ph-BA-daD"/>
+        <segue reference="6oL-8J-eNe"/>
+        <segue reference="HsH-hq-pfh"/>
+        <segue reference="wkG-4I-Mfd"/>
     </inferredMetricsTieBreakers>
 </document>

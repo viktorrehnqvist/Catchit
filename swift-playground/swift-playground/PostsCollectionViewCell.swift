@@ -23,13 +23,14 @@ class PostsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var likeImageView: UIImageView!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var commentImageView: UIImageView!
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var commentCount: UILabel!
     @IBOutlet weak var buttonContainer: UIStackView!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var scoreLabel: UILabel!
-    
+
     // MARK: User Interaction
     @IBAction func pressLikeButton(sender: AnyObject) {
         postService.likePost(postId!)

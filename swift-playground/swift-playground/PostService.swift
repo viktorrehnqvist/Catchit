@@ -135,4 +135,10 @@ class PostService {
         Alamofire.request(.POST, url + "/comments?commenter_id=\(postId)&commenter_type=post", parameters: parameters, headers: headers)
     }
     
+    // MARK: Delete-Requests
+    
+    func destroyPost(postId: Int) {
+        Alamofire.request(.DELETE, url + "posts/\(postId).json", headers: headers)
+    }
+    
 }
