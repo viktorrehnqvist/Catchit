@@ -234,7 +234,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(title: "Visa uppdrag", style: UIAlertActionStyle.Default, handler: { action in
-            self.performSegueWithIdentifier("showAchievementFromHome", sender: sender)
+            self.performSegueWithIdentifier("showAchievementFromExplore", sender: sender)
         }))
         alert.addAction(UIAlertAction(title: "Lägg till uppdrag i min lista", style: UIAlertActionStyle.Default, handler: { action in
             self.achievementService.addToBucketlist(self.achievementIds[sender!.tag])

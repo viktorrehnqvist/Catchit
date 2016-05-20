@@ -15,16 +15,19 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     let achievementService = AchievementService()
     let uploadService = UploadService()
+    let postService = PostService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     @IBOutlet weak var collectionView: UICollectionView!
     var header: AchievementsCollectionReusableView!
+    
     let likeActiveImage = UIImage(named: "heart-icon-active")
     let likeInactiveImage = UIImage(named: "heart-icon-inactive")
-    
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
     let unlockedIcon = UIImage(named: "unlocked_icon")
+    
     var achievementDescription: String!
     var achievementId: Int!
     var achievementScore: Int = 0
@@ -271,6 +274,25 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
     }
     
+    @IBAction func showMore(sender: AnyObject?) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Lägg till uppdrag i min lista", style: UIAlertActionStyle.Default, handler: { action in
+            self.achievementService.addToBucketlist(self.achievementId)
+        }))
+        if postUserIds[sender!.tag] == userDefaults.objectForKey("id")?.integerValue {
+            alert.addAction(UIAlertAction(title: "Radera inlägg", style: UIAlertActionStyle.Destructive, handler: { action in
+                self.postService.destroyPost(self.postIds[sender!.tag])
+                self.destroyCell(sender!.tag)
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "Rapportera inlägg", style: UIAlertActionStyle.Destructive, handler: nil))
+        }
+        alert.addAction(UIAlertAction(title: "Avbryt", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func uploadPost(sender: AnyObject?) {
         if achievementCompleted {
             self.performSegueWithIdentifier("showPostFromAchievement", sender: achievementCompletedPostId)
@@ -390,4 +412,21 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.postUserAvatars.append(image!)
     }
     
+    func destroyCell(cellIndex: Int) {
+        self.achievementCompleterCount -= 1
+        self.achievementCompleted = false
+        self.achievementCompletedPostId = 0
+        self.postIds.removeAtIndex(cellIndex)
+        self.postImageUrls.removeAtIndex(cellIndex)
+        self.postImages.removeAtIndex(cellIndex)
+        //postVideoUrls.removeAtIndex(cellIndex)
+        self.postUserIds.removeAtIndex(cellIndex)
+        self.postUserNames.removeAtIndex(cellIndex)
+        self.postUserAvatarUrls.removeAtIndex(cellIndex)
+        self.postUserAvatars.removeAtIndex(cellIndex)
+        self.postCommentCounts.removeAtIndex(cellIndex)
+        self.postLikeCounts.removeAtIndex(cellIndex)
+        self.postLike.removeAtIndex(cellIndex)
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
 }

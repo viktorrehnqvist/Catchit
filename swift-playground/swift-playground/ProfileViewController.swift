@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
     let postService = PostService()
+    let achievementService = AchievementService()
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
     var header: ProfileCollectionReusableView!
@@ -244,6 +245,26 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         header.followersCount.text = String(userFollowersCount) + " Följare"
     }
     
+    @IBAction func showMore(sender: AnyObject?) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Visa uppdrag", style: UIAlertActionStyle.Default, handler: { action in
+            self.performSegueWithIdentifier("showAchievementFromProfile", sender: sender)
+        }))
+        if userId == userDefaults.objectForKey("id")?.integerValue {
+            alert.addAction(UIAlertAction(title: "Radera inlägg", style: UIAlertActionStyle.Destructive, handler: { action in
+                self.postService.destroyPost(self.postIds[sender!.tag])
+                self.destroyCell(sender!.tag)
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "Rapportera inlägg", style: UIAlertActionStyle.Destructive, handler: nil))
+        }
+        alert.addAction(UIAlertAction(title: "Avbryt", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
+    
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backItem = UIBarButtonItem()
@@ -322,6 +343,23 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
             timer.invalidate()
             return
         }
+    }
+    
+    func destroyCell(cellIndex: Int) {
+        self.userScore -= achievementScores[cellIndex]
+        self.userAchievementCount -= 1
+        header.completeProgressView.progress = Float(userAchievementCount) / Float(totalAchievements)
+        self.achievementDescriptions.removeAtIndex(cellIndex)
+        self.achievementIds.removeAtIndex(cellIndex)
+        self.achievementScores.removeAtIndex(cellIndex)
+        self.postIds.removeAtIndex(cellIndex)
+        self.postImageUrls.removeAtIndex(cellIndex)
+        self.postImages.removeAtIndex(cellIndex)
+        //postVideoUrls.removeAtIndex(cellIndex)
+        self.postCommentCounts.removeAtIndex(cellIndex)
+        self.postLikeCounts.removeAtIndex(cellIndex)
+        self.postLike.removeAtIndex(cellIndex)
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
 }

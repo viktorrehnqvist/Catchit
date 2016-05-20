@@ -836,8 +836,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SvS-TZ-Tyk">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SvS-TZ-Tyk">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Hmn-E4-V4B">
@@ -911,10 +911,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="leading" secondItem="8zq-ib-kyt" secondAttribute="leading" id="0WL-CG-gtn"/>
-                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="top" secondItem="9En-f0-16w" secondAttribute="bottom" id="0uG-Hc-Lne"/>
-                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="bottom" secondItem="RxO-OV-f5O" secondAttribute="top" id="7cY-OP-yea"/>
-                            <constraint firstAttribute="trailing" secondItem="SvS-TZ-Tyk" secondAttribute="trailing" id="ecs-nN-S43"/>
+                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="top" secondItem="9En-f0-16w" secondAttribute="bottom" id="8qz-co-KVc"/>
+                            <constraint firstItem="SvS-TZ-Tyk" firstAttribute="leading" secondItem="8zq-ib-kyt" secondAttribute="leading" id="rgD-ID-7hB"/>
+                            <constraint firstAttribute="trailing" secondItem="SvS-TZ-Tyk" secondAttribute="trailing" id="t8c-rU-zQ3"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="SvS-TZ-Tyk" secondAttribute="bottom" constant="-49" id="tcS-NT-LOa"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1376,6 +1376,9 @@
                                                                     <exclude reference="PCz-1F-NbZ"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <action selector="showMore:" destination="Egn-Kw-huY" eventType="touchUpInside" id="fzS-lc-HnT"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -1696,11 +1699,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-hX-3fj">
-                                                    <rect key="frame" x="0.0" y="46" width="600" height="191"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
-                                                </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3aV-hC-dqX">
                                                     <rect key="frame" x="5" y="298" width="590" height="60"/>
                                                     <subviews>
@@ -1746,6 +1744,9 @@
                                                                     <exclude reference="KXl-jK-Ecg"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <action selector="showMore:" destination="7Za-Yi-E48" eventType="touchUpInside" id="VHt-oS-Tpd"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -1761,6 +1762,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="16" id="Cqx-qp-DeY"/>
                                                     </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-hX-3fj">
+                                                    <rect key="frame" x="0.0" y="46" width="600" height="191"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2985,8 +2991,8 @@
         <segue reference="8jf-T0-H7W"/>
         <segue reference="2pF-mY-u1R"/>
         <segue reference="djO-lN-Qc8"/>
-        <segue reference="76D-eb-acg"/>
-        <segue reference="jal-hA-pvU"/>
-        <segue reference="QzT-29-F4w"/>
+        <segue reference="HsH-hq-pfh"/>
+        <segue reference="6oL-8J-eNe"/>
+        <segue reference="wkG-4I-Mfd"/>
     </inferredMetricsTieBreakers>
 </document>
