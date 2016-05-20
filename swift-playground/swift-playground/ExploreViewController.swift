@@ -15,6 +15,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     
     // MARK: Setup
     let postService = PostService()
+    let achievementService = AchievementService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
@@ -180,6 +181,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
+        cell.moreButton?.tag = indexPath.row
         cell.postId = postIds[indexPath.row]
         if postLike[indexPath.row] {
             cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
@@ -226,6 +228,28 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     
     @IBAction func showSearch(sender: AnyObject) {
         self.performSegueWithIdentifier("showSearchFromExplore", sender: sender)
+    }
+    
+    @IBAction func showMore(sender: AnyObject?) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Visa uppdrag", style: UIAlertActionStyle.Default, handler: { action in
+            self.performSegueWithIdentifier("showAchievementFromHome", sender: sender)
+        }))
+        alert.addAction(UIAlertAction(title: "Lägg till uppdrag i min lista", style: UIAlertActionStyle.Default, handler: { action in
+            self.achievementService.addToBucketlist(self.achievementIds[sender!.tag])
+        }))
+        if postUserIds[sender!.tag] == userDefaults.objectForKey("id")?.integerValue {
+            alert.addAction(UIAlertAction(title: "Radera inlägg", style: UIAlertActionStyle.Destructive, handler: { action in
+                self.postService.destroyPost(self.postIds[sender!.tag])
+                self.destroyCell(sender!.tag)
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "Rapportera inlägg", style: UIAlertActionStyle.Destructive, handler: nil))
+        }
+        alert.addAction(UIAlertAction(title: "Avbryt", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: Navigation
@@ -288,6 +312,26 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         } else {
             self.postUserAvatars.append(image!)
         }
+    }
+    
+    func destroyCell(cellIndex: Int) {
+        self.achievementDescriptions.removeAtIndex(cellIndex)
+        self.achievementIds.removeAtIndex(cellIndex)
+        self.achievementScores.removeAtIndex(cellIndex)
+        self.postIds.removeAtIndex(cellIndex)
+        self.postCreatedAt.removeAtIndex(cellIndex)
+        self.postUpdatedAt.removeAtIndex(cellIndex)
+        self.postImageUrls.removeAtIndex(cellIndex)
+        self.postImages.removeAtIndex(cellIndex)
+        //postVideoUrls.removeAtIndex(cellIndex)
+        self.postUserIds.removeAtIndex(cellIndex)
+        self.postUserNames.removeAtIndex(cellIndex)
+        self.postUserAvatarUrls.removeAtIndex(cellIndex)
+        self.postUserAvatars.removeAtIndex(cellIndex)
+        self.postCommentCounts.removeAtIndex(cellIndex)
+        self.postLikeCounts.removeAtIndex(cellIndex)
+        self.postLike.removeAtIndex(cellIndex)
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
 

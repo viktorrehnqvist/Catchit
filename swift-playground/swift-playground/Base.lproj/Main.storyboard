@@ -655,6 +655,9 @@
                                                                     <exclude reference="c57-6G-LgK"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <action selector="showMore:" destination="pc2-b1-3Nb" eventType="touchUpInside" id="9Jo-I6-6Ef"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -767,6 +770,7 @@
                                             <outlet property="likeButton" destination="i50-za-ErQ" id="3fw-6B-TUF"/>
                                             <outlet property="likeCount" destination="ojd-oO-X0t" id="iRm-EU-mWc"/>
                                             <outlet property="likeImageView" destination="uJ6-jd-dVs" id="kbG-CN-HfG"/>
+                                            <outlet property="moreButton" destination="uS9-GY-Mfh" id="bUC-oF-7SM"/>
                                             <outlet property="profileImage" destination="emS-60-bge" id="Jnz-uT-UQI"/>
                                             <outlet property="profileLabel" destination="WUf-ad-lnZ" id="a5o-vG-hFX"/>
                                             <outlet property="scoreLabel" destination="gJh-xi-ztT" id="Qk9-33-flM"/>
@@ -2944,11 +2948,11 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GxL-aq-8sZ"/>
+        <segue reference="8jf-T0-H7W"/>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="3Ph-BA-daD"/>
-        <segue reference="6oL-8J-eNe"/>
-        <segue reference="HsH-hq-pfh"/>
-        <segue reference="wkG-4I-Mfd"/>
+        <segue reference="zhv-hg-8pY"/>
+        <segue reference="JTS-hb-4sY"/>
+        <segue reference="4pd-pR-4gV"/>
+        <segue reference="xHK-9p-MYi"/>
     </inferredMetricsTieBreakers>
 </document>
