@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     @IBOutlet weak var collectionView: UICollectionView!
     var header: ProfileCollectionReusableView!
     let userDefaults = NSUserDefaults.standardUserDefaults()
+    let likeActiveImage = UIImage(named: "heart-icon-active")
+    let likeInactiveImage = UIImage(named: "heart-icon-inactive")
     var counter: Float = 0
     var timer = NSTimer()
     
@@ -142,15 +144,15 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.likeCount.addGestureRecognizer(likesTapGesture)
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
-        cell.commentCount.text! = String(postCommentCounts[indexPath.row]) + " kommentarer"
-        cell.likeCount.text! = String(postLikeCounts[indexPath.row]) + " gilla-markeringar"
+        cell.commentCount.text! = String(postCommentCounts[indexPath.row])
+        cell.likeCount.text! = String(postLikeCounts[indexPath.row])
         cell.scoreLabel.text! = String(achievementScores[indexPath.row]) + "p"
         cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         if postLike[indexPath.row] {
-            cell.likeButton?.setTitle("Sluta gilla", forState: .Normal)
+            cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
         } else {
-            cell.likeButton?.setTitle("Gilla", forState: .Normal)
+            cell.likeButton?.setImage(likeInactiveImage, forState: .Normal)
         }
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
@@ -171,7 +173,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
             let resizeFactor = screenSize.width / image.size.width
             height = resizeFactor * image.size.height
         }
-        let size = CGSize(width: screenSize.width, height: height + 150)
+        let size = CGSize(width: screenSize.width, height: height + 180)
         
         return size
     }

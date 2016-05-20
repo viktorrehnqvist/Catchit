@@ -19,6 +19,8 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
     var header: AchievementsCollectionReusableView!
+    let likeActiveImage = UIImage(named: "heart-icon-active")
+    let likeInactiveImage = UIImage(named: "heart-icon-inactive")
     
     let addToBucketlistImage = UIImage(named: "achievement_button_icon3")
     let removeFromBucketlistImage = UIImage(named: "bucketlist-remove_icon")
@@ -40,6 +42,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     var postUserAvatars: [UIImage] = []
     var postCommentCounts: [Int] = []
     var postLikeCounts: [Int] = []
+    var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     var segueShouldShowCompleters: Bool = false
     
@@ -69,6 +72,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                     postUserAvatarUrls.append(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
                     postCommentCounts.append(json["posts"]!![i]?["comments_count"] as! Int)
                     postLikeCounts.append(json["posts"]!![i]?["likes_count"] as! Int)
+                    postLike.append((json["like"] as! NSArray)[i] as! Bool)
                     
                     fetchDataFromUrlToPostImages(json["posts"]!![i]["image"]!!["url"]! as! String)
                     fetchDataFromUrlToPostUserAvatars(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
@@ -87,6 +91,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                     postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
                     postCommentCounts.append(json[i]?["comments_count"] as! Int)
                     postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                    postLike.append((json["like"] as! NSArray)[i] as! Bool)
                     
                     fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
                     fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
@@ -158,12 +163,17 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         cell.imageView?.image = postImages[indexPath.row]
         cell.label?.text = achievementDescription
         cell.scoreLabel.text = String(achievementScore) + "p"
-        cell.likeCount.text = String(postLikeCounts[indexPath.row]) + " gilla-markeringar"
-        cell.commentCount.text = String(postCommentCounts[indexPath.row]) + " kommentarer"
+        cell.likeCount.text = String(postLikeCounts[indexPath.row])
+        cell.commentCount.text = String(postCommentCounts[indexPath.row])
         cell.profileImage.image = postUserAvatars[indexPath.row]
         cell.profileLabel.text = postUserNames[indexPath.row]
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
+        if postLike[indexPath.row] {
+            cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
+        } else {
+            cell.likeButton?.setImage(likeInactiveImage, forState: .Normal)
+        }
         cell.postId = postIds[indexPath.row]
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -181,7 +191,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             let resizeFactor = screenSize.width / image.size.width
             height = resizeFactor * image.size.height
         }
-        let size = CGSize(width: screenSize.width, height: height + 150)
+        let size = CGSize(width: screenSize.width, height: height + 180)
         
         return size
     }
