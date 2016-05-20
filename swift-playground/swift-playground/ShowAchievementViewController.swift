@@ -48,6 +48,8 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     var segueShouldShowCompleters: Bool = false
+    var shouldRefresh: Bool = false
+    var newUpload: Bool = false
     
     // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
@@ -135,6 +137,15 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        
+        if shouldRefresh {
+            newUpload = false
+            refreshView()
+        }
+        
+        if newUpload {
+            shouldRefresh = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -333,8 +344,10 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             let image = info[UIImagePickerControllerOriginalImage] as? UIImage
             let imageData: NSData = UIImagePNGRepresentation(image!)!
             uploadService.uploadImage(imageData, achievementId: achievementId)
+            newUpload = true
         } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
             let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
+            newUpload = true
             uploadService.uploadVideo(pickedVideo, achievementId: achievementId)
         }
         
@@ -428,5 +441,23 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.postLikeCounts.removeAtIndex(cellIndex)
         self.postLike.removeAtIndex(cellIndex)
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+    
+    func refreshView() {
+        postIds = []
+        postImageUrls = []
+        postImages = []
+        postVideoUrls = []
+        postUserIds = []
+        postUserNames = []
+        postUserAvatarUrls = []
+        postUserAvatars = []
+        postCommentCounts = []
+        postLikeCounts = []
+        postLike = []
+        morePostsToLoad = true
+        segueShouldShowCompleters = false
+        achievementService.getAchievement(achievementId)
+        shouldRefresh = false
     }
 }

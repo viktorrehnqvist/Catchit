@@ -22,6 +22,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchField: UITextField!
     var uploadAchievementId: Int?
+    @IBOutlet weak var emptyImage: UIImageView!
     
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
@@ -33,6 +34,9 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
                 achievementDescriptions.append((json["bucketlist"]!![i]["description"])! as! String)
                 achievementIds.append((json["bucketlist"]!![i]["id"]) as! Int)
             }
+            emptyImage.hidden = true
+        } else {
+            emptyImage.hidden = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
@@ -103,6 +107,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
             return size
     }
     
+    
     // MARK: User Interaction
     @IBAction func showAchievement(sender: AnyObject?) {
         self.performSegueWithIdentifier("showAchievementFromBucketlist", sender: sender)
@@ -121,6 +126,9 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         achievementDescriptions.removeAtIndex(cellIndex)
         achievementIds.removeAtIndex(cellIndex)
         collectionView.deleteItemsAtIndexPaths([cellIndexPath!])
+        if achievementIds.isEmpty {
+            emptyImage.hidden = false
+        }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
