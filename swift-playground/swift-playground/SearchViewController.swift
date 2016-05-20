@@ -25,7 +25,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         collectionView.delegate = self
         searchField.delegate = self
         searchField.becomeFirstResponder()
-        searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 90, 30)
+        if screenSize.width < 400 {
+            searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 90, 30)
+        } else {
+            searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 100, 30)
+        }
         // Do any additional setup after loading the view.
     }
 
