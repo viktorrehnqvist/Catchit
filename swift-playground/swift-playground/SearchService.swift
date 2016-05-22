@@ -23,7 +23,7 @@ class SearchService {
 
     // MARK: GET-Requests
     func search(searchString: String) {
-        Alamofire.request(.GET, url + "users/autocomplete_user_name?term=" + searchString, headers: headers)
+        Alamofire.request(.GET, url + "/search_results/autocomplete_search_result_record_string?term=" + searchString, headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {
@@ -34,6 +34,5 @@ class SearchService {
                 }
                 
         }
-    }
-    
+    }    
 }

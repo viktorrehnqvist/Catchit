@@ -2039,7 +2039,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="ZlW-Wl-bjq"/>
                                                     </constraints>
-                                                    <state key="normal" image="bucketlist-add-icon"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2990,7 +2989,6 @@
         <image name="achievement_icon" width="32" height="32"/>
         <image name="avatar" width="159" height="159"/>
         <image name="avatarsmall" width="32" height="32"/>
-        <image name="bucketlist-add-icon" width="60" height="60"/>
         <image name="bucketlist-remove_icon" width="60" height="60"/>
         <image name="bucketlist_icon" width="32" height="32"/>
         <image name="comment-icon" width="60" height="57"/>
@@ -3006,8 +3004,8 @@
         <segue reference="qnV-sV-0kd"/>
         <segue reference="2pF-mY-u1R"/>
         <segue reference="UnV-OJ-WQS"/>
-        <segue reference="JIk-2X-1Dy"/>
-        <segue reference="L9l-gp-JAO"/>
         <segue reference="qca-Hm-Suw"/>
+        <segue reference="pO1-vJ-RJX"/>
+        <segue reference="Avd-S3-QhS"/>
     </inferredMetricsTieBreakers>
 </document>
