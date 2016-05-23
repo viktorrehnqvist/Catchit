@@ -2031,7 +2031,7 @@
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="uploadPost:" destination="dcD-Gz-shw" eventType="touchUpInside" id="lja-n8-3A2"/>
+                                                        <action selector="resultButtonPress:" destination="SWf-Jd-IBW" eventType="touchUpInside" id="RVz-rV-ot1"/>
                                                     </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM2-8r-6MH">
@@ -2039,6 +2039,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="ZlW-Wl-bjq"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="bucketlistPress:" destination="SWf-Jd-IBW" eventType="touchUpInside" id="s5X-9a-Z2L"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2107,6 +2110,7 @@
                         <outlet property="searchField" destination="sul-om-o6i" id="DXW-Wq-KBZ"/>
                         <segue destination="7Za-Yi-E48" kind="show" identifier="showAchievementFromSearch" id="pO1-vJ-RJX"/>
                         <segue destination="Egn-Kw-huY" kind="show" identifier="showProfileFromSearch" id="Avd-S3-QhS"/>
+                        <segue destination="Umm-fh-qXz" kind="show" identifier="showPostFromSearch" id="7ir-IZ-5qd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8fK-Og-ysd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3004,8 +3008,8 @@
         <segue reference="qnV-sV-0kd"/>
         <segue reference="2pF-mY-u1R"/>
         <segue reference="UnV-OJ-WQS"/>
-        <segue reference="qca-Hm-Suw"/>
         <segue reference="pO1-vJ-RJX"/>
         <segue reference="Avd-S3-QhS"/>
+        <segue reference="7ir-IZ-5qd"/>
     </inferredMetricsTieBreakers>
 </document>

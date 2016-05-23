@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import Foundation
+import Alamofire
+import MobileCoreServices
 
-class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, SearchServiceDelegate, UserServiceDelegate {
+class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, SearchServiceDelegate, UserServiceDelegate, UploadServiceDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     // MARK: Setup
     let postService = PostService()
     let searchService = SearchService()
     let userService = UserService()
+    let uploadService = UploadService()
+    let achievementService = AchievementService()
     @IBOutlet weak var searchField: UITextField!        
     @IBOutlet weak var collectionView: UICollectionView!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
@@ -27,12 +32,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     
     var userFollowIds: [Int] = []
     var completedAchievementIds: [Int] = []
+    var completedPostIds: [Int] = []
     var bucketlistAchievementIds: [Int] = []
     var labels: [String] = []
     var ids: [Int] = []
     var types: [String] = []
     var imageUrls: [String] = []
     var images: [UIImage] = []
+    var uploadAchievementId: Int?
+    var uploadIndexPath: NSIndexPath?
     
     // MARK: Lifecycle
     func setSearchResult(json: AnyObject) {
@@ -56,19 +64,25 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     
     func setUserData(json: AnyObject, follow: Bool) {
         userFollowIds = (json["follow_infos"] as! NSArray)[2] as! [Int]
-        if (json["posts"] as! NSArray).count > 0 {
-            for i in 0...((json["posts"] as! NSArray).count - 1) {
-                completedAchievementIds.append((json["posts"] as! NSArray)[i]["achievement_id"] as! Int)
-            }
-        }
+        completedAchievementIds = (json["achievement_ids"] as! NSArray) as! [Int]
+        completedPostIds = (json["post_ids"] as! NSArray) as! [Int]
         if json["bucketlist"]!!.count > 0 {
             for i in 0...(json["bucketlist"]!!.count - 1) {
                 bucketlistAchievementIds.append((json["bucketlist"]!![i]["id"]) as! Int)
             }
         }
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     func updateUserData(json: AnyObject) {
+    }
+    
+    func setUploadedResult(json: AnyObject) {
+        let postId = json["id"] as! Int
+        completedAchievementIds.append(uploadAchievementId!)
+        completedPostIds.append(postId)
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        self.performSegueWithIdentifier("showPostFromSearch", sender: postId)
     }
     
     // MARK: View Lifecycle
@@ -80,12 +94,21 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         searchField.becomeFirstResponder()
         userService.delegate = self
         userService.getCurrentUserData()
+        uploadService.delegate = self
         if screenSize.width < 400 {
             searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 90, 30)
         } else {
             searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 100, 30)
         }
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        userFollowIds = []
+        completedAchievementIds = []
+        completedPostIds = []
+        bucketlistAchievementIds = []
+        userService.getCurrentUserData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,6 +153,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.resultLabel.text! = labels[indexPath.row]
         cell.resultButton.layer.cornerRadius = 5
+        cell.resultButton.tag = indexPath.row
         cell.bucketlistButton.tag = indexPath.row
             
         return cell
@@ -150,7 +174,51 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         }
     }
     
+    @IBAction func resultButtonPress(sender: AnyObject) {
+        let index = sender.tag
+        let indexPath = NSIndexPath(forItem: sender.tag, inSection: 0)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SearchCollectionViewCell
+        let recordId = ids[index]
+        if types[index] == "achievement" {
+            uploadAchievementId = recordId
+            uploadIndexPath = indexPath
+            if completedAchievementIds.contains(recordId) {
+                let postId = completedPostIds[completedAchievementIds.indexOf(recordId)!]
+                self.performSegueWithIdentifier("showPostFromSearch", sender: postId)
+            } else {
+                let existingOrNewMediaController = UIAlertController(title: "Inlägg", message: "Välj från bibliotek eller ta bild", preferredStyle: .Alert)
+                existingOrNewMediaController.addAction(UIAlertAction(title: "Välj från bibliotek", style: .Default) { (UIAlertAction) in
+                    self.useLibrary()
+                    })
+                existingOrNewMediaController.addAction(UIAlertAction(title: "Ta bild eller video", style: .Default) { (UIAlertAction) in
+                    self.useCamera()
+                    })
+                existingOrNewMediaController.addAction(UIAlertAction(title: "Avbryt", style: .Cancel, handler: nil))
+                self.presentViewController(existingOrNewMediaController, animated: true, completion: nil)
+            }
+        } else {
+            if cell.resultButton.titleForState(.Normal) == "Sluta följ" {
+                userService.followUserChange(recordId, follow: false)
+                cell.resultButton.setTitle("Följ", forState: .Normal)
+            } else {
+                userService.followUserChange(recordId, follow: true)
+                cell.resultButton.setTitle("Sluta följ", forState: .Normal)
+            }
+        }
+    }
     
+    @IBAction func bucketlistPress(sender: AnyObject) {
+        let indexPath = NSIndexPath(forItem: sender.tag, inSection: 0)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SearchCollectionViewCell
+        if cell.bucketlistButton.currentImage == bucketlistAddIcon {
+            achievementService.addToBucketlist(ids[indexPath.row])
+            cell.bucketlistButton.setImage(bucketlistRemoveIcon, forState: .Normal)
+        } else {
+            achievementService.removeFromBucketlist(ids[indexPath.row])
+            cell.bucketlistButton.setImage(bucketlistAddIcon, forState: .Normal)
+        }
+    }
+
     @IBAction func back(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(false)
     }
@@ -178,6 +246,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
             let vc = segue.destinationViewController as! ProfileViewController
             vc.userId = sender?.integerValue
         }
+        
+        if segue.identifier == "showPostFromSearch" {
+            let vc = segue.destinationViewController as! ShowPostViewController
+            vc.postId = sender?.integerValue!
+        }
     }
     
     // MARK: Additional Helpers
@@ -186,6 +259,38 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         let data = NSData(contentsOfURL:url)
         let image = UIImage(data: data!)
         self.images.append(image!)
+    }
+    
+    func useLibrary() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func useCamera() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.Camera
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType]
+        if mediaType!.isEqualToString(kUTTypeImage as String) {
+            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let imageData: NSData = UIImagePNGRepresentation(image!)!
+            uploadService.uploadImage(imageData, achievementId: uploadAchievementId!)
+        } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
+            let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
+            uploadService.uploadVideo(pickedVideo, achievementId: uploadAchievementId!)
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
