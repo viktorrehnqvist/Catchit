@@ -38,6 +38,7 @@
 		F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73A51DC1CA1690D0029779D /* ProfileViewController.swift */; };
 		F74018811C72FEF2004383FE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74018801C72FEF2004383FE /* SwiftyJSON.swift */; };
 		F745D2F41CEF68AB004A5A8B /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F745D2F31CEF68AB004A5A8B /* SearchService.swift */; };
+		F745D2F81CF32074004A5A8B /* ImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F745D2F71CF32074004A5A8B /* ImageOrientation.swift */; };
 		F761C52C1C9DD60200E3C334 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C52B1C9DD60200E3C334 /* ExploreViewController.swift */; };
 		F761C5301C9DD6CF00E3C334 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */; };
 		F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */; };
@@ -125,6 +126,7 @@
 		F73A51DC1CA1690D0029779D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F74018801C72FEF2004383FE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../Weather-App-Example/Weather-App-Example/SwiftyJSON.swift"; sourceTree = "<group>"; };
 		F745D2F31CEF68AB004A5A8B /* SearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		F745D2F71CF32074004A5A8B /* ImageOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageOrientation.swift; sourceTree = "<group>"; };
 		F761C52B1C9DD60200E3C334 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		F761C52F1C9DD6CF00E3C334 /* AchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
 		F761C5311C9DD6F300E3C334 /* BucketlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketlistViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				F735209F1CE48839002A9B20 /* UserViews */,
 				F74018801C72FEF2004383FE /* SwiftyJSON.swift */,
 				F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift */,
+				F745D2F71CF32074004A5A8B /* ImageOrientation.swift */,
 				F76DEB101CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift */,
 				F70173791C6E6EAF006F799A /* Main.storyboard */,
 				F701737F1C6E6EAF006F799A /* Assets.xcassets */,
@@ -547,6 +550,7 @@
 			files = (
 				F728AFCE1CDBD6A800F5A1DF /* UploadService.swift in Sources */,
 				F745D2F41CEF68AB004A5A8B /* SearchService.swift in Sources */,
+				F745D2F81CF32074004A5A8B /* ImageOrientation.swift in Sources */,
 				F73A51CA1C9ED2160029779D /* AchievementCollectionViewCell.swift in Sources */,
 				F73520B31CE5DF77002A9B20 /* SearchCollectionViewCell.swift in Sources */,
 				F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */,

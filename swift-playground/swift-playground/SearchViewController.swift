@@ -283,7 +283,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         let mediaType = info[UIImagePickerControllerMediaType]
         if mediaType!.isEqualToString(kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-            let imageData: NSData = UIImagePNGRepresentation(image!)!
+            let fixedImage = image?.fixOrientation()
+            let imageData: NSData = UIImagePNGRepresentation(fixedImage!)!
             uploadService.uploadImage(imageData, achievementId: uploadAchievementId!)
         } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
             let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!

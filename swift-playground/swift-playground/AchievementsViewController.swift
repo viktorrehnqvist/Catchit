@@ -11,6 +11,7 @@ import Foundation
 import Alamofire
 import MobileCoreServices
 
+
 @available(iOS 9.0, *)
 class AchievementsViewController: UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -419,38 +420,6 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         }
     }
     
-    func useLibrary() {
-        let imageFromSource = UIImagePickerController()
-        imageFromSource.delegate = self
-        imageFromSource.allowsEditing = false
-        imageFromSource.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-        self.presentViewController(imageFromSource, animated: true, completion: nil)
-    }
-    
-    func useCamera() {
-        let imageFromSource = UIImagePickerController()
-        imageFromSource.delegate = self
-        imageFromSource.allowsEditing = false
-        imageFromSource.sourceType = UIImagePickerControllerSourceType.Camera
-        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-        self.presentViewController(imageFromSource, animated: true, completion: nil)
-    }
-        
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let mediaType = info[UIImagePickerControllerMediaType]
-        if mediaType!.isEqualToString(kUTTypeImage as String) {
-            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-            let imageData: NSData = UIImagePNGRepresentation(image!)!
-            uploadService.uploadImage(imageData, achievementId: uploadAchievementId!)
-        } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
-            let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
-            uploadService.uploadVideo(pickedVideo, achievementId: uploadAchievementId!)
-        }
-
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var cellIndex: Int = 0
@@ -480,6 +449,40 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 vc.achievementId = achievementIds[cellIndex]
             }
         }
+    }
+    
+    // MARK: Additional Helpers
+    func useLibrary() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func useCamera() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.Camera
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType]
+        if mediaType!.isEqualToString(kUTTypeImage as String) {
+            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let fixedImage = image?.fixOrientation()
+            let imageData: NSData = UIImagePNGRepresentation(fixedImage!)!
+            uploadService.uploadImage(imageData, achievementId: uploadAchievementId!)
+        } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
+            let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
+            uploadService.uploadVideo(pickedVideo, achievementId: uploadAchievementId!)
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
