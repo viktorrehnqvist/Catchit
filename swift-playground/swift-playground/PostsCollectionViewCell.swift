@@ -30,6 +30,7 @@ class PostsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var videoView: UIView!
 
     // MARK: User Interaction
     @IBAction func pressLikeButton(sender: AnyObject) {

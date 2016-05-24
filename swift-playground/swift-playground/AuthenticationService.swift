@@ -19,7 +19,7 @@ class AuthenticationService {
     // MARK: Setup
     var delegate: AuthenticationServiceDelegate?
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    let url = "http://192.168.1.116:3000/"
+    let url = "http://veckokampen.se/"
     
     // MARK: POST-Requests
     func registerUser(email: String, password: String, username: String) {
@@ -47,7 +47,7 @@ class AuthenticationService {
                             self.userDefaults.setInteger(userId, forKey: "id")
                             self.userDefaults.setObject(headers, forKey: "headers")
                             self.userDefaults.setObject(username, forKey: "name")
-                            self.userDefaults.setObject("http://192.168.1.116:3000/", forKey: "url")
+                            self.userDefaults.setObject("http://veckokampen.se/", forKey: "url")
                             if self.delegate != nil {
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     self.delegate?.setAuthenticationData(true)
@@ -103,7 +103,7 @@ class AuthenticationService {
                         self.userDefaults.setInteger(userId, forKey: "id")
                         self.userDefaults.setObject(headers, forKey: "headers")
                         self.userDefaults.setObject(username, forKey: "name")
-                        self.userDefaults.setObject("http://192.168.1.116:3000/", forKey: "url")
+                        self.userDefaults.setObject("http://veckokampen.se/", forKey: "url")
                         if self.delegate != nil {
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 self.delegate?.setAuthenticationData(true)

@@ -290,7 +290,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
             let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
             uploadService.uploadVideo(pickedVideo, achievementId: uploadAchievementId!)
         }
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
