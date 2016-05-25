@@ -180,7 +180,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row])
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row])
-        cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
+        cell.scoreLabel.text! = "\(self.achievementScores[indexPath.row])p"
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.moreButton?.tag = indexPath.row

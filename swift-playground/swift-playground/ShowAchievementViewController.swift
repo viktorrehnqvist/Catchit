@@ -176,7 +176,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         cell.imageView?.image = postImages[indexPath.row]
         cell.label?.text = achievementDescription
-        cell.scoreLabel.text = String(achievementScore) + "p"
+        cell.scoreLabel.text = "\(achievementScore)p"
         cell.likeCount.text = String(postLikeCounts[indexPath.row])
         cell.commentCount.text = String(postCommentCounts[indexPath.row])
         cell.profileImage.image = postUserAvatars[indexPath.row]
@@ -219,8 +219,8 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
         headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
         headerView.achievementDescription.text = achievementDescription
-        headerView.achievementCompleterCount.text = String(achievementCompleterCount) + " har klarat detta"
-        headerView.achievementScore.text = String(achievementScore) + "p"
+        headerView.achievementCompleterCount.text = "\(achievementCompleterCount) har klarat detta"
+        headerView.achievementScore.text = "\(achievementScore)p"
         headerView.tag = achievementId
         headerView.uploadButton.layer.cornerRadius = 5
         if achievementInBucketlist {

@@ -147,7 +147,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.label.addGestureRecognizer(achievementTapGesture)
         cell.commentCount.text! = String(postCommentCounts[indexPath.row])
         cell.likeCount.text! = String(postLikeCounts[indexPath.row])
-        cell.scoreLabel.text! = String(achievementScores[indexPath.row]) + "p"
+        cell.scoreLabel.text! = "\(achievementScores[indexPath.row])p"
         cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         if postLike[indexPath.row] {
@@ -185,15 +185,15 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                       withReuseIdentifier: "profileTopBar",
                                                                       forIndexPath: indexPath) as! ProfileCollectionReusableView
-        headerView.achievementCount.text = String(userAchievementCount) + "st"
-        headerView.score.text = String(userScore) + "P"
-        headerView.followCount.text = String(userFollowsCount) + " Följer"
-        headerView.followersCount.text = String(userFollowersCount) + " Följare"
+        headerView.achievementCount.text = "\(userAchievementCount)st"
+        headerView.score.text = "\(userScore)P"
+        headerView.followCount.text = "\(userFollowsCount) Följer"
+        headerView.followersCount.text = "\(userFollowersCount) Följare"
         headerView.followCount.tag = userId!
         headerView.followersCount.tag = userId!
         headerView.userAvatar.image = userAvatar
         headerView.username.text = username
-        headerView.completeLabel.text = String(userAchievementCount) + "/" + String(totalAchievements)
+        headerView.completeLabel.text = "\(userAchievementCount)/\(totalAchievements)"
         
         if userId == userDefaults.objectForKey("id")?.integerValue {
             headerView.followButton.setTitle("Inställningar", forState: .Normal)
@@ -242,7 +242,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         } else {
             self.performSegueWithIdentifier("showSettingsFromProfile", sender: sender)
         }
-        header.followersCount.text = String(userFollowersCount) + " Följare"
+        header.followersCount.text = "\(userFollowersCount) Följare"
     }
     
     @IBAction func showMore(sender: AnyObject?) {

@@ -297,9 +297,9 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         cell.achievementImage1.image = achievementFirstCompleterImages[indexPath.row]
         cell.achievementImage2.image = achievementSecondCompleterImages[indexPath.row]
         cell.achievementImage3.image = achievementThirdCompleterImages[indexPath.row]
-        cell.completersLabel.text! = String(achievementCompleterCounts[indexPath.row]) + " har klarat detta"
+        cell.completersLabel.text! = "\(achievementCompleterCounts[indexPath.row]) har klarat detta"
         cell.achievementLabel.text! = achievementDescriptions[indexPath.row]
-        cell.scoreLabel.text! = String(achievementScores[indexPath.row]) + "p"
+        cell.scoreLabel.text! = "\(achievementScores[indexPath.row]) p"
         if achievementInBucketlist[indexPath.row] {
             cell.bucketlistImage.image = removeFromBucketlistImage
         } else {

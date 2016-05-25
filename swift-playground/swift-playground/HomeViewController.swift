@@ -148,11 +148,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
                 fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String, new: true)
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: true)
             }
-            players = []
-            playerLayers = []
-            activePlayer = nil
-            activeCellIndexPath = nil
-            addedVideoCells = []
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
         }
     }
@@ -172,6 +167,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             if centerCellIndexPath != activeCellIndexPath {
                 activeCellIndexPath = centerCellIndexPath
                 NSNotificationCenter.defaultCenter().removeObserver(self)
+                activePlayer?.muted = true
                 activePlayer?.pause()
                 playVideo(centerCellIndexPath.row)
             }
@@ -243,7 +239,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row])
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row])
-        cell.scoreLabel.text! = String(self.achievementScores[indexPath.row]) + "p"
+        cell.scoreLabel.text! = "\(self.achievementScores[indexPath.row])p"
         cell.commentButton?.tag = indexPath.row
         cell.commentCount?.tag = indexPath.row
         cell.moreButton?.tag = indexPath.row
@@ -437,10 +433,10 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     }
     
     func playVideo(index: Int) {
-            let thisPlayer = players[index]
-            activePlayer = thisPlayer
-            activePlayer!.play()
-            NSNotificationCenter.defaultCenter().addObserver(self,
+        let thisPlayer = players[index]
+        activePlayer = thisPlayer
+        activePlayer!.play()
+        NSNotificationCenter.defaultCenter().addObserver(self,
                                                          selector: #selector(playerItemDidReachEnd(_:)),
                                                          name: AVPlayerItemDidPlayToEndTimeNotification,
                                                          object: self.activePlayer!.currentItem)

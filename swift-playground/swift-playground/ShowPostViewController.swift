@@ -171,7 +171,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         headerView.likesCount.text = String(likesCount)
         headerView.profileLabel.text = userName
         headerView.profileImage.image = userAvatar
-        headerView.scoreLabel.text = String(achievementScore) + "p"
+        headerView.scoreLabel.text = "\(achievementScore)p"
         
         header = headerView
         return headerView
