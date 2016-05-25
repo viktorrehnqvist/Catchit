@@ -423,7 +423,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="nDc-wz-2pn" id="QMa-fJ-hHl"/>
-                        <outlet property="navigationBar" destination="CFx-Ce-W6f" id="p4S-w3-3si"/>
                         <outlet property="searchField" destination="8Kn-2a-pXb" id="TsN-QI-AF6"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showLikesFromHome" id="UnV-OJ-WQS"/>
                         <segue destination="Umm-fh-qXz" kind="show" identifier="showCommentsFromHome" id="KBR-5L-ez0"/>
@@ -3714,10 +3713,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="L9l-gp-JAO"/>
-        <segue reference="qca-Hm-Suw"/>
-        <segue reference="qnV-sV-0kd"/>
-        <segue reference="QzT-29-F4w"/>
-        <segue reference="blo-6f-H6Y"/>
+        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="dwR-E4-82o"/>
+        <segue reference="KBR-5L-ez0"/>
+        <segue reference="OvH-UW-Jlq"/>
+        <segue reference="N5Z-XD-MLh"/>
     </inferredMetricsTieBreakers>
 </document>

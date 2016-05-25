@@ -19,7 +19,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     let postService = PostService()
     let achievementService = AchievementService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     let likeActiveImage = UIImage(named: "heart-icon-active")
@@ -225,15 +224,15 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         cell.commentCount?.tag = indexPath.row
         cell.moreButton?.tag = indexPath.row
         cell.postId = postIds[indexPath.row]
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.mainScreen().scale
+        cell.tag = indexPath.row
         
         if postLike[indexPath.row] {
             cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
         } else {
             cell.likeButton?.setImage(likeInactiveImage, forState: .Normal)
         }
-        cell.layer.shouldRasterize = true
-        cell.layer.rasterizationScale = UIScreen.mainScreen().scale
-        cell.tag = indexPath.row
         
         return cell
         
@@ -251,6 +250,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             height = resizeFactor * image.size.height
         }
         size = CGSize(width: screenSize.width, height: height + 180)
+        
         return size
     }
     
@@ -425,6 +425,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             playerLayers.append(playerLayer)
         }
     }
+    
 }
 
 

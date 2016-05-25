@@ -9,6 +9,8 @@
 import UIKit
 import Foundation
 import Alamofire
+import AVKit
+import AVFoundation
 
 @available(iOS 9.0, *)
 class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -21,6 +23,9 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     let likeActiveImage = UIImage(named: "heart-icon-active")
     let likeInactiveImage = UIImage(named: "heart-icon-inactive")
+    var players: [AVPlayer] = []
+    var playerLayers: [AVPlayerLayer] = []
+    var activePlayer: AVPlayer?
     @IBOutlet weak var searchField: UITextField!
     
     var achievementDescriptions: [String] = []
@@ -41,6 +46,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     var postLike: [Bool] = []
     var morePostsToLoad: Bool = true
     var justCheckedForNewPosts: Bool = true
+    var activeCellIndexPath: NSIndexPath?
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
@@ -55,7 +61,13 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
                 postCreatedAt.append(json[i]?["created_at"] as! String)
                 postUpdatedAt.append(json[i]?["updated_at"] as! String)
                 postImageUrls.append((json[i]?["image_url"])! as! String)
-                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                if ((json[i]?["video_url"] as? String) != nil) {
+                    postVideoUrls.append(((json[i]?["video_url"]) as! String))
+                    addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
+                } else {
+                    postVideoUrls.append("")
+                    addNewPlayer("", shouldBeFirstInArray: false)
+                }
                 postUserIds.append(json[i]?["user_id"] as! Int)
                 postUserNames.append((json[i]?["user_name"])! as! String)
                 postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
@@ -99,7 +111,13 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
                 postCreatedAt.insert((json[i]?["created_at"] as! String), atIndex: 0)
                 postUpdatedAt.insert((json[i]?["updated_at"] as! String), atIndex: 0)
                 postImageUrls.insert(((json[i]?["image_url"])! as! String), atIndex: 0)
-                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                if ((json[i]?["video_url"] as? String) != nil) {
+                    postVideoUrls.insert((json[i]?["video_url"] as! String), atIndex: 0)
+                    addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: true)
+                } else {
+                    postVideoUrls.insert("", atIndex: 0)
+                    addNewPlayer("", shouldBeFirstInArray: true)
+                }
                 postUserIds.insert((json[i]?["user_id"] as! Int), atIndex: 0)
                 postUserNames.insert(((json[i]?["user_name"])! as! String), atIndex: 0)
                 postUserAvatarUrls.insert(((json[i]?["user_avatar_url"])! as! String), atIndex: 0)
@@ -111,6 +129,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: true)
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            playVideo(0)
         }
     }
     
@@ -124,6 +143,15 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
             postService.getNewPosts(postIds.first!)
             justCheckedForNewPosts = true
+        }
+        if let centerCellIndexPath: NSIndexPath  = collectionView.centerCellIndexPath {
+            if centerCellIndexPath != activeCellIndexPath {
+                activeCellIndexPath = centerCellIndexPath
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                activePlayer?.muted = true
+                activePlayer?.pause()
+                playVideo(centerCellIndexPath.row)
+            }
         }
     }
     
@@ -141,6 +169,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         self.navigationController?.navigationBarHidden = false
         postService.updatePosts(postIds, updatedAt: postUpdatedAt)
         justCheckedForNewPosts = false
+        activePlayer?.play()
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
@@ -158,25 +187,35 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         
         loadMore(indexPath.row)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+        var cell: PostsCollectionViewCell!
+        if postVideoUrls[indexPath.row] == "" {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+            cell.imageView?.image = self.postImages[indexPath.row]
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreVideoCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+            showVideo(cell, indexPath: indexPath)
+            let videoTapGesture = UITapGestureRecognizer(target: self, action: #selector(videoToggleSound(_:)))
+            cell.videoView.addGestureRecognizer(videoTapGesture)
+        }
         
+        let likeCountTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
+        let commentCountTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
         
-        // Should be changed cause gesture recognizers only apply once.
-        // cell.likeCount.addGestureRecognizer(likesTapGesture)
+        // Should use button with image and label instead of multiple tapGestures
+        cell.likeCount.addGestureRecognizer(likeCountTapGesture)
         cell.likeImageView.addGestureRecognizer(likesTapGesture)
-        // cell.commentCount.addGestureRecognizer(commentsTapGesture)
+        cell.commentCount.addGestureRecognizer(commentCountTapGesture)
         cell.commentImageView.addGestureRecognizer(commentsTapGesture)
         cell.label.addGestureRecognizer(achievementTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         cell.profileImage.image = self.postUserAvatars[indexPath.row]
         cell.profileLabel.text! = self.postUserNames[indexPath.row]
-        cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         cell.commentCount.text! = String(self.postCommentCounts[indexPath.row])
         cell.likeCount.text! = String(self.postLikeCounts[indexPath.row])
@@ -185,13 +224,15 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         cell.commentCount?.tag = indexPath.row
         cell.moreButton?.tag = indexPath.row
         cell.postId = postIds[indexPath.row]
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.mainScreen().scale
+        cell.tag = indexPath.row
+        
         if postLike[indexPath.row] {
             cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
         } else {
             cell.likeButton?.setImage(likeInactiveImage, forState: .Normal)
         }
-        cell.layer.shouldRasterize = true
-        cell.layer.rasterizationScale = UIScreen.mainScreen().scale
 
         return cell
         
@@ -254,8 +295,18 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    @IBAction func videoToggleSound(sender: AnyObject?) {
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let thisCell: PostsCollectionViewCell = main as! PostsCollectionViewCell
+        let player = players[thisCell.tag]
+        player.muted = !player.muted
+    }
+    
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        activePlayer?.pause()
         var cellIndex: Int
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
@@ -325,7 +376,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         self.postUpdatedAt.removeAtIndex(cellIndex)
         self.postImageUrls.removeAtIndex(cellIndex)
         self.postImages.removeAtIndex(cellIndex)
-        //postVideoUrls.removeAtIndex(cellIndex)
+        self.postVideoUrls.removeAtIndex(cellIndex)
         self.postUserIds.removeAtIndex(cellIndex)
         self.postUserNames.removeAtIndex(cellIndex)
         self.postUserAvatarUrls.removeAtIndex(cellIndex)
@@ -336,7 +387,42 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
-
+    func showVideo(cell: PostsCollectionViewCell, indexPath: NSIndexPath) {
+        let image = self.postImages[indexPath.row]
+        let resizeFactor = screenSize.width / image.size.width
+        let playerLayer = playerLayers[indexPath.row]
+        playerLayer.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: image.size.height * resizeFactor)
+        cell.videoView.layer.sublayers = [playerLayer]
+    }
+    
+    func playVideo(index: Int) {
+        if postVideoUrls[index] != "" {
+            activePlayer = players[index]
+            activePlayer!.play()
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                                                             selector: #selector(playerItemDidReachEnd(_:)),
+                                                             name: AVPlayerItemDidPlayToEndTimeNotification,
+                                                             object: self.activePlayer!.currentItem)
+        }
+    }
+    
+    func playerItemDidReachEnd(notification: NSNotification) {
+        self.activePlayer!.seekToTime(kCMTimeZero)
+        self.activePlayer!.play()
+    }
+    
+    func addNewPlayer(urlString: String, shouldBeFirstInArray: Bool) {
+        let player = AVPlayer(URL: NSURL(string: url + urlString)!)
+        player.muted = true
+        let playerLayer = AVPlayerLayer(player: player)
+        if shouldBeFirstInArray {
+            players.insert(player, atIndex: 0)
+            playerLayers.insert(playerLayer, atIndex: 0)
+        } else {
+            players.append(player)
+            playerLayers.append(playerLayer)
+        }
+    }
     
 }
 

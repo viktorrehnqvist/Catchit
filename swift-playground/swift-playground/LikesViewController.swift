@@ -119,6 +119,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+        cell.noticeButton.layer.cornerRadius = 5
         
         if typeIs == "achievementShare" {
             cell.noticeButton.hidden = false

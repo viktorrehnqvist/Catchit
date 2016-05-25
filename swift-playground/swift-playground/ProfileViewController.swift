@@ -7,12 +7,10 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class ProfileViewController: UIViewController, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-    
-
-
-    
     // MARK: Setup
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
@@ -24,6 +22,9 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let likeActiveImage = UIImage(named: "heart-icon-active")
     let likeInactiveImage = UIImage(named: "heart-icon-inactive")
+    var players: [AVPlayer] = []
+    var playerLayers: [AVPlayerLayer] = []
+    var activePlayer: AVPlayer?
     var counter: Float = 0
     var timer = NSTimer()
     
@@ -52,6 +53,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     var morePostsToLoad: Bool = true
     var totalAchievements: Int = 10
     var completeFactor: Float?
+    var activeCellIndexPath: NSIndexPath?
     
     // MARK: Lifecycle
     func setUserData(json: AnyObject, follow: Bool) {
@@ -70,10 +72,15 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
                 achievementScores.append((json["achievements"] as! NSArray)[i]["score"] as! Int)
                 postIds.append((json["posts"] as! NSArray)[i]["id"] as! Int)
                 postImageUrls.append((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
-                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                if (((json["video_urls"] as! NSArray)[i] as? String) != nil) {
+                    postVideoUrls.append(((json["video_urls"] as! NSArray)[i] as! String))
+                    addNewPlayer((json["video_urls"] as! NSArray)[i] as! String, shouldBeFirstInArray: false)
+                } else {
+                    postVideoUrls.append("")
+                    addNewPlayer("", shouldBeFirstInArray: false)
+                }
                 postCommentCounts.append((json["posts"] as! NSArray)[i]["comments_count"] as! Int)
                 postLikeCounts.append((json["posts"] as! NSArray)[i]["likes_count"] as! Int)
-                // Check if current user follows the displayed user
                 fetchDataFromUrlToPostImages((json["posts"] as! NSArray)[i]["image"]!!["url"] as! String)
             }
         } else {
@@ -100,6 +107,18 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         }
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if let centerCellIndexPath: NSIndexPath  = collectionView.centerCellIndexPath {
+            if centerCellIndexPath != activeCellIndexPath {
+                activeCellIndexPath = centerCellIndexPath
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                activePlayer?.muted = true
+                activePlayer?.pause()
+                playVideo(centerCellIndexPath.row)
+            }
+        }
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +138,10 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         self.navigationController?.navigationBarHidden = false
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        activePlayer?.pause()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -133,7 +156,16 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         
         loadMore(indexPath.row)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+        var cell: PostsCollectionViewCell!
+        if postVideoUrls[indexPath.row] == "" {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+            cell.imageView?.image = self.postImages[indexPath.row]
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileVideoCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+            showVideo(cell, indexPath: indexPath)
+            let videoTapGesture = UITapGestureRecognizer(target: self, action: #selector(videoToggleSound(_:)))
+            cell.videoView.addGestureRecognizer(videoTapGesture)
+        }
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(pressCommentButton(_:)))
@@ -148,7 +180,6 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.commentCount.text! = String(postCommentCounts[indexPath.row])
         cell.likeCount.text! = String(postLikeCounts[indexPath.row])
         cell.scoreLabel.text! = "\(achievementScores[indexPath.row])p"
-        cell.imageView?.image = self.postImages[indexPath.row]
         cell.label?.text = self.achievementDescriptions[indexPath.row]
         if postLike[indexPath.row] {
             cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
@@ -160,6 +191,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         cell.postId = postIds[indexPath.row]
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
+        cell.tag = indexPath.row
         
         return cell
         
@@ -263,10 +295,19 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
+    
+    @IBAction func videoToggleSound(sender: AnyObject?) {
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let thisCell: PostsCollectionViewCell = main as! PostsCollectionViewCell
+        let player = players[thisCell.tag]
+        player.muted = !player.muted
+    }
     
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        activePlayer?.pause()
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
@@ -355,11 +396,48 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         self.postIds.removeAtIndex(cellIndex)
         self.postImageUrls.removeAtIndex(cellIndex)
         self.postImages.removeAtIndex(cellIndex)
-        //postVideoUrls.removeAtIndex(cellIndex)
+        self.postVideoUrls.removeAtIndex(cellIndex)
         self.postCommentCounts.removeAtIndex(cellIndex)
         self.postLikeCounts.removeAtIndex(cellIndex)
         self.postLike.removeAtIndex(cellIndex)
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+    
+    func showVideo(cell: PostsCollectionViewCell, indexPath: NSIndexPath) {
+        let image = self.postImages[indexPath.row]
+        let resizeFactor = screenSize.width / image.size.width
+        let playerLayer = playerLayers[indexPath.row]
+        playerLayer.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: image.size.height * resizeFactor)
+        cell.videoView.layer.sublayers = [playerLayer]
+    }
+    
+    func playVideo(index: Int) {
+        if postVideoUrls[index] != "" {
+            activePlayer = players[index]
+            activePlayer!.play()
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                                                             selector: #selector(playerItemDidReachEnd(_:)),
+                                                             name: AVPlayerItemDidPlayToEndTimeNotification,
+                                                             object: self.activePlayer!.currentItem)
+        }
+    }
+    
+    func playerItemDidReachEnd(notification: NSNotification) {
+        self.activePlayer!.seekToTime(kCMTimeZero)
+        self.activePlayer!.play()
+    }
+    
+    func addNewPlayer(urlString: String, shouldBeFirstInArray: Bool) {
+        let player = AVPlayer(URL: NSURL(string: url + urlString)!)
+        player.muted = true
+        let playerLayer = AVPlayerLayer(player: player)
+        if shouldBeFirstInArray {
+            players.insert(player, atIndex: 0)
+            playerLayers.insert(playerLayer, atIndex: 0)
+        } else {
+            players.append(player)
+            playerLayers.append(playerLayer)
+        }
     }
     
 }

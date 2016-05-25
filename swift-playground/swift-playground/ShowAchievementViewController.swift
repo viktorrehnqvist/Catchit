@@ -8,6 +8,8 @@
 
 import UIKit
 import MobileCoreServices
+import AVKit
+import AVFoundation
 
 class ShowAchievementViewController: UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -20,6 +22,9 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     let userDefaults = NSUserDefaults.standardUserDefaults()
     @IBOutlet weak var collectionView: UICollectionView!
+    var players: [AVPlayer] = []
+    var playerLayers: [AVPlayerLayer] = []
+    var activePlayer: AVPlayer?
     var header: AchievementsCollectionReusableView!
     
     let likeActiveImage = UIImage(named: "heart-icon-active")
@@ -50,6 +55,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     var segueShouldShowCompleters: Bool = false
     var shouldRefresh: Bool = false
     var newUpload: Bool = false
+    var activeCellIndexPath: NSIndexPath?
     
     // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
@@ -71,7 +77,13 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                 for i in 0...(jsonCountMaxFourPosts - 1) {
                     postIds.append(json["posts"]!![i]?["id"] as! Int)
                     postImageUrls.append((json["posts"]!![i]["image"]!!["url"])! as! String)
-                    // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                    if (((json["video_urls"] as! NSArray)[i] as? String) != nil) {
+                        postVideoUrls.append(((json["video_urls"] as! NSArray)[i] as! String))
+                        addNewPlayer(((json["video_urls"] as! NSArray)[i] as! String), shouldBeFirstInArray: false)
+                    } else {
+                        postVideoUrls.append("")
+                        addNewPlayer("", shouldBeFirstInArray: false)
+                    }
                     postUserIds.append(((json["completer_infos"] as! NSArray)[0] as! NSArray)[i] as! Int)
                     postUserNames.append(((json["completer_infos"] as! NSArray)[1] as! NSArray)[i] as! String)
                     postUserAvatarUrls.append(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
@@ -90,7 +102,13 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                 for i in 0...(json.count - 1) {
                     postIds.append(json[i]?["id"] as! Int)
                     postImageUrls.append((json[i]?["image_url"])! as! String)
-                    // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
+                    if ((json[i]?["video_url"] as? String) != nil) {
+                        postVideoUrls.append(((json[i]?["video_url"]) as! String))
+                        addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
+                    } else {
+                        postVideoUrls.append("")
+                        addNewPlayer("", shouldBeFirstInArray: false)
+                    }
                     postUserIds.append(json[i]?["user_id"] as! Int)
                     postUserNames.append((json[i]?["user_name"])! as! String)
                     postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
@@ -126,6 +144,18 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if let centerCellIndexPath: NSIndexPath  = collectionView.centerCellIndexPath {
+            if centerCellIndexPath != activeCellIndexPath {
+                activeCellIndexPath = centerCellIndexPath
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                activePlayer?.muted = true
+                activePlayer?.pause()
+                playVideo(centerCellIndexPath.row)
+            }
+        }
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,6 +178,10 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        activePlayer?.pause()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -162,7 +196,17 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         
         loadMore(indexPath.row)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("showAchievementCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+        var cell: PostsCollectionViewCell!
+        if postVideoUrls[indexPath.row] == "" {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("showAchievementCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+            cell.imageView?.image = self.postImages[indexPath.row]
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("showAchievementVideoCell", forIndexPath: indexPath) as! PostsCollectionViewCell
+            showVideo(cell, indexPath: indexPath)
+            let videoTapGesture = UITapGestureRecognizer(target: self, action: #selector(videoToggleSound(_:)))
+            cell.videoView.addGestureRecognizer(videoTapGesture)
+        }
+
         
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.showLikes(_:)))
         let commentsTapGesture = UITapGestureRecognizer(target: self, action: #selector(ShowAchievementViewController.pressCommentButton(_:)))
@@ -174,7 +218,6 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         cell.commentCount.addGestureRecognizer(commentsTapGesture)
         cell.profileImage.addGestureRecognizer(profileImageTapGesture)
         cell.profileLabel.addGestureRecognizer(profileLabelTapGesture)
-        cell.imageView?.image = postImages[indexPath.row]
         cell.label?.text = achievementDescription
         cell.scoreLabel.text = "\(achievementScore)p"
         cell.likeCount.text = String(postLikeCounts[indexPath.row])
@@ -191,6 +234,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         cell.postId = postIds[indexPath.row]
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
+        cell.tag = indexPath.row
         
         return cell
         
@@ -199,13 +243,15 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     func collectionView(collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        var size: CGSize = CGSize(width: 0, height: 0)
+        
         let image = self.postImages[indexPath.row]
         var height = image.size.height
         if image.size.width > screenSize.width {
             let resizeFactor = screenSize.width / image.size.width
             height = resizeFactor * image.size.height
         }
-        let size = CGSize(width: screenSize.width, height: height + 180)
+        size = CGSize(width: screenSize.width, height: height + 180)
         
         return size
     }
@@ -320,43 +366,18 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         }
     }
     
-    func useLibrary() {
-        let imageFromSource = UIImagePickerController()
-        imageFromSource.delegate = self
-        imageFromSource.allowsEditing = false
-        imageFromSource.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-        self.presentViewController(imageFromSource, animated: true, completion: nil)
-    }
-    
-    func useCamera() {
-        let imageFromSource = UIImagePickerController()
-        imageFromSource.delegate = self
-        imageFromSource.allowsEditing = false
-        imageFromSource.sourceType = UIImagePickerControllerSourceType.Camera
-        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-        self.presentViewController(imageFromSource, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let mediaType = info[UIImagePickerControllerMediaType]
-        if mediaType!.isEqualToString(kUTTypeImage as String) {
-            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-            let fixedImage = image?.fixOrientation()
-            let imageData: NSData = UIImagePNGRepresentation(fixedImage!)!
-            uploadService.uploadImage(imageData, achievementId: achievementId)
-            newUpload = true
-        } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
-            let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
-            newUpload = true
-            uploadService.uploadVideo(pickedVideo, achievementId: achievementId)
-        }
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func videoToggleSound(sender: AnyObject?) {
+        let point = sender?.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let thisCell: PostsCollectionViewCell = main as! PostsCollectionViewCell
+        let player = players[thisCell.tag]
+        player.muted = !player.muted
     }
     
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        activePlayer?.pause()
         let backItem = UIBarButtonItem()
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed.
@@ -426,6 +447,41 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.postUserAvatars.append(image!)
     }
     
+    func useLibrary() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func useCamera() {
+        let imageFromSource = UIImagePickerController()
+        imageFromSource.delegate = self
+        imageFromSource.allowsEditing = false
+        imageFromSource.sourceType = UIImagePickerControllerSourceType.Camera
+        imageFromSource.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        self.presentViewController(imageFromSource, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType]
+        if mediaType!.isEqualToString(kUTTypeImage as String) {
+            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let fixedImage = image?.fixOrientation()
+            let imageData: NSData = UIImagePNGRepresentation(fixedImage!)!
+            uploadService.uploadImage(imageData, achievementId: achievementId)
+            newUpload = true
+        } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
+            let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
+            newUpload = true
+            uploadService.uploadVideo(pickedVideo, achievementId: achievementId)
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func destroyCell(cellIndex: Int) {
         self.achievementCompleterCount -= 1
         self.achievementCompleted = false
@@ -433,7 +489,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.postIds.removeAtIndex(cellIndex)
         self.postImageUrls.removeAtIndex(cellIndex)
         self.postImages.removeAtIndex(cellIndex)
-        //postVideoUrls.removeAtIndex(cellIndex)
+        self.postVideoUrls.removeAtIndex(cellIndex)
         self.postUserIds.removeAtIndex(cellIndex)
         self.postUserNames.removeAtIndex(cellIndex)
         self.postUserAvatarUrls.removeAtIndex(cellIndex)
@@ -461,4 +517,42 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         achievementService.getAchievement(achievementId)
         shouldRefresh = false
     }
+    
+    func showVideo(cell: PostsCollectionViewCell, indexPath: NSIndexPath) {
+        let image = self.postImages[indexPath.row]
+        let resizeFactor = screenSize.width / image.size.width
+        let playerLayer = playerLayers[indexPath.row]
+        playerLayer.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: image.size.height * resizeFactor)
+        cell.videoView.layer.sublayers = [playerLayer]
+    }
+    
+    func playVideo(index: Int) {
+        if postVideoUrls[index] != "" {
+            activePlayer = players[index]
+            activePlayer!.play()
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                                                             selector: #selector(playerItemDidReachEnd(_:)),
+                                                             name: AVPlayerItemDidPlayToEndTimeNotification,
+                                                             object: self.activePlayer!.currentItem)
+        }
+    }
+    
+    func playerItemDidReachEnd(notification: NSNotification) {
+        self.activePlayer!.seekToTime(kCMTimeZero)
+        self.activePlayer!.play()
+    }
+    
+    func addNewPlayer(urlString: String, shouldBeFirstInArray: Bool) {
+        let player = AVPlayer(URL: NSURL(string: url + urlString)!)
+        player.muted = true
+        let playerLayer = AVPlayerLayer(player: player)
+        if shouldBeFirstInArray {
+            players.insert(player, atIndex: 0)
+            playerLayers.insert(playerLayer, atIndex: 0)
+        } else {
+            players.append(player)
+            playerLayers.append(playerLayer)
+        }
+    }
+    
 }
