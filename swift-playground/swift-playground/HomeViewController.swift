@@ -69,7 +69,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     var addedVideoCells: [NSIndexPath] = []
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
-
+    
     // MARK: Lifecycle
     func setPostData(json: AnyObject) {
         if json.count > 0 {
@@ -83,11 +83,10 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
                 postImageUrls.append((json[i]?["image_url"])! as! String)
                 if ((json[i]?["video_url"] as? String) != nil) {
                     postVideoUrls.append(((json[i]?["video_url"]) as! String))
-                    print(json[i]?["video_url"])
+                    addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
                 } else {
                     postVideoUrls.append("")
-                    print("no Video")
-                    print(postVideoUrls)
+                    addNewPlayer("", shouldBeFirstInArray: false)
                 }
                 postUserIds.append(json[i]?["user_id"] as! Int)
                 postUserNames.append((json[i]?["user_name"])! as! String)
@@ -116,7 +115,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
                     postLikeCounts[cellIndex] = json[i]?["likes_count"] as! Int
                     postLike[cellIndex] = json[i]?["like"] as! Bool
                 }
-
+                
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
         }
@@ -132,11 +131,12 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
                 postCreatedAt.insert((json[i]?["created_at"] as! String), atIndex: 0)
                 postUpdatedAt.insert((json[i]?["updated_at"] as! String), atIndex: 0)
                 postImageUrls.insert(((json[i]?["image_url"])! as! String), atIndex: 0)
-                // Handle null! postVideoUrls.append((json[i]?["video_url"])! as! String)
                 if ((json[i]?["video_url"] as? String) != nil) {
                     postVideoUrls.insert((json[i]?["video_url"] as! String), atIndex: 0)
+                    addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: true)
                 } else {
                     postVideoUrls.insert("", atIndex: 0)
+                    addNewPlayer("", shouldBeFirstInArray: true)
                 }
                 postUserIds.insert((json[i]?["user_id"] as! Int), atIndex: 0)
                 postUserNames.insert(((json[i]?["user_name"])! as! String), atIndex: 0)
@@ -149,6 +149,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
                 fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: true)
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            playVideo(0)
         }
     }
     
@@ -204,13 +205,11 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         loadMore(indexPath.row)
-
+        
         var cell: PostsCollectionViewCell!
         if postVideoUrls[indexPath.row] == "" {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! PostsCollectionViewCell
             cell.imageView?.image = self.postImages[indexPath.row]
-            // This adds not used players to get right indexPath when searching for video player, this should be fixed.
-            addPlayerAndPlayerLayer(indexPath)
         } else {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("videoCell", forIndexPath: indexPath) as! PostsCollectionViewCell
             showVideo(cell, indexPath: indexPath)
@@ -244,7 +243,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         cell.commentCount?.tag = indexPath.row
         cell.moreButton?.tag = indexPath.row
         cell.postId = postIds[indexPath.row]
-       
+        
         if postLike[indexPath.row] {
             cell.likeButton?.setImage(likeActiveImage, forState: .Normal)
         } else {
@@ -262,7 +261,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         var size: CGSize = CGSize(width: 0, height: 0)
-
+        
         let image = self.postImages[indexPath.row]
         var height = image.size.height
         if image.size.width > screenSize.width {
@@ -414,22 +413,9 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         let image = self.postImages[indexPath.row]
         let imageHeight = image.size.height
         let resizeFactor = screenSize.width / image.size.width
-        if !addedVideoCells.contains(indexPath) {
-            addedVideoCells.append(indexPath)
-            let videoURL = NSURL(string: url + postVideoUrls[indexPath.row])
-            let player = AVPlayer(URL: videoURL!)
-            players.append(player)
-            let playerLayer = AVPlayerLayer(player: player)
-            playerLayers.append(playerLayer)
-            let playerView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: imageHeight * resizeFactor))
-            cell.videoView.layer.addSublayer(playerLayer)
-            playerLayer.frame = playerView.bounds
-            player.muted = true
-        } else {
-            let playerView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: imageHeight * resizeFactor))
-            cell.videoView.layer.addSublayer(playerLayers[indexPath.row])
-            playerLayers[indexPath.row].frame = playerView.bounds
-        }
+        let playerView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: imageHeight * resizeFactor))
+        cell.videoView.layer.addSublayer(playerLayers[indexPath.row])
+        playerLayers[indexPath.row].frame = playerView.bounds
     }
     
     func playVideo(index: Int) {
@@ -442,16 +428,22 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
                                                          object: self.activePlayer!.currentItem)
     }
     
-   func playerItemDidReachEnd(notification: NSNotification) {
+    func playerItemDidReachEnd(notification: NSNotification) {
         self.activePlayer!.seekToTime(kCMTimeZero)
         self.activePlayer!.play()
-   }
+    }
     
-    func addPlayerAndPlayerLayer(indexPath: NSIndexPath) {
-        if !addedVideoCells.contains(indexPath) {
-            addedVideoCells.append(indexPath)
-            players.append(AVPlayer())
-            playerLayers.append(AVPlayerLayer())
+    func addNewPlayer(urlString: String, shouldBeFirstInArray: Bool) {
+        let videoURL = NSURL(string: url + urlString)
+        let player = AVPlayer(URL: videoURL!)
+        player.muted = true
+        let playerLayer = AVPlayerLayer(player: player)
+        if shouldBeFirstInArray {
+            players.insert(player, atIndex: 0)
+            playerLayers.insert(playerLayer, atIndex: 0)
+        } else {
+            players.append(player)
+            playerLayers.append(playerLayer)
         }
     }
 }
