@@ -497,6 +497,9 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         self.postCommentCounts.removeAtIndex(cellIndex)
         self.postLikeCounts.removeAtIndex(cellIndex)
         self.postLike.removeAtIndex(cellIndex)
+        self.players.removeAtIndex(cellIndex)
+        self.playerLayers.removeAtIndex(cellIndex)
+        playVideo(collectionView.centerCellIndexPath!.row)
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
@@ -527,7 +530,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     }
     
     func playVideo(index: Int) {
-        if postVideoUrls[index] != "" {
+        if !postVideoUrls.isEmpty && postVideoUrls[index] != "" {
             activePlayer = players[index]
             activePlayer!.play()
             NSNotificationCenter.defaultCenter().addObserver(self,
