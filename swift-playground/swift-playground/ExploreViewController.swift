@@ -192,7 +192,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         }
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale
-        
+
         return cell
         
     }

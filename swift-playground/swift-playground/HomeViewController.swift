@@ -48,7 +48,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     var morePostsToLoad: Bool = true
     var justCheckedForNewPosts: Bool = true
     var activeCellIndexPath: NSIndexPath?
-    var addedVideoCells: [NSIndexPath] = []
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
@@ -171,6 +170,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         self.navigationController?.navigationBarHidden = false
         postService.updatePosts(postIds, updatedAt: postUpdatedAt)
         justCheckedForNewPosts = false
+        activePlayer?.play()
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
@@ -308,6 +308,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        activePlayer?.pause()
         let cellIndex: Int
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
@@ -389,25 +390,22 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     }
     
     func showVideo(cell: PostsCollectionViewCell, indexPath: NSIndexPath) {
-        if ((cell.videoView.layer.sublayers) != nil) {
-            cell.videoView.layer.sublayers?.removeAll()
-        }
         let image = self.postImages[indexPath.row]
-        let imageHeight = image.size.height
         let resizeFactor = screenSize.width / image.size.width
-        let playerView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: imageHeight * resizeFactor))
-        cell.videoView.layer.addSublayer(playerLayers[indexPath.row])
-        playerLayers[indexPath.row].frame = playerView.bounds
+        let playerLayer = playerLayers[indexPath.row]
+        playerLayer.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: image.size.height * resizeFactor)
+        cell.videoView.layer.sublayers = [playerLayer]
     }
     
     func playVideo(index: Int) {
-        let thisPlayer = players[index]
-        activePlayer = thisPlayer
-        activePlayer!.play()
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        if postVideoUrls[index] != "" {
+            activePlayer = players[index]
+            activePlayer!.play()
+            NSNotificationCenter.defaultCenter().addObserver(self,
                                                          selector: #selector(playerItemDidReachEnd(_:)),
                                                          name: AVPlayerItemDidPlayToEndTimeNotification,
                                                          object: self.activePlayer!.currentItem)
+        }
     }
     
     func playerItemDidReachEnd(notification: NSNotification) {
@@ -416,8 +414,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     }
     
     func addNewPlayer(urlString: String, shouldBeFirstInArray: Bool) {
-        let videoURL = NSURL(string: url + urlString)
-        let player = AVPlayer(URL: videoURL!)
+        let player = AVPlayer(URL: NSURL(string: url + urlString)!)
         player.muted = true
         let playerLayer = AVPlayerLayer(player: player)
         if shouldBeFirstInArray {
