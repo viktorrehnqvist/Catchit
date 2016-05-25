@@ -21,6 +21,7 @@
 		F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */; };
 		F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */; };
 		F71290541CAC459500639DA0 /* ShowPostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */; };
+		F7197BF11CF5CA410051C030 /* CenterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */; };
 		F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */; };
 		F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */; };
 		F728AFCA1CD910E100F5A1DF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */; };
@@ -109,6 +110,7 @@
 		F71290481CA92A0C00639DA0 /* ShowAchievementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAchievementViewController.swift; sourceTree = "<group>"; };
 		F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsCollectionReusableView.swift; sourceTree = "<group>"; };
 		F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionReusableView.swift; sourceTree = "<group>"; };
+		F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterCollectionView.swift; sourceTree = "<group>"; };
 		F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -219,10 +221,7 @@
 				F73520A91CE488C1002A9B20 /* CollectionViews */,
 				F73520A81CE488A4002A9B20 /* Services */,
 				F735209F1CE48839002A9B20 /* UserViews */,
-				F74018801C72FEF2004383FE /* SwiftyJSON.swift */,
-				F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift */,
-				F745D2F71CF32074004A5A8B /* ImageOrientation.swift */,
-				F76DEB101CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift */,
+				F7197BF41CF5CAA30051C030 /* Helpers */,
 				F70173791C6E6EAF006F799A /* Main.storyboard */,
 				F701737F1C6E6EAF006F799A /* Assets.xcassets */,
 				F70173811C6E6EAF006F799A /* LaunchScreen.storyboard */,
@@ -248,6 +247,18 @@
 				F701739A1C6E6EAF006F799A /* Info.plist */,
 			);
 			path = "swift-playgroundUITests";
+			sourceTree = "<group>";
+		};
+		F7197BF41CF5CAA30051C030 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F74018801C72FEF2004383FE /* SwiftyJSON.swift */,
+				F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift */,
+				F745D2F71CF32074004A5A8B /* ImageOrientation.swift */,
+				F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */,
+				F76DEB101CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		F735209F1CE48839002A9B20 /* UserViews */ = {
@@ -560,6 +571,7 @@
 				F761C5321C9DD6F300E3C334 /* BucketlistViewController.swift in Sources */,
 				F761C52C1C9DD60200E3C334 /* ExploreViewController.swift in Sources */,
 				F73A51DD1CA1690D0029779D /* ProfileViewController.swift in Sources */,
+				F7197BF11CF5CA410051C030 /* CenterCollectionView.swift in Sources */,
 				F71290541CAC459500639DA0 /* ShowPostCollectionReusableView.swift in Sources */,
 				F7B553CF1C71ABFB00EA9D12 /* PostService.swift in Sources */,
 				F73520A71CE48889002A9B20 /* ChangeUsernameViewController.swift in Sources */,

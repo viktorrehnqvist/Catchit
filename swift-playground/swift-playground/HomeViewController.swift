@@ -12,24 +12,6 @@ import Alamofire
 import AVKit
 import AVFoundation
 
-extension UICollectionView {
-    
-    var centerPoint : CGPoint {
-        
-        get {
-            return CGPoint(x: self.center.x + self.contentOffset.x, y: self.center.y + self.contentOffset.y);
-        }
-    }
-    
-    var centerCellIndexPath: NSIndexPath? {
-        
-        if let centerIndexPath: NSIndexPath  = self.indexPathForItemAtPoint(self.centerPoint) {
-            return centerIndexPath
-        }
-        return nil
-    }
-}
-
 @available(iOS 9.0, *)
 class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
