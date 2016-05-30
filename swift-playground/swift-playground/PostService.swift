@@ -25,7 +25,7 @@ class PostService {
     
     // MARK: GET-Requests
     func getPosts() {
-        Alamofire.request(.GET, "http://veckokampen.se/" + "posts.json/", headers: headers)
+        Alamofire.request(.GET, url + "posts.json/", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
                     if self.delegate != nil {

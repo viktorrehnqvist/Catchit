@@ -49,15 +49,18 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         types = []
         imageUrls = []
         images = []
-        resultCount = json.count
-        if json.count > 0 {
-            for i in 0...(json.count - 1) {
+        print("5")
+        resultCount = json["search_results"]!!.count
+        if json["search_results"]!!.count > 0 {
+            print("6")
+            for i in 0...(json["search_results"]!!.count - 1) {
+                print(7 + i)
                 print(json)
                 labels.append(json["search_results"]!![i]["label"] as! String)
-                ids.append(json[i]?["record_id"] as! Int)
-                types.append(json[i]?["record_type"] as! String)
-                imageUrls.append(json[i]?["record_image"] as! String)
-                fetchDataFromUrlToUserAvatars(json[i]?["record_image"] as! String)
+                ids.append(json["search_results"]!![i]?["record_id"] as! Int)
+                types.append(json["search_results"]!![i]?["record_type"] as! String)
+                imageUrls.append(json["search_results"]!![i]?["record_image"] as! String)
+                fetchDataFromUrlToUserAvatars(json["search_results"]!![i]?["record_image"] as! String)
             }
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)

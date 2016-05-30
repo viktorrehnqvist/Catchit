@@ -87,6 +87,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     func updatePostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
+                print(json)
                 let postId = json[i]?["id"] as! Int
                 if let cellIndex = postIds.indexOf({$0 == postId}) {
                     achievementScores[cellIndex] = json[i]?["achievement_score"] as! Int
