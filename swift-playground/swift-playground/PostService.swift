@@ -118,6 +118,19 @@ class PostService {
         }
     }
     
+    func fetchMoreUserPosts(userId: Int, lastPostId: Int) {
+        Alamofire.request(.GET, url + "posts.json/", parameters: ["user": userId, "id": lastPostId], headers: headers)
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setPostData(JSON)
+                        })
+                    }
+                }
+        }
+    }
+    
     // MARK: PUT-Requests
     func likePost(postId: Int) {
         Alamofire.request(.PUT, url + "posts/like/\(postId)", headers: headers)

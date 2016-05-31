@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ProfileViewController: UIViewController, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     // MARK: Setup
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let userService = UserService()
@@ -103,7 +103,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            postService.fetchMorePosts(postIds.last!)
+            postService.fetchMoreUserPosts(userId!, lastPostId: postIds.last!)
         }
     }
     
@@ -119,6 +119,38 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
         }
     }
     
+    func setPostData(json: AnyObject) {
+        if json.count > 0 {
+            for i in 0...(json.count - 1) {
+                achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
+                achievementIds.append((json[i]?["achievement_id"]) as! Int)
+                achievementScores.append(json[i]?["achievement_score"] as! Int)
+                postIds.append(json[i]?["id"] as! Int)
+                postImageUrls.append((json[i]?["image_url"])! as! String)
+                if ((json[i]?["video_url"] as? String) != nil) {
+                    postVideoUrls.append(((json[i]?["video_url"]) as! String))
+                    addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
+                } else {
+                    postVideoUrls.append("")
+                    addNewPlayer("", shouldBeFirstInArray: false)
+                }
+                postCommentCounts.append(json[i]?["comments_count"] as! Int)
+                postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                postLike.append(json[i]?["like"] as! Bool)
+                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
+            }
+        } else {
+            morePostsToLoad = false
+        }
+        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+    }
+    
+    func setNewPostData(json: AnyObject) {
+    }
+    
+    func updatePostData(json: AnyObject) {
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,6 +161,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, UICollection
             userId = userDefaults.objectForKey("id")! as? Int
             userService.getCurrentUserData()
         }
+        self.postService.delegate = self
         self.userService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
