@@ -87,6 +87,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
+        searchField.tintColor = UIColor.blueColor()
         super.viewDidLoad()
         collectionView.delegate = self
         searchService.delegate = self
