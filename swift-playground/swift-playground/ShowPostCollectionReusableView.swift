@@ -17,5 +17,6 @@ class ShowPostCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var commentsCount: UILabel!
     @IBOutlet weak var likesCount: UILabel!
     @IBOutlet weak var achievementLabel: UILabel!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
 }

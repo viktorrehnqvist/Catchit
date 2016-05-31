@@ -47,6 +47,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     var achievementScore: Int!
     var achievementDescription: String!
     var postId: Int!
+    var postHeight: Int!
     var comments: [String] = []
     var commentUserAvatarUrls: [String] = []
     var commentUserAvatars: [UIImage] = []
@@ -175,6 +176,20 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         
         header = headerView
         return headerView
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        var size: CGSize = CGSize(width: 0, height: 0)
+        let image = self.postImage
+        if image != nil {
+        var height = image.size.height
+        if image.size.width > screenSize.width {
+            let resizeFactor = screenSize.width / image.size.width
+            height = resizeFactor * image.size.height
+        }
+            size = CGSize(width: screenSize.width, height: height + 100)
+        }
+        return size
     }
     
     func borderBottom(view: AnyObject) {
