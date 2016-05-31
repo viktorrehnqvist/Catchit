@@ -87,13 +87,21 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     func updatePostData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
-                let postId = json[i]?["id"] as! Int
-                if let cellIndex = postIds.indexOf({$0 == postId}) {
-                    achievementScores[cellIndex] = json[i]?["achievement_score"] as! Int
-                    postUpdatedAt[cellIndex] = json[i]?["updated_at"] as! String
-                    postCommentCounts[cellIndex] = json[i]?["comments_count"] as! Int
-                    postLikeCounts[cellIndex] = json[i]?["likes_count"] as! Int
-                    postLike[cellIndex] = json[i]?["like"] as! Bool
+                if ((json[i]["deleted"] as? NSArray) != nil) {
+                    for deletedPost in (json[i]["deleted"] as! NSArray) {
+                        let deletedPostId = deletedPost.integerValue
+                        let cellIndex = postIds.indexOf(deletedPostId)
+                        destroyCell(cellIndex!)
+                    }
+                } else {
+                    let postId = json[i]?["id"] as! Int
+                    if let cellIndex = postIds.indexOf({$0 == postId}) {
+                        achievementScores[cellIndex] = json[i]?["achievement_score"] as! Int
+                        postUpdatedAt[cellIndex] = json[i]?["updated_at"] as! String
+                        postCommentCounts[cellIndex] = json[i]?["comments_count"] as! Int
+                        postLikeCounts[cellIndex] = json[i]?["likes_count"] as! Int
+                        postLike[cellIndex] = json[i]?["like"] as! Bool
+                    }
                 }
                 
             }
@@ -386,7 +394,12 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         self.postLike.removeAtIndex(cellIndex)
         self.players.removeAtIndex(cellIndex)
         self.playerLayers.removeAtIndex(cellIndex)
-        playVideo(collectionView.centerCellIndexPath!.row)
+        let centerCellIndexPath = collectionView.centerCellIndexPath!.row
+        if self.players.count > centerCellIndexPath {
+            playVideo(centerCellIndexPath)
+        } else {
+            playVideo(postVideoUrls.endIndex - 1)
+        }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
