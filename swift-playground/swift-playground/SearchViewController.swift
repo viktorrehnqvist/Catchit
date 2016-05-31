@@ -49,13 +49,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         types = []
         imageUrls = []
         images = []
-        print("5")
         resultCount = json["search_results"]!!.count
         if json["search_results"]!!.count > 0 {
-            print("6")
             for i in 0...(json["search_results"]!!.count - 1) {
-                print(7 + i)
-                print(json)
                 labels.append(json["search_results"]!![i]["label"] as! String)
                 ids.append(json["search_results"]!![i]?["record_id"] as! Int)
                 types.append(json["search_results"]!![i]?["record_type"] as! String)
