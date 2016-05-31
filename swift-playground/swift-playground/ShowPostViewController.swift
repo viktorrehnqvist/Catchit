@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 extension UILabel{
     
@@ -53,10 +55,13 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     var commentUserAvatars: [UIImage] = []
     var commentUserNames: [String] = []
     var commentUserIds: [Int] = []
+    var postIsVideo: Bool = false
+    var postVideoUrl: String?
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
     // MARK: Lifecycle
     func setPostData(json: AnyObject) {
+        print(json)
         postImageUrl = json["image_url"] as! String
         userId = json["user_id"] as! Int
         achievementId = json["achievement_id"] as! Int
@@ -64,6 +69,10 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         userAvatarUrl = json["user_avatar_url"] as! String
         likesCount = json["likes_count"] as! Int
         commentsCount = json["comments_count"] as! Int
+        if ((json["video"]!!["video"]!!["url"] as? String) != nil) {
+            postIsVideo = true
+            postVideoUrl = json["video"]!!["video"]!!["url"] as? String
+        }
         achievementDescription = json["achievement_description"] as! String
         achievementScore = json["achievement_score"] as! Int
         commentUserNames = (json["commenter_infos"] as! NSArray)[0] as! [String]
@@ -155,8 +164,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                                withReuseIdentifier: "commentsTopBar",
                                                                                forIndexPath: indexPath) as! ShowPostCollectionReusableView
-        //let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
-        //headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
         let achievementTapGesture = UITapGestureRecognizer(target: self, action: #selector(showAchievement(_:)))
         let likesTapGesture = UITapGestureRecognizer(target: self, action: #selector(showLikes(_:)))
         let profileLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showProfile(_:)))
@@ -166,7 +173,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         headerView.likesCount.addGestureRecognizer(likesTapGesture)
         headerView.profileLabel.addGestureRecognizer(profileLabelTapGesture)
         headerView.profileImage.addGestureRecognizer(profileImageTapGesture)
-        headerView.postImage.image = postImage
         headerView.achievementLabel.text = achievementDescription
         headerView.commentsCount.text = String(commentsCount)
         headerView.likesCount.text = String(likesCount)
@@ -174,6 +180,26 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         headerView.profileImage.image = userAvatar
         headerView.scoreLabel.text = "\(achievementScore)p"
         
+        if postIsVideo {
+            let player = AVPlayer(URL: NSURL(string: url + self.postVideoUrl!)!)
+            let playerController = AVPlayerViewController()
+            
+            playerController.player = player
+            self.addChildViewController(playerController)
+            collectionView.addSubview(playerController.view)
+            
+            let image = postImage
+            var height = image.size.height
+            if image.size.width > screenSize.width {
+                let resizeFactor = screenSize.width / image.size.width
+                height = resizeFactor * image.size.height
+            }
+            playerController.view.frame = CGRect(x: 0, y: 50, width: screenSize.width, height: height * 0.5)
+            
+            player.play()
+        } else {
+            headerView.postImage.image = postImage
+        }
         header = headerView
         return headerView
     }
@@ -182,12 +208,16 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         var size: CGSize = CGSize(width: 0, height: 0)
         let image = self.postImage
         if image != nil {
-        var height = image.size.height
-        if image.size.width > screenSize.width {
-            let resizeFactor = screenSize.width / image.size.width
-            height = resizeFactor * image.size.height
-        }
-            size = CGSize(width: screenSize.width, height: height + 100)
+            var height = image.size.height
+            if image.size.width > screenSize.width {
+                let resizeFactor = screenSize.width / image.size.width
+                height = resizeFactor * image.size.height
+            }
+            if postIsVideo {
+                size = CGSize(width: screenSize.width, height: height * 0.5 + 110)
+            } else {
+                size = CGSize(width: screenSize.width, height: height + 110)
+            }
         }
         return size
     }
