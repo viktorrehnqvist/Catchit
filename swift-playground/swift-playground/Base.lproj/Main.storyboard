@@ -1507,7 +1507,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <imageView key="backgroundView" hidden="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" id="Zjc-dD-SFm">
+                                <imageView key="backgroundView" hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-bucketlist" id="Zjc-dD-SFm">
                                     <rect key="frame" x="0.0" y="-44" width="600" height="551"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -3692,7 +3692,6 @@
     </scenes>
     <resources>
         <image name="1" width="713" height="1080"/>
-        <image name="2" width="1936" height="2592"/>
         <image name="3" width="640" height="960"/>
         <image name="4" width="528" height="720"/>
         <image name="achievement_button_icon1" width="60" height="42"/>
@@ -3711,14 +3710,15 @@
         <image name="home_icon" width="32" height="32"/>
         <image name="lock_icon" width="30" height="30"/>
         <image name="more-icon" width="60" height="60"/>
+        <image name="no-bucketlist" width="320" height="300"/>
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="8jf-T0-H7W"/>
-        <segue reference="7ir-IZ-5qd"/>
+        <segue reference="L9l-gp-JAO"/>
+        <segue reference="qca-Hm-Suw"/>
+        <segue reference="JIk-2X-1Dy"/>
+        <segue reference="qnV-sV-0kd"/>
         <segue reference="OC7-hT-lCd"/>
-        <segue reference="76D-eb-acg"/>
-        <segue reference="blo-6f-H6Y"/>
     </inferredMetricsTieBreakers>
 </document>

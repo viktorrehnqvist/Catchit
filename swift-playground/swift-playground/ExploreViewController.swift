@@ -143,7 +143,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            postService.fetchMoreExplorePosts(postIds.last!)
+            postService.fetchMorePosts(postIds.last!)
         }
     }
     

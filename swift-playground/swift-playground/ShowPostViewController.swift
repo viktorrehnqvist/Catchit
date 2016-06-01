@@ -195,8 +195,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
                 height = resizeFactor * image.size.height
             }
             playerController.view.frame = CGRect(x: 0, y: 50, width: screenSize.width, height: height * 0.5)
-            
-            player.play()
         } else {
             headerView.postImage.image = postImage
         }

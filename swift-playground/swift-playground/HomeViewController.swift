@@ -143,13 +143,14 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            postService.fetchMorePosts(postIds.last!)
+            postService.fetchMoreHomePosts(postIds.last!)
         }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
-            postService.getNewPosts(postIds.first!)
+            postService.getNewHomePosts(postIds.first!)
+            print(postIds.first)
             justCheckedForNewPosts = true
         }
         if let centerCellIndexPath: NSIndexPath  = collectionView.centerCellIndexPath {
@@ -167,9 +168,9 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
-        postService.getPosts()
         self.postService.delegate = self
         self.collectionView.delegate = self
+        postService.getHomePosts()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
