@@ -3710,7 +3710,7 @@
         <image name="home_icon" width="32" height="32"/>
         <image name="lock_icon" width="30" height="30"/>
         <image name="more-icon" width="60" height="60"/>
-        <image name="no-bucketlist" width="320" height="300"/>
+        <image name="no-bucketlist" width="300" height="350"/>
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
