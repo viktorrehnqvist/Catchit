@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     var playerLayers: [AVPlayerLayer] = []
     var activePlayer: AVPlayer?
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var emptyImage: UIImageView!
     
     var achievementDescriptions: [String] = []
     var achievementIds: [Int] = []
@@ -82,6 +83,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             morePostsToLoad = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        displayImageIfNoPosts()
     }
     
     func updatePostData(json: AnyObject) {
@@ -440,6 +442,14 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         } else {
             players.append(player)
             playerLayers.append(playerLayer)
+        }
+    }
+    
+    func displayImageIfNoPosts() {
+        if self.postIds.count > 0 {
+            emptyImage.hidden = true
+        } else {
+            emptyImage.hidden = false
         }
     }
     
