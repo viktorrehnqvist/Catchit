@@ -120,29 +120,31 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
     }
     
     func setPostData(json: AnyObject) {
-        if json.count > 0 {
-            for i in 0...(json.count - 1) {
-                achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
-                achievementIds.append((json[i]?["achievement_id"]) as! Int)
-                achievementScores.append(json[i]?["achievement_score"] as! Int)
-                postIds.append(json[i]?["id"] as! Int)
-                postImageUrls.append((json[i]?["image_url"])! as! String)
-                if ((json[i]?["video_url"] as? String) != nil) {
-                    postVideoUrls.append(((json[i]?["video_url"]) as! String))
-                    addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
-                } else {
-                    postVideoUrls.append("")
-                    addNewPlayer("", shouldBeFirstInArray: false)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if json.count > 0 {
+                for i in 0...(json.count - 1) {
+                    self.achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
+                    self.achievementIds.append((json[i]?["achievement_id"]) as! Int)
+                    self.achievementScores.append(json[i]?["achievement_score"] as! Int)
+                    self.postIds.append(json[i]?["id"] as! Int)
+                    self.postImageUrls.append((json[i]?["image_url"])! as! String)
+                    if ((json[i]?["video_url"] as? String) != nil) {
+                        self.postVideoUrls.append(((json[i]?["video_url"]) as! String))
+                        self.addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
+                    } else {
+                        self.postVideoUrls.append("")
+                        self.addNewPlayer("", shouldBeFirstInArray: false)
+                    }
+                    self.postCommentCounts.append(json[i]?["comments_count"] as! Int)
+                    self.postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                    self.postLike.append(json[i]?["like"] as! Bool)
+                    self.fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
                 }
-                postCommentCounts.append(json[i]?["comments_count"] as! Int)
-                postLikeCounts.append(json[i]?["likes_count"] as! Int)
-                postLike.append(json[i]?["like"] as! Bool)
-                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
+            } else {
+                self.morePostsToLoad = false
             }
-        } else {
-            morePostsToLoad = false
-        }
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+        })
     }
     
     func setNewPostData(json: AnyObject) {

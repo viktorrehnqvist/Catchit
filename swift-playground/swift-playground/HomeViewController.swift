@@ -53,37 +53,39 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     
     // MARK: Lifecycle
     func setPostData(json: AnyObject) {
-        if json.count > 0 {
-            for i in 0...(json.count - 1) {
-                achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
-                achievementIds.append((json[i]?["achievement_id"]) as! Int)
-                achievementScores.append(json[i]?["achievement_score"] as! Int)
-                postIds.append(json[i]?["id"] as! Int)
-                postCreatedAt.append(json[i]?["created_at"] as! String)
-                postUpdatedAt.append(json[i]?["updated_at"] as! String)
-                postImageUrls.append((json[i]?["image_url"])! as! String)
-                if ((json[i]?["video_url"] as? String) != nil) {
-                    postVideoUrls.append(((json[i]?["video_url"]) as! String))
-                    addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
-                } else {
-                    postVideoUrls.append("")
-                    addNewPlayer("", shouldBeFirstInArray: false)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if json.count > 0 {
+                for i in 0...(json.count - 1) {
+                    self.achievementDescriptions.append((json[i]?["achievement_desc"])! as! String)
+                    self.achievementIds.append((json[i]?["achievement_id"]) as! Int)
+                    self.achievementScores.append(json[i]?["achievement_score"] as! Int)
+                    self.postIds.append(json[i]?["id"] as! Int)
+                    self.postCreatedAt.append(json[i]?["created_at"] as! String)
+                    self.postUpdatedAt.append(json[i]?["updated_at"] as! String)
+                    self.postImageUrls.append((json[i]?["image_url"])! as! String)
+                    if ((json[i]?["video_url"] as? String) != nil) {
+                        self.postVideoUrls.append(((json[i]?["video_url"]) as! String))
+                        self.addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
+                    } else {
+                        self.postVideoUrls.append("")
+                        self.addNewPlayer("", shouldBeFirstInArray: false)
+                    }
+                    self.postUserIds.append(json[i]?["user_id"] as! Int)
+                    self.postUserNames.append((json[i]?["user_name"])! as! String)
+                    self.postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
+                    self.postCommentCounts.append(json[i]?["comments_count"] as! Int)
+                    self.postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                    self.postLike.append(json[i]?["like"] as! Bool)
+                    
+                    self.fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String, new: false)
+                    self.fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: false)
                 }
-                postUserIds.append(json[i]?["user_id"] as! Int)
-                postUserNames.append((json[i]?["user_name"])! as! String)
-                postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
-                postCommentCounts.append(json[i]?["comments_count"] as! Int)
-                postLikeCounts.append(json[i]?["likes_count"] as! Int)
-                postLike.append(json[i]?["like"] as! Bool)
-                
-                fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String, new: false)
-                fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String, new: false)
+            } else {
+                self.morePostsToLoad = false
             }
-        } else {
-            morePostsToLoad = false
-        }
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
-        displayImageIfNoPosts()
+            NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+            self.displayImageIfNoPosts()
+        })
     }
     
     func updatePostData(json: AnyObject) {
@@ -145,7 +147,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            postService.fetchMoreHomePosts(postIds.last!)
+            self.postService.fetchMoreHomePosts(self.postIds.last!)
         }
     }
     

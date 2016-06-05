@@ -59,72 +59,74 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
-        if firstFetch {
-            achievementInBucketlist = json["bucketlist"] as! Bool
-            achievementCompleted = json["completed"] as! Bool
-            achievementCompletedPostId = json["post_id"] as! Int
-            achievementScore = json["score"] as! Int
-            achievementCompleterCount = json["posts"]!!.count
-            achievementDescription = json["description"] as! String
-            if json["posts"]!!.count > 0 {
-                // Prevent loading more than 4 posts initially.
-                var jsonCountMaxFourPosts: Int!
-                if json["posts"]!!.count > 4 {
-                    jsonCountMaxFourPosts = 4
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if firstFetch {
+                self.achievementInBucketlist = json["bucketlist"] as! Bool
+                self.achievementCompleted = json["completed"] as! Bool
+                self.achievementCompletedPostId = json["post_id"] as! Int
+                self.achievementScore = json["score"] as! Int
+                self.achievementCompleterCount = json["posts"]!!.count
+                self.achievementDescription = json["description"] as! String
+                if json["posts"]!!.count > 0 {
+                    // Prevent loading more than 4 posts initially.
+                    var jsonCountMaxFourPosts: Int!
+                    if json["posts"]!!.count > 4 {
+                        jsonCountMaxFourPosts = 4
+                    } else {
+                        jsonCountMaxFourPosts = json["posts"]!!.count
+                    }
+                    for i in 0...(jsonCountMaxFourPosts - 1) {
+                        self.postIds.append(json["posts"]!![i]?["id"] as! Int)
+                        self.postImageUrls.append((json["posts"]!![i]["image"]!!["url"])! as! String)
+                        if (((json["video_urls"] as! NSArray)[i] as? String) != nil) {
+                            self.postVideoUrls.append(((json["video_urls"] as! NSArray)[i] as! String))
+                            self.addNewPlayer(((json["video_urls"] as! NSArray)[i] as! String), shouldBeFirstInArray: false)
+                        } else {
+                            self.postVideoUrls.append("")
+                            self.addNewPlayer("", shouldBeFirstInArray: false)
+                        }
+                        self.postUserIds.append(((json["completer_infos"] as! NSArray)[0] as! NSArray)[i] as! Int)
+                        self.postUserNames.append(((json["completer_infos"] as! NSArray)[1] as! NSArray)[i] as! String)
+                        self.postUserAvatarUrls.append(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
+                        self.postCommentCounts.append(json["posts"]!![i]?["comments_count"] as! Int)
+                        self.postLikeCounts.append(json["posts"]!![i]?["likes_count"] as! Int)
+                        self.postLike.append((json["like"] as! NSArray)[i] as! Bool)
+                        
+                        self.fetchDataFromUrlToPostImages(json["posts"]!![i]["image"]!!["url"]! as! String)
+                        self.fetchDataFromUrlToPostUserAvatars(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
+                    }
                 } else {
-                    jsonCountMaxFourPosts = json["posts"]!!.count
-                }
-                for i in 0...(jsonCountMaxFourPosts - 1) {
-                    postIds.append(json["posts"]!![i]?["id"] as! Int)
-                    postImageUrls.append((json["posts"]!![i]["image"]!!["url"])! as! String)
-                    if (((json["video_urls"] as! NSArray)[i] as? String) != nil) {
-                        postVideoUrls.append(((json["video_urls"] as! NSArray)[i] as! String))
-                        addNewPlayer(((json["video_urls"] as! NSArray)[i] as! String), shouldBeFirstInArray: false)
-                    } else {
-                        postVideoUrls.append("")
-                        addNewPlayer("", shouldBeFirstInArray: false)
-                    }
-                    postUserIds.append(((json["completer_infos"] as! NSArray)[0] as! NSArray)[i] as! Int)
-                    postUserNames.append(((json["completer_infos"] as! NSArray)[1] as! NSArray)[i] as! String)
-                    postUserAvatarUrls.append(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
-                    postCommentCounts.append(json["posts"]!![i]?["comments_count"] as! Int)
-                    postLikeCounts.append(json["posts"]!![i]?["likes_count"] as! Int)
-                    postLike.append((json["like"] as! NSArray)[i] as! Bool)
-                    
-                    fetchDataFromUrlToPostImages(json["posts"]!![i]["image"]!!["url"]! as! String)
-                    fetchDataFromUrlToPostUserAvatars(((json["completer_infos"] as! NSArray)[2] as! NSArray)[i] as! String)
+                    self.morePostsToLoad = false
                 }
             } else {
-                morePostsToLoad = false
-            }
-        } else {
-            if json.count > 0 {
-                for i in 0...(json.count - 1) {
-                    postIds.append(json[i]?["id"] as! Int)
-                    postImageUrls.append((json[i]?["image_url"])! as! String)
-                    if ((json[i]?["video_url"] as? String) != nil) {
-                        postVideoUrls.append(((json[i]?["video_url"]) as! String))
-                        addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
-                    } else {
-                        postVideoUrls.append("")
-                        addNewPlayer("", shouldBeFirstInArray: false)
+                if json.count > 0 {
+                    for i in 0...(json.count - 1) {
+                        self.postIds.append(json[i]?["id"] as! Int)
+                        self.postImageUrls.append((json[i]?["image_url"])! as! String)
+                        if ((json[i]?["video_url"] as? String) != nil) {
+                            self.postVideoUrls.append(((json[i]?["video_url"]) as! String))
+                            self.addNewPlayer(json[i]?["video_url"] as! String, shouldBeFirstInArray: false)
+                        } else {
+                            self.postVideoUrls.append("")
+                            self.addNewPlayer("", shouldBeFirstInArray: false)
+                        }
+                        self.postUserIds.append(json[i]?["user_id"] as! Int)
+                        self.postUserNames.append((json[i]?["user_name"])! as! String)
+                        self.postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
+                        self.postCommentCounts.append(json[i]?["comments_count"] as! Int)
+                        self.postLikeCounts.append(json[i]?["likes_count"] as! Int)
+                        self.postLike.append((json["like"] as! NSArray)[i] as! Bool)
+                        
+                        self.fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
+                        self.fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
                     }
-                    postUserIds.append(json[i]?["user_id"] as! Int)
-                    postUserNames.append((json[i]?["user_name"])! as! String)
-                    postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
-                    postCommentCounts.append(json[i]?["comments_count"] as! Int)
-                    postLikeCounts.append(json[i]?["likes_count"] as! Int)
-                    postLike.append((json["like"] as! NSArray)[i] as! Bool)
-                    
-                    fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
-                    fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
+                } else {
+                    self.morePostsToLoad = false
                 }
-            } else {
-                morePostsToLoad = false
+                
             }
-
-        }
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+        })
     }
     
     func updateAchievementsData(json: AnyObject) {

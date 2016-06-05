@@ -29,6 +29,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     let bucketlistRemoveIcon = UIImage(named: "bucketlist-remove_icon")
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     var resultCount: Int = 0
+    var searchObject: AnyObject = 0
     
     var userFollowIds: [Int] = []
     var completedAchievementIds: [Int] = []
@@ -44,22 +45,27 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     
     // MARK: Lifecycle
     func setSearchResult(json: AnyObject) {
-        labels = []
-        ids = []
-        types = []
-        imageUrls = []
-        images = []
-        resultCount = json["search_results"]!!.count
-        if json["search_results"]!!.count > 0 {
-            for i in 0...(json["search_results"]!!.count - 1) {
-                labels.append(json["search_results"]!![i]["label"] as! String)
-                ids.append(json["search_results"]!![i]?["record_id"] as! Int)
-                types.append(json["search_results"]!![i]?["record_type"] as! String)
-                imageUrls.append(json["search_results"]!![i]?["record_image"] as! String)
-                fetchDataFromUrlToUserAvatars(json["search_results"]!![i]?["record_image"] as! String)
+        self.searchObject = json
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.labels = []
+            self.ids = []
+            self.types = []
+            self.imageUrls = []
+            self.images = []
+            self.resultCount = json["search_results"]!!.count
+            if json["search_results"]!!.count > 0 {
+                for i in 0...(json["search_results"]!!.count - 1) {
+                    self.labels.append(json["search_results"]!![i]["label"] as! String)
+                    self.ids.append(json["search_results"]!![i]?["record_id"] as! Int)
+                    self.types.append(json["search_results"]!![i]?["record_type"] as! String)
+                    self.imageUrls.append(json["search_results"]!![i]?["record_image"] as! String)
+                    self.fetchDataFromUrlToUserAvatars(json["search_results"]!![i]?["record_image"] as! String)
+                }
             }
-        }
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            if self.searchObject === json {
+                NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+            }
+        })
     }
     
     func setUserData(json: AnyObject, follow: Bool) {

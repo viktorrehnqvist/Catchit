@@ -49,64 +49,66 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     // MARK: Lifecycle
     func setAchievementData(json: AnyObject, firstFetch: Bool) {
-        if json.count > 0 {
-            for i in 0...(json.count - 1) {
-                achievementCreatedAt.append((json[i]?["created_at"])! as! String)
-                achievementUpdatedAt.append((json[i]?["updated_at"])! as! String)
-                achievementDescriptions.append((json[i]?["description"])! as! String)
-                achievementIds.append((json[i]?["id"]) as! Int)
-                achievementScores.append(json[i]?["score"] as! Int)
-                achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
-                achievementInBucketlist.append(json[i]?["bucketlist"] as! Bool)
-                achievementCompleted.append(json[i]?["completed"] as! Bool)
-                achievementCompletedPostIds.append(json[i]?["post_id"] as! Int)
-                let postImagesToLoad = json[i]["latest_posts"]!![0].count
-                // Load first three postes for achievement
-                if postImagesToLoad > 0 {
-                    for postIndex in 0...(postImagesToLoad - 1) {
-                        if let completerImageUrl = ((json[i]["latest_posts"] as! NSArray)[0] as! NSArray)[postIndex] as? String {
-                            let url = NSURL(string: self.url + completerImageUrl)!
-                            let data = NSData(contentsOfURL:url)
-                            if data != nil {
-                                switch postIndex {
-                                case 0:
-                                    achievementFirstCompleterImages.append(UIImage(data: data!)!)
-                                    achievementFirstCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
-                                case 1:
-                                    achievementSecondCompleterImages.append(UIImage(data: data!)!)
-                                    achievementSecondCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
-                                case 2:
-                                    achievementThirdCompleterImages.append(UIImage(data: data!)!)
-                                    achievementThirdCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
-                                default:
-                                    print("Switch Error")
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if json.count > 0 {
+                for i in 0...(json.count - 1) {
+                    self.achievementCreatedAt.append((json[i]?["created_at"])! as! String)
+                    self.achievementUpdatedAt.append((json[i]?["updated_at"])! as! String)
+                    self.achievementDescriptions.append((json[i]?["description"])! as! String)
+                    self.achievementIds.append((json[i]?["id"]) as! Int)
+                    self.achievementScores.append(json[i]?["score"] as! Int)
+                    self.achievementCompleterCounts.append(json[i]?["posts_count"] as! Int)
+                    self.achievementInBucketlist.append(json[i]?["bucketlist"] as! Bool)
+                    self.achievementCompleted.append(json[i]?["completed"] as! Bool)
+                    self.achievementCompletedPostIds.append(json[i]?["post_id"] as! Int)
+                    let postImagesToLoad = json[i]["latest_posts"]!![0].count
+                    // Load first three postes for achievement
+                    if postImagesToLoad > 0 {
+                        for postIndex in 0...(postImagesToLoad - 1) {
+                            if let completerImageUrl = ((json[i]["latest_posts"] as! NSArray)[0] as! NSArray)[postIndex] as? String {
+                                let url = NSURL(string: self.url + completerImageUrl)!
+                                let data = NSData(contentsOfURL:url)
+                                if data != nil {
+                                    switch postIndex {
+                                    case 0:
+                                        self.achievementFirstCompleterImages.append(UIImage(data: data!)!)
+                                        self.achievementFirstCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
+                                    case 1:
+                                        self.achievementSecondCompleterImages.append(UIImage(data: data!)!)
+                                        self.achievementSecondCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
+                                    case 2:
+                                        self.achievementThirdCompleterImages.append(UIImage(data: data!)!)
+                                        self.achievementThirdCompleterPostIds.append(((json[i]["latest_posts"] as! NSArray)[1] as! NSArray)[postIndex] as! Int)
+                                    default:
+                                        print("Switch Error")
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                var postsAlreadyLoaded = postImagesToLoad
-                while postsAlreadyLoaded < 3 {
-                    switch postsAlreadyLoaded {
-                    case 0:
-                        achievementFirstCompleterImages.append(noPostImage!)
-                        achievementFirstCompleterPostIds.append(0)
-                    case 1:
-                        achievementSecondCompleterImages.append(noPostImage!)
-                        achievementSecondCompleterPostIds.append(0)
-                    case 2:
-                        achievementThirdCompleterImages.append(noPostImage!)
-                        achievementThirdCompleterPostIds.append(0)
-                    default:
-                        print("Switch Error")
+                    var postsAlreadyLoaded = postImagesToLoad
+                    while postsAlreadyLoaded < 3 {
+                        switch postsAlreadyLoaded {
+                        case 0:
+                            self.achievementFirstCompleterImages.append(self.noPostImage!)
+                            self.achievementFirstCompleterPostIds.append(0)
+                        case 1:
+                            self.achievementSecondCompleterImages.append(self.noPostImage!)
+                            self.achievementSecondCompleterPostIds.append(0)
+                        case 2:
+                            self.achievementThirdCompleterImages.append(self.noPostImage!)
+                            self.achievementThirdCompleterPostIds.append(0)
+                        default:
+                            print("Switch Error")
+                        }
+                        postsAlreadyLoaded! += 1
                     }
-                    postsAlreadyLoaded! += 1
                 }
+            } else {
+                self.moreAchievementsToLoad = false
             }
-        } else {
-            moreAchievementsToLoad = false
-        }
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+            NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+        })
     }
     
     func updateAchievementsData(json: AnyObject) {
