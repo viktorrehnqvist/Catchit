@@ -41,7 +41,6 @@ class PostService {
         Alamofire.request(.GET, url + "follow_index.json", headers: headers)
             .responseJSON { response in
                 if let JSON = response.result.value {
-                    print(JSON)
                     if self.delegate != nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             self.delegate?.setPostData(JSON)

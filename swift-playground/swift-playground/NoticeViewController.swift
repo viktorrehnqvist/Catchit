@@ -37,7 +37,6 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         noticeLinkIds = (json["notice_infos"] as! NSArray)[4] as! [Int]
         noticeSeen = (json["notice_infos"] as! NSArray)[5] as! [AnyObject]
         loadAvatars()
-        print(json)
     }
     
     func updateUserData(json: AnyObject) {

@@ -61,7 +61,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     
     // MARK: Lifecycle
     func setPostData(json: AnyObject) {
-        print(json)
         postImageUrl = json["image_url"] as! String
         userId = json["user_id"] as! Int
         achievementId = json["achievement_id"] as! Int
