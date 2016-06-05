@@ -154,7 +154,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
             postService.getNewHomePosts(postIds.first!)
-            print(postIds.first)
             justCheckedForNewPosts = true
         }
         if let centerCellIndexPath: NSIndexPath  = collectionView.centerCellIndexPath {
@@ -180,10 +179,12 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
-        postService.updatePosts(postIds, updatedAt: postUpdatedAt)
+        if postIds.count > 0 {
+            postService.updatePosts(postIds, updatedAt: postUpdatedAt)
+        }
         justCheckedForNewPosts = false
         activePlayer?.play()
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        //NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     override func didReceiveMemoryWarning() {

@@ -177,10 +177,12 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
-        postService.updatePosts(postIds, updatedAt: postUpdatedAt)
+        if postIds.count > 0 {
+            postService.updatePosts(postIds, updatedAt: postUpdatedAt)
+        }
         justCheckedForNewPosts = false
         activePlayer?.play()
-        NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        //NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     override func didReceiveMemoryWarning() {
