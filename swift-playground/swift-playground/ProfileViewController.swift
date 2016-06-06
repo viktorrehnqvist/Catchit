@@ -264,6 +264,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
         
         if userId == userDefaults.objectForKey("id")?.integerValue {
             headerView.followButton.setTitle("Inställningar", forState: .Normal)
+            let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(changeAvatar(_:)))
+            headerView.userAvatar.addGestureRecognizer(profileTapGesture)
         }
         
         if self.userFollowed {
@@ -338,6 +340,10 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
         let thisCell: PostsCollectionViewCell = main as! PostsCollectionViewCell
         let player = players[thisCell.tag]
         player.muted = !player.muted
+    }
+    
+    @IBAction func changeAvatar(sender: AnyObject?) {
+        self.performSegueWithIdentifier("showAvatarFromProfile", sender: sender)
     }
     
     // MARK: Navigation

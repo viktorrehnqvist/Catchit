@@ -2003,7 +2003,7 @@
                                     <rect key="frame" x="0.0" y="44" width="600" height="92"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wjs-dl-iWN">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wjs-dl-iWN">
                                             <rect key="frame" x="8" y="10" width="62" height="62"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="62" id="nst-OU-KAP"/>
@@ -2145,6 +2145,7 @@
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showFollowsFromProfile" id="wkG-4I-Mfd"/>
                         <segue destination="CCn-0l-fD4" kind="show" identifier="showFollowersFromProfile" id="Sgi-5F-Iy7"/>
                         <segue destination="hSN-h3-a3P" kind="show" identifier="showSettingsFromProfile" id="2cN-x3-eYi"/>
+                        <segue destination="zp6-z1-jqU" kind="show" identifier="showAvatarFromProfile" id="GNg-t3-vgZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A7z-IN-6uA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3654,8 +3655,8 @@
                                     <action selector="uploadAvatar:" destination="zp6-z1-jqU" eventType="touchUpInside" id="vsm-cC-CJ7"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cg7-zm-Od9">
-                                <rect key="frame" x="221" y="35" width="159" height="64"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cg7-zm-Od9">
+                                <rect key="frame" x="221" y="79" width="159" height="249"/>
                                 <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cg7-zm-Od9" secondAttribute="height" multiplier="1:1" id="1uu-i3-kkt"/>
@@ -3692,7 +3693,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yF5-dB-Wcm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1549" y="2182.5"/>
+            <point key="canvasLocation" x="1563" y="2322"/>
         </scene>
     </scenes>
     <resources>
@@ -3720,11 +3721,12 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2pF-mY-u1R"/>
         <segue reference="N5Z-XD-MLh"/>
-        <segue reference="dwR-E4-82o"/>
-        <segue reference="KBR-5L-ez0"/>
+        <segue reference="2pF-mY-u1R"/>
         <segue reference="OvH-UW-Jlq"/>
-        <segue reference="UnV-OJ-WQS"/>
+        <segue reference="6oL-8J-eNe"/>
+        <segue reference="wkG-4I-Mfd"/>
+        <segue reference="HsH-hq-pfh"/>
+        <segue reference="TXR-8N-X8V"/>
     </inferredMetricsTieBreakers>
 </document>
