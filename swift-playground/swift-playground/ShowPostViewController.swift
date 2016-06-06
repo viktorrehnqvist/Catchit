@@ -26,7 +26,7 @@ extension UILabel{
     }
 }
 
-class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostServiceDelegate, UICollectionViewDataSource, UITextFieldDelegate {
+class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostServiceDelegate, UserServiceDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
     // MARK: Setup
     var header: ShowPostCollectionReusableView!
@@ -34,9 +34,12 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     @IBOutlet weak var textField: UITextField!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     let postService = PostService()
+    let userService = UserService()
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var currentUsername: String?
+    var currentUserAvatar: UIImage?
+    var currentUserId: Int?
     var achievementId: Int!
     var userId: Int!
     var postImage: UIImage!
@@ -88,9 +91,19 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         
     }
     
+    func setUserData(json: AnyObject, follow: Bool) {
+        fetchDataFromUrlToCurrentUserAvatar((json["avatar_url"] as? String)!)
+    }
+    
+    func updateUserData(json: AnyObject) {
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.currentUserId = userDefaults.objectForKey("id") as? Int
+        self.userService.delegate = self
+        self.userService.getCurrentUserData()
         self.postService.getPost(postId!)
         self.postService.delegate = self
         self.currentUsername = userDefaults.objectForKey("name") as? String
@@ -310,6 +323,13 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
+    func fetchDataFromUrlToCurrentUserAvatar(fetchUrl: String) {
+        let url = NSURL(string: self.url + fetchUrl)!
+        let data = NSData(contentsOfURL:url)
+        let image = UIImage(data: data!)
+        self.currentUserAvatar = image!
+    }
+    
     func animateViewMoving (up:Bool, moveValue :CGFloat, moveSpeed:Double){
         // Lifts the view
         let movementDuration:NSTimeInterval = moveSpeed
@@ -330,7 +350,8 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         let indexPath = NSIndexPath(forItem: self.comments.count, inSection: 0)
         comments.insert(textField.text!, atIndex: self.comments.count)
         commentUserNames.insert(currentUsername!, atIndex: self.commentUserNames.count)
-        commentUserAvatars.insert(UIImage(named: "avatar")!, atIndex: self.commentUserAvatars.count)
+        commentUserAvatars.insert(currentUserAvatar!, atIndex: self.commentUserAvatars.count)
+        commentUserIds.insert(currentUserId!, atIndex: self.commentUserIds.count)
         collectionView.insertItemsAtIndexPaths([indexPath])
         textField.text = ""
         collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
