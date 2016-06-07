@@ -60,6 +60,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     var commentUserIds: [Int] = []
     var postIsVideo: Bool = false
     var postVideoUrl: String?
+    var cellSizes: [CGSize] = []
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
     // MARK: Lifecycle
@@ -144,15 +145,15 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         border.borderWidth = width
         cell.layer.addSublayer(border)
         cell.layer.masksToBounds = true
-        cell.label.sizeToFit()
         
         return cell
         
     }
     
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        if cellSizes.count < indexPath.row + 1 {
             let label = UILabel(frame: CGRectMake(0, 0, 120, 0))
             label.text = self.comments[indexPath.row]
             label.font = label.font.fontWithSize(12)
@@ -164,12 +165,12 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
                 newLabelHeight = 50
             } else if newLabelHeight < 75 {
                 newLabelHeight = 65
+            }
+            cellSizes.append(CGSize(width: screenSize.width, height: newLabelHeight * 0.8))
         }
-            let size = CGSize(width: screenSize.width, height: newLabelHeight * 0.8)
-        
-            return size
+        return cellSizes[indexPath.row]
     }
-    
+
     func collectionView(collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                                                           atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
