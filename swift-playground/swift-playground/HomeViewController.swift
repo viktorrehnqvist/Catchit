@@ -424,6 +424,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     }
     
     func playVideo(index: Int) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         if !postVideoUrls.isEmpty && postVideoUrls[index] != "" {
             activePlayer = players[index]
             activePlayer!.play()

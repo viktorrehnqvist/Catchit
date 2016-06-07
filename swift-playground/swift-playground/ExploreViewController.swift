@@ -418,6 +418,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     }
     
     func playVideo(index: Int) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         if !postVideoUrls.isEmpty && postVideoUrls[index] != "" {
             activePlayer = players[index]
             activePlayer!.play()
