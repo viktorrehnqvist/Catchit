@@ -98,7 +98,7 @@ class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, Use
         let mediaType = info[UIImagePickerControllerMediaType]
         if mediaType!.isEqualToString(kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-            let resizedImage = resizeImage(image!, newWidth: 159)
+            let resizedImage = resizeImage(image!, newWidth: 259)
             avatar.image = resizedImage
         }
         
@@ -106,10 +106,8 @@ class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, Use
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newWidth))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        UIGraphicsBeginImageContext(CGSizeMake(259, 259))
+        image.drawInRect(CGRectMake(0, 0, 259, 259))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

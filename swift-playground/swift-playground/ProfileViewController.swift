@@ -259,6 +259,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
         headerView.followCount.tag = userId!
         headerView.followersCount.tag = userId!
         headerView.userAvatar.image = userAvatar
+        headerView.userAvatar.clipsToBounds = true
+        headerView.userAvatar.contentMode = UIViewContentMode.ScaleToFill
         headerView.username.text = username
         headerView.completeLabel.text = "\(userAchievementCount)/\(totalAchievements)"
         
