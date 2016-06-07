@@ -31,6 +31,14 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
+    
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if indexPath.row == 3 {
+            return false
+        } else {
+            return true
+        }
+    }
 
     // MARK: User Interaction
     @IBAction func shareGps(sender: AnyObject) {
