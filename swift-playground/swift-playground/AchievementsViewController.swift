@@ -114,7 +114,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     func updateAchievementsData(json: AnyObject) {
         if json.count > 0 {
             for i in 0...(json.count - 1) {
-                let achievementId = json[i]?["id"] as! Int
+                if let achievementId = json[i]?["id"] as? Int {
                 if let cellIndex = achievementIds.indexOf({$0 == achievementId}) {
                     achievementScores[cellIndex] = json[i]?["score"] as! Int
                     achievementUpdatedAt[cellIndex] = json[i]?["updated_at"] as! String
@@ -166,6 +166,10 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
 
                 }
                 
+                } else {
+                    reloadAchievements()
+                    break
+                }
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
         }
@@ -487,5 +491,25 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func reloadAchievements() {
+        achievementCreatedAt = []
+        achievementUpdatedAt = []
+        achievementDescriptions = []
+        achievementIds = []
+        achievementScores = []
+        achievementCompleterCounts = []
+        achievementFirstCompleterImages = []
+        achievementSecondCompleterImages = []
+        achievementThirdCompleterImages = []
+        achievementFirstCompleterPostIds = []
+        achievementSecondCompleterPostIds = []
+        achievementThirdCompleterPostIds = []
+        achievementInBucketlist = []
+        achievementCompleted = []
+        achievementCompletedPostIds = []
+        moreAchievementsToLoad = true
+        segueShouldShowCompleters = false
+        achievementService.getAchievements()
+    }
     
 }
