@@ -2173,11 +2173,11 @@
                         <viewControllerLayoutGuide type="bottom" id="JK5-Ll-Dml"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nWN-Uo-UTs">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2dj-hQ-vpX">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Ot-iY-fDx">
                                     <size key="itemSize" width="600" height="366"/>
@@ -2187,7 +2187,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="showAchievementCell" id="m5w-MS-in6" customClass="PostsCollectionViewCell" customModule="Catchit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="264" width="600" height="354"/>
+                                        <rect key="frame" x="0.0" y="220" width="600" height="354"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="354"/>
@@ -2366,7 +2366,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="showAchievementVideoCell" id="b5I-jo-leT" customClass="PostsCollectionViewCell" customModule="Catchit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="628" width="600" height="354"/>
+                                        <rect key="frame" x="0.0" y="584" width="600" height="354"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="354"/>
@@ -2545,7 +2545,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="profileTopBar" id="o1n-Fq-cGs" customClass="AchievementsCollectionReusableView" customModule="Catchit" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="44" width="600" height="210"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="210"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 har klarat detta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEf-YW-Dyl">
@@ -3724,12 +3724,12 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N5Z-XD-MLh"/>
+        <segue reference="wDe-rl-syz"/>
+        <segue reference="6oL-8J-eNe"/>
+        <segue reference="76D-eb-acg"/>
+        <segue reference="OC7-hT-lCd"/>
+        <segue reference="TXR-8N-X8V"/>
         <segue reference="2pF-mY-u1R"/>
         <segue reference="OvH-UW-Jlq"/>
-        <segue reference="6oL-8J-eNe"/>
-        <segue reference="wkG-4I-Mfd"/>
-        <segue reference="HsH-hq-pfh"/>
-        <segue reference="TXR-8N-X8V"/>
     </inferredMetricsTieBreakers>
 </document>

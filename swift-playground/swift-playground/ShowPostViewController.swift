@@ -199,8 +199,6 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
             
             playerController.player = player
             self.addChildViewController(playerController)
-            collectionView.addSubview(playerController.view)
-            
             let image = postImage
             var height = image.size.height
             if image.size.width > screenSize.width {
@@ -208,9 +206,11 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
                 height = resizeFactor * image.size.height
             }
             playerController.view.frame = CGRect(x: 0, y: 50, width: screenSize.width, height: height * 0.5)
+            collectionView.addSubview(playerController.view)
         } else {
             headerView.postImage.image = postImage
         }
+        
         header = headerView
         return headerView
     }
