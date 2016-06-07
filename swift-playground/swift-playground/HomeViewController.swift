@@ -86,6 +86,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
             NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
             dispatch_async(dispatch_get_main_queue()) {
                 self.displayImageIfNoPosts()
+                self.hidesBarOnSwipeUnlessNoPosts()
             }
         })
     }
@@ -180,7 +181,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         hidesBarOnSwipeUnlessNoPosts()
         if postIds.count > 0 {
