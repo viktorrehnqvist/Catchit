@@ -9,31 +9,40 @@
 import UIKit
 import MobileCoreServices
 
-class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, UserServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: Setup
+    let settingsService = SettingsService()
+    let userService = UserService()
+    let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
+    
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var pickImageButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
-    let settingsService = SettingsService()
     // MARK: Lifecycle
     func setSettingsData(json: AnyObject) {
-        
+    }
+    
+    func setUserData(json: AnyObject, follow: Bool) {
+        fetchDataFromUrlToUserAvatar((json["avatar_url"] as! String))
+    }
+    
+    func updateUserData(json: AnyObject) {
     }
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         roundButtons()
+        self.userService.delegate = self
         self.settingsService.delegate = self
-        // Do any additional setup after loading the view.
+        self.userService.getCurrentUserData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: Layout
@@ -105,6 +114,14 @@ class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, UII
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    func fetchDataFromUrlToUserAvatar(fetchUrl: String) {
+        let url = NSURL(string: self.url + fetchUrl)!
+        let data = NSData(contentsOfURL:url)
+        let image = UIImage(data: data!)
+        self.avatar.image = image
+        self.avatar.hidden = false
     }
 
 }
