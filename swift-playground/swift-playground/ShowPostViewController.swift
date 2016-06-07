@@ -102,6 +102,8 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnSwipe = false
         self.currentUserId = userDefaults.objectForKey("id") as? Int
         self.userService.delegate = self
         self.userService.getCurrentUserData()
@@ -112,7 +114,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         borderBottom(self.view)
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

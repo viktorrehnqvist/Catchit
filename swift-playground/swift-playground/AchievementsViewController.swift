@@ -259,6 +259,8 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnSwipe = true
         achievementService.updateAchievements(achievementIds, updatedAt: achievementUpdatedAt)
         if achievementIds.first != nil {
             achievementService.getNewAchievements(achievementIds.first!)

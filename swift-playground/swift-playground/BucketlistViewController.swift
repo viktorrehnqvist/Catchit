@@ -63,6 +63,8 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnSwipe = false
         self.achievementDescriptions = []
         self.achievementIds = []
         self.achievementService.getBucketlist()

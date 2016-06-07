@@ -30,6 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window!.rootViewController = rootVC
                 }, completion: nil)
         }
+        
+        let view: UIView = UIView.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 20))
+        view.backgroundColor = UIColor(red:0.21, green:0.27, blue:0.36, alpha:1.0)
+        self.window!.rootViewController!.view.addSubview(view)
+        
         return true
     }
 

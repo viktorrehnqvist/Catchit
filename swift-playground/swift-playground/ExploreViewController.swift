@@ -168,6 +168,8 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnSwipe = true
         postService.getExplorePosts()
         searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         self.postService.delegate = self

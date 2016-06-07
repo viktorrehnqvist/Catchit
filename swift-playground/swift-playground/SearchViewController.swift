@@ -111,6 +111,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnSwipe = false
         userFollowIds = []
         completedAchievementIds = []
         completedPostIds = []

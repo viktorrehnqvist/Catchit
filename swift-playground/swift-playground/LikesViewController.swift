@@ -73,6 +73,8 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnSwipe = false
         switch typeIs! {
         case "post":
             self.postService.delegate = self

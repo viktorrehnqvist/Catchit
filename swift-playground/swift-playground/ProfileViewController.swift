@@ -170,7 +170,8 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
     
     override func viewWillAppear(animated: Bool) {
         userService.updateUserData(userId!)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnSwipe = false
     }
     
     override func viewWillDisappear(animated: Bool) {
