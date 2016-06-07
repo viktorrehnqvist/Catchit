@@ -22,6 +22,7 @@
 		F71290501CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */; };
 		F71290541CAC459500639DA0 /* ShowPostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */; };
 		F7197BF11CF5CA410051C030 /* CenterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */; };
+		F71A09F11D0732E000A632DB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71A09F01D0732E000A632DB /* SettingsViewController.swift */; };
 		F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */; };
 		F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */; };
 		F728AFCA1CD910E100F5A1DF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */; };
@@ -111,6 +112,7 @@
 		F712904F1CAAB4BA00639DA0 /* AchievementsCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsCollectionReusableView.swift; sourceTree = "<group>"; };
 		F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionReusableView.swift; sourceTree = "<group>"; };
 		F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterCollectionView.swift; sourceTree = "<group>"; };
+		F71A09F01D0732E000A632DB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			children = (
 				F73A51DC1CA1690D0029779D /* ProfileViewController.swift */,
 				F70BDBC61CEC8D9C00799F2B /* SettingsTableViewController.swift */,
+				F71A09F01D0732E000A632DB /* SettingsViewController.swift */,
 				F73520A21CE48868002A9B20 /* ChangePasswordViewController.swift */,
 				F73520A41CE48877002A9B20 /* ChangeAvatarViewController.swift */,
 				F73520A61CE48889002A9B20 /* ChangeUsernameViewController.swift */,
@@ -582,6 +585,7 @@
 				F71290491CA92A0C00639DA0 /* ShowAchievementViewController.swift in Sources */,
 				F761C5341C9DD70F00E3C334 /* NoticeViewController.swift in Sources */,
 				F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */,
+				F71A09F11D0732E000A632DB /* SettingsViewController.swift in Sources */,
 				F73520A51CE48877002A9B20 /* ChangeAvatarViewController.swift in Sources */,
 				F70BDBC11CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift in Sources */,
 				F73520B11CE48BF9002A9B20 /* SettingsService.swift in Sources */,

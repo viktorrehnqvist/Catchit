@@ -2832,10 +2832,10 @@
             </objects>
             <point key="canvasLocation" x="904" y="1526"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="KOo-xs-Kmm">
             <objects>
-                <viewController id="hSN-h3-a3P" sceneMemberID="viewController">
+                <viewController id="hSN-h3-a3P" customClass="SettingsViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qf5-eF-uD9"/>
                         <viewControllerLayoutGuide type="bottom" id="j6z-S8-Am7"/>
@@ -3018,10 +3018,10 @@
             </objects>
             <point key="canvasLocation" x="2201" y="1526"/>
         </scene>
-        <!--Byt användarnamn-->
+        <!--Change Username View Controller-->
         <scene sceneID="kf7-RB-DEH">
             <objects>
-                <viewController title="Byt användarnamn" id="ArO-oG-btD" customClass="ChangeUsernameViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ArO-oG-btD" customClass="ChangeUsernameViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jzg-Dd-0Dv"/>
                         <viewControllerLayoutGuide type="bottom" id="RrN-Yc-PgV"/>
@@ -3521,10 +3521,10 @@
             </objects>
             <point key="canvasLocation" x="926" y="-6"/>
         </scene>
-        <!--Byt lösenord-->
+        <!--Change Password View Controller-->
         <scene sceneID="GUc-wZ-Xx5">
             <objects>
-                <viewController title="Byt lösenord" id="UO4-sA-cYe" customClass="ChangePasswordViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UO4-sA-cYe" customClass="ChangePasswordViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="21W-4X-NwH"/>
                         <viewControllerLayoutGuide type="bottom" id="vgy-H1-u92"/>
@@ -3607,10 +3607,10 @@
             </objects>
             <point key="canvasLocation" x="2201" y="2183"/>
         </scene>
-        <!--Byt profilbild-->
+        <!--Change Avatar View Controller-->
         <scene sceneID="1kC-v3-326">
             <objects>
-                <viewController title="Byt profilbild" id="zp6-z1-jqU" customClass="ChangeAvatarViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zp6-z1-jqU" customClass="ChangeAvatarViewController" customModule="Catchit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eKC-Sg-7eE"/>
                         <viewControllerLayoutGuide type="bottom" id="vbW-Sb-9e1"/>
