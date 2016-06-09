@@ -22,6 +22,7 @@ class PostService {
     var delegate: PostServiceDelegate?
     let headers = NSUserDefaults.standardUserDefaults().objectForKey("headers") as? [String : String]
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
+    let currentUserId = NSUserDefaults.standardUserDefaults().objectForKey("id") as? Int
     
     // MARK: GET-Requests
     func getPosts() {
@@ -178,5 +179,5 @@ class PostService {
     func destroyPost(postId: Int) {
         Alamofire.request(.DELETE, url + "posts/\(postId).json", headers: headers)
     }
-    
+
 }

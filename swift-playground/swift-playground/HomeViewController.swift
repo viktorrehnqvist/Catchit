@@ -13,11 +13,12 @@ import AVKit
 import AVFoundation
 
 @available(iOS 9.0, *)
-class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // MARK: Setup
     let postService = PostService()
     let achievementService = AchievementService()
+    let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
@@ -148,6 +149,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         }
     }
     
+    
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
             self.postService.fetchMoreHomePosts(self.postIds.last!)
@@ -170,11 +172,22 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
         }
     }
     
+    func setUserData(json: AnyObject, follow: Bool) {}
+    func updateUserData(json: AnyObject) {}
+    func setNoticeData(notSeenNoticeCount: Int) {
+        if notSeenNoticeCount > 0 {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = "\(Int(notSeenNoticeCount))"
+        } else {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = nil
+        }
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         self.postService.delegate = self
+        self.userService.delegate = self
         self.collectionView.delegate = self
         postService.getHomePosts()
         // Do any additional setup after loading the view, typically from a nib.
@@ -182,6 +195,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UIScrollViewDel
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        userService.getNotSeenNoticeCount()
         hidesBarOnSwipeUnlessNoPosts()
         if postIds.count > 0 {
             postService.updatePosts(postIds, updatedAt: postUpdatedAt)

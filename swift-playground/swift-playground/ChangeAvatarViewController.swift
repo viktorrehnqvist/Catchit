@@ -32,6 +32,9 @@ class ChangeAvatarViewController: UIViewController, SettingsServiceDelegate, Use
     func updateUserData(json: AnyObject) {
     }
     
+    func setNoticeData(notSeenNoticeCount: Int) {
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,11 +12,12 @@ import Alamofire
 import MobileCoreServices
 
 @available(iOS 9.0, *)
-class BucketlistViewController:  UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
+class BucketlistViewController:  UIViewController, AchievementServiceDelegate, UploadServiceDelegate, UserServiceDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
     
     // MARK: Setup
     let achievementService = AchievementService()
     let uploadService = UploadService()
+    let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
@@ -52,12 +53,23 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         self.performSegueWithIdentifier("showPostFromBucketlist", sender: postId)
     }
     
+    func setUserData(json: AnyObject, follow: Bool) {}
+    func updateUserData(json: AnyObject) {}
+    func setNoticeData(notSeenNoticeCount: Int) {
+        if notSeenNoticeCount > 0 {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = "\(Int(notSeenNoticeCount))"
+        } else {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = nil
+        }
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         self.achievementService.delegate = self
         self.uploadService.delegate = self
+        self.userService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -65,6 +77,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hidesBarsOnSwipe = false
+        self.userService.getNotSeenNoticeCount()
         self.achievementDescriptions = []
         self.achievementIds = []
         self.achievementService.getBucketlist()

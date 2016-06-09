@@ -13,6 +13,7 @@ import Alamofire
 protocol UserServiceDelegate {
     func setUserData(json: AnyObject, follow: Bool)
     func updateUserData(json: AnyObject)
+    func setNoticeData(notSeenNoticeCount: Int)
 }
 
 class UserService {
@@ -81,6 +82,21 @@ class UserService {
 
     }
     
+    func getNotSeenNoticeCount() {
+        Alamofire.request(.GET, url + "users/\(currentUserId!).json/", headers: headers)
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    if self.delegate != nil {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.delegate?.setNoticeData(((JSON["notice_infos"] as! NSArray)[5] as! NSArray).filter({ $0 as? String == nil }).count)
+                        })
+                    }
+                }
+                
+        }
+        
+    }
+    
     // MARK: PUT-Requests
     func followUserChange(userId: Int, follow: Bool) {
         if follow {
@@ -97,6 +113,11 @@ class UserService {
         ]
         Alamofire.request(.POST, url + "users/\(userId)/tip.json", parameters: parameters, headers: headers)
     }
+    
+    func noticesBeenSeen() {
+        Alamofire.request(.POST, url + "users/\(currentUserId!)/noticed.json", headers: headers)
+    }
+    
     
 
 }

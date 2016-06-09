@@ -83,6 +83,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     func updateUserData(json: AnyObject) {
     }
     
+    func setNoticeData(notSeenNoticeCount: Int) {
+    }
+    
     func setUploadedResult(json: AnyObject) {
         let postId = json["id"] as! Int
         completedAchievementIds.append(uploadAchievementId!)

@@ -13,11 +13,12 @@ import AVKit
 import AVFoundation
 
 @available(iOS 9.0, *)
-class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ExploreViewController: UIViewController, PostServiceDelegate, UserServiceDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // MARK: Setup
     let postService = PostService()
     let achievementService = AchievementService()
+    let userService = UserService()
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var collectionView: UICollectionView!
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
@@ -165,6 +166,16 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         }
     }
     
+    func setUserData(json: AnyObject, follow: Bool) {}
+    func updateUserData(json: AnyObject) {}
+    func setNoticeData(notSeenNoticeCount: Int) {
+        if notSeenNoticeCount > 0 {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = "\(Int(notSeenNoticeCount))"
+        } else {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = nil
+        }
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -172,12 +183,14 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UIScrollView
         searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 80, 30)
         self.postService.delegate = self
         self.collectionView.delegate = self
+        self.userService.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hidesBarsOnSwipe = true
+        userService.getNotSeenNoticeCount()
         if postIds.count > 0 {
             postService.updatePosts(postIds, updatedAt: postUpdatedAt)
         }

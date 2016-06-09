@@ -37,9 +37,13 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         noticeLinkIds = (json["notice_infos"] as! NSArray)[4] as! [Int]
         noticeSeen = (json["notice_infos"] as! NSArray)[5] as! [AnyObject]
         loadAvatars()
+        self.tabBarController?.tabBar.items?.last?.badgeValue = nil
     }
     
     func updateUserData(json: AnyObject) {
+    }
+    
+    func setNoticeData(notSeenNoticeCount: Int) {
     }
     
     // MARK: View Lifecycle
@@ -62,6 +66,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         self.noticeLinkIds = []
         self.noticeSeen = []
         userService.getCurrentUserData()
+        userService.noticesBeenSeen()
     }
     
     override func didReceiveMemoryWarning() {

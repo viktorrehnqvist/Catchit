@@ -16,6 +16,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     let userService = UserService()
     let url = NSUserDefaults.standardUserDefaults().objectForKey("url")! as! String
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noRecordsImageView: UIImageView!
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     
     var typeIs: String!
@@ -70,26 +71,35 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     func updateUserData(json: AnyObject) {
     }
     
+    func setNoticeData(notSeenNoticeCount: Int) {
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hidesBarsOnSwipe = false
+        noRecordsImageView.hidden = true
         switch typeIs! {
         case "post":
             self.postService.delegate = self
+            self.noRecordsImageView.image = UIImage(named: "no-posts")
             postService.getPost(postId!)
         case "achievementCompleters":
             self.achievementService.delegate = self
+            self.noRecordsImageView.image = UIImage(named: "no-bucketlist")
             achievementService.getCompleters(achievementId!)
         case "achievementShare":
             self.userService.delegate = self
+            self.noRecordsImageView.image = UIImage(named: "no-posts")
             userService.getCurrentUserData()
         case "follows":
             self.userService.delegate = self
+            self.noRecordsImageView.image = UIImage(named: "no-bucketlist")
             userService.getFollowData(userId!, follow: true)
         case "followers":
             self.userService.delegate = self
+            self.noRecordsImageView.image = UIImage(named: "no-bucketlist")
             userService.getFollowData(userId!, follow: false)
         default:
             print("Switch case error")
@@ -188,6 +198,10 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
                 }
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        } else {
+            // No records loaded.
+            self.collectionView.backgroundColor = UIColor(red: 0.1647, green: 0.2157, blue: 0.2902, alpha: 1.0)
+            noRecordsImageView.hidden = false
         }
     }
     

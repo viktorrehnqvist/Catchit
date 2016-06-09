@@ -101,6 +101,9 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
+    func setNoticeData(notSeenNoticeCount: Int) {
+    }
+    
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
             postService.fetchMoreUserPosts(userId!, lastPostId: postIds.last!)
