@@ -12,7 +12,6 @@ class ProfileCollectionReusableView: UICollectionReusableView {
     // MARK: Setup
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var userAvatar: UIImageView!
-    @IBOutlet weak var achievementCount: UILabel!
     @IBOutlet weak var score: UILabel!
     @IBOutlet weak var followCount: UILabel!
     @IBOutlet weak var followersCount: UILabel!

@@ -256,17 +256,14 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                       withReuseIdentifier: "profileTopBar",
                                                                       forIndexPath: indexPath) as! ProfileCollectionReusableView
-        headerView.achievementCount.text = "\(userAchievementCount)st"
         headerView.score.text = "\(userScore)P"
-        headerView.followCount.text = "\(userFollowsCount) Följer"
+        headerView.followCount.text = "Följer \(userFollowsCount)"
         headerView.followersCount.text = "\(userFollowersCount) Följare"
         headerView.followCount.tag = userId!
         headerView.followersCount.tag = userId!
         headerView.userAvatar.image = userAvatar
-        headerView.userAvatar.clipsToBounds = true
-        headerView.userAvatar.contentMode = UIViewContentMode.ScaleToFill
         headerView.username.text = username
-        headerView.completeLabel.text = "\(userAchievementCount)/\(totalAchievements)"
+        headerView.completeLabel.text = "\((Float(userAchievementCount) / Float(totalAchievements)) * 100)%"
         
         if userId == userDefaults.objectForKey("id")?.integerValue {
             headerView.followButton.setTitle("Inställningar", forState: .Normal)
@@ -420,12 +417,12 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
     func startTimer() {
         if userAchievementCount > 0 {
             completeFactor = Float(userAchievementCount) / Float(totalAchievements)
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.005, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         }
     }
     
     func timerAction() {
-        counter += 0.002
+        counter += 0.006
         header.completeProgressView.progress = counter
         if completeFactor < counter {
             timer.invalidate()
