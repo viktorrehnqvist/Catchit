@@ -87,6 +87,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
             morePostsToLoad = false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
+        collectionView.removeIndicators()
         startTimer()
     }
     
@@ -99,27 +100,6 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
         userFollowed = json["follow"] as! Bool
         fetchDataFromUrlToUserAvatar((json["avatar_url"] as! String))
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
-    }
-    
-    func setNoticeData(notSeenNoticeCount: Int) {
-    }
-    
-    func loadMore(cellIndex: Int) {
-        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
-            postService.fetchMoreUserPosts(userId!, lastPostId: postIds.last!)
-        }
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if let centerCellIndexPath: NSIndexPath  = collectionView.centerCellIndexPath {
-            if centerCellIndexPath != activeCellIndexPath {
-                activeCellIndexPath = centerCellIndexPath
-                NSNotificationCenter.defaultCenter().removeObserver(self)
-                activePlayer?.muted = true
-                activePlayer?.pause()
-                playVideo(centerCellIndexPath.row)
-            }
-        }
     }
     
     func setPostData(json: AnyObject) {
@@ -147,6 +127,9 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
                 self.morePostsToLoad = false
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.collectionView.removeIndicators()
+            }
         })
     }
     
@@ -154,6 +137,28 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
     }
     
     func updatePostData(json: AnyObject) {
+    }
+    
+    func setNoticeData(notSeenNoticeCount: Int) {
+    }
+    
+    func loadMore(cellIndex: Int) {
+        if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            collectionView.loadIndicatorBottom()
+            postService.fetchMoreUserPosts(userId!, lastPostId: postIds.last!)
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if let centerCellIndexPath: NSIndexPath  = collectionView.centerCellIndexPath {
+            if centerCellIndexPath != activeCellIndexPath {
+                activeCellIndexPath = centerCellIndexPath
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                activePlayer?.muted = true
+                activePlayer?.pause()
+                playVideo(centerCellIndexPath.row)
+            }
+        }
     }
     
     // MARK: View Lifecycle
@@ -168,6 +173,7 @@ class ProfileViewController: UIViewController, UserServiceDelegate, PostServiceD
         }
         self.postService.delegate = self
         self.userService.delegate = self
+        collectionView.loadIndicatorMidWithHeader(screenSize)
         // Do any additional setup after loading the view, typically from a nib.
     }
     

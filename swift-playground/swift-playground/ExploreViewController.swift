@@ -84,6 +84,9 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UserServiceD
                 self.morePostsToLoad = false
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.collectionView.removeIndicators()
+            }
         })
     }
     
@@ -142,16 +145,19 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UserServiceD
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
             playVideo(0)
         }
+        collectionView.removeIndicators()
     }
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            collectionView.loadIndicatorBottom()
             postService.fetchMorePosts(postIds.last!)
         }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
+            collectionView.loadIndicatorTop()
             postService.getNewPosts(postIds.first!)
             justCheckedForNewPosts = true
         }
@@ -184,6 +190,7 @@ class ExploreViewController: UIViewController, PostServiceDelegate, UserServiceD
         self.postService.delegate = self
         self.collectionView.delegate = self
         self.userService.delegate = self
+        collectionView.loadIndicatorMid(screenSize, style: UIActivityIndicatorViewStyle.White)
         // Do any additional setup after loading the view, typically from a nib.
     }
     

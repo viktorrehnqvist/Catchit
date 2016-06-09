@@ -34,6 +34,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         userAvatarUrls = (json["like_infos"] as! NSArray)[1] as! [String]
         userIds = (json["like_infos"] as! NSArray)[2] as! [Int]
         loadAvatars()
+        collectionView.removeIndicators()
     }
     
     func updatePostData(json: AnyObject) {
@@ -47,6 +48,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
         userNames = (json["completer_infos"] as! NSArray)[1] as! [String]
         userAvatarUrls = (json["completer_infos"] as! NSArray)[2] as! [String]
         loadAvatars()
+        collectionView.removeIndicators()
     }
     
     func updateAchievementsData(json: AnyObject) {
@@ -66,6 +68,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
             userIds = (json["follower_infos"] as! NSArray)[2] as! [Int]
         }
         loadAvatars()
+        collectionView.removeIndicators()
     }
     
     func updateUserData(json: AnyObject) {
@@ -77,6 +80,7 @@ class LikesViewController: UIViewController, PostServiceDelegate, AchievementSer
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.loadIndicatorMid(screenSize, style: UIActivityIndicatorViewStyle.Gray)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hidesBarsOnSwipe = false
         noRecordsImageView.hidden = true

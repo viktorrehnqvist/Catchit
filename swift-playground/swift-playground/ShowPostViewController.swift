@@ -83,6 +83,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         commentUserIds = (json["commenter_infos"] as! NSArray)[2] as! [Int]
         comments = (json["commenter_infos"] as! NSArray)[3] as! [String]
         loadImageFromUrls()
+        self.collectionView.removeIndicators()
     }
     
     func updatePostData(json: AnyObject) {
@@ -115,6 +116,7 @@ class ShowPostViewController: UIViewController, UICollectionViewDelegate, PostSe
         self.currentUsername = userDefaults.objectForKey("name") as? String
         textField.delegate = self
         borderBottom(self.view)
+        collectionView.loadIndicatorMid(screenSize, style: UIActivityIndicatorViewStyle.Gray)
         // Do any additional setup after loading the view.
     }
     

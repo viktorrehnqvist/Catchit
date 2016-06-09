@@ -23,6 +23,7 @@
 		F71290541CAC459500639DA0 /* ShowPostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */; };
 		F7197BF11CF5CA410051C030 /* CenterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */; };
 		F71A09F11D0732E000A632DB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71A09F01D0732E000A632DB /* SettingsViewController.swift */; };
+		F71A09F71D098D5100A632DB /* ActivityIndicatorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71A09F61D098D5000A632DB /* ActivityIndicatorCollectionView.swift */; };
 		F721AD531C9B503300BF0BEA /* ShowPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */; };
 		F728AFC81CD910BF00F5A1DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */; };
 		F728AFCA1CD910E100F5A1DF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */; };
@@ -113,6 +114,7 @@
 		F71290531CAC459500639DA0 /* ShowPostCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionReusableView.swift; sourceTree = "<group>"; };
 		F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterCollectionView.swift; sourceTree = "<group>"; };
 		F71A09F01D0732E000A632DB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F71A09F61D098D5000A632DB /* ActivityIndicatorCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCollectionView.swift; sourceTree = "<group>"; };
 		F721AD521C9B503300BF0BEA /* ShowPostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		F728AFC71CD910BF00F5A1DF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		F728AFC91CD910E100F5A1DF /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				F70BDBC01CEB62DE00799F2B /* KeyboardLayoutConstraintLogin.swift */,
 				F745D2F71CF32074004A5A8B /* ImageOrientation.swift */,
 				F7197BF01CF5CA410051C030 /* CenterCollectionView.swift */,
+				F71A09F61D098D5000A632DB /* ActivityIndicatorCollectionView.swift */,
 				F76DEB101CEDC403007F5A10 /* KeyboardLayoutConstraintComment.swift */,
 			);
 			name = Helpers;
@@ -562,6 +565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F71A09F71D098D5100A632DB /* ActivityIndicatorCollectionView.swift in Sources */,
 				F728AFCE1CDBD6A800F5A1DF /* UploadService.swift in Sources */,
 				F745D2F41CEF68AB004A5A8B /* SearchService.swift in Sources */,
 				F745D2F81CF32074004A5A8B /* ImageOrientation.swift in Sources */,

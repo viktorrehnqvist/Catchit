@@ -109,6 +109,9 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
                 self.moreAchievementsToLoad = false
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.collectionView.removeIndicators()
+            }
         })
     }
     
@@ -243,6 +246,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.achievementDescriptions.count - 1 && moreAchievementsToLoad {
+            collectionView.loadIndicatorBottom()
             achievementService.fetchMoreAchievements(achievementIds.last!)
         }
     }
@@ -266,6 +270,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         self.uploadService.delegate = self
         self.userService.delegate = self
         self.collectionView.delegate = self
+        collectionView.loadIndicatorMid(screenSize, style: UIActivityIndicatorViewStyle.White)
         // Do any additional setup after loading the view, typically from a nib.
     }
     

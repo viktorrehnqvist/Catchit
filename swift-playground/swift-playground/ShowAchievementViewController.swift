@@ -115,7 +115,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                         self.postUserAvatarUrls.append((json[i]?["user_avatar_url"])! as! String)
                         self.postCommentCounts.append(json[i]?["comments_count"] as! Int)
                         self.postLikeCounts.append(json[i]?["likes_count"] as! Int)
-                        self.postLike.append((json["like"] as! NSArray)[i] as! Bool)
+                        self.postLike.append(json[i]?["like"] as! Bool)
                         
                         self.fetchDataFromUrlToPostImages((json[i]?["image_url"])! as! String)
                         self.fetchDataFromUrlToPostUserAvatars((json[i]?["user_avatar_url"])! as! String)
@@ -126,6 +126,9 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                 
             }
             NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.collectionView.removeIndicators()
+            }
         })
     }
     
@@ -142,6 +145,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            collectionView.loadIndicatorBottom()
             achievementService.fetchMorePostsForAchievement(postIds.last!, achievementId: achievementId)
         }
     }
@@ -164,6 +168,7 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         achievementService.getAchievement(achievementId)
         self.uploadService.delegate = self
         self.achievementService.delegate = self
+        collectionView.loadIndicatorMidWithHeader(screenSize)
         // Do any additional setup after loading the view, typically from a nib.
     }
     

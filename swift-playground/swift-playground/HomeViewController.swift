@@ -88,6 +88,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
             dispatch_async(dispatch_get_main_queue()) {
                 self.displayImageIfNoPosts()
                 self.hidesBarOnSwipeUnlessNoPosts()
+                self.collectionView.removeIndicators()
             }
         })
     }
@@ -147,17 +148,20 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
             NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
             playVideo(0)
         }
+        collectionView.removeIndicators()
     }
     
     
     func loadMore(cellIndex: Int) {
         if cellIndex == self.postIds.count - 1 && morePostsToLoad {
+            collectionView.loadIndicatorBottom()
             self.postService.fetchMoreHomePosts(self.postIds.last!)
         }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if collectionView.contentOffset.y < -90.0 && justCheckedForNewPosts == false {
+            collectionView.loadIndicatorTop()
             postService.getNewHomePosts(postIds.first!)
             justCheckedForNewPosts = true
         }
@@ -190,6 +194,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
         self.userService.delegate = self
         self.collectionView.delegate = self
         postService.getHomePosts()
+        collectionView.loadIndicatorMid(screenSize, style: UIActivityIndicatorViewStyle.White)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -202,7 +207,6 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
         }
         justCheckedForNewPosts = false
         activePlayer?.play()
-        //NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
     override func didReceiveMemoryWarning() {

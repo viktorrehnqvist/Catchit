@@ -64,6 +64,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
             }
             if self.searchObject === json {
                 NSOperationQueue.mainQueue().addOperationWithBlock(self.collectionView.reloadData)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.collectionView.removeIndicators()
+                }
             }
         })
     }
@@ -240,6 +243,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     }
 
     @IBAction func textDidChange(sender: AnyObject) {
+        collectionView.loadIndicatorSearch()
         searchService.search(searchField.text!)
     }
     
