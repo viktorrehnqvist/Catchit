@@ -18,6 +18,8 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate, UISc
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var marginTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
     
      // MARK: Lifecycle
     func setAuthenticationData(json: AnyObject) {
@@ -33,6 +35,8 @@ class LoginViewController: UIViewController, AuthenticationServiceDelegate, UISc
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginButton.layer.cornerRadius = 5
+        registerButton.layer.cornerRadius = 5
         marginTopConstraint.constant = 0.15 * screenSize.height
         emailLabel.delegate = self
         passwordLabel.delegate = self
