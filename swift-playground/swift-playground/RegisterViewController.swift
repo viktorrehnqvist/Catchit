@@ -19,6 +19,8 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate, U
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var marginTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     // MARK: Lifecycle
     func setAuthenticationData(json: AnyObject) {
@@ -34,6 +36,8 @@ class RegisterViewController: UIViewController, AuthenticationServiceDelegate, U
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginButton.layer.cornerRadius = 5
+        registerButton.layer.cornerRadius = 5
         marginTopConstraint.constant = 0.15 * screenSize.height
         emailLabel.delegate = self
         usernameLabel.delegate = self

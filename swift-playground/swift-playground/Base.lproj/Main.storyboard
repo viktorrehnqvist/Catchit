@@ -532,6 +532,9 @@
                                                 <state key="normal" title="Logga in">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <state key="disabled" title="Logga in">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="loginUser:" destination="oaG-zJ-hso" eventType="touchUpInside" id="YrR-XI-TOa"/>
                                                     <action selector="resignKeyboard:" destination="oaG-zJ-hso" eventType="touchUpInside" id="ywS-Dp-sEo"/>
@@ -644,7 +647,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-postadress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qQP-C6-21Q">
-                                                <rect key="frame" x="180" y="251" width="240" height="30"/>
+                                                <rect key="frame" x="160" y="251" width="281" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="281" id="Qax-D4-rUK"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -652,25 +658,15 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lösenord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-LB-v3C">
-                                                <rect key="frame" x="180" y="327" width="240" height="30"/>
+                                                <rect key="frame" x="160" y="327" width="281" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
                                                     <action selector="resignKeyboard:" destination="pTY-6l-dlQ" eventType="editingDidEndOnExit" id="GDM-Tg-KIg"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pwf-de-SHz">
-                                                <rect key="frame" x="180" y="365" width="240" height="30"/>
-                                                <state key="normal" title="Registrera">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="registerUser:" destination="pTY-6l-dlQ" eventType="touchUpInside" id="TVW-lr-UQ8"/>
-                                                    <action selector="resignKeyboard:" destination="pTY-6l-dlQ" eventType="touchUpInside" id="NIT-bN-E3v"/>
-                                                </connections>
-                                            </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Användarnamn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Se-Sk-kU2">
-                                                <rect key="frame" x="180" y="289" width="240" height="30"/>
+                                                <rect key="frame" x="160" y="289" width="281" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -680,7 +676,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Har du glömt dina inloggningsuppgifter?            Klicka här." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ys7-cO-5iB">
                                                 <rect key="frame" x="180" y="441" width="240" height="63"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="63" id="xsh-vU-mYR"/>
+                                                    <constraint firstAttribute="height" constant="63" id="xts-dd-Sav"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -690,7 +686,8 @@
                                                 <rect key="frame" x="236" y="86" width="128" height="128"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oV-7g-Fi6">
-                                                <rect key="frame" x="180" y="403" width="240" height="30"/>
+                                                <rect key="frame" x="160" y="403" width="281" height="30"/>
+                                                <color key="backgroundColor" red="0.26992974949999998" green="0.35256660470000001" blue="0.50643500190000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Tillbaka till inloggning">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -698,31 +695,44 @@
                                                     <segue destination="oaG-zJ-hso" kind="show" animates="NO" id="WSq-7A-ZD3"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pwf-de-SHz">
+                                                <rect key="frame" x="160" y="365" width="281" height="30"/>
+                                                <color key="backgroundColor" red="0.26992974949999998" green="0.35256660470000001" blue="0.50643500190000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Registrera">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="registerUser:" destination="pTY-6l-dlQ" eventType="touchUpInside" id="TVW-lr-UQ8"/>
+                                                    <action selector="resignKeyboard:" destination="pTY-6l-dlQ" eventType="touchUpInside" id="NIT-bN-E3v"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.1843137255" green="0.24313725489999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="5i9-p4-XWF" firstAttribute="leading" secondItem="qQP-C6-21Q" secondAttribute="leading" id="AxB-qT-Qml"/>
-                                            <constraint firstItem="Pwf-de-SHz" firstAttribute="trailing" secondItem="6oV-7g-Fi6" secondAttribute="trailing" id="CZd-i4-Msz"/>
-                                            <constraint firstItem="bsP-LB-v3C" firstAttribute="top" secondItem="0Se-Sk-kU2" secondAttribute="bottom" constant="8" symbolic="YES" id="CdQ-aY-Sf6"/>
-                                            <constraint firstItem="Pwf-de-SHz" firstAttribute="top" secondItem="bsP-LB-v3C" secondAttribute="bottom" constant="8" symbolic="YES" id="DlH-iE-ouc"/>
+                                            <constraint firstItem="qQP-C6-21Q" firstAttribute="top" secondItem="5i9-p4-XWF" secondAttribute="bottom" constant="8" symbolic="YES" id="0CJ-WI-Tfa"/>
+                                            <constraint firstItem="Pwf-de-SHz" firstAttribute="top" secondItem="bsP-LB-v3C" secondAttribute="bottom" constant="8" symbolic="YES" id="8YR-Ox-HRa"/>
+                                            <constraint firstItem="0Se-Sk-kU2" firstAttribute="leading" secondItem="bsP-LB-v3C" secondAttribute="leading" id="CE6-Pg-7cL"/>
+                                            <constraint firstItem="Pwf-de-SHz" firstAttribute="trailing" secondItem="6oV-7g-Fi6" secondAttribute="trailing" id="GmH-H9-CGE"/>
                                             <constraint firstItem="YPx-Qw-kGZ" firstAttribute="centerX" secondItem="5i9-p4-XWF" secondAttribute="centerX" id="H6h-Bm-63g"/>
-                                            <constraint firstItem="6oV-7g-Fi6" firstAttribute="top" secondItem="Pwf-de-SHz" secondAttribute="bottom" constant="8" symbolic="YES" id="J7l-bl-cuZ"/>
-                                            <constraint firstItem="6oV-7g-Fi6" firstAttribute="leading" secondItem="ys7-cO-5iB" secondAttribute="leading" id="KsQ-wk-FqH"/>
-                                            <constraint firstItem="0Se-Sk-kU2" firstAttribute="trailing" secondItem="bsP-LB-v3C" secondAttribute="trailing" id="NCO-RJ-Vak"/>
-                                            <constraint firstItem="0Se-Sk-kU2" firstAttribute="top" secondItem="qQP-C6-21Q" secondAttribute="bottom" constant="8" symbolic="YES" id="OdK-5k-X0Z"/>
+                                            <constraint firstItem="qQP-C6-21Q" firstAttribute="leading" secondItem="0Se-Sk-kU2" secondAttribute="leading" id="LQP-mr-Z7U"/>
+                                            <constraint firstItem="qQP-C6-21Q" firstAttribute="centerX" secondItem="5i9-p4-XWF" secondAttribute="centerX" id="MZv-RG-UTj"/>
                                             <constraint firstItem="5i9-p4-XWF" firstAttribute="top" secondItem="YPx-Qw-kGZ" secondAttribute="bottom" constant="8" symbolic="YES" id="OhD-MQ-T40"/>
                                             <constraint firstItem="YPx-Qw-kGZ" firstAttribute="centerX" secondItem="8hA-xD-b8K" secondAttribute="centerX" id="PFI-t3-u0d"/>
-                                            <constraint firstItem="qQP-C6-21Q" firstAttribute="trailing" secondItem="0Se-Sk-kU2" secondAttribute="trailing" id="RLZ-9e-abP"/>
-                                            <constraint firstItem="5i9-p4-XWF" firstAttribute="trailing" secondItem="qQP-C6-21Q" secondAttribute="trailing" id="Z47-0K-Ree"/>
-                                            <constraint firstItem="ys7-cO-5iB" firstAttribute="top" secondItem="6oV-7g-Fi6" secondAttribute="bottom" constant="8" symbolic="YES" id="ZdS-sh-sBQ"/>
+                                            <constraint firstItem="ys7-cO-5iB" firstAttribute="top" secondItem="6oV-7g-Fi6" secondAttribute="bottom" constant="8" symbolic="YES" id="PeU-yS-bD7"/>
+                                            <constraint firstItem="ys7-cO-5iB" firstAttribute="leading" secondItem="5i9-p4-XWF" secondAttribute="leading" id="PgG-uI-Ydq"/>
+                                            <constraint firstItem="0Se-Sk-kU2" firstAttribute="top" secondItem="qQP-C6-21Q" secondAttribute="bottom" constant="8" symbolic="YES" id="Qil-dJ-p8X"/>
+                                            <constraint firstItem="6oV-7g-Fi6" firstAttribute="top" secondItem="Pwf-de-SHz" secondAttribute="bottom" constant="8" symbolic="YES" id="R9X-Ur-6fB"/>
+                                            <constraint firstItem="ys7-cO-5iB" firstAttribute="trailing" secondItem="5i9-p4-XWF" secondAttribute="trailing" id="X8T-Wx-0fK"/>
                                             <constraint firstItem="YPx-Qw-kGZ" firstAttribute="top" secondItem="8hA-xD-b8K" secondAttribute="top" constant="86" id="aEN-oB-Kfc"/>
-                                            <constraint firstItem="Pwf-de-SHz" firstAttribute="leading" secondItem="6oV-7g-Fi6" secondAttribute="leading" id="chz-Gi-9Z3"/>
-                                            <constraint firstItem="6oV-7g-Fi6" firstAttribute="trailing" secondItem="ys7-cO-5iB" secondAttribute="trailing" id="cjT-cn-2OH"/>
-                                            <constraint firstItem="bsP-LB-v3C" firstAttribute="trailing" secondItem="Pwf-de-SHz" secondAttribute="trailing" id="co4-0e-aJz"/>
-                                            <constraint firstItem="qQP-C6-21Q" firstAttribute="leading" secondItem="0Se-Sk-kU2" secondAttribute="leading" id="eoa-KV-68Z"/>
-                                            <constraint firstItem="bsP-LB-v3C" firstAttribute="leading" secondItem="Pwf-de-SHz" secondAttribute="leading" id="iGn-gj-MHw"/>
-                                            <constraint firstItem="qQP-C6-21Q" firstAttribute="top" secondItem="5i9-p4-XWF" secondAttribute="bottom" constant="8" symbolic="YES" id="s7B-xu-RKQ"/>
-                                            <constraint firstItem="0Se-Sk-kU2" firstAttribute="leading" secondItem="bsP-LB-v3C" secondAttribute="leading" id="wio-Ac-Wsq"/>
+                                            <constraint firstItem="bsP-LB-v3C" firstAttribute="top" secondItem="0Se-Sk-kU2" secondAttribute="bottom" constant="8" symbolic="YES" id="aoF-D9-EcN"/>
+                                            <constraint firstItem="0Se-Sk-kU2" firstAttribute="trailing" secondItem="bsP-LB-v3C" secondAttribute="trailing" id="bKM-DZ-ung"/>
+                                            <constraint firstItem="bsP-LB-v3C" firstAttribute="leading" secondItem="Pwf-de-SHz" secondAttribute="leading" id="diA-fL-ZZ5"/>
+                                            <constraint firstItem="Pwf-de-SHz" firstAttribute="leading" secondItem="6oV-7g-Fi6" secondAttribute="leading" id="fPC-JO-uT6"/>
+                                            <constraint firstItem="qQP-C6-21Q" firstAttribute="trailing" secondItem="0Se-Sk-kU2" secondAttribute="trailing" id="tfA-T1-Qow"/>
+                                            <constraint firstItem="bsP-LB-v3C" firstAttribute="trailing" secondItem="Pwf-de-SHz" secondAttribute="trailing" id="wBa-xP-Nfx"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -747,9 +757,11 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="emailLabel" destination="qQP-C6-21Q" id="0T1-IO-UOO"/>
+                        <outlet property="loginButton" destination="6oV-7g-Fi6" id="qnh-77-qGD"/>
                         <outlet property="logo" destination="YPx-Qw-kGZ" id="aAp-ql-noX"/>
                         <outlet property="marginTopConstraint" destination="aEN-oB-Kfc" id="8V5-ue-nAp"/>
                         <outlet property="passwordLabel" destination="bsP-LB-v3C" id="NZ9-IA-5KZ"/>
+                        <outlet property="registerButton" destination="Pwf-de-SHz" id="MOk-02-lI2"/>
                         <outlet property="scrollView" destination="36q-d5-PZs" id="cto-xa-zyS"/>
                         <outlet property="usernameLabel" destination="0Se-Sk-kU2" id="wug-cN-C49"/>
                         <segue destination="Mov-A6-gvQ" kind="show" identifier="LoginFromRegistrationView" id="JiC-qu-bKm"/>
