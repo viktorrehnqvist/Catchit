@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor(red:0.21, green:0.27, blue:0.36, alpha:1.0)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().translucent = false
-        userDefaults.setObject("http://veckokampen.se/", forKey: "url")
+        userDefaults.setObject("https://catchit.se/", forKey: "url")
         if headers != nil {
             let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("InitViewController") as UIViewController
             rootVC.view.frame = UIScreen.mainScreen().bounds
