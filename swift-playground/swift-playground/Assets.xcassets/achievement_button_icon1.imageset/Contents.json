@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "fi-torsos-all-2.png",
+      "filename" : "torsos_small.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "fi-torsos-all-1.png",
+      "filename" : "torsos_medium.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "fi-torsos-all.png",
+      "filename" : "torsos_big.png",
       "scale" : "3x"
     }
   ],
