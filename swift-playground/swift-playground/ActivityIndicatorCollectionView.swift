@@ -21,7 +21,7 @@ extension UICollectionView {
     
     func loadIndicatorSearch() {
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
-        activityIndicator.frame = CGRect(x: self.bounds.midX, y: self.contentSize.height + 20, width: 0, height: 0)
+        activityIndicator.frame = CGRect(x: self.bounds.midX, y: self.contentSize.height, width: 0, height: 0)
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = false
         self.removeIndicators()
@@ -46,7 +46,7 @@ extension UICollectionView {
     
     func loadIndicatorMidWithHeader(screenSize: CGRect) {
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
-        activityIndicator.frame = CGRect(x: screenSize.midX, y: self.contentSize.height + 10, width: 0, height: 0)
+        activityIndicator.frame = CGRect(x: screenSize.midX, y: self.contentSize.height + 20, width: 0, height: 0)
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = false
         self.addSubview(activityIndicator)

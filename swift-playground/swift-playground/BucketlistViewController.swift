@@ -39,6 +39,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
         } else {
             emptyImage.hidden = false
         }
+        collectionView.removeIndicators()
         NSOperationQueue.mainQueue().addOperationWithBlock(collectionView.reloadData)
     }
     
@@ -74,6 +75,7 @@ class BucketlistViewController:  UIViewController, AchievementServiceDelegate, U
     }
     
     override func viewWillAppear(animated: Bool) {
+        collectionView.loadIndicatorMidWithHeader(screenSize)
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hidesBarsOnSwipe = false

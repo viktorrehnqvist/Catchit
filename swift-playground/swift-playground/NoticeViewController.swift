@@ -38,6 +38,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
         noticeSeen = (json["notice_infos"] as! NSArray)[5] as! [AnyObject]
         loadAvatars()
         self.tabBarController?.tabBar.items?.last?.badgeValue = nil
+        collectionView.removeIndicators()
     }
     
     func updateUserData(json: AnyObject) {
@@ -55,6 +56,7 @@ class NoticeViewController:  UIViewController, UserServiceDelegate, UICollection
     }
     
     override func viewWillAppear(animated: Bool) {
+        collectionView.loadIndicatorMidWithHeader(screenSize)
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hidesBarsOnSwipe = false
