@@ -2720,7 +2720,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="D42-yS-IqB">
                                     <size key="itemSize" width="600" height="46"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -2737,12 +2737,6 @@
                                                         <constraint firstAttribute="width" constant="30" id="cpc-OH-Gj2"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segla över havet och sjung en bra sång samtidigt som du äter godis" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-1u-1I5">
-                                                    <rect key="frame" x="44" y="0.0" width="419" height="46"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwc-Tz-4X3">
                                                     <rect key="frame" x="518" y="4" width="74" height="38"/>
                                                     <color key="backgroundColor" red="0.17254901959999999" green="0.48627450979999998" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -2766,6 +2760,12 @@
                                                         <action selector="bucketlistPress:" destination="SWf-Jd-IBW" eventType="touchUpInside" id="s5X-9a-Z2L"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segla över havet och sjung en bra sång samtidigt som du äter godis" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-1u-1I5">
+                                                    <rect key="frame" x="44" y="0.0" width="419" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -2793,6 +2793,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Rdt-hd-LpN">
+                                    <rect key="frame" x="0.0" y="90" width="600" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="SWf-Jd-IBW" id="Le6-0b-xXR"/>
                                     <outlet property="delegate" destination="SWf-Jd-IBW" id="fNi-yn-6cF"/>
@@ -3734,12 +3738,12 @@
         <image name="notice_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N5Z-XD-MLh"/>
         <segue reference="2pF-mY-u1R"/>
-        <segue reference="dwR-E4-82o"/>
         <segue reference="UnV-OJ-WQS"/>
-        <segue reference="OvH-UW-Jlq"/>
-        <segue reference="KBR-5L-ez0"/>
+        <segue reference="8jf-T0-H7W"/>
+        <segue reference="pO1-vJ-RJX"/>
+        <segue reference="7ir-IZ-5qd"/>
+        <segue reference="Avd-S3-QhS"/>
         <segue reference="GNg-t3-vgZ"/>
     </inferredMetricsTieBreakers>
 </document>

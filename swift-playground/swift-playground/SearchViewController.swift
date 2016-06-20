@@ -30,6 +30,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     var screenSize: CGRect = UIScreen.mainScreen().bounds
     var resultCount: Int = 0
     var searchObject: AnyObject = 0
+    var noResultLabel: UILabel?
     
     var userFollowIds: [Int] = []
     var completedAchievementIds: [Int] = []
@@ -113,6 +114,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         } else {
             searchField.layer.frame = CGRectMake(0 , 0, screenSize.width - 100, 30)
         }
+        let label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+        label.center = CGPointMake(screenSize.midX, 20)
+        label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor.whiteColor()
+        label.text = "Inga resultat hittades."
+        label.hidden = true
+        self.view.addSubview(label)
+        self.noResultLabel = label
         // Do any additional setup after loading the view.
     }
     
@@ -133,6 +142,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     
     // MARK: Layout
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !(searchField.text?.isEmpty)! && resultCount == 0 {
+            self.noResultLabel!.hidden = false
+        } else {
+            self.noResultLabel!.hidden = true
+        }
         return resultCount
     }
     
