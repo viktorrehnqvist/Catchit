@@ -49,6 +49,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
     var morePostsToLoad: Bool = true
     var justCheckedForNewPosts: Bool = true
     var activeCellIndexPath: NSIndexPath?
+    var userFollowIds: [Int]?
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
@@ -176,7 +177,17 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
         }
     }
     
-    func setUserData(json: AnyObject, follow: Bool) {}
+    func setUserData(json: AnyObject, follow: Bool) {
+        if (userFollowIds == nil) {
+            userFollowIds = (json["follow_infos"] as! NSArray)[2] as? [Int]
+        } else {
+            if userFollowIds! != (json["follow_infos"] as! NSArray)[2] as! [Int] {
+                reloadView()
+                userFollowIds = (json["follow_infos"] as! NSArray)[2] as? [Int]
+            }
+        }
+    }
+    
     func updateUserData(json: AnyObject) {}
     func setNoticeData(notSeenNoticeCount: Int) {
         if notSeenNoticeCount > 0 {
@@ -207,6 +218,7 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
         }
         justCheckedForNewPosts = false
         activePlayer?.play()
+        userService.getCurrentUserData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -403,6 +415,31 @@ class HomeViewController: UIViewController, PostServiceDelegate, UserServiceDele
         } else {
             self.postUserAvatars.append(image!)
         }
+    }
+    
+    func reloadView() {
+        self.achievementDescriptions = []
+        self.achievementIds = []
+        self.achievementScores = []
+        self.postIds = []
+        self.postCreatedAt = []
+        self.postUpdatedAt = []
+        self.postImageUrls = []
+        self.postImages = []
+        self.postVideoUrls = []
+        self.postUserIds = []
+        self.postUserNames = []
+        self.postUserAvatarUrls = []
+        self.postUserAvatars = []
+        self.postCommentCounts = []
+        self.postLikeCounts = []
+        self.postLike = []
+        self.players = []
+        self.playerLayers = []
+        self.collectionView.loadIndicatorMid(screenSize, style: UIActivityIndicatorViewStyle.White)
+        self.justCheckedForNewPosts = false
+        self.morePostsToLoad = true
+        self.postService.getHomePosts()
     }
     
     func destroyCell(cellIndex: Int) {
