@@ -1363,13 +1363,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5AB-en-h4q">
                                                     <rect key="frame" x="0.0" y="80" width="600" height="93"/>
                                                     <subviews>
-                                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="gOt-u6-Q9s">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="gOt-u6-Q9s">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="93"/>
                                                         </imageView>
-                                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="EsX-vc-jTU">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="EsX-vc-jTU">
                                                             <rect key="frame" x="200" y="0.0" width="200" height="93"/>
                                                         </imageView>
-                                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="RBe-oP-ly5">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="RBe-oP-ly5">
                                                             <rect key="frame" x="400" y="0.0" width="200" height="93"/>
                                                         </imageView>
                                                     </subviews>
@@ -3727,10 +3727,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="2pF-mY-u1R"/>
         <segue reference="Ftt-UR-dJW"/>
+        <segue reference="KhT-yk-Sfv"/>
+        <segue reference="S0S-yH-cd5"/>
         <segue reference="GxL-aq-8sZ"/>
-        <segue reference="jal-hA-pvU"/>
-        <segue reference="QzT-29-F4w"/>
-        <segue reference="djO-lN-Qc8"/>
+        <segue reference="3Ph-BA-daD"/>
         <segue reference="GNg-t3-vgZ"/>
     </inferredMetricsTieBreakers>
 </document>
