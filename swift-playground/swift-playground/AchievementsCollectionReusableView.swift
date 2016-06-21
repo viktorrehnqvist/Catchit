@@ -10,11 +10,13 @@ import UIKit
 
 class AchievementsCollectionReusableView: UICollectionReusableView {
     // MARK: Setup
-    @IBOutlet weak var bucketlistImage: UIImageView!
     @IBOutlet weak var achievementDescription: UILabel!
     @IBOutlet weak var achievementCompleterCount: UILabel!
     @IBOutlet weak var achievementScore: UILabel!
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var lockImage: UIImageView!
+    @IBOutlet weak var completersButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var bucketlistButton: UIButton!
     
 }

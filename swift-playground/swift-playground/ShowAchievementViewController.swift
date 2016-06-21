@@ -269,17 +269,18 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                                withReuseIdentifier: "profileTopBar",
                                                                                forIndexPath: indexPath) as! AchievementsCollectionReusableView
-        let bucketlistImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(bucketlistPress(_:)))
-        headerView.bucketlistImage.addGestureRecognizer(bucketlistImageTapGesture)
+        
         headerView.achievementDescription.text = achievementDescription
         headerView.achievementCompleterCount.text = "\(achievementCompleterCount) har klarat detta"
         headerView.achievementScore.text = "\(achievementScore)p"
         headerView.tag = achievementId
+        headerView.completersButton.tag = achievementId
+        headerView.shareButton.tag = achievementId
         headerView.uploadButton.layer.cornerRadius = 5
         if achievementInBucketlist {
-            headerView.bucketlistImage.image = removeFromBucketlistImage
+            headerView.bucketlistButton.setImage(removeFromBucketlistImage, forState: .Normal)
         } else {
-            headerView.bucketlistImage.image = addToBucketlistImage
+            headerView.bucketlistButton.setImage(addToBucketlistImage, forState: .Normal)
         }
         if achievementCompleted {
             headerView.lockImage.image = unlockedIcon
@@ -298,12 +299,12 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(ac, animated: true, completion: nil)
         } else {
-            if header.bucketlistImage.image == addToBucketlistImage {
+            if header.bucketlistButton.currentImage == addToBucketlistImage {
                 achievementService.addToBucketlist(achievementId)
-                header.bucketlistImage.image = removeFromBucketlistImage
+                header.bucketlistButton.setImage(removeFromBucketlistImage, forState: .Normal)
             } else {
                 achievementService.removeFromBucketlist(achievementId)
-                header.bucketlistImage.image = addToBucketlistImage
+                header.bucketlistButton.setImage(addToBucketlistImage, forState: .Normal)
             }
         }
     }
@@ -389,10 +390,18 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
         backItem.title = "Tillbaka"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed.
         var cellIndex: Int = 0
-        
         // This should be rewritten for better readability.
         if (sender!.tag != nil) {
             cellIndex = sender!.tag
+            if segue.identifier == "showLikesFromShowAchievement" {
+                let vc = segue.destinationViewController as! LikesViewController
+                vc.achievementId = cellIndex
+                if segueShouldShowCompleters {
+                    vc.typeIs = "achievementCompleters"
+                } else {
+                    vc.typeIs = "achievementShare"
+                }
+            }
         } else {
             let point = sender?.view
             let mainCell = point?.superview
@@ -404,20 +413,6 @@ class ShowAchievementViewController: UIViewController, AchievementServiceDelegat
                     let vc = segue.destinationViewController as! LikesViewController
                     vc.typeIs = "post"
                     vc.postId = postIds[cellIndex]
-                }
-            } else {
-                // If sender is an achievement.
-                if let thisCell: AchievementsCollectionReusableView = mainCell as? AchievementsCollectionReusableView {
-                    cellIndex = thisCell.tag
-                    if segue.identifier == "showLikesFromShowAchievement" {
-                        let vc = segue.destinationViewController as! LikesViewController
-                        vc.achievementId = cellIndex
-                        if segueShouldShowCompleters {
-                            vc.typeIs = "achievementCompleters"
-                        } else {
-                            vc.typeIs = "achievementShare"
-                        }
-                    }
                 }
             }
         }
