@@ -240,6 +240,7 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
     }
     
     func setUploadedResult(json: AnyObject) {
+        SwiftOverlays.removeAllBlockingOverlays()
         let postId = json["id"] as! Int
         self.performSegueWithIdentifier("showPostFromAchievements", sender: postId)
     }
@@ -497,14 +498,15 @@ class AchievementsViewController: UIViewController, AchievementServiceDelegate, 
         if mediaType!.isEqualToString(kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage] as? UIImage
             let fixedImage = image?.fixOrientation()
-            let imageData: NSData = UIImagePNGRepresentation(fixedImage!)!
-            uploadService.uploadImage(imageData, achievementId: uploadAchievementId!)
+            let imageData: NSData = UIImageJPEGRepresentation(fixedImage!, 0.1)!
+            let pngImage = UIImagePNGRepresentation(UIImage(data: imageData)!)
+            uploadService.uploadImage(pngImage!, achievementId: uploadAchievementId!)
         } else if mediaType!.isEqualToString(kUTTypeMovie as String) {
             let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL)!
             uploadService.uploadVideo(pickedVideo, achievementId: uploadAchievementId!)
         }
-        
         self.dismissViewControllerAnimated(true, completion: nil)
+        SwiftOverlays.showBlockingWaitOverlayWithText("Laddar upp...")
     }
     
     func reloadAchievements() {
